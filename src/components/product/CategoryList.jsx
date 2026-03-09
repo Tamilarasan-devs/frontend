@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import pro from '../../assets/images/grp.webp'
 import pro1 from '../../assets/images/grp2.webp'
 import pro2 from '../../assets/images/grp1.webp'
-import pro3 from '../../assets/images/group.webp'
+import pro3 from '../../assets/images/Group.webp'
 import pro4 from '../../assets/images/pro4.webp'
 
 
