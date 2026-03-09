@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'RocaTwo';
+  src: url('/fonts/fonnts.com-Roca_Two_Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RocaTwo';
+  src: url('/fonts/fonnts.com-Roca_Two_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+body {
+  font-family: 'RocaTwo', sans-serif;
+  background-color: #fefbf6
+}
