@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import bnnr1 from '../../assets/images/bnnr1.avif';
-import bnnr2 from '../../assets/images/bnnr2.avif';
-import bnnr3 from '../../assets/images/bnnr3.avif';
-import bnnr4 from '../../assets/images/bnnr4.avif';
-import bnnr5 from '../../assets/images/bnnr5.avif';
+import React, { useEffect, useRef } from "react";
+import bnnr1 from "../../assets/images/bnnr1.avif";
+import bnnr2 from "../../assets/images/bnnr2.avif";
+import bnnr3 from "../../assets/images/bnnr3.avif";
+import bnnr4 from "../../assets/images/bnnr4.avif";
+import bnnr5 from "../../assets/images/bnnr5.avif";
 
 export default function Banner() {
   const containerRef = useRef(null);
@@ -13,36 +13,45 @@ export default function Banner() {
     let scrollAmount = 0;
 
     const scrollInterval = setInterval(() => {
-      scrollAmount += container.offsetWidth / 3; // scroll by one image width
-      if (scrollAmount >= container.scrollWidth / 2) {
-        // reset to start for infinite loop
-        scrollAmount = 0;
-      }
+      const width = container.offsetWidth;
+
+      // responsive scroll size
+      let scrollStep = width;
+      if (window.innerWidth >= 768) scrollStep = width / 2;
+      if (window.innerWidth >= 1024) scrollStep = width / 3;
+
+      scrollAmount += scrollStep;
+
       container.scrollTo({
         left: scrollAmount,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
-    }, 2000); // change image every 2 seconds
+
+      if (scrollAmount >= container.scrollWidth / 2) {
+        setTimeout(() => {
+          container.scrollTo({
+            left: 0,
+            behavior: "auto",
+          });
+          scrollAmount = 0;
+        }, 500);
+      }
+    }, 2000);
 
     return () => clearInterval(scrollInterval);
   }, []);
 
-  // Duplicate images for seamless infinite scroll
   const images = [bnnr1, bnnr2, bnnr3, bnnr4, bnnr5];
   const allImages = [...images, ...images];
 
   return (
-    <div
-      ref={containerRef}
-      className="flex overflow-hidden w-full"
-      style={{ scrollBehavior: 'smooth' }}
-    >
+    <div ref={containerRef} className="flex overflow-hidden w-full">
       {allImages.map((img, index) => (
         <img
           key={index}
           src={img}
           alt={`Banner ${index + 1}`}
-          className="w-1/3 flex-shrink-0 object-cover"
+          className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover"
         />
       ))}
     </div>
