@@ -1,5 +1,5 @@
 import React from "react";
-
+import bnr from '../../../assets/images/bnr-1.webp'
 export default function SecondBanner() {
   return (
     <div className="px-6 py-12">

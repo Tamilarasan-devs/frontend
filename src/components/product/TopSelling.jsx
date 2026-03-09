@@ -2,6 +2,8 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import bottle from '../../assets/images/btl.jpg'
 import bottle1 from '../../assets/images/btl1.jpg'
 import { useNavigate } from "react-router-dom";
+import {  FaShoppingCart, } from "react-icons/fa";
+
 const products = [
   { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of traditional Indian spices mixed with milk for a healthy and refreshing drink.", rating: 4.5, reviews: 248, badge: "Best Seller", image: [bottle], hoverImage: [bottle1], tags: ["Spicy", "Healthy", "Indian"] },
   { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that deeply cleanses and refreshes your skin naturally.", rating: 4, reviews: 184, badge: "New", image: [bottle], hoverImage: [bottle1], tags: ["Skin Care", "Herbal", "Refresh"] },
@@ -26,29 +28,7 @@ const badgeClass = {
   "Premium":     { bg: "#fdf4e7", color: "#820c0c", border: "#f5cba7" },
 };
 
-/* ─── Star Rating ─────────────────────────────────────────── */
-function StarRating({ rating, reviews }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-      <div style={{ display: "flex", gap: 2 }}>
-        {[1, 2, 3, 4, 5].map((v) => {
-          const filled = v <= Math.floor(rating);
-          const half   = !filled && v - rating < 1;
-          const color  = filled || half ? "#f59e0b" : "#e5e7eb";
-          return (
-            <svg key={v} width="13" height="13" viewBox="0 0 24 24">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-                fill={color} stroke={color} strokeWidth="1"
-              />
-            </svg>
-          );
-        })}
-      </div>
-      <span style={{ fontSize: 11, color: "#9ca3af", fontWeight: 500 }}>({reviews})</span>
-    </div>
-  );
-}
+
 
 /* ─── Arrow Button ────────────────────────────────────────── */
 function ArrowBtn({ dir, onClick }) {
@@ -158,16 +138,29 @@ const navigate =useNavigate()
         </div>
 
         {/* Discount ribbon */}
-        <div style={{
-          position: "absolute", top: 10, right: 10, zIndex: 5,
-          width: 40, height: 40, borderRadius: "50%",
-          background: BRAND, color: "#fff",
-          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-          boxShadow: "0 2px 8px rgba(130,12,12,.3)",
-        }}>
-          <span style={{ fontSize: 9, fontWeight: 700, lineHeight: 1.1 }}>OFF</span>
-          <span style={{ fontSize: 11, fontWeight: 700, lineHeight: 1.1 }}>{disc}%</span>
-        </div>
+     <div
+  style={{
+    position: "absolute",
+    top: 6,
+    right: 10,
+    zIndex: 5,
+    background: "#c9643a",
+    color: "#fff",
+    padding: "12px 12px",
+    fontWeight: 800,
+    textAlign: "center",
+    lineHeight: 1.1,
+    fontFamily: "sans-serif",
+    clipPath:
+      "polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
+  }}
+>
+  <div className="-mt-2">
+    <div style={{ fontSize: 18 }}>{disc}%</div>
+    <div style={{ fontSize: 12 }}>OFF</div>
+  </div>
+</div>
       </div>
 
       {/* Body */}
@@ -239,22 +232,24 @@ const navigate =useNavigate()
           textAlign: "center",
           boxShadow: "0 2px 6px rgba(201,100,58,0.2)",
         }}>
-          Get @ ₹{product.price} | Code: GRAB
+          Get @ ₹{product.price - 20} | Code: GRAB
         </div>
 
         <div style={{ height: 1, background: "#f3f4f6", margin: "12px 0" }} />
 
         {/* Add to Cart */}
         <button
-          onMouseEnter={() => setBtnHov(true)}
-          onMouseLeave={() => setBtnHov(false)}
-          className={`w-full py-3 text-sm font-semibold tracking-wide uppercase 
-            rounded-tl-[50px] rounded-br-[50px] rounded-tr-[0] rounded-bl-[0] 
-            ${btnHov ? `bg-[${AMBER}] shadow-[0_6px_20px_rgba(201,100,58,.35)]` : `bg-[${BRAND}]`} 
-            text-white cursor-pointer transition-all duration-300 ease-in-out`}
-        >
-          Add to Cart
-        </button>
+  onMouseEnter={() => setBtnHov(true)}
+  onMouseLeave={() => setBtnHov(false)}
+  className={`w-full py-3 text-sm font-semibold tracking-wide uppercase
+  flex items-center justify-center gap-2
+  rounded-tl-[50px] rounded-br-[50px] rounded-tr-[0] rounded-bl-[0]
+  ${btnHov ? `bg-[${AMBER}] shadow-[0_6px_20px_rgba(201,100,58,.35)]` : `bg-[${BRAND}]`}
+  text-white cursor-pointer transition-all duration-300 ease-in-out`}
+>
+  <FaShoppingCart size={14} />
+  Add to Cart
+</button>
       </div>
     </div>
   );

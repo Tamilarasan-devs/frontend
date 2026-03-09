@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import {  FaShoppingCart, } from "react-icons/fa";
 
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
@@ -85,10 +86,29 @@ const navigate = useNavigate()
         </div>
 
         {/* Discount */}
-        <div className="absolute top-2.5 right-2.5 z-10 w-10 h-10 rounded-full flex flex-col items-center justify-center text-white shadow-lg" style={{ background: BRAND }}>
-          <span className="text-[8px] font-bold leading-none">OFF</span>
-          <span className="text-[11px] font-extrabold leading-none">{disc}%</span>
-        </div>
+       <div
+  style={{
+    position: "absolute",
+    top: 6,
+    right: 10,
+    zIndex: 5,
+    background: "#c9643a",
+    color: "#fff",
+    padding: "12px 12px",
+    fontWeight: 800,
+    textAlign: "center",
+    lineHeight: 1.1,
+    fontFamily: "sans-serif",
+    clipPath:
+      "polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
+  }}
+>
+  <div className="-mt-2">
+    <div style={{ fontSize: 18 }}>{disc}%</div>
+    <div style={{ fontSize: 12 }}>OFF</div>
+  </div>
+</div>
 
         {/* Wishlist */}
         <button onClick={(e) => e.stopPropagation()}
@@ -132,22 +152,33 @@ const navigate = useNavigate()
         {/* Promo strip */}
         <div className="text-xs font-bold text-center py-1.5 px-3 rounded-lg mb-3 border border-dashed"
           style={{ color: BRAND, background: "#fff4f4", borderColor: "rgba(130,12,12,.25)" }}>
-          Use code <strong>GRAB</strong> → Get @ ₹{product.price}
+          Use code <strong>GRAB</strong> → Get @ ₹{product.price -20}
         </div>
 
         <div className="h-px bg-gray-100 mb-3" />
 
         {/* Cart Button */}
-        <button
-          onClick={handleCart}
-          className={`w-full py-2.5 text-sm font-bold tracking-widest uppercase text-white cursor-pointer border-none transition-all duration-300
-            ${added ? "rounded-xl bg-emerald-500" : "rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none"}`}
-          style={!added ? { background: BRAND } : {}}
-          onMouseEnter={(e) => { if (!added) e.currentTarget.style.background = ACCENT; }}
-          onMouseLeave={(e) => { if (!added) e.currentTarget.style.background = BRAND; }}
-        >
-          {added ? "✓ Added!" : "Add to Cart"}
-        </button>
+       <button
+  onClick={handleCart}
+  className={`w-full py-2.5 text-sm font-bold tracking-widest uppercase text-white cursor-pointer border-none transition-all duration-300
+  flex items-center justify-center gap-2
+  ${added ? "rounded-xl bg-emerald-500" : "rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none"}`}
+  style={!added ? { background: BRAND } : {}}
+  onMouseEnter={(e) => { if (!added) e.currentTarget.style.background = ACCENT; }}
+  onMouseLeave={(e) => { if (!added) e.currentTarget.style.background = BRAND; }}
+>
+  {added ? (
+    <>
+      <FaShoppingCart size={14} />
+      Added!
+    </>
+  ) : (
+    <>
+      <FaShoppingCart size={14} />
+      Add to Cart
+    </>
+  )}
+</button>
       </div>
     </div>
   );
@@ -409,7 +440,7 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
                 {filtered.map((product, idx) => (
                   <ProductCard key={product.id} product={product} animDelay={idx * 0.05} />
                 ))}

@@ -28,7 +28,7 @@ export default function Home() {
         <TopSelling/>
         {/* <TwoSideBanner/>
         <GridBanner/> */}
-        <OurStory/>
+        {/* <OurStory/> */}
         <SecondBanner/>
         <OffersSection/>
         {/* <Newsletter/> */}
