@@ -141,8 +141,8 @@ const navigate =useNavigate()
      <div
   style={{
     position: "absolute",
-    top: 6,
-    right: 10,
+    top: 0,
+    right: 0,
     zIndex: 5,
     background: "#c9643a",
     color: "#fff",
@@ -178,13 +178,26 @@ const navigate =useNavigate()
           </span>
         )}
 
-        <h3 style={{
-          fontFamily: "'Libre Baskerville', serif",
-          fontSize: 15.5, fontWeight: 700, color: "#1a1a1a",
-          margin: "0 0 5px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-        }}>
-          {product.name}
-        </h3>
+       <div>
+
+  <div className="inline-block group">
+    
+    <h3
+      className="font-['Libre_Baskerville'] text-[15.5px] font-bold text-[#1a1a1a]
+      mb-[3px] whitespace-nowrap overflow-hidden text-ellipsis"
+    >
+      {product.name}
+    </h3>
+
+    {/* underline */}
+   <div
+  className="h-[2px] w-0 transition-all duration-300 group-hover:w-full"
+  style={{ backgroundColor: BRAND }}
+></div>
+        
+  </div>
+
+</div>
 
         <p style={{
           fontSize: 14, color: 'black', lineHeight: 1.65, margin: "0 0 12px",

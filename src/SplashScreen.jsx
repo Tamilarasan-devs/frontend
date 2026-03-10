@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import logo from './assets/images/logo.jpg'
 const LogoSVG = ({ animated }) => (
   <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
     <path
@@ -216,7 +216,8 @@ export default function SplashScreen({ onFinish } = {}) {
             transition: "opacity 0.8s ease, transform 1s cubic-bezier(0.34,1.56,0.64,1)",
             animation: logoAnim ? "breathe 4s ease-in-out 2s infinite" : "none",
           }}>
-            <LogoSVG animated={logoAnim} />
+            <img src={logo} alt="log" animated={logoAnim}  className="rounded-full"/>
+            {/* <LogoSVG animated={logoAnim} /> */}
           </div>
 
           {/* Brand name */}

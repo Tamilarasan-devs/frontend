@@ -22,29 +22,34 @@ export default function TopScroll() {
   }, [index]);
 
   return (
-    <div className=" text-white py-3 relative flex items-center justify-center"  style={{ background: "linear-gradient(90deg,#4a0000 0%,#8b0000 50%,#4a0000 100%)" }}>
+   <div
+  className="text-white py-3 flex justify-center"
+  style={{ background: "linear-gradient(90deg,#4a0000 0%,#8b0000 50%,#4a0000 100%)" }}
+>
+  <div className="flex items-center gap-4">
+    
+    {/* Left Arrow */}
+    <button
+      onClick={prevSlide}
+      className="text-xl font-bold"
+    >
+      ❮
+    </button>
 
-      {/* Left Arrow */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold"
-      >
-        ❮
-      </button>
+    {/* Message */}
+    <h2 className="text-center">
+      {messages[index]}
+    </h2>
 
-      {/* Message */}
-      <h2 className="text-center px-10">
-        {messages[index]}
-      </h2>
+    {/* Right Arrow */}
+    <button
+      onClick={nextSlide}
+      className="text-xl font-bold"
+    >
+      ❯
+    </button>
 
-      {/* Right Arrow */}
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-xl font-bold"
-      >
-        ❯
-      </button>
-
-    </div>
+  </div>
+</div>
   );
 }
