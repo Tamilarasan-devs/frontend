@@ -52,16 +52,14 @@ function InfoCard({ icon, label, value, sub, color, index }) {
         opacity: 0,
       }}
     >
-      {/* gradient blob bg */}
       <div className={`absolute -top-8 -right-8 w-28 h-28 rounded-full bg-gradient-to-br ${color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
-      
       <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${color} text-white shadow-lg`}>
         {icon}
       </div>
       <div>
         <p className="text-xs font-semibold tracking-widest uppercase text-amber-600 mb-1">{label}</p>
         <p className="font-bold text-red-900 text-base mb-0.5">{value}</p>
-        <p className="font-bold text-red-900 text-base mb-0.5 ">{sub}</p>
+        <p className="font-bold text-red-900 text-base">{sub}</p>
       </div>
     </div>
   );
@@ -70,7 +68,6 @@ function InfoCard({ icon, label, value, sub, color, index }) {
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [focused, setFocused] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,18 +82,17 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fefbf6]" >
+    <div className="min-h-screen bg-[#fefbf6]">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500;600&display=swap');
         @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
         @keyframes checkAnim { from { stroke-dashoffset:20; } to { stroke-dashoffset:0; } }
         .inp::placeholder { color: rgba(122,64,64,0.35); }
-        .inp:focus { outline: none; }
+        .inp:focus { outline: none; border-color: #c9643a; box-shadow: 0 0 0 3px rgba(201,100,58,0.12); }
       `}</style>
 
       {/* ── HERO HEADER ── */}
       <div className="relative bg-[#820c0c] overflow-hidden">
-        {/* Decorative circles */}
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white opacity-[0.03]" />
         <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-amber-500 opacity-10" />
         <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(255,255,255,0.015) 24px,rgba(255,255,255,0.015) 25px)" }} />
@@ -107,15 +103,14 @@ export default function ContactPage() {
             <span className="text-xl font-semibold tracking-[5px] uppercase text-[#829b1c]">Reach Out</span>
             <div className="w-8 h-px bg-[#829b1c] opacity-60" />
           </div>
-          <h1 className="text-6xl font-black text-white leading-tight mb-4">
+          <h1 className="text-6xl font-black text-white leading-tight mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
             Get in <em className="not-italic text-[#829b1c] font-light italic">Touch</em>
           </h1>
-          <p className="text-lg text-white/70 max-w-md mx-auto leading-relaxed" >
+          <p className="text-lg text-white/70 max-w-md mx-auto leading-relaxed">
             We'd love to hear from you. Fill out the form or reach us directly — we're here to help.
           </p>
         </div>
 
-        {/* Curved bottom */}
         <div className="h-10 relative">
           <svg viewBox="0 0 1440 40" preserveAspectRatio="none" className="absolute bottom-0 left-0 w-full h-full">
             <path d="M0,0 Q720,40 1440,0 L1440,40 L0,40 Z" fill="#fefbf6" />
@@ -123,112 +118,146 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* ── THREE INFO CARDS ── */}
-      <div className="max-w-6xl mx-auto px-6 -mt-2 mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {contactInfo.map((info, i) => (
-            <InfoCard key={i} {...info} index={i} />
-          ))}
-        </div>
-      </div>
+      
 
-      {/* ================= FORM SECTION ================= */}
-      <section className="bg-white py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-[#820c0c]">
-              Send Us a Message
-            </h2>
-            <p className="text-gray-500 mt-3">
-              We will get back to you within 24 hours.
-            </p>
+      {/* ── TWO-COLUMN CONTACT SECTION ── */}
+      <section className="max-w-6xl mx-auto px-6 mb-16">
+        <div className="rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row" style={{ animation: "fadeUp 0.7s 0.3s ease both", opacity: 0 }}>
+
+          {/* LEFT — Details Panel */}
+          <div
+            className="relative lg:w-[42%] flex flex-col justify-between px-10 py-12 overflow-hidden"
+            style={{ background: "linear-gradient(155deg, #820c0c 0%, #5a0808 60%, #3a0404 100%)" }}
+          >
+            <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-white opacity-[0.04]" />
+            <div className="absolute bottom-0 -left-10 w-48 h-48 rounded-full bg-amber-400 opacity-[0.07]" />
+            <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(255,255,255,0.012) 28px,rgba(255,255,255,0.012) 29px)" }} />
+
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-8">
+                <div className="w-6 h-px bg-[#aab820] opacity-70" />
+                <span className="text-[10px] tracking-[4px] uppercase text-[#aab820] font-semibold">Contact Details</span>
+                <div className="w-6 h-px bg-[#aab820] opacity-70" />
+              </div>
+
+              <h2 className="text-4xl font-black text-white leading-tight mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Let's Start a<br />
+                <em className="not-italic text-[#aab820] font-light italic">Conversation</em>
+              </h2>
+              <p className="text-white/55 text-sm leading-relaxed mt-3 mb-10 font-light">
+                Reach out for inquiries, partnerships, or just to say hello — we'd love to hear from you.
+              </p>
+
+              <div className="space-y-7">
+                {contactInfo.map((item, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div
+                      className="mt-0.5 w-10 h-10 rounded-xl flex items-center justify-center text-white shrink-0"
+                      style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}
+                    >
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="text-[10px] tracking-[3px] uppercase text-[#aab820] font-semibold mb-0.5">{item.label}</p>
+                      <p className="text-white font-medium text-sm leading-snug">{item.value}</p>
+                      <p className="text-white/50 text-xs mt-0.5">{item.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative z-10 mt-12 pt-8 border-t border-white/10">
+              <p className="text-white/30 text-xs tracking-widest uppercase mb-3">Business Hours</p>
+              <p className="text-white/70 text-sm">Monday – Saturday</p>
+              <p className="text-[#aab820] text-sm font-semibold">9:00 AM – 6:00 PM IST</p>
+            </div>
           </div>
 
-          <div className="bg-[#fefbf6] p-10 rounded-3xl shadow-lg border border-red-100">
+          {/* RIGHT — Form Panel */}
+          <div className="flex-1 bg-white px-10 py-12">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-[#820c0c] mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Send Us a Message
+              </h2>
+              <p className="text-gray-400 text-sm">We will get back to you within 24 hours.</p>
+            </div>
+
             {submitted && (
-              <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
-                Message sent successfully!
+              <div className="mb-6 flex items-center gap-3 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm" style={{ animation: "fadeUp 0.4s ease both" }}>
+                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Message sent successfully! We'll be in touch soon.
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-
-              <div className="grid md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-lg font-bold text-[#820c0c] mb-1">
-                    Full Name
-                  </label>
+                  <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Full Name</label>
                   <input
                     type="text"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#c9643a] focus:ring-2 focus:ring-[#c9643a]/20 outline-none"
                     placeholder="Your name"
+                    className="inp w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-lg font-bold text-[#820c0c] mb-1">
-                    Phone
-                  </label>
+                  <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Phone</label>
                   <input
                     type="tel"
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#c9643a] focus:ring-2 focus:ring-[#c9643a]/20 outline-none"
                     placeholder="+91 98765 43210"
+                    className="inp w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-lg font-bold text-[#820c0c] mb-1">
-                  Email Address
-                </label>
+                <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Email Address</label>
                 <input
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#c9643a] focus:ring-2 focus:ring-[#c9643a]/20 outline-none"
                   placeholder="you@example.com"
+                  className="inp w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-lg font-bold text-[#820c0c] mb-1">
-                  Message
-                </label>
+                <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Message</label>
                 <textarea
                   name="message"
                   value={form.message}
                   onChange={handleChange}
                   required
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#c9643a] focus:ring-2 focus:ring-[#c9643a]/20 outline-none resize-none"
-                  placeholder="Write your message..."
-                ></textarea>
+                  rows={6}
+                  placeholder="Write your message here..."
+                  className="inp w-full px-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all resize-none"
+                />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl text-white font-semibold tracking-wide transition hover:opacity-90"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #820c0c, #a01010)",
-                }}
+                className="w-full py-4 rounded-xl text-white text-sm font-semibold tracking-widest uppercase transition-all hover:opacity-90 active:scale-[0.98]"
+                style={{ background: "linear-gradient(135deg, #820c0c 0%, #a81010 100%)", boxShadow: "0 8px 24px rgba(130,12,12,0.25)" }}
               >
-                Send Message
+                Send Message →
               </button>
             </form>
           </div>
         </div>
       </section>
-      {/* ================= FULL WIDTH MAP ================= */}
+
+      {/* ── FULL WIDTH MAP ── */}
       <section className="w-full">
         <div className="w-full h-[500px]">
           <iframe
@@ -238,10 +267,9 @@ export default function ContactPage() {
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
-          ></iframe>
+          />
         </div>
       </section>
-
     </div>
   );
 }

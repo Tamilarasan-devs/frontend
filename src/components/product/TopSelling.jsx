@@ -138,10 +138,10 @@ const navigate =useNavigate()
         </div>
 
         {/* Discount ribbon */}
-     <div
+    <div
   style={{
     position: "absolute",
-    top: 0,
+    top: 2,
     right: 0,
     zIndex: 5,
     background: "#c9643a",
@@ -154,6 +154,7 @@ const navigate =useNavigate()
     clipPath:
       "polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)",
     boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
+    // borderTopRightRadius: "15px",  // Add this line for top-right border radius
   }}
 >
   <div className="-mt-2">
@@ -199,28 +200,53 @@ const navigate =useNavigate()
 
 </div>
 
-        <p style={{
-          fontSize: 14, color: 'black', lineHeight: 1.65, margin: "0 0 12px",
-          display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-        }}>
-          {product.description}
-        </p>
+       <p
+  style={{
+    fontSize: "14px",
+    lineHeight: 1.65,
+    margin: "0 0 12px",
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+  }}
+  className="font-bold text-gray-600"
+>
+  {product.description}
+</p>
 
         {/* Numeric Rating */}
-        {product.rating && (
-          <span style={{
-            fontSize: 12,
-            fontWeight: 600,
-            color: "#f59e0b",
-            marginBottom: 10,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 4,
-          }}>
-            <span>⭐</span>
-            <span>{product.rating.toFixed(1)} Ratings</span>
-          </span>
-        )}
+ {product.rating && (
+  <div style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 12, // Space between the two elements
+  }}>
+    <span style={{
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#f59e0b",
+      marginBottom: 10,
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 4,
+    }}>
+      <span>⭐</span>
+      <span>{product.rating.toFixed(1)} Ratings</span>
+    </span>
+    
+    {/* Reviews */}
+    <span style={{
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#6b7280", // A soft gray for reviews text
+      marginBottom: 10,
+    }}>
+      ({product.reviews}) Reviews
+    </span>
+  </div>
+)}
+
 
         {/* Price */}
         <div style={{ display: "flex", alignItems: "baseline", gap: 7, margin: "10px 0 6px" }}>
@@ -239,13 +265,8 @@ const navigate =useNavigate()
         </div>
 
         {/* Special Offer Feature */}
-        <div style={{
-          fontSize: 13, fontWeight: 700, color: BRAND,
-          background: "#fff4f4", padding: "5px 10px", borderRadius: 8, marginBottom: 12,
-          textAlign: "center",
-          boxShadow: "0 2px 6px rgba(201,100,58,0.2)",
-        }}>
-          Get @ ₹{product.price - 20} | Code: GRAB
+        <div className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed" style={{ color:BRAND, background:"#fff4f4", borderColor:"rgba(130,12,12,.25)" }}>
+          Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
         </div>
 
         <div style={{ height: 1, background: "#f3f4f6", margin: "12px 0" }} />

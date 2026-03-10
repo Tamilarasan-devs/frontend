@@ -1,41 +1,60 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import Banner from "../layout/Banner";
 
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
 const badgeMap = {
-  "Best Seller": "bg-amber-100 border-amber-300 text-amber-800",
-  "New":         "bg-blue-100 border-blue-300 text-blue-800",
-  "Top Rated":   "bg-emerald-100 border-emerald-300 text-emerald-800",
-  "Popular":     "bg-violet-100 border-violet-300 text-violet-800",
+  "New Launches":   "bg-amber-100 border-amber-300 text-amber-800",
+  "Must Try!":      "bg-blue-100 border-blue-300 text-blue-800",
+  "Top Rated":      "bg-emerald-100 border-emerald-300 text-emerald-800",
+  "Fasting Moving": "bg-emerald-100 border-emerald-300 text-emerald-800",
+  "Hot Seller":     "bg-violet-100 border-violet-300 text-violet-800",
+  "Limited Stock":  "bg-violet-100 border-violet-300 text-violet-800",
 };
 
 const categoryMeta = {
-  "All":         { image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80", icon: "🛍️" },
-  "Supplements": { image: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=400&q=80", icon: "💊" },
-  "Vitamins":    { image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&q=80", icon: "🧬" },
-  "Protein":     { image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&q=80", icon: "💪" },
-  "Skincare":    { image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80", icon: "✨" },
+  "All":         { image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80", icon: "🛍️", color: "#820c0c" },
+  "Supplements": { image: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=400&q=80", icon: "💊", color: "#7c3aed" },
+  "Vitamins":    { image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&q=80", icon: "🧬", color: "#0369a1" },
+  "Protein":     { image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&q=80", icon: "💪", color: "#b45309" },
+  "Skincare":    { image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80", icon: "✨", color: "#be185d" },
 };
 
 const products = [
-  { id: 1,  name: "Cherry Iron Supplement",    category: "Supplements", description: "Iron-rich supplement to support healthy hemoglobin levels and daily vitality.", price: 299, originalPrice: 499, rating: 4.5, reviews: 128, badge: "Best Seller", tags: ["Iron-Rich","Energy"],   images: ["https://www.amway.in/_next/image?url=https://media.amway.in/sys-master/images/h86/h9c/9201499865118/EIA.w560.h560.316167ID_Cherry-iron2.png&w=1440&q=75","https://www.amway.in/_next/image?url=https://media.amway.in/sys-master/images/h7b/h8f/9201499868670/EIA.w560.h560.316167ID_Cherry-iron3.png&w=1440&q=75"] },
+  { id: 1,  name: "Cherry Iron Supplement",    category: "Supplements", description: "Iron-rich supplement to support healthy hemoglobin levels and daily vitality.", price: 299, originalPrice: 499, rating: 4.5, reviews: 128, badge: "New Launches", tags: ["Iron-Rich","Energy"],   images: ["https://www.amway.in/_next/image?url=https://media.amway.in/sys-master/images/h86/h9c/9201499865118/EIA.w560.h560.316167ID_Cherry-iron2.png&w=1440&q=75","https://www.amway.in/_next/image?url=https://media.amway.in/sys-master/images/h7b/h8f/9201499868670/EIA.w560.h560.316167ID_Cherry-iron3.png&w=1440&q=75"] },
   { id: 2,  name: "Daily Multivitamin Tablets", category: "Vitamins",    description: "Complete multivitamin for immunity, energy, and daily nutrition support.",   price: 449, originalPrice: 699, rating: 5,   reviews: 210, badge: "Top Rated",  tags: ["Immunity","Daily Use"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 3,  name: "Protein Nutrition Powder",  category: "Protein",     description: "High-quality protein blend for muscle recovery and strength gains.",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Popular",    tags: ["Muscle","Recovery"],   images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Supplements", description: "Supports heart health and brain function with pure Omega-3 fatty acids.",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Best Seller", tags: ["Heart","Brain"],       images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 5,  name: "Herbal Skin Cleanser",      category: "Skincare",    description: "Gentle herbal cleanser that refreshes skin and removes impurities naturally.", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "New",        tags: ["Herbal","Gentle"],     images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 6,  name: "Calcium Magnesium Tablets", category: "Supplements", description: "Essential minerals for bone strength and optimal muscle function.",             price: 479, originalPrice: 699, rating: 4.7, reviews: 143, badge: "Popular",    tags: ["Bones","Minerals"],    images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 7,  name: "Vitamin C Boost Capsules",  category: "Vitamins",    description: "Powerful antioxidant capsules to boost immunity and overall wellbeing.",       price: 279, originalPrice: 449, rating: 4.3, reviews: 89,  badge: "New",        tags: ["Antioxidant","Immunity"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 8,  name: "Energy Booster Drink Mix",  category: "Protein",     description: "Instant mix to enhance energy levels and mental focus throughout the day.",    price: 329, originalPrice: 499, rating: 3.9, reviews: 52,  badge: "New",        tags: ["Energy","Focus"],      images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 3,  name: "Protein Nutrition Powder",  category: "Protein",     description: "High-quality protein blend for muscle recovery and strength gains.",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Hot Seller",    tags: ["Muscle","Recovery"],   images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Supplements", description: "Supports heart health and brain function with pure Omega-3 fatty acids.",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Must Try!", tags: ["Heart","Brain"],       images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 5,  name: "Herbal Skin Cleanser",      category: "Skincare",    description: "Gentle herbal cleanser that refreshes skin and removes impurities naturally.", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "Limited Stock",        tags: ["Herbal","Gentle"],     images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 6,  name: "Calcium Magnesium Tablets", category: "Supplements", description: "Essential minerals for bone strength and optimal muscle function.",             price: 479, originalPrice: 699, rating: 4.7, reviews: 143, badge: "Fasting Moving",    tags: ["Bones","Minerals"],    images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 7,  name: "Vitamin C Boost Capsules",  category: "Vitamins",    description: "Powerful antioxidant capsules to boost immunity and overall wellbeing.",       price: 279, originalPrice: 449, rating: 4.3, reviews: 89,  badge: "Top Rated",        tags: ["Antioxidant","Immunity"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 8,  name: "Energy Booster Drink Mix",  category: "Protein",     description: "Instant mix to enhance energy levels and mental focus throughout the day.",    price: 329, originalPrice: 499, rating: 3.9, reviews: 52,  badge: "Hot Seller",        tags: ["Energy","Focus"],      images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
   { id: 9,  name: "Digestive Enzyme Tablets",  category: "Supplements", description: "Supports digestion and nutrient absorption for a healthier gut.",              price: 519, originalPrice: 749, rating: 4.9, reviews: 230, badge: "Top Rated",  tags: ["Gut Health","Digest"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 10, name: "Immunity Support Syrup",    category: "Vitamins",    description: "Advanced herbal formula to strengthen immune defense naturally.",              price: 399, originalPrice: 599, rating: 4.4, reviews: 167, badge: "Popular",    tags: ["Herbal","Immunity"],   images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 10, name: "Immunity Support Syrup",    category: "Vitamins",    description: "Advanced herbal formula to strengthen immune defense naturally.",              price: 399, originalPrice: 599, rating: 4.4, reviews: 167, badge: "Must Try!",    tags: ["Herbal","Immunity"],   images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
 ];
 
 const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
 
-
+/* ── Star Rating ── */
+const StarRating = ({ rating }) => {
+  return (
+    <div style={{ display: "flex", gap: 1 }}>
+      {[1,2,3,4,5].map(i => (
+        <svg key={i} width="11" height="11" viewBox="0 0 24 24"
+          fill={i <= Math.floor(rating) ? "#f59e0b" : i - 0.5 <= rating ? "url(#half)" : "#e5e7eb"}
+          xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="half"><stop offset="50%" stopColor="#f59e0b"/><stop offset="50%" stopColor="#e5e7eb"/></linearGradient>
+          </defs>
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      ))}
+    </div>
+  );
+};
 
 /* ── Product Card ── */
 const ProductCard = ({ product, animDelay = 0 }) => {
@@ -69,7 +88,7 @@ const ProductCard = ({ product, animDelay = 0 }) => {
         </div>
 
         {/* Discount badge */}
-        <div style={{ position:"absolute", top:8, right:0, zIndex:5, background:"#c9643a", color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.1, fontFamily:"sans-serif", clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
+        <div style={{ position:"absolute", top:8, right:0, zIndex:5, background:ACCENT, color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.1, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
           <div className="-mt-1.5">
             <div style={{ fontSize:16 }}>{disc}%</div>
             <div style={{ fontSize:10 }}>OFF</div>
@@ -97,25 +116,42 @@ const ProductCard = ({ product, animDelay = 0 }) => {
           <div className="h-[2px] w-0 transition-all duration-300 group-hover:w-full" style={{ backgroundColor: BRAND }} />
         </div>
 
-        <p className="text-sm text-gray-600 font-bold leading-relaxed line-clamp-2 mb-2 flex-grow mt-1">{product.description}</p>
+        <p className="text-md font-bold text-gray-500 leading-relaxed line-clamp-2 mb-2 flex-grow mt-1 ">{product.description}</p>
+
+{product.rating && (
+  <div style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 12, // Space between the two elements
+  }}>
+    <span style={{
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#f59e0b",
+      marginBottom: 10,
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 4,
+    }}>
+      <span>⭐</span>
+      <span>{product.rating.toFixed(1)} Ratings</span>
+    </span>
+    
+    {/* Reviews */}
+    <span style={{
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#6b7280", // A soft gray for reviews text
+      marginBottom: 10,
+    }}>
+      ({product.reviews}) Reviews
+    </span>
+  </div>
+)}
         
-        {product.rating && (
-          <span style={{
-            fontSize: 12,
-            fontWeight: 600,
-            color: "#f59e0b",
-            marginBottom: 10,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 4,
-          }}>
-            <span>⭐</span>
-            <span>{product.rating.toFixed(1)} Ratings </span>({product.reviews})
-          </span>
-        )}
 
         <div className="flex items-baseline gap-1.5 mt-1 mb-2 flex-wrap">
-          <span className="text-lg font-extrabold" style={{ color: BRAND, fontFamily:"'Libre Baskerville', serif" }}>₹{product.price}</span>
+          <span className="text-lg font-extrabold" style={{ color: BRAND }}>₹{product.price}</span>
           <span className="text-xs text-gray-400 line-through">₹{product.originalPrice}</span>
           <span className="ml-auto text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">Save ₹{product.originalPrice - product.price}</span>
         </div>
@@ -127,15 +163,18 @@ const ProductCard = ({ product, animDelay = 0 }) => {
         <div className="h-px bg-gray-100 mb-2.5" />
 
         <button
-          onClick={e => { e.stopPropagation(); const [a, setA] = [added, setAdded]; setAdded(true); setTimeout(() => setAdded(false), 1800); }}
-          className={`w-full py-2 text-xs font-bold tracking-widest uppercase text-white cursor-pointer border-none transition-all duration-300 flex items-center justify-center gap-1.5
-            ${added ? "rounded-xl bg-emerald-500" : "rounded-tl-[40px] rounded-br-[40px]"}`}
-          style={!added ? { background: BRAND } : {}}
+          onClick={e => { e.stopPropagation(); setAdded(true); setTimeout(() => setAdded(false), 1800); }}
+          className="w-full py-3 text-sm font-semibold tracking-wide uppercase flex items-center justify-center gap-2 text-white cursor-pointer transition-all duration-300 ease-in-out"
+          style={{
+            borderRadius: "50px 0 50px 0",
+            background: added ? "#16a34a" : BRAND,
+            border: "none",
+          }}
           onMouseEnter={e => { if (!added) e.currentTarget.style.background = ACCENT; }}
           onMouseLeave={e => { if (!added) e.currentTarget.style.background = BRAND; }}
         >
           <FaShoppingCart size={12} />
-          {added ? "Added!" : "Add to Cart"}
+          {added ? "✓ Added!" : "Add to Cart"}
         </button>
       </div>
     </div>
@@ -143,54 +182,150 @@ const ProductCard = ({ product, animDelay = 0 }) => {
 };
 
 /* ── Desktop Category Sidebar ── */
-const DesktopSidebar = ({ selectedCategory, setSelectedCategory }) => (
-  <div className="p-4">
-    <p className="text-[9px] font-extrabold tracking-[.18em] text-gray-400 uppercase mb-4">Categories</p>
-    <div className="flex flex-col gap-2.5">
-      {categories.map(cat => {
-        const meta = categoryMeta[cat];
-        const isActive = selectedCategory === cat;
-        const count = cat === "All" ? products.length : products.filter(p => p.category === cat).length;
-        return (
-          <button key={cat} onClick={() => setSelectedCategory(cat)}
-            className={`relative w-full rounded-xl overflow-hidden cursor-pointer border-none text-left transition-all duration-300
-              ${isActive ? "shadow-lg scale-[1.03]" : "hover:scale-[1.01] hover:shadow-md"}`}
-            style={isActive ? { outline: `2px solid ${BRAND}`, outlineOffset: 2 } : {}}>
-            <div className="relative h-16 overflow-hidden">
-              <img src={meta?.image} alt={cat} className={`w-full h-full object-cover transition-transform duration-500 ${isActive ? "scale-110" : "hover:scale-105"}`} />
-              <div className="absolute inset-0" style={{ background: isActive ? `linear-gradient(135deg, ${BRAND}cc, ${ACCENT}99)` : "linear-gradient(135deg,rgba(0,0,0,0.5),rgba(0,0,0,0.2))" }} />
-              <div className="absolute inset-0 flex items-center justify-between px-3">
-                <div>
-                  <div className="text-xs font-extrabold text-white" style={{ fontFamily:"'Libre Baskerville',serif" }}>{cat}</div>
-                  <div className="text-[9px] text-white/70">{count} items</div>
+const DesktopSidebar = ({ selectedCategory, setSelectedCategory }) => {
+  const totalProducts = products.length;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", padding: "0" }}>
+      
+      {/* Sidebar Header */}
+      <div style={{
+        padding: "20px 16px 14px",
+        borderBottom: "1px solid #fde8e8",
+        background: "linear-gradient(160deg, #fff4f4 0%, #fff 100%)",
+      }}>
+        <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.2em", color: "#9ca3af", textTransform: "uppercase", marginBottom: 4 }}>Shop By</p>
+        <h3 style={{ fontSize: 15, fontWeight: 800, color: "#1a1a1a",   margin: 0 }}>Categories</h3>
+      </div>
+
+      {/* Category List */}
+      <div style={{ flex: 1, overflowY: "auto", padding: "12px 10px" }}>
+        {categories.map(cat => {
+          const meta = categoryMeta[cat];
+          const isActive = selectedCategory === cat;
+          const count = cat === "All" ? totalProducts : products.filter(p => p.category === cat).length;
+          
+          return (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              style={{
+                width: "100%",
+                border: "none",
+                padding: 0,
+                marginBottom: 8,
+                cursor: "pointer",
+                background: "transparent",
+                textAlign: "left",
+              }}
+            >
+              {/* Card */}
+              <div style={{
+                position: "relative",
+                borderRadius: 14,
+                overflow: "hidden",
+                height: 72,
+                transition: "all 0.25s ease",
+                outline: isActive ? `2.5px solid ${BRAND}` : "2.5px solid transparent",
+                outlineOffset: 2,
+                boxShadow: isActive ? `0 4px 16px rgba(130,12,12,0.18)` : "0 1px 4px rgba(0,0,0,0.06)",
+                transform: isActive ? "scale(1.02)" : "scale(1)",
+              }}>
+                {/* Background image */}
+                <img
+                  src={meta?.image}
+                  alt={cat}
+                  style={{
+                    position: "absolute", inset: 0,
+                    width: "100%", height: "100%",
+                    objectFit: "cover",
+                    transition: "transform 0.4s ease",
+                    transform: isActive ? "scale(1.08)" : "scale(1)",
+                  }}
+                />
+                {/* Overlay */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: isActive
+                    ? `linear-gradient(120deg, ${BRAND}e0 0%, ${ACCENT}bb 100%)`
+                    : "linear-gradient(120deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.22) 100%)",
+                  transition: "background 0.3s ease",
+                }} />
+
+                {/* Content */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  display: "flex", alignItems: "center",
+                  padding: "0 14px",
+                  gap: 10,
+                }}>
+                  {/* Icon bubble */}
+                  <div style={{
+                    width: 36, height: 36,
+                    borderRadius: "50%",
+                    background: isActive ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.15)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 17,
+                    flexShrink: 0,
+                    backdropFilter: "blur(4px)",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                    transition: "all 0.3s ease",
+                  }}>
+                    {meta?.icon}
+                  </div>
+
+                  {/* Text */}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 13, fontWeight: 800, color: "#fff", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {cat}
+                    </div>
+                    <div style={{ fontSize: 10, color: "rgba(255,255,255,0.72)", marginTop: 2 }}>
+                      {count} product{count !== 1 ? "s" : ""}
+                    </div>
+                  </div>
+
+                  {/* Active check */}
+                  {isActive && (
+                    <div style={{
+                      width: 20, height: 20, borderRadius: "50%",
+                      background: "#fff",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      flexShrink: 0,
+                    }}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={BRAND} strokeWidth={3.5}>
+                        <path d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                  )}
                 </div>
-                <span className="text-lg">{meta?.icon}</span>
               </div>
-            </div>
-          </button>
-        );
-      })}
+            </button>
+          );
+        })}
+      </div>
+
+     
+
+      
     </div>
-  </div>
-);
+  );
+};
 
 /* ── Mobile Category Drawer ── */
 const MobileCategoryDrawer = ({ selectedCategory, setSelectedCategory, onClose }) => (
   <div className="fixed inset-0 z-50">
     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
     <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[80vh] overflow-y-auto shadow-2xl">
-      {/* Handle */}
       <div className="flex justify-center pt-3 pb-1">
         <div className="w-10 h-1 rounded-full bg-gray-200" />
       </div>
       <div className="px-5 pt-2 pb-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-base font-extrabold text-gray-900" style={{ fontFamily:"'Libre Baskerville',serif" }}>Browse Categories</h3>
+          <h3 className="text-base font-extrabold text-gray-900">Browse Categories</h3>
           <button onClick={onClose} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border-none cursor-pointer">
             <svg className="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M18 6L6 18M6 6l12 12"/></svg>
           </button>
         </div>
-        {/* Grid of category cards */}
         <div className="grid grid-cols-2 gap-3">
           {categories.map(cat => {
             const meta = categoryMeta[cat];
@@ -204,7 +339,7 @@ const MobileCategoryDrawer = ({ selectedCategory, setSelectedCategory, onClose }
                 <div className="absolute inset-0" style={{ background: isActive ? `linear-gradient(135deg,${BRAND}cc,${ACCENT}99)` : "linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.2))" }} />
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 p-2">
                   <span className="text-2xl">{meta?.icon}</span>
-                  <span className="text-xs font-extrabold text-white text-center leading-tight" style={{ fontFamily:"'Libre Baskerville',serif" }}>{cat}</span>
+                  <span className="text-xs font-extrabold text-white text-center leading-tight">{cat}</span>
                   <span className="text-[9px] text-white/70">{count} items</span>
                 </div>
                 {isActive && (
@@ -246,21 +381,16 @@ export default function App() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;600;700;800&display=swap');
-        * { font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
         @keyframes cardIn {
           from { opacity:0; transform:translateY(18px) scale(.97); }
           to   { opacity:1; transform:translateY(0) scale(1); }
-        }
-        @keyframes slideUp {
-          from { transform:translateY(100%); }
-          to   { transform:translateY(0); }
         }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #e2b8b8; border-radius: 99px; }
       `}</style>
 
+<Banner/>
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-rose-50">
 
         {/* ── Hero ── */}
@@ -285,7 +415,6 @@ export default function App() {
         {/* ── Sticky Toolbar ── */}
         <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
           <div className="max-w-screen-xl mx-auto px-3 sm:px-5 py-2.5 flex items-center gap-2">
-
             {/* Mobile: Category Button */}
             <button onClick={() => setDrawerOpen(true)}
               className="sm:hidden flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-white border-none cursor-pointer shrink-0 transition-all active:scale-95"
@@ -329,16 +458,24 @@ export default function App() {
         {/* ── Body Layout ── */}
         <div className="max-w-screen-xl mx-auto flex">
 
-          {/* Desktop Sidebar */}
-          <aside className="hidden sm:block w-48 md:w-56 shrink-0">
-            <div className="sticky top-[53px] h-[calc(100vh-53px)] overflow-y-auto bg-white border-r border-gray-100">
+          {/* Desktop Sidebar — fully utilized */}
+          <aside className="hidden sm:flex flex-col w-56 md:w-64 shrink-0">
+            <div style={{
+              position: "sticky",
+              top: 53,
+              height: "calc(100vh - 53px)",
+              overflowY: "auto",
+              background: "#fff",
+              borderRight: "1px solid #fde8e8",
+              display: "flex",
+              flexDirection: "column",
+            }}>
               <DesktopSidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
             </div>
           </aside>
 
           {/* Products Area */}
           <main className="flex-1 min-w-0 p-3 sm:p-4 md:p-6">
-
             {/* Section title */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
@@ -365,7 +502,7 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 sm:gap-4">
                 {filtered.map((product, idx) => (
                   <ProductCard key={product.id} product={product} animDelay={idx * 0.04} />
                 ))}

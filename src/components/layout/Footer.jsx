@@ -204,9 +204,7 @@ export default function Footer() {
                   <h2 className="footer-display" style={{ fontSize: 22, fontWeight: 700, color: "#f5ede8", letterSpacing: "0.04em", lineHeight: 1.2 }}>
                     Aayubakawath
                   </h2>
-                  <p style={{ fontSize: 11, color: "#D4845A", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 3, fontWeight: 600 }}>
-                    Life Science
-                  </p>
+                  
                 </div>
               </div>
 
