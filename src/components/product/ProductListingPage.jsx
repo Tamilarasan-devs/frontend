@@ -38,23 +38,7 @@ const products = [
 
 const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
 
-/* ── Star Rating ── */
-const StarRating = ({ rating }) => {
-  return (
-    <div style={{ display: "flex", gap: 1 }}>
-      {[1,2,3,4,5].map(i => (
-        <svg key={i} width="11" height="11" viewBox="0 0 24 24"
-          fill={i <= Math.floor(rating) ? "#f59e0b" : i - 0.5 <= rating ? "url(#half)" : "#e5e7eb"}
-          xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="half"><stop offset="50%" stopColor="#f59e0b"/><stop offset="50%" stopColor="#e5e7eb"/></linearGradient>
-          </defs>
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      ))}
-    </div>
-  );
-};
+
 
 /* ── Product Card ── */
 const ProductCard = ({ product, animDelay = 0 }) => {
@@ -390,7 +374,6 @@ export default function App() {
         ::-webkit-scrollbar-thumb { background: #e2b8b8; border-radius: 99px; }
       `}</style>
 
-<Banner/>
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-rose-50">
 
         {/* ── Hero ── */}

@@ -316,7 +316,6 @@ export default function Header() {
                     { label: "Login",    href: "/login" },
                     { label: "Register", href: "/register" },
                     { label: "Profile",  href: "/profile" },
-                    { label: "Orders",   href: "/orders" },
                   ].map(item => (
                     <a key={item.href} href={item.href}
                        className="block px-5 py-[10px] font-dm text-[12.5px] tracking-[0.4px]
