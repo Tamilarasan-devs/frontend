@@ -13,7 +13,11 @@ import SecondBanner from '../components/layout/banner/SecondBanner'
 import Testimonial from '../components/layout/Testimonial'
 import TwoSideBanner from '../components/layout/banner/TwoSideBanner'
 import OfferScrollBar from '../components/layout/OfferScrollBar'
-
+import RewardsCard from '../components/common/RewardsCard'
+import ProductGrid from '../components/product/ProductGrid'
+import ClientReview from '../components/clientReview/ClientReview'
+import BanrCombo from '../components/layout/banner/BanrCombo'
+import Certificate from './Certificate'
 export default function Home() {
   return (
     <div>
@@ -25,13 +29,19 @@ export default function Home() {
         </div>
         <CategoryList/>
         {/* <FirstBanner/> */}
+        <ProductGrid/>
         <TopSelling/>
         {/* <TwoSideBanner/>
         <GridBanner/> */}
         {/* <OurStory/> */}
-        <SecondBanner/>
-        <OffersSection/>
+        {/* <SecondBanner/>
+        <OffersSection/> */}
         {/* <Newsletter/> */}
+        <BanrCombo/>
+        <RewardsCard/>
+        <ClientReview/>
+        <Certificate/>
+
         <Testimonial/>
         
     </div>

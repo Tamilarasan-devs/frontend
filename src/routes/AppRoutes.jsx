@@ -17,6 +17,9 @@ import Dealership from '../pages/Dealership'
 import About from '../pages/About'
 import SingleProduct from '../components/product/SingleProduct'
 import OfferModal from '../components/layout/OfferModel'
+import CategoryList from '../components/product/CategoryList'
+import ProductGrid from '../components/product/ProductGrid'
+import ClientReview from '../components/clientReview/ClientReview'
 
 
 
@@ -45,6 +48,9 @@ export default function AppRoutes() {
           <Route path='/dealership' element={<Dealership />} />
           <Route path='/aboutpage' element={<About/>} />
           <Route path='/product' element={<SingleProduct/> } />
+          <Route path='/categorylist' element={<CategoryList/>}/>
+          <Route path='/productgrid' element={<ProductGrid/> }  />
+          <Route path='/clientreview' element={<ClientReview/> } />
         </Route>
       </Routes>
     </BrowserRouter>

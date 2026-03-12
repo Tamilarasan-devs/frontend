@@ -53,7 +53,7 @@ export default function WhatsAppButton() {
         }
       `}</style>
 
-      <div className="fixed bottom-8 left-8 z-50 flex flex-col items-center">
+      <div className="fixed bottom-28 left-8 z-50 flex flex-col items-center">
         {/* Ripple rings */}
         <div className="relative flex items-center justify-center">
           <div className="ripple-ring absolute w-14 h-14 rounded-full bg-green-400 opacity-60" />

@@ -1,54 +1,41 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import bottle from '../../assets/images/btl.jpg'
-import bottle1 from '../../assets/images/btl1.jpg'
+import bottle from '../../assets/images/btl.jpg';
+import bottle1 from '../../assets/images/btl1.jpg';
 import { useNavigate } from "react-router-dom";
-import {  FaShoppingCart, } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 const products = [
-  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of traditional Indian spices mixed with milk for a healthy and refreshing drink.", rating: 4.5, reviews: 248, badge: "Best Seller", image: [bottle], hoverImage: [bottle1], tags: ["Spicy", "Healthy", "Indian"] },
-  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that deeply cleanses and refreshes your skin naturally.", rating: 4, reviews: 184, badge: "New", image: [bottle], hoverImage: [bottle1], tags: ["Skin Care", "Herbal", "Refresh"] },
-  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement to support muscle growth and daily nutrition.", rating: 5, reviews: 512, badge: "Top Rated", image: [bottle], hoverImage: [bottle1], tags: ["Fitness", "Protein", "Muscle"] },
-  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation designed to boost immunity and overall wellness.", rating: 3.5, reviews: 97, badge: "New", image: [bottle], hoverImage: [bottle1], tags: ["Immunity", "Ayurvedic", "Wellness"] },
-  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to strengthen your immune system every single day.", rating: 4.2, reviews: 321, badge: "Sale", image: [bottle], hoverImage: [bottle1], tags: ["Vitamin", "Immunity", "Daily"] },
-  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that nourishes scalp and promotes thick, healthy hair growth.", rating: 4.7, reviews: 430, badge: "Premium", image: [bottle], hoverImage: [bottle1], tags: ["Hair Care", "Botanical", "Serum"] },
-  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support healthy digestion and gut comfort daily.", rating: 4.0, reviews: 156, badge: "Top Rated", image: [bottle], hoverImage: [bottle1], tags: ["Digestive", "Ayurvedic", "Gut"] },
+  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of traditional Indian spices mixed with milk for a healthy and refreshing drink.", rating: 4.5, reviews: 248, badge: "Best Seller", image: bottle, hoverImage: bottle1, tags: ["Spicy", "Healthy", "Indian"] },
+  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that deeply cleanses and refreshes your skin naturally.", rating: 4, reviews: 184, badge: "New", image: bottle, hoverImage: bottle1, tags: ["Skin Care", "Herbal", "Refresh"] },
+  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement to support muscle growth and daily nutrition.", rating: 5, reviews: 512, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Fitness", "Protein", "Muscle"] },
+  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation designed to boost immunity and overall wellness.", rating: 3.5, reviews: 97, badge: "New", image: bottle, hoverImage: bottle1, tags: ["Immunity", "Ayurvedic", "Wellness"] },
+  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to strengthen your immune system every single day.", rating: 4.2, reviews: 321, badge: "Sale", image: bottle, hoverImage: bottle1, tags: ["Vitamin", "Immunity", "Daily"] },
+  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that nourishes scalp and promotes thick, healthy hair growth.", rating: 4.7, reviews: 430, badge: "Premium", image: bottle, hoverImage: bottle1, tags: ["Hair Care", "Botanical", "Serum"] },
+  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support healthy digestion and gut comfort daily.", rating: 4.0, reviews: 156, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Digestive", "Ayurvedic", "Gut"] },
 ];
 
-const BRAND = "#820c0c";
-const ACCENT = "#c9643a";
 const CARD_W = 272;
 const CARD_GAP = 20;
-const CRIMSON = "#820c0c";
-const AMBER = "#c9643a"
-const badgeClass = {
-  "Best Seller": { bg: "#fff7ed", color: "#c2410c", border: "#fed7aa" },
-  "New":         { bg: "#f0fdf4", color: "#15803d", border: "#bbf7d0" },
-  "Top Rated":   { bg: "#eff6ff", color: "#1d4ed8", border: "#bfdbfe" },
-  "Sale":        { bg: "#fff1f2", color: "#be123c", border: "#fecdd3" },
-  "Premium":     { bg: "#fdf4e7", color: "#820c0c", border: "#f5cba7" },
+
+const badgeStyles = {
+  "Best Seller": "bg-orange-50 text-orange-700 border border-orange-200",
+  "New":         "bg-green-50 text-green-700 border border-green-200",
+  "Top Rated":   "bg-blue-50 text-blue-700 border border-blue-200",
+  "Sale":        "bg-rose-50 text-rose-700 border border-rose-200",
+  "Premium":     "bg-amber-50 text-[#820c0c] border border-amber-200",
 };
-
-
 
 /* ─── Arrow Button ────────────────────────────────────────── */
 function ArrowBtn({ dir, onClick }) {
-  const [hov, setHov] = useState(false);
   return (
     <button
       onClick={onClick}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        width: 40, height: 40, borderRadius: "50%",
-        border: `1.5px solid ${hov ? BRAND : "#e5e7eb"}`,
-        background: hov ? BRAND : "#fff",
-        color: hov ? "#fff" : "#374151",
-        fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "pointer",
-        boxShadow: hov ? `0 4px 14px rgba(130,12,12,.25)` : "0 1px 4px rgba(0,0,0,.07)",
-        transition: "all .22s ease",
-        flexShrink: 0,
-      }}
+      className="w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-700 text-lg
+        flex items-center justify-center cursor-pointer flex-shrink-0
+        hover:bg-[#820c0c] hover:text-white hover:border-[#820c0c]
+        hover:shadow-[0_4px_14px_rgba(130,12,12,0.25)]
+        shadow-[0_1px_4px_rgba(0,0,0,0.07)]
+        transition-all duration-200 ease-in-out"
     >
       {dir === "prev" ? "‹" : "›"}
     </button>
@@ -56,51 +43,57 @@ function ArrowBtn({ dir, onClick }) {
 }
 
 /* ─── Product Card ────────────────────────────────────────── */
-
-
- function ProductCard({ product, animDelay }) {
+function ProductCard({ product, animDelay }) {
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const disc = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-  const bm   = badgeClass[product.badge];
-const navigate =useNavigate()
+  const navigate = useNavigate();
+
   return (
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       onMouseDown={(e) => e.stopPropagation()}
+      className="flex-shrink-0 bg-white rounded-lg overflow-hidden relative cursor-pointer select-none"
       style={{
-        flexShrink: 0,
         width: CARD_W,
-        background: "#fff",
         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
-        borderRadius: 16,
-        overflow: "hidden",
-        position: "relative",
         zIndex: hov ? 40 : 10,
         transform: hov ? "translateY(-12px) scale(1.015)" : "translateY(0) scale(1)",
         boxShadow: hov
           ? "0 20px 48px rgba(130,12,12,.10), 0 4px 16px rgba(0,0,0,.06)"
           : "0 1px 4px rgba(0,0,0,.04)",
         transition: "transform .35s cubic-bezier(.22,.68,0,1.15), box-shadow .35s ease, border-color .3s ease",
-        cursor: "pointer",
-        userSelect: "none",
         animation: `cardIn .45s ease ${animDelay}s both`,
       }}
-
-      
     >
-      {/* Image */}
-      <div style={{ position: "relative", height: 220, overflow: "hidden", background: "#f9f5f2" }} className="mt-3" onClick={
-        ()=>navigate('/product')
-      }>
+      {/* ── Image Area ── */}
+      {/* rounded container with side margin so ribbon + tags sit inside cleanly */}
+      {product.badge && (
+          // <span className={`text-[10px] px-2.5 py-2 rounded-md font-bold tracking-[.06em] uppercase  mb-2 ${badgeStyles[product.badge]}`}>
+          //   {product.badge}
+          // </span>
+          <span
+              className="absolute top-3 left-3 text-white text-xs px-2 py-1 rounded z-10 font-semibold"
+              style={{ backgroundColor: 'red' }}
+            >
+              {product.badge}
+            </span>
+        )}
+        
+      <div
+        className="relative overflow-hidden bg-[#f9f5f2] mt-3 mx-3 rounded-xl"
+        style={{ height: 220 }}
+        onClick={() => navigate('/product')}
+      >
+        
         {/* Primary image */}
         <img
           src={product.image}
           alt={product.name}
           draggable={false}
+          className="absolute inset-0 w-full h-full object-cover"
           style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
             opacity: hov ? 0 : 1,
             transform: hov ? "scale(1.06)" : "scale(1)",
             transition: "opacity .4s ease, transform .6s ease",
@@ -111,179 +104,131 @@ const navigate =useNavigate()
           src={product.hoverImage}
           alt={product.name}
           draggable={false}
+          className="absolute inset-0 w-full h-full object-cover"
           style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
             opacity: hov ? 1 : 0,
             transform: hov ? "scale(1)" : "scale(1.06)",
             transition: "opacity .4s ease, transform .6s ease",
           }}
         />
 
-        {/* Tags */}
-        <div style={{
-          position: "absolute", top: 150, left: 10,
-          display: "flex", flexDirection: "column", gap: 4, zIndex: 5,
-          opacity: hov ? 1 : 0,
-          transform: hov ? "translateY(0)" : "translateY(-6px)",
-          transition: "opacity .25s ease, transform .25s ease",
-        }}>
+        {/* Tags — bottom-left, revealed on hover */}
+        <div
+          className="absolute bottom-2 left-2 flex flex-col gap-1 z-10"
+          style={{
+            opacity: hov ? 1 : 0,
+            transform: hov ? "translateY(0)" : "translateY(6px)",
+            transition: "opacity .25s ease, transform .25s ease",
+          }}
+        >
           {product.tags.map((t, i) => (
-            <span key={i} style={{
-              fontSize: 9.5, padding: "3px 9px", borderRadius: 99,
-              background: BRAND, color: '#fff',
-              fontWeight: 700, letterSpacing: ".05em", textTransform: "uppercase",
-              boxShadow: "0 1px 4px rgba(0,0,0,.12)",
-            }}>{t}</span>
+            <span
+              key={i}
+              className="text-[9.5px] px-2.5 py-[3px] rounded-full bg-[#820c0c] text-white
+                font-bold tracking-[.05em] uppercase shadow-sm w-fit"
+            >
+              {t}
+            </span>
           ))}
         </div>
 
-        {/* Discount ribbon */}
-    <div
-  style={{
-    position: "absolute",
-    top: 2,
-    right: 0,
-    zIndex: 5,
-    background: "#c9643a",
-    color: "#fff",
-    padding: "12px 12px",
-    fontWeight: 800,
-    textAlign: "center",
-    lineHeight: 1.1,
-    fontFamily: "sans-serif",
-    clipPath:
-      "polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
-    // borderTopRightRadius: "15px",  // Add this line for top-right border radius
-  }}
->
-  <div className="-mt-2">
-    <div style={{ fontSize: 18 }}>{disc}%</div>
-    <div style={{ fontSize: 12 }}>OFF</div>
-  </div>
-</div>
+        {/* Discount ribbon — top-right corner */}
+        <div
+          className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
+          style={{
+            background: "#c9643a",
+            padding: "14px 10px 18px",
+            fontFamily: "sans-serif",
+            lineHeight: 1.1,
+            clipPath: "polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            minWidth: 44,
+          }}
+        >
+          <div className="text-[17px] font-black">{disc}%</div>
+          <div className="text-[10px] font-bold -mt-0.5">OFF</div>
+        </div>
       </div>
 
-      {/* Body */}
-      <div style={{ padding: "16px 18px 20px" }}>
+      {/* ── Card Body ── */}
+      <div className="px-[18px] pt-4 pb-5">
         {/* Badge */}
-        {bm && (
-          <span style={{
-            fontSize: 10, padding: "2px 9px", borderRadius: 99,
-            border: `1px solid ${bm.border}`,
-            background: bm.bg, color: bm.color,
-            fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase",
-            display: "inline-block", marginBottom: 8,
-          }}>
-            {product.badge}
-          </span>
+        
+
+        {/* Product Name */}
+        <div className="inline-block group mb-1 max-w-full">
+          <h3 className="font-['Libre_Baskerville'] text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
+            {product.name}
+          </h3>
+          <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#820c0c]" />
+        </div>
+
+        {/* Description */}
+        <p
+          className="text-sm font-bold text-gray-600 mb-3"
+          style={{
+            lineHeight: 1.65,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {product.description}
+        </p>
+
+        {/* Rating & Reviews */}
+        {product.rating && (
+          <div className="flex items-center gap-3 mb-1 justify-between">
+            <span className="text-xs font-semibold text-amber-400 flex items-center gap-1 ">
+              <span>⭐</span>
+              <span>{product.rating.toFixed(1)} Ratings</span>
+            </span>
+            <span className="text-xs font-semibold text-gray-500">
+              ({product.reviews}) Reviews
+            </span>
+          </div>
         )}
 
-       <div>
-
-  <div className="inline-block group">
-    
-    <h3
-      className="font-['Libre_Baskerville'] text-[15.5px] font-bold text-[#1a1a1a]
-      mb-[3px] whitespace-nowrap overflow-hidden text-ellipsis"
-    >
-      {product.name}
-    </h3>
-
-    {/* underline */}
-   <div
-  className="h-[2px] w-0 transition-all duration-300 group-hover:w-full"
-  style={{ backgroundColor: BRAND }}
-></div>
-        
-  </div>
-
-</div>
-
-       <p
-  style={{
-    fontSize: "14px",
-    lineHeight: 1.65,
-    margin: "0 0 12px",
-    display: "-webkit-box",
-    WebkitLineClamp: 2,
-    WebkitBoxOrient: "vertical",
-    overflow: "hidden",
-  }}
-  className="font-bold text-gray-600"
->
-  {product.description}
-</p>
-
-        {/* Numeric Rating */}
- {product.rating && (
-  <div style={{
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 12, // Space between the two elements
-  }}>
-    <span style={{
-      fontSize: 12,
-      fontWeight: 600,
-      color: "#f59e0b",
-      marginBottom: 10,
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 4,
-    }}>
-      <span>⭐</span>
-      <span>{product.rating.toFixed(1)} Ratings</span>
-    </span>
-    
-    {/* Reviews */}
-    <span style={{
-      fontSize: 12,
-      fontWeight: 600,
-      color: "#6b7280", // A soft gray for reviews text
-      marginBottom: 10,
-    }}>
-      ({product.reviews}) Reviews
-    </span>
-  </div>
-)}
-
-
         {/* Price */}
-        <div style={{ display: "flex", alignItems: "baseline", gap: 7, margin: "10px 0 6px" }}>
-          <span style={{ fontFamily: "'Libre Baskerville', serif", fontSize: 20, fontWeight: 700, color: BRAND }}>
+        <div className="flex items-baseline gap-1.5 mt-2.5 mb-1.5">
+          <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#820c0c]">
             ₹{product.price}
           </span>
-          <span style={{ fontSize: 13, color: "#9ca3af", textDecoration: "line-through" }}>
+          <span className="text-[13px] text-gray-400 line-through">
             ₹{product.originalPrice}
           </span>
-          <span style={{
-            marginLeft: "auto", fontSize: 11, color: "#059669", fontWeight: 700,
-            background: "#ecfdf5", padding: "2px 7px", borderRadius: 99,
-          }}>
+          <span className="ml-auto text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">
             Save ₹{(product.originalPrice - product.price).toFixed(0)}
           </span>
         </div>
 
-        {/* Special Offer Feature */}
-        <div className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed" style={{ color:BRAND, background:"#fff4f4", borderColor:"rgba(130,12,12,.25)" }}>
+        {/* Promo code */}
+        <div
+          className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed text-[#820c0c] bg-[#fff4f4]"
+          style={{ borderColor: "rgba(130,12,12,.25)" }}
+        >
           Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
         </div>
 
-        <div style={{ height: 1, background: "#f3f4f6", margin: "12px 0" }} />
+        <div className="h-px bg-gray-100 my-3" />
 
         {/* Add to Cart */}
         <button
-  onMouseEnter={() => setBtnHov(true)}
-  onMouseLeave={() => setBtnHov(false)}
-  className={`w-full py-3 text-sm font-semibold tracking-wide uppercase
-  flex items-center justify-center gap-2
-  rounded-tl-[50px] rounded-br-[50px] rounded-tr-[0] rounded-bl-[0]
-  ${btnHov ? `bg-[${AMBER}] shadow-[0_6px_20px_rgba(201,100,58,.35)]` : `bg-[${BRAND}]`}
-  text-white cursor-pointer transition-all duration-300 ease-in-out`}
->
-  <FaShoppingCart size={14} />
-  Add to Cart
-</button>
+          onMouseEnter={() => setBtnHov(true)}
+          onMouseLeave={() => setBtnHov(false)}
+          className="w-full py-3 text-sm font-semibold tracking-wide uppercase
+            flex items-center justify-center gap-2 text-white cursor-pointer
+            rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none
+            transition-all duration-300 ease-in-out"
+          style={{
+            background: btnHov ? "#c9643a" : "#820c0c",
+            boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
+          }}
+        >
+          <FaShoppingCart size={14} />
+          Add to Cart
+        </button>
       </div>
     </div>
   );
@@ -292,32 +237,39 @@ const navigate =useNavigate()
 /* ─── Main Component ──────────────────────────────────────── */
 export default function TopSelling() {
   const trackRef  = useRef(null);
-  const [prog, setProg]     = useState(0);
-  const [active, setActive] = useState(0);
+  const barRef    = useRef(null);
+  const [prog, setProg]         = useState(0);
+  const [active, setActive]     = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [thumbW, setThumbW]     = useState(30);
+  const [thumbL, setThumbL]     = useState(0);
   const dragX   = useRef(0);
   const dragSL  = useRef(0);
   const isThumb = useRef(false);
-  const [thumbW, setThumbW] = useState(100);
-  const [thumbL, setThumbL] = useState(0);
 
+  /* ── recalculate thumb width + position from current scroll state ── */
   const recalcThumb = useCallback(() => {
     const el = trackRef.current;
-    if (!el || el.scrollWidth <= el.clientWidth) {
-      setThumbW(100); setThumbL(0); return;
-    }
-    const ratio = el.clientWidth / el.scrollWidth;
-    const w = Math.max(ratio * 100, 8);
-    const p = el.scrollLeft / (el.scrollWidth - el.clientWidth);
+    if (!el) return;
+    const scrollable = el.scrollWidth - el.clientWidth;
+    if (scrollable <= 0) { setThumbW(100); setThumbL(0); return; }
+
+    // thumb width shrinks as more content exists relative to viewport
+    const visibleRatio = el.clientWidth / el.scrollWidth;
+    const w = Math.max(visibleRatio * 100, 6);          // min 6%
+
+    // thumb position: how far scrolled → map to remaining bar space
+    const scrollProgress = el.scrollLeft / scrollable;
+    const maxLeft = 100 - w;
     setThumbW(w);
-    setThumbL(p * (100 - w));
+    setThumbL(scrollProgress * maxLeft);
   }, []);
 
   const onScroll = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    const max = el.scrollWidth - el.clientWidth;
-    const p   = max > 0 ? el.scrollLeft / max : 0;
+    const scrollable = el.scrollWidth - el.clientWidth;
+    const p = scrollable > 0 ? el.scrollLeft / scrollable : 0;
     setProg(p);
     setActive(Math.min(Math.round(el.scrollLeft / (CARD_W + CARD_GAP)), products.length - 1));
     recalcThumb();
@@ -336,8 +288,24 @@ export default function TopSelling() {
   }, [onScroll, recalcThumb]);
 
   const toCard = (i) => trackRef.current?.scrollTo({ left: i * (CARD_W + CARD_GAP), behavior: "smooth" });
-  const byCard = (d) => trackRef.current?.scrollBy({ left: d * (CARD_W + CARD_GAP), behavior: "smooth" });
+  const byCard = (d) => {
+  const el = trackRef.current;
+  if (!el) return;
 
+  const scrollAmount = d * (CARD_W + CARD_GAP);
+
+  el.scrollBy({
+    left: scrollAmount,
+    behavior: "smooth",
+  });
+
+  requestAnimationFrame(() => {
+    const scrollable = el.scrollWidth - el.clientWidth;
+    const p = scrollable > 0 ? el.scrollLeft / scrollable : 0;
+    setProg(p);
+    recalcThumb();
+  });
+};
   const startDrag = (e, thumb) => {
     e.preventDefault();
     isThumb.current = thumb;
@@ -352,28 +320,38 @@ export default function TopSelling() {
       const el = trackRef.current;
       if (!el) return;
       if (isThumb.current) {
-        const bar = document.getElementById("ts-scrollbar");
+        const bar = barRef.current;
         if (!bar) return;
-        const bw = bar.clientWidth;
-        const tw = (el.clientWidth / el.scrollWidth) * bw;
-        const dx = (e.clientX - dragX.current) / (bw - tw);
-        el.scrollLeft = dragSL.current + dx * (el.scrollWidth - el.clientWidth);
+        const barPx   = bar.clientWidth;
+        const thumbPx = (el.clientWidth / el.scrollWidth) * barPx;
+        const scale   = (el.scrollWidth - el.clientWidth) / (barPx - thumbPx);
+        el.scrollLeft = dragSL.current + (e.clientX - dragX.current) * scale;
       } else {
         el.scrollLeft = dragSL.current - (e.clientX - dragX.current);
       }
     };
     const up = () => setDragging(false);
     window.addEventListener("mousemove", mv);
-    window.addEventListener("mouseup", up);
-    return () => { window.removeEventListener("mousemove", mv); window.removeEventListener("mouseup", up); };
+    window.addEventListener("mouseup",   up);
+    return () => {
+      window.removeEventListener("mousemove", mv);
+      window.removeEventListener("mouseup",   up);
+    };
   }, [dragging]);
+
+  const onBarClick = (e) => {
+    const bar = barRef.current;
+    const el  = trackRef.current;
+    if (!bar || !el) return;
+    const rect  = bar.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
+  };
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;500;600;700&display=swap');
-
-        * { box-sizing: border-box; }
 
         @keyframes cardIn {
           from { opacity: 0; transform: translateY(18px); }
@@ -392,75 +370,37 @@ export default function TopSelling() {
         }
         #ts-track::-webkit-scrollbar { display: none; }
 
-        .ts-fade-left,
-        .ts-fade-right {
-          position: absolute;
-          top: 0; bottom: 0;
-          width: 50px;
-          z-index: 20;
-          pointer-events: none;
+        .ts-fade-left, .ts-fade-right {
+          position: absolute; top: 0; bottom: 0;
+          width: 50px; z-index: 20; pointer-events: none;
         }
-        .ts-fade-left  { left: 0;  background: linear-gradient(to right, #ffffff, transparent); }
-        .ts-fade-right { right: 0; background: linear-gradient(to left, #ffffff, transparent); }
-
-        #ts-section::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 4px;
-          background: linear-gradient(to right, ${BRAND}, ${ACCENT}, ${BRAND});
-        }
+        .ts-fade-left  { left:  0; background: linear-gradient(to right, #fff, transparent); }
+        .ts-fade-right { right: 0; background: linear-gradient(to left,  #fff, transparent); }
       `}</style>
 
-      <section
-        id="ts-section"
-        style={{
-          // fontFamily: "'Nunito', sans-serif",
-          background: "#ffffff",
-          padding: "72px 0 60px",
-          position: "relative",
-        }}
-      >
-        {/* ── Header ── */}
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-          <div style={{
-            display: "flex", alignItems: "flex-end", justifyContent: "space-between",
-            flexWrap: "wrap", gap: 16, marginBottom: 28,
-          }}>
-            {/* Left: Title */}
-            <div>
-              <p style={{
-                fontSize: 18, letterSpacing: ".2em", textTransform: "uppercase",
-                fontWeight: 700, color: ACCENT, marginBottom: 10,
-                display: "flex", alignItems: "center", gap: 10,
-              }}>
-                Our collection
-                <span style={{ width: 32, height: 1.5, background: ACCENT, borderRadius: 99, opacity: .5, display: "inline-block" }} />
-              </p>
-              <h2 style={{
-                fontFamily: "'Libre Baskerville', serif",
-                fontSize: "clamp(26px, 4vw, 36px)",
-                fontWeight: 700, color: "#111827", margin: 0, lineHeight: 1.15,
-              }}>
-                Top Selling <span style={{ color: BRAND }}>Products</span>
-              </h2>
-              <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 6 }}>
-                <div style={{ width: 36, height: 2.5, background: BRAND, borderRadius: 99 }} />
-                <div style={{ width: 8, height: 8, borderRadius: "50%", background: ACCENT, opacity: .6 }} />
-                <div style={{ width: 16, height: 2.5, background: "#f0ece8", borderRadius: 99 }} />
-              </div>
-            </div>
+      <section className="bg-white relative" style={{ padding: "72px 0 60px" }}>
 
-            {/* Right: Arrows */}
-            <div style={{ display: "flex", gap: 8 }}>
-              <ArrowBtn dir="prev" onClick={() => byCard(-1)} />
-              <ArrowBtn dir="next" onClick={() => byCard(1)} />
-            </div>
+        {/* ── Header ── */}
+        <div className="max-w-[1200px] mx-auto px-6 mb-7">
+          <p className="text-lg tracking-[.2em] uppercase font-bold text-[#c9643a] mb-2.5 flex items-center gap-2.5">
+            Our collection
+            <span className="w-8 h-[1.5px] bg-[#c9643a] rounded-full opacity-50 inline-block" />
+          </p>
+          <h2
+            className="font-['Libre_Baskerville'] font-bold text-[#111827] m-0 leading-tight"
+            style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
+          >
+            Shop by <span className="text-[#820c0c]">Category</span>
+          </h2>
+          <div className="mt-3 flex items-center gap-1.5">
+            <div className="w-9 h-[2.5px] bg-[#820c0c] rounded-full" />
+            <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
+            <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
           </div>
         </div>
 
         {/* ── Scroll Track ── */}
-        <div style={{ position: "relative", overflow: "hidden", padding: "12px 0 4px" }}>
+        <div className="relative overflow-hidden py-3">
           <div className="ts-fade-left" />
           <div className="ts-fade-right" />
           <div
@@ -475,65 +415,69 @@ export default function TopSelling() {
           </div>
         </div>
 
-        {/* ── Controls: Scrollbar + Dots ── */}
-        <div style={{ maxWidth: 1200, margin: "10px auto 0", padding: "0 24px" }}>
-          {/* Scrollbar track */}
+        {/* ── Bottom Controls ── */}
+        <div className="max-w-[1200px] mx-auto px-6 mt-3">
+
+          {/* ── Scrollbar track ── */}
           <div
-            id="ts-scrollbar"
-            onClick={(e) => {
-              const r = e.currentTarget.getBoundingClientRect();
-              const ratio = (e.clientX - r.left) / r.width;
-              const el = trackRef.current;
-              if (el) el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
-            }}
-            style={{
-              height: 3, background: "#f0ede9", borderRadius: 99,
-              cursor: "pointer", position: "relative",
-            }}
+            ref={barRef}
+            onClick={onBarClick}
+            className="relative h-[4px] rounded-full cursor-pointer"
+            style={{ background: "#f0ede9" }}
           >
-            {/* Fill */}
-            <div style={{
-              position: "absolute", top: 0, left: 0, height: "100%",
-              width: `${prog * 100}%`,
-              background: `linear-gradient(to right, ${ACCENT}66, ${BRAND}4D)`,
-              borderRadius: 99, pointerEvents: "none",
-            }} />
-            {/* Thumb */}
+            {/* Background fill (progress) */}
+            <div
+              className="absolute top-0 left-0 h-full rounded-full pointer-events-none"
+              style={{
+                width: `${prog * 100}%`,
+                background: "linear-gradient(to right, rgba(201,100,58,.3), rgba(130,12,12,.2))",
+              }}
+            />
+            {/* Draggable thumb — moves & resizes dynamically */}
             <div
               onMouseDown={(e) => { e.stopPropagation(); startDrag(e, true); }}
+              className="absolute top-0 h-full rounded-full"
               style={{
-                position: "absolute", top: "50%", transform: "translateY(-50%)",
-                height: 3, borderRadius: 99, cursor: "grab",
-                width: `${thumbW}%`, left: `${thumbL}%`,
-                background: `linear-gradient(to right, ${ACCENT}, ${BRAND})`,
-                boxShadow: `0 0 8px ${ACCENT}55`,
-                transition: "height .18s ease",
+                width:      `${thumbW}%`,
+                left:       `${thumbL}%`,
+                background: "linear-gradient(to right, #c9643a, #820c0c)",
+                boxShadow:  "0 0 8px rgba(201,100,58,.5)",
+                cursor:     dragging && isThumb.current ? "grabbing" : "grab",
+                transition: dragging ? "none" : "left .08s linear, width .15s ease",
               }}
             />
           </div>
 
-          {/* Dots + Counter */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 14 }}>
-            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+          {/* ── Dots + Counter + Arrows ── */}
+          <div className="flex items-center justify-between mt-4">
+
+            {/* Dots */}
+            <div className="flex items-center gap-1.5">
               {products.map((_, i) => (
                 <div
                   key={i}
                   onClick={() => toCard(i)}
+                  className="h-[3px] rounded-full cursor-pointer"
                   style={{
-                    height: 3, borderRadius: 99, cursor: "pointer",
                     width: i === active ? 26 : 8,
                     background: i === active
-                      ? `linear-gradient(to right, ${ACCENT}, ${BRAND})`
+                      ? "linear-gradient(to right, #c9643a, #820c0c)"
                       : "#e5e7eb",
-                    boxShadow: i === active ? `0 0 6px ${ACCENT}55` : "none",
+                    boxShadow: i === active ? "0 0 6px rgba(201,100,58,.4)" : "none",
                     transition: "all .28s cubic-bezier(.22,.68,0,1.2)",
                   }}
                 />
               ))}
             </div>
-            <span style={{ fontSize: 12, color: "#9ca3af", fontWeight: 600, letterSpacing: ".1em" }}>
-              {String(active + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
-            </span>
+
+            {/* Counter + Arrows */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-gray-400 font-semibold tracking-[.1em]">
+                {String(active + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
+              </span>
+              <ArrowBtn dir="prev" onClick={() => byCard(-1)} />
+              <ArrowBtn dir="next" onClick={() => byCard(1)} />
+            </div>
           </div>
         </div>
       </section>

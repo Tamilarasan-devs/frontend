@@ -19,37 +19,34 @@ export default function TopScroll() {
   useEffect(() => {
     const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
-  }, [index]);
+  }, []);
 
   return (
-   <div
-  className="text-white py-3 flex justify-center"
-  style={{ background: "linear-gradient(90deg,#4a0000 0%,#8b0000 50%,#4a0000 100%)" }}
->
-  <div className="flex items-center gap-4">
-    
-    {/* Left Arrow */}
-    <button
-      onClick={prevSlide}
-      className="text-xl font-bold"
+    <div
+      className="text-white py-3 flex justify-center"
+      style={{
+        background:
+          "linear-gradient(90deg,#4a0000 0%,#8b0000 50%,#4a0000 100%)",
+      }}
     >
-      ❮
-    </button>
+      <div className="flex items-center w-full max-w-3xl justify-between px-4">
 
-    {/* Message */}
-    <h2 className="text-center">
-      {messages[index]}
-    </h2>
+        {/* Left Arrow */}
+        <button onClick={prevSlide} className="text-xl font-bold">
+          ❮
+        </button>
 
-    {/* Right Arrow */}
-    <button
-      onClick={nextSlide}
-      className="text-xl font-bold"
-    >
-      ❯
-    </button>
+        {/* Message (fixed width so arrows don't move) */}
+        <div className="flex-1 text-center px-4">
+          <h2>{messages[index]}</h2>
+        </div>
 
-  </div>
-</div>
+        {/* Right Arrow */}
+        <button onClick={nextSlide} className="text-xl font-bold">
+          ❯
+        </button>
+
+      </div>
+    </div>
   );
 }
