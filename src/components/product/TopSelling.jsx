@@ -75,7 +75,7 @@ function ProductCard({ product, animDelay }) {
           // </span>
           <span
               className="absolute top-3 left-3 text-white text-xs px-2 py-1 rounded z-10 font-semibold"
-              style={{ backgroundColor: 'red' }}
+              style={{ backgroundColor: '#820c0c' }}
             >
               {product.badge}
             </span>
