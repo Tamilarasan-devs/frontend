@@ -145,11 +145,12 @@ export default function ProductGrid() {
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[87rem] mx-auto">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-4 relative flex flex-col"
-            style={{ borderTop: `3px solid ${BRAND}` }}
-          >
+         <div
+  key={product.id}
+  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 
+             p-4 relative flex flex-col border border-gray-200 hover:border-[var(--accent)]"
+  style={{ "--accent": ACCENT }}
+>
 
             {/* Tag */}
             <span
@@ -232,7 +233,7 @@ export default function ProductGrid() {
             <div className="flex-1" />
 
             {/* Divider */}
-            <div className="border-t border-gray-100 mt-3" />
+            {/* <div className="border-t border-gray-100 mt-3" /> */}
 
             {/* Price */}
             <div className="flex items-center gap-2 mt-3">
