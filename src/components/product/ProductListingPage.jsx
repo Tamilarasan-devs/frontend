@@ -58,7 +58,15 @@ const ProductCard = ({ product, animDelay = 0 }) => {
       style={{ animation: `cardIn 0.45s ease ${animDelay}s both` }}
     >
       {/* Image */}
+        {/* {bm && <span className={`self-start text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-1.5 `}>{product.badge}</span>} */}
+        <span
+              className= {` absolute top-3 left-3 text-white text-xs px-2 py-1 rounded z-10 font-semibold ${bm}` }
+              style={{ backgroundColor: BRAND }}
+            >
+              {product.badge}
+            </span>
       <div className="relative h-44 sm:h-48 overflow-hidden bg-orange-50 shrink-0">
+
         <img src={product.images[0]} alt={product.name} draggable={false}
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${hov ? "opacity-0 scale-105" : "opacity-100 scale-100"}`} />
         <img src={product.images[1]} alt={product.name} draggable={false}
@@ -91,7 +99,6 @@ const ProductCard = ({ product, animDelay = 0 }) => {
 
       {/* Body */}
       <div className="p-3 sm:p-4 flex flex-col flex-grow">
-        {bm && <span className={`self-start text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-1.5 ${bm}`}>{product.badge}</span>}
 
         <div className="inline-block group">
           <h3 className="text-[14px] sm:text-[15px] font-bold text-[#1a1a1a] mb-[3px] whitespace-nowrap overflow-hidden text-ellipsis">
