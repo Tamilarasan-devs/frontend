@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaShoppingCart ,FaArrowRight} from "react-icons/fa";
 import img from '../../assets/images/pro.webp'
 import img1 from '../../assets/images/pro1.webp'
-
+import { useNavigate } from "react-router-dom";
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
@@ -114,7 +114,7 @@ export default function ProductGrid() {
 
   const getDiscount = (sale, regular) =>
     Math.round(((regular - sale) / regular) * 100);
-
+const navigate =useNavigate()
   return (
     <div className="min-h-screen p-6" style={{ backgroundColor: "#fdf5f5" }}>
 
@@ -178,6 +178,7 @@ export default function ProductGrid() {
               onMouseLeave={() =>
                 setHovered((prev) => ({ ...prev, [product.id]: false }))
               }
+              onClick={()=>navigate("/product")}
             >
               <img
                 src={product.image}
@@ -268,7 +269,7 @@ export default function ProductGrid() {
         ))}
       </div>
       <div className="text-center mt-6 flex justify-center">
-      <button className="flex items-center justify-center bg-[#c9643a] text-white text-sm font-semibold py-4 px-8 rounded-md hover:bg-blue-700 transition duration-300">
+      <button className="flex items-center justify-center bg-[#c9643a] text-white text-sm font-semibold py-4 px-8 rounded-md hover:bg-[#6B8C1A] transition duration-300" onClick={()=>navigate('/productListing')}>
         View More
         <FaArrowRight className="ml-2" />
       </button>
