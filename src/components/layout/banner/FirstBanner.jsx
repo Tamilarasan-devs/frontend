@@ -1,5 +1,5 @@
 import React from "react";
-import banner from '../../../assets/images/banner1.jpg'
+import banner from '../../../assets/images/rewards_desktop.webp'
 
 export default function FirstBanner() {
   return (

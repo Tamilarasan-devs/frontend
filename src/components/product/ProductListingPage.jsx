@@ -2,17 +2,18 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import Banner from "../layout/Banner";
-
+import bottle from '../../assets/images/btl.jpg';
+import bottle1 from '../../assets/images/btl1.jpg';
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
 const badgeMap = {
-  "New Launches":   "bg-amber-100 border-amber-300 text-amber-800",
-  "Must Try!":      "bg-blue-100 border-blue-300 text-blue-800",
-  "Top Rated":      "bg-emerald-100 border-emerald-300 text-emerald-800",
-  "Fasting Moving": "bg-emerald-100 border-emerald-300 text-emerald-800",
-  "Hot Seller":     "bg-violet-100 border-violet-300 text-violet-800",
-  "Limited Stock":  "bg-violet-100 border-violet-300 text-violet-800",
+  "New Launches":   "bg-yellow-400 border-yellow-500 text-black",
+  "Must Try!":      "bg-sky-500 border-sky-600 text-white",
+  "Top Rated":      "bg-green-500 border-green-600 text-white",
+  "Fast Moving":    "bg-lime-500 border-lime-600 text-black",
+  "Hot Seller":     "bg-pink-500 border-pink-600 text-white",
+  "Limited Stock":  "bg-red-500 border-red-600 text-white",
 };
 
 const categoryMeta = {
@@ -24,16 +25,16 @@ const categoryMeta = {
 };
 
 const products = [
-  { id: 1,  name: "Cherry Iron Supplement",    category: "Supplements", description: "Iron-rich supplement to support .", price: 299, originalPrice: 499, rating: 4.5, reviews: 128, badge: "New Launches", tags: ["Iron-Rich","Energy"],   images: ["https://www.amway.in/_next/image?url=https://media.amway.in/sys-master/images/h86/h9c/9201499865118/EIA.w560.h560.316167ID_Cherry-iron2.png&w=1440&q=75","https://www.amway.in/_next/image?url=https://media.amway.in/sys-master/images/h7b/h8f/9201499868670/EIA.w560.h560.316167ID_Cherry-iron3.png&w=1440&q=75"] },
-  { id: 2,  name: "Daily Multivitamin Tablets", category: "Vitamins",    description: "Complete multivitamin for immunity",   price: 449, originalPrice: 699, rating: 5,   reviews: 210, badge: "Top Rated",  tags: ["Immunity","Daily Use"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 3,  name: "Protein Nutrition Powder",  category: "Protein",     description: "High-quality protein blend for ",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Hot Seller",    tags: ["Muscle","Recovery"],   images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Supplements", description: "Supports heart health and brain",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Must Try!", tags: ["Heart","Brain"],       images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 5,  name: "Herbal Skin Cleanser",      category: "Skincare",    description: "Gentle herbal cleanser that refreshes skin .", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "Limited Stock",        tags: ["Herbal","Gentle"],     images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 6,  name: "Calcium Magnesium Tablets", category: "Supplements", description: "Essential minerals for bone strength.",             price: 479, originalPrice: 699, rating: 4.7, reviews: 143, badge: "Fasting Moving",    tags: ["Bones","Minerals"],    images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 7,  name: "Vitamin C Boost Capsules",  category: "Vitamins",    description: "Powerful antioxidant capsules to boost .",       price: 279, originalPrice: 449, rating: 4.3, reviews: 89,  badge: "Top Rated",        tags: ["Antioxidant","Immunity"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 8,  name: "Energy Booster Drink Mix",  category: "Protein",     description: "Instant mix to enhance energy levels.",    price: 329, originalPrice: 499, rating: 3.9, reviews: 52,  badge: "Hot Seller",        tags: ["Energy","Focus"],      images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 9,  name: "Digestive Enzyme Tablets",  category: "Supplements", description: "Supports digestion and nutrient.",              price: 519, originalPrice: 749, rating: 4.9, reviews: 230, badge: "Top Rated",  tags: ["Gut Health","Digest"], images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
-  { id: 10, name: "Immunity Support Syrup",    category: "Vitamins",    description: "Advanced herbal formula to strengthen.",              price: 399, originalPrice: 599, rating: 4.4, reviews: 167, badge: "Must Try!",    tags: ["Herbal","Immunity"],   images: ["https://originnutrition.in/cdn/shop/files/supergreens_5.webp?v=1740766116&width=533","https://www.rippedupnutrition.com/cdn/shop/files/Protein_Oats_1770975628_79737921-2303-440f-8255-a34e82949b97.webp?v=1771041223&width=400"] },
+  { id: 1,  name: "Cherry Iron Supplement",    category: "Supplements", description: "Iron-rich supplement to support .", price: 299, originalPrice: 499, rating: 4.5, reviews: 128, badge: "New Launches", tags: ["Iron-Rich","Energy"],   images: [bottle,bottle1] },
+  { id: 2,  name: "Daily Multivitamin Tablets", category: "Vitamins",    description: "Complete multivitamin for immunity",   price: 449, originalPrice: 699, rating: 5,   reviews: 210, badge: "Top Rated",  tags: ["Immunity","Daily Use"], images: [bottle,bottle1] },
+  { id: 3,  name: "Protein Nutrition Powder",  category: "Protein",     description: "High-quality protein blend for ",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Hot Seller",    tags: ["Muscle","Recovery"],   images: [bottle,bottle1] },
+  { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Supplements", description: "Supports heart health and brain",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Must Try!", tags: ["Heart","Brain"],       images: [bottle,bottle1] },
+  { id: 5,  name: "Herbal Skin Cleanser",      category: "Skincare",    description: "Gentle herbal cleanser that refreshes skin .", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "Limited Stock",        tags: ["Herbal","Gentle"],     images: [bottle,bottle1] },
+  { id: 6,  name: "Calcium Magnesium Tablets", category: "Supplements", description: "Essential minerals for bone strength.",             price: 479, originalPrice: 699, rating: 4.7, reviews: 143, badge: "Fasting Moving",    tags: ["Bones","Minerals"],    images: [bottle,bottle1] },
+  { id: 7,  name: "Vitamin C Boost Capsules",  category: "Vitamins",    description: "Powerful antioxidant capsules to boost .",       price: 279, originalPrice: 449, rating: 4.3, reviews: 89,  badge: "Top Rated",        tags: ["Antioxidant","Immunity"], images: [bottle,bottle1] },
+  { id: 8,  name: "Energy Booster Drink Mix",  category: "Protein",     description: "Instant mix to enhance energy levels.",    price: 329, originalPrice: 499, rating: 3.9, reviews: 52,  badge: "Hot Seller",        tags: ["Energy","Focus"],      images: [bottle,bottle1] },
+  { id: 9,  name: "Digestive Enzyme Tablets",  category: "Supplements", description: "Supports digestion and nutrient.",              price: 519, originalPrice: 749, rating: 4.9, reviews: 230, badge: "Top Rated",  tags: ["Gut Health","Digest"], images: [bottle,bottle1] },
+  { id: 10, name: "Immunity Support Syrup",    category: "Vitamins",    description: "Advanced herbal formula to strengthen.",              price: 399, originalPrice: 599, rating: 4.4, reviews: 167, badge: "Must Try!",    tags: ["Herbal","Immunity"],   images: [bottle,bottle1] },
 ];
 
 const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
@@ -46,7 +47,8 @@ const ProductCard = ({ product, animDelay = 0 }) => {
   const [added, setAdded] = useState(false);
   const navigate = useNavigate();
   const disc = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-  const bm = badgeMap[product.badge];
+const bm = badgeMap[product.badge] || "bg-gray-400 text-white";
+
 
   return (
     <div
@@ -60,11 +62,10 @@ const ProductCard = ({ product, animDelay = 0 }) => {
       {/* Image */}
         {/* {bm && <span className={`self-start text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-1.5 `}>{product.badge}</span>} */}
         <span
-              className= {` absolute top-3 left-3 text-white text-xs px-2 py-1 rounded z-10 font-semibold ${bm}` }
-              style={{ backgroundColor: BRAND }}
-            >
-              {product.badge}
-            </span>
+  className={`absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold border ${bm}`}
+>
+  {product.badge}
+</span>
       <div className="relative h-44 sm:h-48 overflow-hidden bg-orange-50 shrink-0">
 
         <img src={product.images[0]} alt={product.name} draggable={false}
@@ -80,7 +81,7 @@ const ProductCard = ({ product, animDelay = 0 }) => {
         </div>
 
         {/* Discount badge */}
-        <div style={{ position:"absolute", top:8, right:0, zIndex:5, background:ACCENT, color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.1, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
+        <div style={{ position:"absolute", top:0, right:0, zIndex:5, background:'#FFB800', color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.4, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
           <div className="-mt-1.5">
             <div style={{ fontSize:16 }}>{disc}%</div>
             <div style={{ fontSize:10 }}>OFF</div>
@@ -104,10 +105,38 @@ const ProductCard = ({ product, animDelay = 0 }) => {
           <h3 className="text-[14px] sm:text-[15px] font-bold text-[#1a1a1a] mb-[3px] whitespace-nowrap overflow-hidden text-ellipsis">
             {product.name}
           </h3>
-          <div className="h-[2px] w-0 transition-all duration-300 group-hover:w-full" style={{ backgroundColor: BRAND }} />
+          <div className="h-[2px] w-0 transition-all duration-300 group-hover:w-50" style={{ backgroundColor: BRAND }} />
         </div>
+<p
+          className="text-sm font-bold text-gray-600 mb-3"
+          style={{
+            lineHeight: 1.65,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+   <span className="text-[#829b1c] font-extrabold">FOR :</span> {product.benefit}
 
-        <p className="text-md font-bold text-gray-500 leading-relaxed line-clamp-2 mb-2 flex-grow mt-1 ">{product.description}</p>
+
+          {product.description}
+        </p>
+        <p
+          className="text-sm font-bold text-gray-600 mb-3"
+          style={{
+            lineHeight: 1.65,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+  <span className="text-[#c9643a] font-extrabold">WITH :</span> {product.benefit}
+
+          {product.description}
+        </p>
+        {/* <p className="text-md font-bold text-gray-500 leading-relaxed line-clamp-2 mb-2 flex-grow mt-1 ">{product.description}</p> */}
 
 {product.rating && (
   <div style={{
@@ -215,7 +244,7 @@ const DesktopSidebar = ({ selectedCategory, setSelectedCategory }) => {
                 position: "relative",
                 borderRadius: 14,
                 overflow: "hidden",
-                height: 72,
+                height: 100,
                 transition: "all 0.25s ease",
                 outline: isActive ? `2.5px solid ${BRAND}` : "2.5px solid transparent",
                 outlineOffset: 2,
@@ -293,11 +322,7 @@ const DesktopSidebar = ({ selectedCategory, setSelectedCategory }) => {
             </button>
           );
         })}
-      </div>
-
-     
-
-      
+      </div> 
     </div>
   );
 };
@@ -383,24 +408,7 @@ export default function App() {
 
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-rose-50">
 
-        {/* ── Hero ── */}
-        <div className="relative overflow-hidden px-4 sm:px-8 lg:px-12 py-8 sm:py-12"
-          style={{ background:"linear-gradient(130deg,#3d0404 0%,#820c0c 50%,#c9643a 100%)" }}>
-          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white opacity-5" />
-          <div className="absolute -bottom-16 left-1/3 w-60 h-60 rounded-full bg-white opacity-5" />
-          <div className="relative z-10 max-w-screen-xl mx-auto">
-            <p className="text-[10px] font-bold tracking-[.2em] text-red-200 uppercase mb-1.5">Wellness & Nutrition</p>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-2" style={{ fontFamily:"'Libre Baskerville',serif" }}>Our Products</h1>
-            <p className="text-sm text-red-200">
-              <strong className="text-white">{filtered.length}</strong> of {products.length} products
-              {selectedCategory !== "All" && (
-                <span className="ml-2 inline-flex items-center gap-1 bg-white/20 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                  {activeMeta?.icon} {selectedCategory}
-                </span>
-              )}
-            </p>
-          </div>
-        </div>
+        <Banner/>
 
         {/* ── Sticky Toolbar ── */}
         <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
@@ -446,7 +454,7 @@ export default function App() {
         )}
 
         {/* ── Body Layout ── */}
-        <div className="max-w-screen-xl mx-auto flex">
+        <div className="max-w-full-xl mx-auto flex p-4">
 
           {/* Desktop Sidebar — fully utilized */}
           <aside className="hidden sm:flex flex-col w-56 md:w-64 shrink-0">

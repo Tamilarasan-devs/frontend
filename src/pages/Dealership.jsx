@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import bane from '../assets/images/bnr-1.webp'
+import Banner from '../components/layout/Banner'
+import bnr from '../assets/images/bn.png';
 
 const inputFields = [
   { name: "name",            label: "Full Name",          type: "text",  icon: "👤", col: "full" },
@@ -72,34 +74,14 @@ const ACCENT = "#c9643a";
 
       <div className="deal-root min-h-screen bg-stone-100">
 
-        {/* ── Banner ── */}
-        <div className="relative overflow-hidden" style={{ height: "clamp(200px, 38vw, 420px)" }}>
-          <img src='https://media.gettyimages.com/id/1305968193/vector/order-now-button-banner-label-template-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=iIqu1tafD7GAaGHywtxR3Wx1hKjw0ajQRMYVXJccHDs=' className='w-full' />
-          {/* Dark overlay */}
-          <div className="absolute inset-0"
-            style={{ background: "linear-gradient(to bottom, rgba(10,4,4,0.3) 0%, rgba(130,12,12,0.6) 60%, rgba(130,12,12,0.88) 100%)" }}
-          />
-          {/* Banner text */}
-          <div className="absolute bottom-0 left-0 right-0 max-w-3xl mx-auto w-full px-5 pb-10">
-            <p className="text-xs uppercase tracking-widest text-white/60 font-medium mb-2 m-0">
-              Become a Partner
-            </p>
-            <h1
-              className="deal-serif text-white font-bold leading-tight m-0"
-              style={{ fontSize: "clamp(28px, 5vw, 58px)" }}
-            >
-              Dealership{" "}
-              <span className="italic" style={{ color: "#f5c7a0" }}>Enquiry</span>
-            </h1>
-            <div className="flex items-center gap-3 mt-3">
-              <div className="w-10 h-0.5 rounded-full" style={{ background: "#c9643a" }} />
-              <p className="text-white/70 m-0 text-sm">
-                Join our growing network of trusted distributors
-              </p>
-            </div>
-          </div>
-        </div>
-
+      
+{/* ══════════ HERO ══════════ */}
+        <section className="relative h-[65vh] min-h-[420px] overflow-hidden">
+          <img src={bnr} alt="About Banner" className="hero-img w-full h-full object-cover" />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          
+        </section>
         {/* ── Form Area ── */}
         <div className="max-w-3xl mx-auto px-4 pb-16" style={{ marginTop: "-36px" }}>
 

@@ -5,24 +5,25 @@ import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 
 const products = [
-  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of traditional Indian spices mixed with milk for a healthy and refreshing drink.", rating: 4.5, reviews: 248, badge: "Best Seller", image: bottle, hoverImage: bottle1, tags: ["Spicy", "Healthy", "Indian"] },
-  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that deeply cleanses and refreshes your skin naturally.", rating: 4, reviews: 184, badge: "New", image: bottle, hoverImage: bottle1, tags: ["Skin Care", "Herbal", "Refresh"] },
-  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement to support muscle growth and daily nutrition.", rating: 5, reviews: 512, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Fitness", "Protein", "Muscle"] },
-  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation designed to boost immunity and overall wellness.", rating: 3.5, reviews: 97, badge: "New", image: bottle, hoverImage: bottle1, tags: ["Immunity", "Ayurvedic", "Wellness"] },
-  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to strengthen your immune system every single day.", rating: 4.2, reviews: 321, badge: "Sale", image: bottle, hoverImage: bottle1, tags: ["Vitamin", "Immunity", "Daily"] },
-  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that nourishes scalp and promotes thick, healthy hair growth.", rating: 4.7, reviews: 430, badge: "Premium", image: bottle, hoverImage: bottle1, tags: ["Hair Care", "Botanical", "Serum"] },
-  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support healthy digestion and gut comfort daily.", rating: 4.0, reviews: 156, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Digestive", "Ayurvedic", "Gut"] },
+  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic.", rating: 4.5, reviews: 248, badge: "New Launches", image: bottle, hoverImage: bottle1, tags: ["Spicy", "Healthy", "Indian"] },
+  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: bottle, hoverImage: bottle1, tags: ["Skin Care", "Herbal", "Refresh"] },
+  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement.", rating: 5, reviews: 512, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Fitness", "Protein", "Muscle"] },
+  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation.", rating: 3.5, reviews: 97, badge: "Must Try!", image: bottle, hoverImage: bottle1, tags: ["Immunity", "Ayurvedic", "Wellness"] },
+  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to.", rating: 4.2, reviews: 321, badge: "Fast Moving", image: bottle, hoverImage: bottle1, tags: ["Vitamin", "Immunity", "Daily"] },
+  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that.", rating: 4.7, reviews: 430, badge: "Limited Stock", image: bottle, hoverImage: bottle1, tags: ["Hair Care", "Botanical", "Serum"] },
+  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support.", rating: 4.0, reviews: 156, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Digestive", "Ayurvedic", "Gut"] },
 ];
 
 const CARD_W = 272;
 const CARD_GAP = 20;
 
-const badgeStyles = {
-  "Best Seller": "bg-orange-50 text-orange-700 border border-orange-200",
-  "New":         "bg-green-50 text-green-700 border border-green-200",
-  "Top Rated":   "bg-blue-50 text-blue-700 border border-blue-200",
-  "Sale":        "bg-rose-50 text-rose-700 border border-rose-200",
-  "Premium":     "bg-amber-50 text-[#820c0c] border border-amber-200",
+const badgeColors = {
+  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" }, // yellow-400 / yellow-500 / black
+  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" }, // sky-500 / sky-600 / white
+  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" }, // green-500 / green-600 / white
+  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" }, // lime-500 / lime-600 / black
+  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" }, // pink-500 / pink-600 / white
+  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" }, // red-500 / red-600 / white
 };
 
 /* ─── Arrow Button ────────────────────────────────────────── */
@@ -54,7 +55,7 @@ function ProductCard({ product, animDelay }) {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       onMouseDown={(e) => e.stopPropagation()}
-      className="flex-shrink-0 bg-white rounded-lg overflow-hidden relative cursor-pointer select-none"
+      className="flex-shrink-0 bg-whiterounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none"
       style={{
         width: CARD_W,
         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
@@ -69,21 +70,22 @@ function ProductCard({ product, animDelay }) {
     >
       {/* ── Image Area ── */}
       {/* rounded container with side margin so ribbon + tags sit inside cleanly */}
-      {product.badge && (
-          // <span className={`text-[10px] px-2.5 py-2 rounded-md font-bold tracking-[.06em] uppercase  mb-2 ${badgeStyles[product.badge]}`}>
-          //   {product.badge}
-          // </span>
-          <span
-              className="absolute top-3 left-3 text-white text-xs px-2 py-1 rounded z-10 font-semibold"
-              style={{ backgroundColor: '#820c0c' }}
-            >
-              {product.badge}
-            </span>
-        )}
-        
+   {product.badge && (
+  <span
+    className="absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold"
+    style={{
+      backgroundColor: badgeColors[product.badge]?.bg || "#A1A1AA", // use .bg
+      color: badgeColors[product.badge]?.text || "#FFFFFF",           // use .text
+      border: `1px solid ${badgeColors[product.badge]?.border || "#888"}`, // optional border
+    }}
+  >
+    {product.badge}
+  </span>
+)}
+       
       <div
-        className="relative overflow-hidden bg-[#f9f5f2] mt-3 mx-3 rounded-xl"
-        style={{ height: 220 }}
+        className="relative overflow-hidden bg-[#f9f5f2]   rounded-xl"
+        style={{ height: 250 }}
         onClick={() => navigate('/product')}
       >
         
@@ -92,7 +94,7 @@ function ProductCard({ product, animDelay }) {
           src={product.image}
           alt={product.name}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover "
           style={{
             opacity: hov ? 0 : 1,
             transform: hov ? "scale(1.06)" : "scale(1)",
@@ -133,21 +135,21 @@ function ProductCard({ product, animDelay }) {
         </div>
 
         {/* Discount ribbon — top-right corner */}
-        <div
-          className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
-          style={{
-            background: "#c9643a",
-            padding: "14px 10px 18px",
-            fontFamily: "sans-serif",
-            lineHeight: 1.1,
-            clipPath: "polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-            minWidth: 44,
-          }}
-        >
-          <div className="text-[17px] font-black">{disc}%</div>
-          <div className="text-[10px] font-bold -mt-0.5">OFF</div>
-        </div>
+        {/* Discount ribbon — top-right corner */}
+<div
+  className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
+  style={{
+    background: "#FFB800",
+    padding: "14px 10px 18px",
+    lineHeight: 1.1,
+    clipPath: "polygon(100% 0,0 0,0 75%,15% 100%,30% 75%,45% 100%,60% 75%,75% 100%,90% 75%,100% 100%)",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    minWidth: 44,
+  }}
+>
+  <div className="text-[17px] font-black">{disc}%</div>
+  <div className="text-[10px] font-bold -mt-0.5">OFF</div>
+</div>
       </div>
 
       {/* ── Card Body ── */}
@@ -157,7 +159,7 @@ function ProductCard({ product, animDelay }) {
 
         {/* Product Name */}
         <div className="inline-block group mb-1 max-w-full">
-          <h3 className="font-['Libre_Baskerville'] text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
+          <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
             {product.name}
           </h3>
           <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#820c0c]" />
@@ -174,8 +176,26 @@ function ProductCard({ product, animDelay }) {
             overflow: "hidden",
           }}
         >
+   <span className="text-[#829b1c] font-extrabold">FOR :</span> {product.benefit}
+
+
           {product.description}
         </p>
+        <p
+          className="text-sm font-bold text-gray-600 mb-3"
+          style={{
+            lineHeight: 1.65,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+  <span className="text-[#c9643a] font-extrabold">WITH :</span> {product.benefit}
+
+          {product.description}
+        </p>
+        
 
         {/* Rating & Reviews */}
         {product.rating && (
@@ -381,23 +401,21 @@ export default function TopSelling() {
       <section className="bg-white relative" style={{ padding: "72px 0 60px" }}>
 
         {/* ── Header ── */}
-        <div className="max-w-[1200px] mx-auto px-6 mb-7">
-          <p className="text-lg tracking-[.2em] uppercase font-bold text-[#c9643a] mb-2.5 flex items-center gap-2.5">
-            Our collection
-            <span className="w-8 h-[1.5px] bg-[#c9643a] rounded-full opacity-50 inline-block" />
-          </p>
+        <div className="flex justify-center  mb-7">
+          
           <h2
-            className="font-['Libre_Baskerville'] font-bold text-[#111827] m-0 leading-tight"
+            className=" font-bold text-[#111827]  leading-tight"
             style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
           >
             Shop by <span className="text-[#820c0c]">Category</span>
           </h2>
-          <div className="mt-3 flex items-center gap-1.5">
+          
+        </div>
+        <div className="mt-3 flex items-center gap-1.5 flex justify-center">
             <div className="w-9 h-[2.5px] bg-[#820c0c] rounded-full" />
             <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
             <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
           </div>
-        </div>
 
         {/* ── Scroll Track ── */}
         <div className="relative overflow-hidden py-3">

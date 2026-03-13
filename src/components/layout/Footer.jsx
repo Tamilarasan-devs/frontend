@@ -31,7 +31,7 @@ export default function Footer() {
 
         .footer-root {
           
-          background: linear-gradient(175deg, #820c0c 0%, #820c0c 40%, #820c0c 100%);
+          background: linear-gradient(175deg, #820c0c 0%, #820c0c 40%, #820c0c 100%); 
           position: relative;
           overflow: hidden;
         }

@@ -3,7 +3,8 @@ import {
   Star, ShoppingCart, Heart, Share2, Shield, Truck, RefreshCw,
   ChevronDown, ChevronUp, Plus, Minus, Check, Leaf, Award, Zap
 } from "lucide-react";
-
+import bottle from '../../assets/images/btl.jpg';
+import bottle1 from '../../assets/images/btl1.jpg';
 // ─── Constants ────────────────────────────────────────────────
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
@@ -17,10 +18,10 @@ const product = {
   reviews: 1248,
   stock: 14,
   images: [
-    "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
+    bottle,
+    bottle1,
+    bottle,
+    bottle1
   ],
   badges: ["100% Natural", "No Preservatives", "GMP Certified"],
   shortDesc:
@@ -169,13 +170,14 @@ export default function SingleProduct() {
             </div>
 
             {/* Discount badge */}
-            <div
-              className="absolute top-4 right-4 w-[52px] h-[52px] rounded-full flex flex-col items-center justify-center text-white text-[10px] font-extrabold leading-tight shadow-lg z-10"
-              style={{ background: BRAND }}
-            >
-              <span>OFF</span>
-              <span className="text-sm">{disc}%</span>
-            </div>
+            
+
+            <div style={{ position:"absolute", top:0, right:0, zIndex:5, background:ACCENT, color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.4, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
+          <div className="-mt-1.5">
+            <div style={{ fontSize:16 }}>{disc}%</div>
+            <div style={{ fontSize:10 }}>OFF</div>
+          </div>
+        </div>
           </div>
 
           {/* Thumbnails */}

@@ -86,7 +86,8 @@ export default function RewardsCard() {
                 </div>
                 <h2 className="text-2xl font-black text-white leading-tight mb-2">
                   Welcome to<br />
-                  <em className="not-italic font-black" style={{ color: "#c8d520" }}>SBLS Rewards</em>
+                  <em className="not-italic font-black" style={{ color: "#c8d520" }}>
+Aayubakwath Rewards</em>
                 </h2>
                 <p className="text-white/50 text-xs leading-relaxed max-w-xs mx-auto">
                   Earn points with every purchase and redeem them for exclusive discounts.

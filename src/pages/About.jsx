@@ -8,7 +8,10 @@ import img0 from '../assets/images/emp.png';
 import img1 from '../assets/images/cont.png';
 import img2 from '../assets/images/the.png';
 import img3 from '../assets/images/ com.png';
-
+import iconbc1 from "../assets/images/icon-bc1.svg";
+import iconbc2 from "../assets/images/icon-bc2.svg";
+import iconbc3 from "../assets/images/icon-bc3.svg";
+import iconbc4 from "../assets/images/icon-bc4.svg";
 /* ── useInView hook for scroll-triggered animations ── */
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -98,6 +101,24 @@ const commitItems = [
   "Not for medicinal use",
   "Recommended to be taken as per suggested usage",
 ];
+const cards = [
+  {
+    title: "Milk is Significant",
+    desc: `Although we started with Goat Milk and farm-grown ingredients, we proudly call ourselves India's 1st Milk-based Skin and Hair Care brand with our Vegan Milk range including Rice, Soy, Almond and Coconut Milk.`,
+  },
+  {
+    title: "Natural Ingredients",
+    desc: "Crafted with natural ingredients to provide gentle and effective skincare solutions that nourish your skin and hair naturally.",
+  },
+  {
+    title: "Farm Fresh Care",
+    desc: "Inspired by farm traditions and blended with modern skincare science to create safe and powerful products.",
+  },
+  {
+    title: "Vegan Milk Range",
+    desc: "Our vegan milk collection includes Rice, Soy, Almond and Coconut milk to deliver gentle nourishment for skin and hair.",
+  },
+];
 
 /* ═══════════════════════════════════════════════════════════ */
 export default function About() {
@@ -166,53 +187,64 @@ export default function About() {
           <img src={bnr} alt="About Banner" className="hero-img w-full h-full object-cover" />
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-          {/* Hero text */}
-          <div className="hero-text absolute bottom-0 left-0 right-0 px-8 pb-14 text-center">
-            <Label text="Our Story" />
-            <h1 className="display-font text-5xl md:text-7xl font-bold text-white leading-tight drop-shadow-xl">
-              Aayubakawath
-            </h1>
-            <p className="text-white/80 text-lg mt-3 font-light tracking-widest uppercase">
-              Rooted in Nature · Backed by Science
-            </p>
-          </div>
+          
         </section>
 
         {/* Features */}
         <FeaturesSection />
 
         {/* ══════════ ABOUT INTRO ══════════ */}
-        <section className="leaf-bg py-28 px-6">
-          <div className="max-w-5xl mx-auto">
-            <Reveal className="text-center mb-16">
-              <Label text="Who We Are" />
-              <h2 className="display-font text-5xl md:text-6xl font-bold leading-tight">
-                <span className="gradient-text">About Aayubakawath</span>
-              </h2>
-              <Divider />
-            </Reveal>
+<section className="leaf-bg py-28 px-6">
+  <div className="max-w-5xl mx-auto">
 
-            <div className="grid md:grid-cols-2 gap-10">
-              <Reveal delay={0.1}>
-                <div className="bg-white rounded-3xl p-10 shadow-[0_4px_32px_rgba(130,12,12,0.07)] border border-[#f0e4d4] h-full card-hover">
-                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#820c0c]/10 to-[#c9643a]/15 flex items-center justify-center text-xl mb-6">🌿</div>
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    <span className="font-bold text-[#820c0c]">Aayubakawath</span> was created with a simple mission — to provide high-quality, science-backed, and herbal-based nutritional supplements that help people maintain a healthy and balanced lifestyle.
-                  </p>
-                </div>
-              </Reveal>
+    {/* ── HEADER ── */}
+    <Reveal className="text-center mb-16">
+      
+      <h2 className="display-font text-5xl md:text-6xl font-bold leading-tight">
+        <span className="gradient-text">About Aayubakawath</span>
+      </h2>
+      <Divider />
+    </Reveal>
 
-              <Reveal delay={0.2}>
-                <div className="bg-white rounded-3xl p-10 shadow-[0_4px_32px_rgba(130,12,12,0.07)] border border-[#f0e4d4] h-full card-hover">
-                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#820c0c]/10 to-[#c9643a]/15 flex items-center justify-center text-xl mb-6">⚗️</div>
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    All products are manufactured by <span className="font-bold text-[#820c0c]">Sri Bhakawath Life Science</span>, ensuring quality production standards and safe ingredient sourcing. Our supplements are designed to bridge the nutritional gap of modern lifestyles.
-                  </p>
-                </div>
-              </Reveal>
+    {/* ── CONTENT ── */}
+    <div className="flex flex-col gap-0">
+
+      {/* Block 1 */}
+      <Reveal delay={0.1}>
+        <div className="flex flex-col md:flex-row items-center gap-10 py-12 border-b border-[#f0e4d4]">
+          <div className="flex-shrink-0 flex flex-col items-center gap-3">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-2xl shadow-lg shadow-[#820c0c]/20">
+              🌿
+            </div>
+            <div className="w-px h-12 bg-gradient-to-b from-[#c9643a] to-transparent hidden md:block" />
+          </div>
+          <div className="flex-1">
+            <p className="text-gray-700 leading-relaxed text-lg">
+              <span className="font-bold text-[#820c0c]">Aayubakawath</span> was created with a simple mission — to provide high-quality, science-backed, and herbal-based nutritional supplements that help people maintain a healthy and balanced lifestyle.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Block 2 */}
+      <Reveal delay={0.2}>
+        <div className="flex flex-col md:flex-row items-center gap-10 py-12">
+          <div className="flex-shrink-0 flex flex-col items-center gap-3">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-2xl shadow-lg shadow-[#820c0c]/20">
+              ⚗️
             </div>
           </div>
-        </section>
+          <div className="flex-1">
+            <p className="text-gray-700 leading-relaxed text-lg">
+              All products are manufactured by <span className="font-bold text-[#820c0c]">Sri Bhakawath Life Science</span>, ensuring quality production standards and safe ingredient sourcing. Our supplements are designed to bridge the nutritional gap of modern lifestyles.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+    </div>
+  </div>
+</section>
 
         {/* ══════════ STORY SECTIONS (alternating) ══════════ */}
         <section className="py-24 bg-white">
@@ -248,53 +280,113 @@ export default function About() {
           </div>
         </section>
 
-        {/* ══════════ MISSION & VISION ══════════ */}
-        <section className="bg-[#f5ede0] py-28 px-6">
-          <div className="max-w-6xl mx-auto space-y-24">
+       {/* ══════════ MISSION & VISION - DIAGONAL PREMIUM STYLE ══════════ */}
+<section className="relative py-32 bg-[#f5ede0] overflow-hidden">
 
-            {/* MISSION */}
-            <Reveal>
-              <div className="grid md:grid-cols-2 gap-14 items-center">
-                <div className="relative overflow-hidden rounded-[28px] shadow-xl">
-                  <img src={mission} alt="Mission" className="story-img w-full h-[380px] object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#820c0c]/20 to-transparent pointer-events-none" />
-                </div>
-                <div>
-                  <Label text="Our Purpose" />
-                  <h2 className="display-font text-4xl md:text-5xl font-bold text-[#820c0c] mb-2">Our Mission</h2>
-                  <span className="accent-bar mb-6 block" />
-                  <p className="text-lg leading-relaxed mb-5 text-gray-800">
-                    Aayubakawath was created to provide science-backed, herbal-based nutritional supplements that help individuals maintain a healthy and balanced lifestyle.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    Manufactured by Sri Bhakawath Life Science, our products follow strict quality standards and safe ingredient sourcing to ensure reliability and trust.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+  {/* Background Decoration */}
+  <div className="absolute top-0 left-0 w-full h-1/2 bg-white -skew-y-3 origin-top-left"></div>
 
-            {/* VISION */}
-            <Reveal>
-              <div className="grid md:grid-cols-2 gap-14 items-center">
-                <div className="order-2 md:order-1">
-                  <Label text="Our Future" />
-                  <h2 className="display-font text-4xl md:text-5xl font-bold text-[#820c0c] mb-2">Our Vision</h2>
-                  <span className="accent-bar mb-6 block" />
-                  <p className="text-lg leading-relaxed mb-5 text-gray-800">
-                    Our vision is to become a trusted leader in herbal wellness by delivering innovative, safe, and effective nutritional solutions for modern lifestyles.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    We aim to empower individuals to take control of their well-being through thoughtfully designed supplements rooted in tradition and backed by science.
-                  </p>
-                </div>
-                <div className="order-1 md:order-2 relative overflow-hidden rounded-[28px] shadow-xl">
-                  <img src={vision} alt="Vision" className="story-img w-full h-[380px] object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-tl from-[#820c0c]/20 to-transparent pointer-events-none" />
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+  <div className="relative max-w-7xl mx-auto px-6 space-y-32">
+
+    {/* MISSION */}
+    <div className="grid md:grid-cols-2 gap-16 items-center">
+
+      {/* Image */}
+      <div className="relative">
+        <img
+          src={mission}
+          alt="Mission"
+          className="rounded-[30px] shadow-2xl h-[420px] w-full object-cover"
+        />
+
+        <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-2xl shadow-xl max-w-sm">
+          <span className="text-sm text-[#820c0c] font-semibold tracking-wider">
+            OUR PURPOSE
+          </span>
+
+          <h2 className="text-3xl font-bold text-[#820c0c] mt-2 display-font">
+            Our Mission
+          </h2>
+
+          <p className="text-gray-600 mt-4 leading-relaxed">
+            Providing science-backed herbal nutritional supplements that help
+            people maintain healthier and more balanced lifestyles.
+          </p>
+        </div>
+      </div>
+
+      {/* Text */}
+      <div>
+        <h3 className="text-4xl font-bold text-[#820c0c] mb-6 display-font">
+          Committed to Quality & Natural Wellness
+        </h3>
+
+        <p className="text-gray-700 text-lg leading-relaxed mb-6">
+          Aayubakawath was created with the goal of blending traditional herbal
+          knowledge with modern scientific research to produce safe and
+          effective nutritional supplements.
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          Manufactured by Sri Bhakawath Life Science, every product is produced
+          under strict quality standards and responsible ingredient sourcing
+          to ensure safety, reliability, and trust for our customers.
+        </p>
+      </div>
+
+    </div>
+
+
+    {/* VISION */}
+    <div className="grid md:grid-cols-2 gap-16 items-center">
+
+      {/* Text */}
+      <div className="order-2 md:order-1">
+        <h3 className="text-4xl font-bold text-[#820c0c] mb-6 display-font">
+          Shaping the Future of Herbal Wellness
+        </h3>
+
+        <p className="text-gray-700 text-lg leading-relaxed mb-6">
+          Our vision is to become a trusted global brand in herbal wellness by
+          offering innovative nutritional solutions designed for modern
+          lifestyles.
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          Through continuous research and thoughtful product design, we aim to
+          empower individuals to take control of their health and long-term
+          well-being.
+        </p>
+      </div>
+
+      {/* Image */}
+      <div className="relative order-1 md:order-2">
+        <img
+          src={vision}
+          alt="Vision"
+          className="rounded-[30px] shadow-2xl h-[420px] w-full object-cover"
+        />
+
+        <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-2xl shadow-xl max-w-sm">
+          <span className="text-sm text-[#820c0c] font-semibold tracking-wider">
+            OUR FUTURE
+          </span>
+
+          <h2 className="text-3xl font-bold text-[#820c0c] mt-2 display-font">
+            Our Vision
+          </h2>
+
+          <p className="text-gray-600 mt-4 leading-relaxed">
+            Becoming a trusted leader in herbal wellness through innovation,
+            safety, and effective nutritional solutions.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
         {/* ══════════ PRODUCT RANGE ══════════ */}
         <section className="py-28 px-6 bg-white leaf-bg">
@@ -316,6 +408,47 @@ export default function About() {
           </div>
         </section>
 
+
+
+        {/* ══════════ WHY CHOOSE US ══════════ */}
+<section className="py-16 bg-[#f9f5f1]">
+      <div className="max-w-5xl mx-auto px-6">
+
+        <h1 className="text-3xl font-extrabold text-center text-[#820c0c] tracking-tight mb-2">
+          Why Aayubakawath
+        </h1>
+        <div className="w-10 h-[3px] bg-[#c9643a] rounded-full mx-auto mb-11" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          {cards.map(({ title, desc }) => (
+            <div
+              key={title}
+              className="group relative h-52 rounded-[18px] overflow-hidden bg-white border border-[#e5d3c6] hover:border-[#820c0c] transition-colors duration-300"
+            >
+              {/* Front */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-7 transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-2.5">
+                <div className="w-14 h-14 rounded-[14px] bg-[#fbeee8] flex items-center justify-center">
+                  <img src={iconbc1} alt="icon" className="w-7 h-7 object-contain" />
+                </div>
+                <h2 className="text-[15.5px] font-bold text-gray-900 text-center leading-snug">
+                  {title}
+                </h2>
+              </div>
+
+              {/* Back */}
+              <div className="absolute inset-0 bg-[#820c0c] flex items-center justify-center px-7 opacity-0 translate-y-3.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <p className="text-[16px] text-white/88 leading-relaxed text-center">
+                  {desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+        
         {/* ══════════ WHY CHOOSE US ══════════ */}
         <section className="py-28 px-6 bg-[#fefbf6]">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">

@@ -1,12 +1,16 @@
 import React, { useState, useRef } from "react";
+
 import beforeImg1 from "../../assets/images/pro1.webp";
 import afterImg1 from "../../assets/images/pro.webp";
-import beforeImg2 from "../../assets/images/pro2.webp"; // Add image path
-import afterImg2 from "../../assets/images/img1.jpg"; // Add image path
-import beforeImg3 from "../../assets/images/pro3.webp"; // Add image path
-import afterImg3 from "../../assets/images/img2.jpg"; // Add image path
+
+import beforeImg2 from "../../assets/images/pro2.webp";
+import afterImg2 from "../../assets/images/img1.jpg";
+
+import beforeImg3 from "../../assets/images/pro3.webp";
+import afterImg3 from "../../assets/images/img2.jpg";
 
 export default function BeforeAfterGrid() {
+
   const containerRef1 = useRef(null);
   const containerRef2 = useRef(null);
   const containerRef3 = useRef(null);
@@ -27,6 +31,7 @@ export default function BeforeAfterGrid() {
   const stopDrag2 = () => setDragging2(false);
   const stopDrag3 = () => setDragging3(false);
 
+  // ---------- MOUSE MOVE ----------
   const handleMove1 = (e) => {
     if (!dragging1) return;
     const rect = containerRef1.current.getBoundingClientRect();
@@ -51,52 +56,74 @@ export default function BeforeAfterGrid() {
     setPosition3(Math.max(0, Math.min(100, percent)));
   };
 
+  // ---------- TOUCH MOVE ----------
+  const handleTouchMove1 = (e) => {
+    if (!dragging1) return;
+    const rect = containerRef1.current.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const percent = (x / rect.width) * 100;
+    setPosition1(Math.max(0, Math.min(100, percent)));
+  };
+
+  const handleTouchMove2 = (e) => {
+    if (!dragging2) return;
+    const rect = containerRef2.current.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const percent = (x / rect.width) * 100;
+    setPosition2(Math.max(0, Math.min(100, percent)));
+  };
+
+  const handleTouchMove3 = (e) => {
+    if (!dragging3) return;
+    const rect = containerRef3.current.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const percent = (x / rect.width) * 100;
+    setPosition3(Math.max(0, Math.min(100, percent)));
+  };
+
   return (
-    <div className="max-w-full-lg mx-auto space-y-12  p-10">
-      {/* Before-After Grid Section */}
+    <div className="max-w-full-lg mx-auto space-y-12 p-10">
+
+      {/* Heading */}
       <div>
+        <h1 className="text-3xl font-bold flex justify-center text-[#820c0c] text-center">
+          Over 1 Million People Trust Aayubakawath
+        </h1>
 
-        <h1 className="text-3xl font-bold flex justify-center text-[#820c0c]" >Over 1 Million People Trust Aayubakawath</h1>
-        <div className="w-24 h-1 bg-[#c9643a] mx-auto rounded-full mb-4  mt-4"></div>
+        <div className="w-24 h-1 bg-[#c9643a] mx-auto rounded-full mb-4 mt-4"></div>
 
-        <h1 className="text-xl font-semibold flex justify-center text-[#820c0c]">Explore Clinically Proven Formulations For South Indian Skin & Hair</h1>
+        <h1 className="text-xl font-semibold flex justify-center text-[#820c0c] text-center">
+          Explore Clinically Proven Formulations For South Indian Skin & Hair
+        </h1>
       </div>
 
+      {/* GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Before-After Card 1 */}
+
+        {/* CARD 1 */}
         <div className="bg-white rounded-2xl shadow-lg p-4">
           <div
             ref={containerRef1}
-            className="relative h-[320px] rounded-xl overflow-hidden"
+            className="relative h-[320px] rounded-xl overflow-hidden touch-none"
             onMouseMove={handleMove1}
             onMouseUp={stopDrag1}
             onMouseLeave={stopDrag1}
+            onTouchMove={handleTouchMove1}
+            onTouchEnd={stopDrag1}
           >
-            {/* BEFORE IMAGE */}
-            <img
-              src={beforeImg1}
-              alt="before"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* AFTER IMAGE */}
+            <img src={beforeImg1} className="absolute inset-0 w-full h-full object-cover" />
+
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position1}%` }}
             >
-              <img
-                src={afterImg1}
-                alt="after"
-                className="w-full h-full object-cover"
-              />
+              <img src={afterImg1} className="w-full h-full object-cover" />
             </div>
-            {/* SLIDER LINE */}
-            <div
-              style={{ left: `${position1}%` }}
-              className="absolute top-0 h-full w-[2px] bg-white"
-            >
-              {/* DRAG HANDLE */}
+
+            <div style={{ left: `${position1}%` }} className="absolute top-0 h-full w-[2px] bg-white">
               <div
                 onMouseDown={startDrag1}
+                onTouchStart={startDrag1}
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center cursor-grab active:cursor-grabbing"
               >
                 <div className="flex gap-[2px]">
@@ -106,49 +133,41 @@ export default function BeforeAfterGrid() {
                 </div>
               </div>
             </div>
-            <span className="absolute top-3 left-3 bg-white text-xs px-2 py-1 rounded">
-              Before
+
+            <span className="absolute top-3 left-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+              BEFORE
             </span>
-            <span className="absolute top-3 right-3 bg-white text-xs px-2 py-1 rounded">
-              After
+
+            <span className="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+              AFTER
             </span>
           </div>
         </div>
 
-        {/* Before-After Card 2 */}
+        {/* CARD 2 */}
         <div className="bg-white rounded-2xl shadow-lg p-4">
           <div
             ref={containerRef2}
-            className="relative h-[320px] rounded-xl overflow-hidden"
+            className="relative h-[320px] rounded-xl overflow-hidden touch-none"
             onMouseMove={handleMove2}
             onMouseUp={stopDrag2}
             onMouseLeave={stopDrag2}
+            onTouchMove={handleTouchMove2}
+            onTouchEnd={stopDrag2}
           >
-            {/* BEFORE IMAGE */}
-            <img
-              src={beforeImg2}
-              alt="before"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* AFTER IMAGE */}
+            <img src={beforeImg2} className="absolute inset-0 w-full h-full object-cover" />
+
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position2}%` }}
             >
-              <img
-                src={afterImg2}
-                alt="after"
-                className="w-full h-full object-cover"
-              />
+              <img src={afterImg2} className="w-full h-full object-cover" />
             </div>
-            {/* SLIDER LINE */}
-            <div
-              style={{ left: `${position2}%` }}
-              className="absolute top-0 h-full w-[2px] bg-white"
-            >
-              {/* DRAG HANDLE */}
+
+            <div style={{ left: `${position2}%` }} className="absolute top-0 h-full w-[2px] bg-white">
               <div
                 onMouseDown={startDrag2}
+                onTouchStart={startDrag2}
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center cursor-grab active:cursor-grabbing"
               >
                 <div className="flex gap-[2px]">
@@ -158,49 +177,41 @@ export default function BeforeAfterGrid() {
                 </div>
               </div>
             </div>
-            <span className="absolute top-3 left-3 bg-white text-xs px-2 py-1 rounded">
-              Before
+
+            <span className="absolute top-3 left-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+              BEFORE
             </span>
-            <span className="absolute top-3 right-3 bg-white text-xs px-2 py-1 rounded">
-              After
+
+            <span className="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+              AFTER
             </span>
           </div>
         </div>
 
-        {/* Before-After Card 3 */}
+        {/* CARD 3 */}
         <div className="bg-white rounded-2xl shadow-lg p-4">
           <div
             ref={containerRef3}
-            className="relative h-[320px] rounded-xl overflow-hidden"
+            className="relative h-[320px] rounded-xl overflow-hidden touch-none"
             onMouseMove={handleMove3}
             onMouseUp={stopDrag3}
             onMouseLeave={stopDrag3}
+            onTouchMove={handleTouchMove3}
+            onTouchEnd={stopDrag3}
           >
-            {/* BEFORE IMAGE */}
-            <img
-              src={beforeImg3}
-              alt="before"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* AFTER IMAGE */}
+            <img src={beforeImg3} className="absolute inset-0 w-full h-full object-cover" />
+
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position3}%` }}
             >
-              <img
-                src={afterImg3}
-                alt="after"
-                className="w-full h-full object-cover"
-              />
+              <img src={afterImg3} className="w-full h-full object-cover" />
             </div>
-            {/* SLIDER LINE */}
-            <div
-              style={{ left: `${position3}%` }}
-              className="absolute top-0 h-full w-[2px] bg-white"
-            >
-              {/* DRAG HANDLE */}
+
+            <div style={{ left: `${position3}%` }} className="absolute top-0 h-full w-[2px] bg-white">
               <div
                 onMouseDown={startDrag3}
+                onTouchStart={startDrag3}
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center cursor-grab active:cursor-grabbing"
               >
                 <div className="flex gap-[2px]">
@@ -210,14 +221,17 @@ export default function BeforeAfterGrid() {
                 </div>
               </div>
             </div>
-            <span className="absolute top-3 left-3 bg-white text-xs px-2 py-1 rounded">
-              Before
+
+            <span className="absolute top-3 left-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+              BEFORE
             </span>
-            <span className="absolute top-3 right-3 bg-white text-xs px-2 py-1 rounded">
-              After
+
+            <span className="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+              AFTER
             </span>
           </div>
         </div>
+
       </div>
     </div>
   );

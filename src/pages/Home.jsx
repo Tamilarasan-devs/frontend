@@ -28,18 +28,21 @@ export default function Home() {
         <OfferScrollBar/>
         </div>
         <CategoryList/>
-        {/* <FirstBanner/> */}
         <ProductGrid/>
+        <FirstBanner/>
+
         <TopSelling/>
         {/* <TwoSideBanner/>
         <GridBanner/> */}
         {/* <OurStory/> */}
-        {/* <SecondBanner/>
+        {/* 
         <OffersSection/> */}
         {/* <Newsletter/> */}
         <BanrCombo/>
         <RewardsCard/>
         <ClientReview/>
+        <SecondBanner/>
+
         <Certificate/>
 
         <Testimonial/>

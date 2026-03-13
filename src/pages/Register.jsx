@@ -12,15 +12,14 @@ export default function Register() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [focused, setFocused] = useState("");
 
   const mutation = useMutation({
     mutationFn: registerUser,
-    onSuccess: (data) => {
-      console.log("Registration successful:", data);
+    onSuccess: () => {
       alert("Account created successfully! Please login.");
     },
     onError: (error) => {
-      console.error("Registration failed:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Registration failed");
     },
   });
@@ -32,230 +31,283 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    if (!form.agree) {
-      alert("You must agree to the terms!");
-      return;
-    }
+    if (form.password !== form.confirmPassword) return alert("Passwords do not match!");
+    if (!form.agree) return alert("You must agree to the terms!");
     mutation.mutate({ name: form.name, email: form.email, password: form.password });
     setForm({ name: "", email: "", password: "", confirmPassword: "", agree: false });
   };
 
-  const EyeIcon = ({ open }) => (
+  const Eye = ({ open }) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
       {open ? (
-        <>
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-          <circle cx="12" cy="12" r="3" />
-        </>
+        <><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></>
       ) : (
-        <>
-          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-          <line x1="1" y1="1" x2="23" y2="23" />
-        </>
+        <><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" /><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" /><line x1="1" y1="1" x2="23" y2="23" /></>
       )}
     </svg>
   );
 
+  const UserIcon = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+    </svg>
+  );
+
+  const MailIcon = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+    </svg>
+  );
+
+  const LockIcon = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+  );
+
+  const features = [
+    {
+      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>,
+      title: "Secure & Encrypted",
+      desc: "256-bit SSL protection at all times.",
+    },
+    {
+      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>,
+      title: "24/7 Support",
+      desc: "Always here when you need us.",
+    },
+    {
+      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>,
+      title: "Full Access",
+      desc: "All features unlocked from day one.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="min-h-screen bg-[#f5ede8] flex items-center justify-center p-4 lg:p-8" >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-        .fade-up { animation: fadeUp 0.55s ease both; }
-        .inp:focus { outline: none; border-color: #820c0c; box-shadow: 0 0 0 3px rgba(130,12,12,0.10); }
-        .inp::placeholder { color: #b0a0a0; }
+        @keyframes slideUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+        .slide-up { animation: slideUp 0.55s cubic-bezier(0.16,1,0.3,1) both; }
+        .inp-field { transition: border-color 0.2s, box-shadow 0.2s; }
+        .inp-field:focus { outline: none; border-color: #820c0c; box-shadow: 0 0 0 3px rgba(130,12,12,0.1); }
+        .inp-field::placeholder { color: #d1bfbf; }
+        .submit-btn { transition: transform 0.15s, box-shadow 0.15s; }
+        .submit-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(130,12,12,0.32) !important; }
+        .submit-btn:active:not(:disabled) { transform: translateY(0); }
+        .feature-item { transition: background 0.2s; }
+        .feature-item:hover { background: rgba(255,255,255,0.13); }
       `}</style>
 
-      {/* ── LEFT DECORATIVE PANEL (hidden on mobile) ── */}
+      {/* ── Outer Card ── */}
       <div
-        className="hidden lg:flex lg:w-[45%] relative flex-col justify-between px-14 py-16 overflow-hidden"
-        style={{ background: "linear-gradient(155deg, #820c0c 0%, #5a0808 55%, #3a0404 100%)" }}
+        className="slide-up w-full max-w-5xl rounded-3xl overflow-hidden"
+        style={{ boxShadow: "0 32px 80px rgba(130,12,12,0.18), 0 8px 24px rgba(0,0,0,0.08)" }}
       >
-        {/* Blobs */}
-        <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-white opacity-[0.04]" />
-        <div className="absolute bottom-10 -left-16 w-64 h-64 rounded-full bg-amber-400 opacity-[0.07]" />
-        <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(255,255,255,0.012) 28px,rgba(255,255,255,0.012) 29px)" }} />
+        <div className="flex flex-col lg:flex-row">
 
-        {/* Logo */}
-       <div className="relative z-10 float-left">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center backdrop-blur-sm border border-white/20">
-                <span className="text-white font-black text-lg">W</span>
-              </div>
-              <span className="text-white font-bold text-xl tracking-tight">
-                Aayubakwath
-              </span>
-            </div>
-          </div>
+          {/* ════ LEFT PANEL ════ */}
+          <div
+            className="lg:w-[42%] relative flex flex-col justify-between px-10 py-12 overflow-hidden"
+            style={{ background: "linear-gradient(155deg, #820c0c 0%, #5a0808 55%, #3a0404 100%)" }}
+          >
+            {/* Background blobs */}
+            <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.04)" }} />
+            <div className="absolute -bottom-24 -left-12 w-80 h-80 rounded-full" style={{ background: "rgba(170,184,32,0.06)" }} />
+            <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(255,255,255,0.012) 28px,rgba(255,255,255,0.012) 29px)" }} />
 
-        {/* Middle content */}
-        <div className="relative z-10">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-6 h-px bg-[#aab820] opacity-70" />
-            <span className="text-[10px] tracking-[4px] uppercase text-[#aab820] font-semibold">Welcome</span>
-          </div>
-          <h2 className="text-4xl font-black text-white leading-tight mb-4">
-            Join Us<br />
-            <em className="not-italic text-[#aab820] font-light italic">Today</em>
-          </h2>
-          <p className="text-white/55 text-sm leading-relaxed max-w-xs">
-            Create your account and unlock access to everything we have to offer.
-          </p>
-
-          {/* Feature list */}
-          <div className="mt-10 space-y-4">
-            {["Secure & encrypted account", "24/7 customer support", "Access to all features"].map((item, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(170,184,32,0.2)", border: "1px solid rgba(170,184,32,0.4)" }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#aab820" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
+            {/* Logo */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-2xl flex items-center justify-center"
+                  style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)" }}
+                >
+                  <span className="text-white font-black text-lg">W</span>
                 </div>
-                <span className="text-white/70 text-sm">{item}</span>
+                <span className="text-white font-bold text-xl tracking-tight">Aayubakwath</span>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="relative z-10 pt-8 border-t border-white/10">
-          <p className="text-white/30 text-xs">Already registered?</p>
-          <a href="login" className="text-[#aab820] text-sm font-semibold hover:underline">Sign in to your account →</a>
-        </div>
-      </div>
-
-      {/* ── RIGHT FORM PANEL ── */}
-      <div className="flex-1 bg-[#fefbf6] flex items-center justify-center px-6 py-16">
-        <div className="w-full max-w-md fade-up">
-
-          {/* Mobile logo */}
-          <div className="flex lg:hidden items-center gap-2 mb-8 justify-center">
-            <div className="w-8 h-8 rounded-lg bg-[#820c0c] flex items-center justify-center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
             </div>
-            <span className="text-[#820c0c] font-bold text-lg">SBLS</span>
+
+            {/* Middle hero content */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-5">
+                <div className="h-px w-6 bg-[#aab820]" />
+                <span className="text-[10px] font-bold tracking-[4px] uppercase text-[#aab820]">Welcome</span>
+              </div>
+              <h2 className="text-4xl font-black text-white leading-snug mb-4">
+                Join Us<br />
+                <em className="not-italic text-[#aab820] italic font-semibold">Today</em>
+              </h2>
+              <p className="text-white text-sm leading-relaxed max-w-xs mb-9">
+                Create your account and unlock access to everything we have to offer. Fast, secure, and simple.
+              </p>
+
+              {/* Feature list */}
+              <div className="space-y-3">
+                {features.map((f, i) => (
+                  <div
+                    key={i}
+                    className="feature-item flex items-start gap-4 rounded-2xl p-4"
+                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.08)" }}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-[#aab820]"
+                      style={{ background: "rgba(170,184,32,0.15)", border: "1px solid rgba(170,184,32,0.3)" }}
+                    >
+                      {f.icon}
+                    </div>
+                    <div>
+                      <p className="text-white text-sm font-bold mb-0.5">{f.title}</p>
+                      <p className="text-white text-xs leading-relaxed">{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom */}
+            <div className="relative z-10 pt-8 border-t border-white/10">
+              <p className="text-white text-xs mb-1">Already registered?</p>
+              <a href="login" className="text-[#aab820] text-sm font-extrabold hover:underline">
+                Sign in to your account →
+              </a>
+            </div>
           </div>
 
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[#820c0c] mb-1">Create Account</h1>
-            <p className="text-gray-400 text-sm">Fill in your details to get started.</p>
-          </div>
+          {/* ════ RIGHT FORM PANEL ════ */}
+          <div className="flex-1 bg-[#fefbf6] flex flex-col justify-center px-8 lg:px-12 py-12">
 
-          <div className="bg-white rounded-2xl shadow-lg border border-red-50 p-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Mobile logo */}
+            <div className="flex lg:hidden items-center gap-2 mb-8">
+              <div className="w-8 h-8 rounded-lg bg-[#820c0c] flex items-center justify-center">
+                <span className="text-white font-black text-sm">W</span>
+              </div>
+              <span className="text-[#820c0c] font-bold text-lg">Aayubakwath</span>
+            </div>
+
+            {/* Heading */}
+            <div className="mb-7">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="h-[3px] w-5 rounded-full bg-[#820c0c]" />
+                <span className="text-[15px] font-extrabold tracking-[3px] uppercase text-[#820c0c]/70">New Account</span>
+              </div>
+              <h1 className="text-2xl font-black text-[#820c0c] mb-1.5" >
+                Create Account
+              </h1>
+              <p className="text-gray-600 text-md font-semibold">Fill in your details below to get started.</p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
 
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Full Name</label>
+                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Full Name</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#820c0c]/40">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
-                    </svg>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "name" ? "#820c0c" : "#d1bfbf" }}>
+                    <UserIcon />
                   </span>
                   <input
                     type="text" name="name" value={form.name} onChange={handleChange} required
                     placeholder="Your full name"
-                    className="inp w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
+                    onFocus={() => setFocused("name")} onBlur={() => setFocused("")}
+                    className="inp-field w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-sm text-gray-800"
                   />
                 </div>
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Email Address</label>
+                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Email Address</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#820c0c]/40">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
-                    </svg>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "email" ? "#820c0c" : "#d1bfbf" }}>
+                    <MailIcon />
                   </span>
                   <input
                     type="email" name="email" value={form.email} onChange={handleChange} required
                     placeholder="you@example.com"
-                    className="inp w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
+                    onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
+                    className="inp-field w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-sm text-gray-800"
                   />
                 </div>
               </div>
 
-              {/* Password */}
-              <div>
-                <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Password</label>
-                <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#820c0c]/40">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                  </span>
-                  <input
-                    type={showPassword ? "text" : "password"} name="password" value={form.password} onChange={handleChange} required
-                    placeholder="Create a password"
-                    className="inp w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
-                  />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#820c0c]/40 hover:text-[#820c0c]/70 transition-colors">
-                    <EyeIcon open={showPassword} />
-                  </button>
+              {/* Password row — two columns */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Password */}
+                <div>
+                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Password</label>
+                  <div className="relative">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "password" ? "#820c0c" : "#d1bfbf" }}>
+                      <LockIcon />
+                    </span>
+                    <input
+                      type={showPassword ? "text" : "password"} name="password" value={form.password} onChange={handleChange} required
+                      placeholder="Create a password"
+                      onFocus={() => setFocused("password")} onBlur={() => setFocused("")}
+                      className="inp-field w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-sm text-gray-800"
+                    />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 transition-colors"
+                      style={{ color: "#c8b4b4" }}>
+                      <Eye open={showPassword} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Confirm Password */}
+                <div>
+                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Confirm</label>
+                  <div className="relative">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "confirmPassword" ? "#820c0c" : "#d1bfbf" }}>
+                      <LockIcon />
+                    </span>
+                    <input
+                      type={showConfirm ? "text" : "password"} name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required
+                      placeholder="Repeat password"
+                      onFocus={() => setFocused("confirmPassword")} onBlur={() => setFocused("")}
+                      className="inp-field w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-sm text-gray-800"
+                    />
+                    <button type="button" onClick={() => setShowConfirm(!showConfirm)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 transition-colors"
+                      style={{ color: "#c8b4b4" }}>
+                      <Eye open={showConfirm} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Confirm Password */}
-              <div>
-                <label className="block text-xs font-semibold tracking-widest uppercase text-[#820c0c]/70 mb-2">Confirm Password</label>
-                <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#820c0c]/40">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                  </span>
-                  <input
-                    type={showConfirm ? "text" : "password"} name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required
-                    placeholder="Repeat your password"
-                    className="inp w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-[#fefbf6] text-gray-800 text-sm transition-all"
-                  />
-                  <button type="button" onClick={() => setShowConfirm(!showConfirm)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#820c0c]/40 hover:text-[#820c0c]/70 transition-colors">
-                    <EyeIcon open={showConfirm} />
-                  </button>
-                </div>
-                {/* Password match indicator */}
-                {form.confirmPassword && (
-                  <p className={`text-xs mt-1.5 font-medium ${form.password === form.confirmPassword ? "text-green-600" : "text-red-500"}`}>
-                    {form.password === form.confirmPassword ? "✓ Passwords match" : "✗ Passwords do not match"}
-                  </p>
-                )}
-              </div>
+              {/* Password match indicator */}
+              {form.confirmPassword && (
+                <p className={`text-xs font-bold flex items-center gap-1.5 -mt-1 ${form.password === form.confirmPassword ? "text-green-600" : "text-red-500"}`}>
+                  {form.password === form.confirmPassword ? "✓ Passwords match" : "✗ Passwords do not match"}
+                </p>
+              )}
 
               {/* Terms */}
               <div className="flex items-start gap-3 pt-1">
-                <div className="relative mt-0.5">
-                  <input
-                    type="checkbox" name="agree" checked={form.agree} onChange={handleChange}
-                    className="sr-only"
-                    id="agree"
-                  />
-                  <label htmlFor="agree"
-                    className="w-5 h-5 rounded-md border-2 flex items-center justify-center cursor-pointer transition-all"
-                    style={{ borderColor: form.agree ? "#820c0c" : "#d1d5db", background: form.agree ? "#820c0c" : "white" }}>
+                <div className="relative mt-0.5 shrink-0">
+                  <input type="checkbox" name="agree" id="agree" checked={form.agree} onChange={handleChange} className="sr-only" />
+                  <label
+                    htmlFor="agree"
+                    className="w-5 h-5 rounded-md flex items-center justify-center cursor-pointer transition-all duration-200"
+                    style={{
+                      background: form.agree ? "#820c0c" : "white",
+                      border: `2px solid ${form.agree ? "#820c0c" : "#e5e7eb"}`,
+                    }}
+                  >
                     {form.agree && (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     )}
                   </label>
                 </div>
-                <label htmlFor="agree" className="text-sm text-gray-500 cursor-pointer leading-relaxed">
+                <label htmlFor="agree" className="text-sm font-bold text-gray-600 cursor-pointer leading-relaxed">
                   I agree to the{" "}
-                  <a href="#" className="text-[#820c0c] hover:underline font-medium">Terms & Conditions</a>
+                  <a href="#" className="text-[#820c0c] font-bold hover:underline">Terms & Conditions</a>
                   {" "}and{" "}
-                  <a href="#" className="text-[#820c0c] hover:underline font-medium">Privacy Policy</a>
+                  <a href="#" className="text-[#820c0c] font-bold hover:underline">Privacy Policy</a>
                 </label>
               </div>
 
@@ -263,8 +315,11 @@ export default function Register() {
               <button
                 type="submit"
                 disabled={mutation.isLoading}
-                className="w-full py-3.5 rounded-xl text-white text-sm font-semibold tracking-wide transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed mt-2"
-                style={{ background: "linear-gradient(135deg, #820c0c 0%, #a81010 100%)", boxShadow: "0 8px 24px rgba(130,12,12,0.25)" }}
+                className="submit-btn w-full py-3.5 rounded-xl text-white text-sm font-extrabold tracking-wide disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                style={{
+                  background: "linear-gradient(135deg, #820c0c 0%, #a81010 100%)",
+                  boxShadow: "0 8px 24px rgba(130,12,12,0.25)",
+                }}
               >
                 {mutation.isLoading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -276,16 +331,31 @@ export default function Register() {
                   </span>
                 ) : "Create Account →"}
               </button>
-              
+
             </form>
-            {/* Login link (mobile) */}
-          <p className="mt-6 text-center text-sm text-gray-400 ">
-            Already have an account?{" "}
-            <a href="login" className="text-[#820c0c] font-semibold hover:underline">Sign In</a>
-          </p>
+
+            {/* Divider */}
+            <div className="mt-6 flex items-center gap-3">
+              <div className="flex-1 h-px bg-gray-100" />
+              <span className="text-xs text-gray-300 font-semibold">or</span>
+              <div className="flex-1 h-px bg-gray-100" />
+            </div>
+
+            {/* Sign-in link */}
+            <p className="mt-4 text-center text-sm  font-semibold text-gray-600">
+              Already have an account?{" "}
+              <a href="login" className="text-[#820c0c] font-extrabold hover:underline">Sign In</a>
+            </p>
+
+            {/* Security note */}
+            <div className="mt-5 flex items-center justify-center gap-1.5 text-gray-300 text-xs">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              <span>256-bit SSL · Secured & Encrypted</span>
+            </div>
           </div>
 
-          
         </div>
       </div>
     </div>

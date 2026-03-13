@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import bnr from '../assets/images/bn.png';
 
 const blogPosts = [
   {
@@ -165,33 +166,13 @@ export default function BlogPage() {
       <div className="blog-root min-h-screen" style={{ background: "linear-gradient(160deg, #fff5f0 0%, #fef9f7 60%, #fff5f0 100%)" }}>
 
         {/* ── Hero Header ── */}
-        <div
-          className="relative py-20 px-6 text-center overflow-hidden"
-          style={{ background: `linear-gradient(135deg, ${BRAND} 0%, #5a0808 40%, #3d1a0a 100%)` }}
-        >
-          {/* Background pattern */}
-          <div className="absolute inset-0 opacity-10"
-            style={{ backgroundImage: "radial-gradient(circle at 25% 50%, #c9643a 0%, transparent 50%), radial-gradient(circle at 75% 50%, #c9643a 0%, transparent 50%)" }}
-          />
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color: "#f5c7a0" }}>
-              Stories & Insights
-            </p>
-            <h1 className="blog-serif text-white font-bold leading-tight mb-4"
-              style={{ fontSize: "clamp(36px, 6vw, 64px)" }}>
-              Our <span className="italic" style={{ color: "#f5c7a0" }}>Blog</span>
-            </h1>
-            <p className="text-white/70 max-w-xl mx-auto leading-relaxed" style={{ fontSize: 15 }}>
-              Explore articles, insights, and tips from our experts to stay informed and inspired.
-            </p>
-            {/* Decorative line */}
-            <div className="flex items-center justify-center gap-2 mt-6">
-              <div className="w-10 h-0.5 rounded-full opacity-40" style={{ background: ACCENT }} />
-              <div className="w-2 h-2 rounded-full opacity-60" style={{ background: ACCENT }} />
-              <div className="w-10 h-0.5 rounded-full opacity-40" style={{ background: ACCENT }} />
-            </div>
-          </div>
-        </div>
+        {/* ══════════ HERO ══════════ */}
+                <section className="relative h-[65vh] min-h-[420px] overflow-hidden">
+                  <img src={bnr} alt="About Banner" className="hero-img w-full h-full object-cover" />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  
+                </section>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
 
