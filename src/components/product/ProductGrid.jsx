@@ -128,7 +128,7 @@ export default function ProductGrid() {
 const navigate =useNavigate()
 
   return (
-    <div className="min-h-screen p-6" style={{ backgroundColor: "#fdf5f5" }}>
+    <div className=" p-6" style={{ backgroundColor: "#fdf5f5" }}>
 
       {/* Header */}
         <div className="m-5">
