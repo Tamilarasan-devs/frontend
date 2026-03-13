@@ -68,10 +68,25 @@ const bm = badgeMap[product.badge] || "bg-gray-400 text-white";
 </span>
       <div className="relative h-44 sm:h-48 overflow-hidden bg-orange-50 shrink-0">
 
-        <img src={product.images[0]} alt={product.name} draggable={false}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${hov ? "opacity-0 scale-105" : "opacity-100 scale-100"}`} />
-        <img src={product.images[1]} alt={product.name} draggable={false}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${hov ? "opacity-100 scale-100" : "opacity-0 scale-105"}`} />
+        <div className="relative h-44 sm:h-48 overflow-hidden bg-white flex items-center justify-center">
+
+  <img
+    src={product.images[0]}
+    alt={product.name}
+    draggable={false}
+    className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 
+    ${hov ? "opacity-0 scale-105" : "opacity-100 scale-100"}`}
+  />
+
+  <img
+    src={product.images[1]}
+    alt={product.name}
+    draggable={false}
+    className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 
+    ${hov ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
+  />
+
+</div>
 
         {/* Tags */}
         <div className={`absolute bottom-2 left-2 flex flex-col gap-1 z-10 transition-all duration-300 ${hov ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
@@ -108,7 +123,7 @@ const bm = badgeMap[product.badge] || "bg-gray-400 text-white";
           <div className="h-[2px] w-0 transition-all duration-300 group-hover:w-50" style={{ backgroundColor: BRAND }} />
         </div>
 <p
-          className="text-sm font-bold text-gray-600 mb-3"
+          className="text-sm font-bold text-gray-600"
           style={{
             lineHeight: 1.65,
             display: "-webkit-box",

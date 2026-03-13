@@ -198,20 +198,26 @@ const navigate =useNavigate()
               }
               onClick={()=>navigate("/product")}
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                  hovered[product.id] ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <img
-                src={product.hoverImage}
-                alt={`${product.name} alternate`}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                  hovered[product.id] ? "opacity-100" : "opacity-0"
-                }`}
-              />
+              <div className="relative h-48 bg-white flex items-center justify-center overflow-hidden">
+
+  <img
+    src={product.image}
+    alt={product.name}
+    className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${
+      hovered[product.id] ? "opacity-0" : "opacity-100"
+    }`}
+  />
+
+  <img
+    src={product.hoverImage}
+    alt={`${product.name} alternate`}
+    className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${
+      hovered[product.id] ? "opacity-100" : "opacity-0"
+    }`}
+  />
+
+</div>
+              
               {/* Brand tint overlay on hover */}
               <div
                 className={`absolute inset-0 transition-opacity duration-500 ${
