@@ -4,6 +4,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import Banner from "../layout/Banner";
 import bottle from '../../assets/images/btl.jpg';
 import bottle1 from '../../assets/images/btl1.jpg';
+import VideoCarousel from '../layout/ReelSection'
+
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
@@ -524,6 +526,7 @@ export default function App() {
           </main>
         </div>
       </div>
+      <VideoCarousel/>
     </>
   );
 }

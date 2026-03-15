@@ -18,6 +18,7 @@ import ProductGrid from '../components/product/ProductGrid'
 import ClientReview from '../components/clientReview/ClientReview'
 import BanrCombo from '../components/layout/banner/BanrCombo'
 import Certificate from './Certificate'
+import ReelSection from '../components/layout/ReelSection'
 export default function Home() {
   return (
     <div>
@@ -44,7 +45,7 @@ export default function Home() {
         <SecondBanner/>
 
         <Certificate/>
-
+<ReelSection/>
         <Testimonial/>
         
     </div>
