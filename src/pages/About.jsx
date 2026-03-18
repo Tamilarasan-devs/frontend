@@ -12,6 +12,9 @@ import iconbc1 from "../assets/images/icon-bc1.svg";
 import iconbc2 from "../assets/images/icon-bc2.svg";
 import iconbc3 from "../assets/images/icon-bc3.svg";
 import iconbc4 from "../assets/images/icon-bc4.svg";
+import {  useNavigate} from 'react-router-dom'
+
+
 /* ── useInView hook for scroll-triggered animations ── */
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -71,57 +74,102 @@ function Divider() {
 
 /* ── Products data ── */
 const products = [
-  { icon: "🩸", name: "Blood Sugar Balance",       desc: "Supports healthy glucose metabolism and insulin function with powerful herbal extracts." },
-  { icon: "💚", name: "Blood Cholesterol Balance",  desc: "Supports lipid metabolism and cardiovascular wellness with botanical ingredients." },
-  { icon: "🧠", name: "Brain Tonic & Vitality Plus", desc: "Enhances memory, focus, and cognitive clarity using natural nootropic herbs." },
-  { icon: "⚡", name: "Vitality Power Plus",         desc: "Boosts stamina, energy levels, and overall vitality with adaptogenic herbs." },
-  { icon: "🌿", name: "General Health",              desc: "Supports overall well-being with essential daily herbal nutrients." },
+  {
+    icon: "🩸",
+    name: "Blood Sugar Balance",
+    desc: "Supports healthy blood glucose levels and metabolic balance for sustained energy.",
+  },
+  {
+    icon: "💚",
+    name: "Cholesterol Balance",
+    desc: "Promotes heart health and supports maintaining healthy cholesterol levels.",
+  },
+  {
+    icon: "🧠",
+    name: "Brain Vitality Plus",
+    desc: "Enhances focus, memory, and cognitive performance in adults.",
+  },
+  {
+    icon: "👶",
+    name: "Brain Tonic for Kids",
+    desc: "Supports memory, concentration, and cognitive development in children.",
+  },
+  {
+    icon: "🌿",
+    name: "General Health",
+    desc: "Supports immunity, vitality, and overall body balance for daily wellness.",
+  },
 ];
 
 /* ── Story items ── */
 const storyItems = [
-  { img: img0, title: "Centrum India Vision",    sub: "TAILORED NUTRITION FOR EVERY LIFE STAGE",   p1: "It all started with a vision to develop a comprehensive multivitamin that meets the unique nutritional needs of individuals across different stages of life.", p2: "Backed by extensive research and collaboration with top experts, we created Centrum — a brand trusted by millions worldwide." },
-  { img: img1, title: "Continuous Evolution",    sub: "ADVANCING SCIENCE FOR YOUR WELL-BEING",     p1: "Our journey has been one of continuous evolution and refinement. We strive to stay at the forefront of scientific advancements, incorporating the latest discoveries.", p2: "Each product is carefully crafted to deliver vital vitamins, minerals, and nutrients your body needs to thrive." },
-  { img: img2, title: "Empowering Your Wellness", sub: "KNOWLEDGE & SUPPORT FOR YOUR JOURNEY",    p1: "Our mission goes beyond just providing high-quality supplements — we empower you with knowledge and support to make informed choices for your health.", p2: "Through educational resources, expert advice, and a strong community, we inspire and guide your wellness journey." },
-  { img: img3, title: "Commitment To Quality",   sub: "TRUSTWORTHY FORMULATIONS FOR YOU",          p1: "Centrum is more than just a brand — it's a trusted partner. We are committed to your well-being, ensuring products are safe, effective, and quality-backed.", p2: "With Centrum, you can feel confident nourishing your body and unlocking your full potential." },
+  {
+    img: img0,
+    title: "Our Beginning",
+    sub: "A VISION FOR BETTER HEALTH",
+    p1: "Aayubakwath was founded with a simple yet powerful vision: to support healthier lives through natural wellness solutions in today’s fast-paced world.",
+    p2: "We focus on addressing common health concerns like blood sugar imbalance, cholesterol issues, and mental fatigue through carefully developed supplements.",
+  },
+  {
+    img: img1,
+    title: "Our Philosophy",
+    sub: "NATURAL & SCIENCE-BACKED",
+    p1: "We believe the right combination of nutrition, natural ingredients, and scientific formulation can restore balance and improve overall well-being.",
+    p2: "Our approach combines traditional wellness knowledge with modern nutritional science.",
+  },
+  {
+    img: img2,
+    title: "Empowering Wellness",
+    sub: "SUPPORTING HEALTHIER LIFESTYLES",
+    p1: "Our mission is to empower individuals and families to take control of their health through safe and effective supplements.",
+    p2: "We aim to support daily energy, mental clarity, and long-term wellness.",
+  },
+  {
+    img: img3,
+    title: "Our Commitment",
+    sub: "QUALITY YOU CAN TRUST",
+    p1: "We are committed to providing high-quality supplements made with carefully selected ingredients.",
+    p2: "Every product is developed to meet high standards of safety, effectiveness, and reliability.",
+  },
 ];
 
 /* ── Why choose us items ── */
 const whyItems = [
-  "Premium quality herbal ingredients",
-  "Scientifically designed formulations",
-  "Manufactured under quality-controlled environment",
-  "Safe & convenient capsule format",
-  "Made in India",
+  "High-quality health supplements",
+  "Thoughtfully developed wellness formulas",
+  "Reliable and trustworthy products",
+  "Support for modern lifestyle health needs",
+  "Customer-focused health solutions",
 ];
 
 /* ── Commitment disclaimers ── */
 const commitItems = [
-  "Not intended to replace a balanced diet",
-  "Not for medicinal use",
-  "Recommended to be taken as per suggested usage",
+  "Made with high-quality ingredients",
+  "Developed with scientific formulation standards",
+  "Focused on safety, quality, and effectiveness",
 ];
 const cards = [
   {
-    title: "Milk is Significant",
-    desc: `Although we started with Goat Milk and farm-grown ingredients, we proudly call ourselves India's 1st Milk-based Skin and Hair Care brand with our Vegan Milk range including Rice, Soy, Almond and Coconut Milk.`,
+    title: "High-Quality Supplements",
+    desc: "We use carefully selected ingredients to ensure premium quality and effectiveness.",
   },
   {
-    title: "Natural Ingredients",
-    desc: "Crafted with natural ingredients to provide gentle and effective skincare solutions that nourish your skin and hair naturally.",
+    title: "Scientifically Formulated",
+    desc: "Our products are developed using research-backed formulations for better results.",
   },
   {
-    title: "Farm Fresh Care",
-    desc: "Inspired by farm traditions and blended with modern skincare science to create safe and powerful products.",
+    title: "Trusted & Reliable",
+    desc: "We focus on transparency and consistency to build long-term customer trust.",
   },
   {
-    title: "Vegan Milk Range",
-    desc: "Our vegan milk collection includes Rice, Soy, Almond and Coconut milk to deliver gentle nourishment for skin and hair.",
+    title: "Lifestyle Support",
+    desc: "Designed to support modern health challenges like stress, fatigue, and imbalance.",
   },
 ];
 
 /* ═══════════════════════════════════════════════════════════ */
 export default function About() {
+  const navigate = useNavigate()
   return (
     <>
       <style>{`
@@ -201,7 +249,7 @@ export default function About() {
     <Reveal className="text-center mb-16">
       
       <h2 className="display-font text-5xl md:text-6xl font-bold leading-tight">
-        <span className="gradient-text">About Aayubakawath</span>
+        <span className="gradient-text">About Aayubakwath</span>
       </h2>
       <Divider />
     </Reveal>
@@ -219,8 +267,9 @@ export default function About() {
             <div className="w-px h-12 bg-gradient-to-b from-[#c9643a] to-transparent hidden md:block" />
           </div>
           <div className="flex-1">
-            <p className="text-gray-700 leading-relaxed text-lg">
-              <span className="font-bold text-[#820c0c]">Aayubakawath</span> was created with a simple mission — to provide high-quality, science-backed, and herbal-based nutritional supplements that help people maintain a healthy and balanced lifestyle.
+            <p className="text-gray-700 leading-relaxed text-lg font-semibold">
+              <span className="font-bold text-[#820c0c]">Aayubakwath </span> 
+           Aayubakwath was founded with a simple yet powerful vision: to support healthier lives through natural wellness solutions. In today’s fast-paced world, people are facing increasing health challenges such as unstable blood sugar levels, high cholesterol, mental fatigue, poor concentration in children, and general lifestyle-related health issues. 
             </p>
           </div>
         </div>
@@ -235,8 +284,24 @@ export default function About() {
             </div>
           </div>
           <div className="flex-1">
-            <p className="text-gray-700 leading-relaxed text-lg">
-              All products are manufactured by <span className="font-bold text-[#820c0c]">Sri Bhakawath Life Science</span>, ensuring quality production standards and safe ingredient sourcing. Our supplements are designed to bridge the nutritional gap of modern lifestyles.
+            <p className="text-gray-700 leading-relaxed text-lg font-semibold">
+           At Aayubakwath, we believe that the right combination of nutrition, natural ingredients, and scientifically formulated supplements can help people regain balance and improve their overall well-being.
+
+            </p>
+          </div>
+        </div>
+      </Reveal>
+      <Reveal delay={0.2}>
+        <div className="flex flex-col md:flex-row items-center gap-10 py-12">
+          <div className="flex-shrink-0 flex flex-col items-center gap-3">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-2xl shadow-lg shadow-[#820c0c]/20">
+              ⚗️
+            </div>
+          </div>
+          <div className="flex-1">
+            <p className="text-gray-700 leading-relaxed text-lg font-semibold">
+  Our mission is to provide safe, effective, and high-quality health supplements that support everyday health needs for individuals and families. We focus on developing products that complement modern lifestyles while staying rooted in the principles of holistic wellness and nutritional balance.
+
             </p>
           </div>
         </div>
@@ -309,8 +374,7 @@ export default function About() {
           </h2>
 
           <p className="text-gray-600 mt-4 leading-relaxed">
-            Providing science-backed herbal nutritional supplements that help
-            people maintain healthier and more balanced lifestyles.
+         At Aayubakwath, our mission is centered around three core values:
           </p>
         </div>
       </div>
@@ -318,19 +382,19 @@ export default function About() {
       {/* Text */}
       <div>
         <h3 className="text-4xl font-bold text-[#820c0c] mb-6 display-font">
-          Committed to Quality & Natural Wellness
+        At Aayubakwath, our mission is centered around three core values:
         </h3>
 
         <p className="text-gray-700 text-lg leading-relaxed mb-6">
-          Aayubakawath was created with the goal of blending traditional herbal
-          knowledge with modern scientific research to produce safe and
-          effective nutritional supplements.
+        Quality – Deliver premium health supplements made with carefully selected ingredients.
         </p>
 
+        <p className="text-gray-600 leading-relaxed mb-6">
+ Trust – Build long-term trust with customers through transparency and reliability.
+        </p>
         <p className="text-gray-600 leading-relaxed">
-          Manufactured by Sri Bhakawath Life Science, every product is produced
-          under strict quality standards and responsible ingredient sourcing
-          to ensure safety, reliability, and trust for our customers.
+Wellness – Support healthier lifestyles through effective nutritional support.
+
         </p>
       </div>
 
@@ -347,15 +411,11 @@ export default function About() {
         </h3>
 
         <p className="text-gray-700 text-lg leading-relaxed mb-6">
-          Our vision is to become a trusted global brand in herbal wellness by
-          offering innovative nutritional solutions designed for modern
-          lifestyles.
+         Our vision is to become a trusted wellness brand in India and globally, known for providing reliable and high-quality nutritional supplements that support long-term health.
         </p>
 
         <p className="text-gray-600 leading-relaxed">
-          Through continuous research and thoughtful product design, we aim to
-          empower individuals to take control of their health and long-term
-          well-being.
+         We strive to empower people with natural health solutions that help maintain energy, improve mental clarity, and support vital body functions.
         </p>
       </div>
 
@@ -377,8 +437,7 @@ export default function About() {
           </h2>
 
           <p className="text-gray-600 mt-4 leading-relaxed">
-            Becoming a trusted leader in herbal wellness through innovation,
-            safety, and effective nutritional solutions.
+            Providing safe, effective, and high-quality health supplements that support everyday health needs for individuals and families.
           </p>
         </div>
       </div>
@@ -415,7 +474,7 @@ export default function About() {
       <div className="max-w-5xl mx-auto px-6">
 
         <h1 className="text-3xl font-extrabold text-center text-[#820c0c] tracking-tight mb-2">
-          Why Aayubakawath
+          Why Aayubakwath
         </h1>
         <div className="w-10 h-[3px] bg-[#c9643a] rounded-full mx-auto mb-11" />
 
@@ -456,7 +515,7 @@ export default function About() {
               <div>
                 <Label text="Our Advantage" />
                 <h2 className="display-font text-4xl md:text-5xl font-bold text-[#820c0c] mb-2">
-                  Why Choose Aayubakawath?
+                  Why Choose Aayubakwath?
                 </h2>
                 <span className="accent-bar mb-8 block" />
                 <ul className="space-y-4">
@@ -501,15 +560,10 @@ export default function About() {
                 <p className="text-gray-700 leading-relaxed text-lg mb-6">
                   We follow strict quality guidelines during sourcing, formulation, and manufacturing. Every batch is produced with hygiene, consistency, and care to ensure premium standards.
                 </p>
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mt-8">
-                  {[["100%", "Natural"], ["GMP", "Certified"], ["0", "Compromise"]].map(([num, lbl]) => (
-                    <div key={lbl} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-[#f0e4d4] card-hover">
-                      <p className="display-font text-3xl font-bold text-[#820c0c]">{num}</p>
-                      <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest">{lbl}</p>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-gray-600 mt-4 leading-relaxed">
+  Providing safe, effective, and high-quality health supplements that support everyday health needs for individuals and families.
+</p>
+                
               </div>
             </Reveal>
 
@@ -536,6 +590,40 @@ export default function About() {
         </section>
 
       </div>
+      <section className="relative py-20 px-6 overflow-hidden">
+
+  {/* Background Gradient */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#820c0c] via-[#a63a1f] to-[#c9643a]" />
+
+  {/* Soft Glow Effects */}
+  <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-white/10 rounded-full blur-3xl" />
+  <div className="absolute bottom-[-80px] right-[-80px] w-72 h-72 bg-white/10 rounded-full blur-3xl" />
+
+  {/* Content */}
+  <div className="relative max-w-4xl mx-auto text-center text-white">
+
+    <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+      Join Our Wellness Journey
+    </h2>
+
+    <p className="text-white/90 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+      Aayubakwath invites you to be part of a growing community focused on
+      health, balance, and well-being. With our range of specialized
+      supplements and our commitment to quality, we aim to support your journey
+      toward a healthier future.
+    </p>
+
+    {/* CTA Buttons */}
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      
+
+      <button className="border border-white/70 px-8 py-3 rounded-full font-semibold hover:bg-[#820c0c] transition" onClick={()=>navigate('/contact')}>
+        Contact Us
+      </button>
+    </div>
+
+  </div>
+</section>
     </>
   );
 }

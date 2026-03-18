@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const mockUser = {
   name: "John Doe",
@@ -39,7 +40,7 @@ export default function ProfilePage() {
   const [wishlist, setWishlist] = useState(mockWishlist);
 
   const removeWishlist = (id) => setWishlist(wishlist.filter(i => i.id !== id));
-
+const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-[#faf7f2]" style={{ fontFamily: "'Inter', sans-serif" }}>
       <style>{`
@@ -227,7 +228,7 @@ export default function ProfilePage() {
                         {order.status}
                       </span>
                       <p className="font-black text-lg text-gray-900">${order.total.toFixed(2)}</p>
-                      <button className="text-xs font-semibold text-[#820c0c] border border-[#820c0c]/20 px-3 py-1.5 rounded-lg hover:bg-[#820c0c]/5 transition-all">
+                      <button className="text-xs font-semibold text-[#820c0c] border border-[#820c0c]/20 px-3 py-1.5 rounded-lg hover:bg-[#820c0c]/5 transition-all" onClick={()=>navigate('/trackorder')}>
                         Details
                       </button>
                     </div>

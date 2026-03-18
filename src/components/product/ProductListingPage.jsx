@@ -5,6 +5,7 @@ import Banner from "../layout/Banner";
 import bottle from '../../assets/images/btl.jpg';
 import bottle1 from '../../assets/images/btl1.jpg';
 import VideoCarousel from '../layout/ReelSection'
+import FirstBanner from "../layout/banner/FirstBanner";
 
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
@@ -448,7 +449,6 @@ export default function App() {
                 onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded-xl text-xs sm:text-sm text-gray-700 bg-gray-50 outline-none focus:border-red-300 focus:ring-2 focus:ring-red-50 transition" />
             </div>
-
             {/* Sort */}
             <select value={sortBy} onChange={e => setSortBy(e.target.value)}
               className="px-2 sm:px-3 py-2 border border-gray-200 rounded-xl text-xs sm:text-sm font-semibold text-gray-700 bg-gray-50 outline-none cursor-pointer shrink-0">
@@ -460,6 +460,7 @@ export default function App() {
             </select>
           </div>
         </div>
+<FirstBanner/>
 
         {/* ── Mobile Category Drawer ── */}
         {drawerOpen && (

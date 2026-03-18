@@ -49,10 +49,10 @@ const testimonials = [
 ];
 
 const stats = [
-  { icon: Users,     value: "10K+", label: "Happy Customers",   bg: "bg-orange-50",  icon_color: "text-orange-500" },
-  { icon: TrendingUp,value: "4.8★", label: "Average Rating",    bg: "bg-amber-50",   icon_color: "text-amber-500"  },
-  { icon: ShieldCheck,value:"100%", label: "Verified Reviews",  bg: "bg-emerald-50", icon_color: "text-emerald-500"},
-  { icon: Award,     value: "50+",  label: "Awards Won",        bg: "bg-blue-50",    icon_color: "text-blue-500"   },
+  { icon: Users,      value: "10K+", label: "Happy Customers",  bg: "bg-orange-50",  icon_color: "text-orange-500" },
+  { icon: TrendingUp, value: "4.8★", label: "Average Rating",   bg: "bg-amber-50",   icon_color: "text-amber-500"  },
+  { icon: ShieldCheck,value: "100%", label: "Verified Reviews", bg: "bg-emerald-50", icon_color: "text-emerald-500"},
+  { icon: Award,      value: "50+",  label: "Awards Won",       bg: "bg-blue-50",    icon_color: "text-blue-500"   },
 ];
 
 const ratingRows = [
@@ -84,10 +84,39 @@ function Stars({ rating, size = "w-3.5 h-3.5" }) {
 }
 
 export default function Testimonial() {
-  const [current, setCurrent]   = useState(0);
-  const [visible, setVisible]   = useState(true);
+  const [current, setCurrent]     = useState(0);
+  const [visible, setVisible]     = useState(true);
   const [animating, setAnimating] = useState(false);
   const timerRef = useRef(null);
+
+  // --- Scroll animation state ---
+  const sectionRef       = useRef(null);
+  const [headerVis,   setHeaderVis]   = useState(false);
+  const [statsVis,    setStatsVis]    = useState(false);
+  const [leftVis,     setLeftVis]     = useState(false);
+  const [rightVis,    setRightVis]    = useState(false);
+  const [trustVis,    setTrustVis]    = useState(false);
+  const [ratingBars,  setRatingBars]  = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVis(true);
+          setTimeout(() => setStatsVis(true),   200);
+          setTimeout(() => setLeftVis(true),    400);
+          setTimeout(() => setRightVis(true),   550);
+          setTimeout(() => setTrustVis(true),   700);
+          setTimeout(() => setRatingBars(true), 800);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.08 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+  // --- End scroll animation state ---
 
   const go = (dir) => {
     if (animating) return;
@@ -116,7 +145,7 @@ export default function Testimonial() {
   const t = testimonials[current];
 
   return (
-    <div className="min-h-screen bg-orange-50/40 flex items-center justify-center p-5 md:p-10">
+    <div ref={sectionRef} className="min-h-screen bg-orange-50/40 flex items-center justify-center p-5 md:p-10">
 
       <style>{`
         .card-anim { transition: opacity 0.28s ease, transform 0.28s ease; }
@@ -137,7 +166,14 @@ export default function Testimonial() {
       <div className="w-full max-w-6xl mx-auto">
 
         {/* ── HEADER ── */}
-        <div className="mb-8">
+        <div
+          className="mb-8"
+          style={{
+            opacity: headerVis ? 1 : 0,
+            transform: headerVis ? "translateY(0)" : "translateY(-28px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
             <div>
               {/* Badge */}
@@ -156,7 +192,6 @@ export default function Testimonial() {
               <p className="text-sm text-stone-500 leading-relaxed">
                 Every review is 100% genuine — no edits, no incentives. Real results from real people.
               </p>
-              
             </div>
           </div>
           {/* Divider */}
@@ -165,13 +200,21 @@ export default function Testimonial() {
 
         {/* ── STATS ROW ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-          {stats.map((s) => (
-            <div key={s.label} className={`stat-tile bg-white rounded-2xl border border-orange-100 p-4 shadow-sm`}>
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`stat-tile bg-white rounded-2xl border border-orange-100 p-4 shadow-sm`}
+              style={{
+                opacity: statsVis ? 1 : 0,
+                transform: statsVis ? "translateY(0) scale(1)" : "translateY(24px) scale(0.96)",
+                transition: `opacity 0.5s ease ${i * 0.1}s, transform 0.5s cubic-bezier(.22,.68,0,1.15) ${i * 0.1}s`,
+              }}
+            >
               <div className="flex items-center gap-3 mb-2">
                 <div className={`w-9 h-9 rounded-xl ${s.bg} flex items-center justify-center flex-shrink-0`}>
                   <s.icon className={`w-4 h-4 ${s.icon_color}`} />
                 </div>
-                <span className=" text-2xl font-bold text-stone-900">{s.value}</span>
+                <span className="text-2xl font-bold text-stone-900">{s.value}</span>
               </div>
               <p className="text-xs text-stone-400 font-medium">{s.label}</p>
             </div>
@@ -182,7 +225,14 @@ export default function Testimonial() {
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-5">
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-4">
+          <div
+            className="flex flex-col gap-4"
+            style={{
+              opacity: leftVis ? 1 : 0,
+              transform: leftVis ? "translateX(0)" : "translateX(-32px)",
+              transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
+            }}
+          >
 
             {/* Reviewer List */}
             <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-4">
@@ -218,19 +268,22 @@ export default function Testimonial() {
               <p className="text-xs font-bold text-orange-400 uppercase tracking-widest mb-4">Rating Breakdown</p>
               <div className="flex items-start gap-4 mb-4">
                 <div className="text-center flex-shrink-0">
-                  <p className=" text-5xl font-bold text-stone-900 leading-none">4.8</p>
+                  <p className="text-5xl font-bold text-stone-900 leading-none">4.8</p>
                   <Stars rating={5} size="w-3 h-3" />
                   <p className="text-xs text-stone-400 mt-1">out of 5</p>
                 </div>
                 <div className="flex-1 flex flex-col gap-2">
-                  {ratingRows.map((row) => (
+                  {ratingRows.map((row, i) => (
                     <div key={row.stars} className="flex items-center gap-2">
                       <span className="text-xs text-stone-400 w-3 text-right">{row.stars}</span>
                       <Star className="w-2.5 h-2.5 fill-amber-400 stroke-amber-400 flex-shrink-0" />
                       <div className="flex-1 h-1.5 bg-orange-100 rounded-full overflow-hidden">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-600"
-                          style={{ width: `${row.pct}%` }}
+                          className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-600 progress-bar"
+                          style={{
+                            width: ratingBars ? `${row.pct}%` : "0%",
+                            transition: `width 0.7s cubic-bezier(.4,0,.2,1) ${i * 0.1}s`,
+                          }}
                         />
                       </div>
                       <span className="text-xs text-stone-400 w-7 text-right">{row.pct}%</span>
@@ -246,7 +299,14 @@ export default function Testimonial() {
           </div>
 
           {/* ── RIGHT COLUMN ── */}
-          <div className="flex flex-col gap-4">
+          <div
+            className="flex flex-col gap-4"
+            style={{
+              opacity: rightVis ? 1 : 0,
+              transform: rightVis ? "translateX(0)" : "translateX(32px)",
+              transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
+            }}
+          >
 
             {/* Main Quote Card */}
             <div className={`card-anim bg-white rounded-2xl border border-orange-100 shadow-md overflow-hidden flex-1 ${visible ? "card-visible" : "card-hidden"}`}>
@@ -349,9 +409,24 @@ export default function Testimonial() {
             </div>
 
             {/* Trust Strip */}
-            <div className="bg-white rounded-2xl border border-orange-100 shadow-sm px-6 py-4 flex items-center justify-between gap-3 flex-wrap">
-              {trustItems.map((item) => (
-                <div key={item.text} className="flex items-center gap-2">
+            <div
+              className="bg-white rounded-2xl border border-orange-100 shadow-sm px-6 py-4 flex items-center justify-between gap-3 flex-wrap"
+              style={{
+                opacity: trustVis ? 1 : 0,
+                transform: trustVis ? "translateY(0)" : "translateY(20px)",
+                transition: "opacity 0.55s ease, transform 0.55s ease",
+              }}
+            >
+              {trustItems.map((item, i) => (
+                <div
+                  key={item.text}
+                  className="flex items-center gap-2"
+                  style={{
+                    opacity: trustVis ? 1 : 0,
+                    transform: trustVis ? "translateY(0)" : "translateY(10px)",
+                    transition: `opacity 0.4s ease ${0.1 + i * 0.08}s, transform 0.4s ease ${0.1 + i * 0.08}s`,
+                  }}
+                >
                   <span className="text-lg leading-none">{item.emoji}</span>
                   <span className="text-xs font-semibold text-stone-600">{item.text}</span>
                 </div>

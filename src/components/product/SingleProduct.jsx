@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import {
   Star, ShoppingCart, Heart, Share2, Shield, Truck, RefreshCw,
   ChevronDown, ChevronUp, Plus, Minus, Check, Leaf, Award, Zap
@@ -120,7 +120,9 @@ export default function SingleProduct() {
     const y = ((e.clientY - top)  / height) * 100;
     setZoomOrigin(`${x}% ${y}%`);
   };
-
+useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // ── Render ──────────────────────────────────────────────────
   return (
     <div className="bg-[#faf8f6] min-h-screen text-gray-900 ">

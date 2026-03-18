@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaShoppingCart ,FaArrowRight} from "react-icons/fa";
 // import img from '../../assets/images/pro.webp'
 // import img1 from '../../assets/images/pro1.webp'
@@ -107,17 +107,65 @@ const products = [
   },
 ];
 const badgeColors = {
-  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" }, // bright yellow / orange border / black text
-  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" }, // bright sky-blue / darker blue border / white text
-  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" }, // vivid green / dark green border / white text
-  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" }, // bright lime / darker lime border / black text
-  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" }, // pink / deep pink border / white text
-  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" }, // red / dark red border / white text
+  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" },
+  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" },
+  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" },
+  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" },
+  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" },
+  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" },
 };
 export default function ProductGrid() {
-  // const [added, setAdded] = useState({});
   const [hovered, setHovered] = useState({});
   const [added, setAdded] = useState(false);
+
+  // --- Animation state ---
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState({});
+  const [btnVisible, setBtnVisible] = useState(false);
+  const headerRef = useRef(null);
+  const cardRefs = useRef({});
+  const btnRef = useRef(null);
+
+  useEffect(() => {
+    // Header observer
+    const headerObs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHeaderVisible(true); headerObs.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    if (headerRef.current) headerObs.observe(headerRef.current);
+
+    // Button observer
+    const btnObs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setBtnVisible(true); btnObs.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    if (btnRef.current) btnObs.observe(btnRef.current);
+
+    // Card observers
+    const cardObservers = products.map((product, index) => {
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              setVisibleCards((prev) => ({ ...prev, [product.id]: true }));
+            }, (index % 4) * 100);
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      if (cardRefs.current[product.id]) obs.observe(cardRefs.current[product.id]);
+      return obs;
+    });
+
+    return () => {
+      headerObs.disconnect();
+      btnObs.disconnect();
+      cardObservers.forEach((obs) => obs.disconnect());
+    };
+  }, []);
+  // --- End animation setup ---
+
   const handleAddToCart = (id) => {
     setAdded((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => setAdded((prev) => ({ ...prev, [id]: false })), 1500);
@@ -131,7 +179,15 @@ const navigate =useNavigate()
     <div className=" p-6" style={{ backgroundColor: "#fdf5f5" }}>
 
       {/* Header */}
-        <div className="m-5">
+        <div
+          ref={headerRef}
+          className="m-5"
+          style={{
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? "translateY(0)" : "translateY(-28px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
               <p style={{
                 fontSize: 18, letterSpacing: ".2em", textTransform: "uppercase",
                 fontWeight: 700, color: ACCENT, marginBottom: 10,
@@ -141,14 +197,13 @@ const navigate =useNavigate()
                 <span style={{ width: 32, height: 1.5, background: ACCENT, borderRadius: 99, opacity: .5, display: "inline-block" }} />
               </p>
               <h2 style={{
-                
                 fontSize: "clamp(26px, 4vw, 36px)",
                 fontWeight: 700, color: "#111827", margin: 0, lineHeight: 1.15,
               }}>
                 Top Selling <span style={{ color: BRAND }}>Products</span>
               </h2>
               <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 6 }}>
-                <div style={{ width: 36, height: 2.5, background: BRAND, borderRadius: 99 }} />
+                <div style={{ width: headerVisible ? 36 : 0, height: 2.5, background: BRAND, borderRadius: 99, transition: "width 0.7s ease 0.3s" }} />
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: ACCENT, opacity: .6 }} />
                 <div style={{ width: 16, height: 2.5, background: "#f0ece8", borderRadius: 99 }} />
               </div>
@@ -156,15 +211,19 @@ const navigate =useNavigate()
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[87rem] mx-auto">
-        {products.map((product) => (
+        {products.map((product, index) => (
          <div
-  key={product.id}
-  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 
-             p-4 relative flex flex-col border border-gray-200 hover:border-[rgba(201,100,58,.33)]"
-  style={{ "--accent": ACCENT ,
-  // border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
-  }}
->
+          ref={(el) => (cardRefs.current[product.id] = el)}
+          key={product.id}
+          className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 
+                     p-4 relative flex flex-col border border-gray-200 hover:border-[rgba(201,100,58,.33)]"
+          style={{
+            "--accent": ACCENT,
+            opacity: visibleCards[product.id] ? 1 : 0,
+            transform: visibleCards[product.id] ? "translateY(0) scale(1)" : "translateY(40px) scale(0.96)",
+            transition: `opacity 0.55s ease, transform 0.55s ease`,
+          }}
+        >
 
             {/* Tag */}
           <span
@@ -179,7 +238,6 @@ const navigate =useNavigate()
     </span>
 
             {/* Discount Badge */}
-           
              <div style={{ position:"absolute", top:0, right:0, zIndex:5, background:'#FFB800', color:"#fff", padding:"15px 15px", fontWeight:800, textAlign:"center", lineHeight:1.1, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" ,borderTopRightRadius: "10px",}}>
           <div className="-mt-1.5">
             <div style={{ fontSize:16 }}> {getDiscount(product.salePrice, product.regularPrice)}%</div>
@@ -308,7 +366,13 @@ const navigate =useNavigate()
           </div>
         ))}
       </div>
-      <div className="text-center mt-6 flex justify-center">
+      <div ref={btnRef} className="text-center mt-6 flex justify-center"
+        style={{
+          opacity: btnVisible ? 1 : 0,
+          transform: btnVisible ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
+        }}
+      >
       <button className="flex items-center justify-center bg-[#c9643a] text-white text-sm font-semibold py-4 px-8 rounded-md hover:bg-[#6B8C1A] transition duration-300" onClick={()=>navigate('/productListing')}>
         View More
         <FaArrowRight className="ml-2" />

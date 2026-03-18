@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import beforeImg1 from "../../assets/images/pro1.webp";
 import afterImg1 from "../../assets/images/pro.webp";
@@ -22,6 +22,31 @@ export default function BeforeAfterGrid() {
   const [dragging1, setDragging1] = useState(false);
   const [dragging2, setDragging2] = useState(false);
   const [dragging3, setDragging3] = useState(false);
+
+  // --- Animation state ---
+  const sectionRef = useRef(null);
+  const [headingVisible, setHeadingVisible] = useState(false);
+  const [card1Visible, setCard1Visible] = useState(false);
+  const [card2Visible, setCard2Visible] = useState(false);
+  const [card3Visible, setCard3Visible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeadingVisible(true);
+          setTimeout(() => setCard1Visible(true), 200);
+          setTimeout(() => setCard2Visible(true), 380);
+          setTimeout(() => setCard3Visible(true), 560);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+  // --- End animation state ---
 
   const startDrag1 = () => setDragging1(true);
   const startDrag2 = () => setDragging2(true);
@@ -82,15 +107,27 @@ export default function BeforeAfterGrid() {
   };
 
   return (
-    <div className="max-w-full-lg mx-auto space-y-12 p-10">
+    <div ref={sectionRef} className="max-w-full-lg mx-auto space-y-12 p-10">
 
       {/* Heading */}
-      <div>
+      <div
+        style={{
+          opacity: headingVisible ? 1 : 0,
+          transform: headingVisible ? "translateY(0)" : "translateY(-28px)",
+          transition: "opacity 0.65s ease, transform 0.65s ease",
+        }}
+      >
         <h1 className="text-3xl font-bold flex justify-center text-[#820c0c] text-center">
           Over 1 Million People Trust Aayubakawath
         </h1>
 
-        <div className="w-24 h-1 bg-[#c9643a] mx-auto rounded-full mb-4 mt-4"></div>
+        <div
+          className="h-1 bg-[#c9643a] mx-auto rounded-full mb-4 mt-4"
+          style={{
+            width: headingVisible ? 96 : 0,
+            transition: "width 0.7s ease 0.3s",
+          }}
+        ></div>
 
         <h1 className="text-xl font-semibold flex justify-center text-[#820c0c] text-center">
           Explore Clinically Proven Formulations For South Indian Skin & Hair
@@ -101,7 +138,14 @@ export default function BeforeAfterGrid() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         {/* CARD 1 */}
-        <div className="bg-white rounded-2xl shadow-lg p-4">
+        <div
+          className="bg-white rounded-2xl shadow-lg p-4"
+          style={{
+            opacity: card1Visible ? 1 : 0,
+            transform: card1Visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.96)",
+            transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
+          }}
+        >
           <div
             ref={containerRef1}
             className="relative h-[320px] rounded-xl overflow-hidden touch-none"
@@ -145,7 +189,14 @@ export default function BeforeAfterGrid() {
         </div>
 
         {/* CARD 2 */}
-        <div className="bg-white rounded-2xl shadow-lg p-4">
+        <div
+          className="bg-white rounded-2xl shadow-lg p-4"
+          style={{
+            opacity: card2Visible ? 1 : 0,
+            transform: card2Visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.96)",
+            transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
+          }}
+        >
           <div
             ref={containerRef2}
             className="relative h-[320px] rounded-xl overflow-hidden touch-none"
@@ -189,7 +240,14 @@ export default function BeforeAfterGrid() {
         </div>
 
         {/* CARD 3 */}
-        <div className="bg-white rounded-2xl shadow-lg p-4">
+        <div
+          className="bg-white rounded-2xl shadow-lg p-4"
+          style={{
+            opacity: card3Visible ? 1 : 0,
+            transform: card3Visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.96)",
+            transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
+          }}
+        >
           <div
             ref={containerRef3}
             className="relative h-[320px] rounded-xl overflow-hidden touch-none"

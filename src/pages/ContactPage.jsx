@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 /* ── Brand tokens ─────────────────────────────────────── */
 const B = "#820c0c";
@@ -183,7 +183,9 @@ export default function ContactPage() {
     { Icon: IconMail,  label: "Email",   value: "info.sblsmarketing@gmail.com",  sub: "We reply within 24 hours",              color: A, bg: "rgba(201,100,58,0.1)" },
     { Icon: IconPhone, label: "Phone",   value: "+91 94431 57282",               sub: "Mon – Sat, 9 AM – 6 PM",                color: G, bg: "rgba(130,155,28,0.1)" },
   ];
-
+useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <div className="cp-root min-h-screen" style={{ background: "#fdf7f2" }}>
       <style>{STYLES}</style>

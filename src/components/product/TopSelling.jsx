@@ -18,12 +18,12 @@ const CARD_W = 272;
 const CARD_GAP = 20;
 
 const badgeColors = {
-  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" }, // yellow-400 / yellow-500 / black
-  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" }, // sky-500 / sky-600 / white
-  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" }, // green-500 / green-600 / white
-  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" }, // lime-500 / lime-600 / black
-  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" }, // pink-500 / pink-600 / white
-  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" }, // red-500 / red-600 / white
+  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" },
+  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" },
+  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" },
+  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" },
+  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" },
+  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" },
 };
 
 /* ─── Arrow Button ────────────────────────────────────────── */
@@ -44,11 +44,19 @@ function ArrowBtn({ dir, onClick }) {
 }
 
 /* ─── Product Card ────────────────────────────────────────── */
-function ProductCard({ product, animDelay }) {
+function ProductCard({ product, animDelay, sectionVisible }) {
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
+  const [cardVisible, setCardVisible] = useState(false);
   const disc = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
   const navigate = useNavigate();
+
+  // Trigger card entrance after section becomes visible + stagger delay
+  useEffect(() => {
+    if (!sectionVisible) return;
+    const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
+    return () => clearTimeout(t);
+  }, [sectionVisible, animDelay]);
 
   return (
     <div
@@ -60,35 +68,39 @@ function ProductCard({ product, animDelay }) {
         width: CARD_W,
         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
         zIndex: hov ? 40 : 10,
-        transform: hov ? "translateY(-12px) scale(1.015)" : "translateY(0) scale(1)",
+        transform: hov
+          ? "translateY(-12px) scale(1.015)"
+          : cardVisible
+          ? "translateY(0) scale(1)"
+          : "translateY(32px) scale(0.96)",
+        opacity: cardVisible ? 1 : 0,
         boxShadow: hov
           ? "0 20px 48px rgba(130,12,12,.10), 0 4px 16px rgba(0,0,0,.06)"
           : "0 1px 4px rgba(0,0,0,.04)",
-        transition: "transform .35s cubic-bezier(.22,.68,0,1.15), box-shadow .35s ease, border-color .3s ease",
-        animation: `cardIn .45s ease ${animDelay}s both`,
+        transition: cardVisible
+          ? "opacity 0.5s ease, transform 0.5s cubic-bezier(.22,.68,0,1.15), box-shadow .35s ease, border-color .3s ease"
+          : "none",
       }}
     >
       {/* ── Image Area ── */}
-      {/* rounded container with side margin so ribbon + tags sit inside cleanly */}
-   {product.badge && (
-  <span
-    className="absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold"
-    style={{
-      backgroundColor: badgeColors[product.badge]?.bg || "#A1A1AA", // use .bg
-      color: badgeColors[product.badge]?.text || "#FFFFFF",           // use .text
-      border: `1px solid ${badgeColors[product.badge]?.border || "#888"}`, // optional border
-    }}
-  >
-    {product.badge}
-  </span>
-)}
-       
+      {product.badge && (
+        <span
+          className="absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold"
+          style={{
+            backgroundColor: badgeColors[product.badge]?.bg || "#A1A1AA",
+            color: badgeColors[product.badge]?.text || "#FFFFFF",
+            border: `1px solid ${badgeColors[product.badge]?.border || "#888"}`,
+          }}
+        >
+          {product.badge}
+        </span>
+      )}
+
       <div
-        className="relative overflow-hidden bg-[#f9f5f2]   rounded-xl"
+        className="relative overflow-hidden bg-[#f9f5f2] rounded-xl"
         style={{ height: 250 }}
         onClick={() => navigate('/product')}
       >
-        
         {/* Primary image */}
         <img
           src={product.image}
@@ -135,28 +147,24 @@ function ProductCard({ product, animDelay }) {
         </div>
 
         {/* Discount ribbon — top-right corner */}
-        {/* Discount ribbon — top-right corner */}
-<div
-  className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
-  style={{
-    background: "#FFB800",
-    padding: "14px 10px 18px",
-    lineHeight: 1.1,
-    clipPath: "polygon(100% 0,0 0,0 75%,15% 100%,30% 75%,45% 100%,60% 75%,75% 100%,90% 75%,100% 100%)",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-    minWidth: 44,
-  }}
->
-  <div className="text-[17px] font-black">{disc}%</div>
-  <div className="text-[10px] font-bold -mt-0.5">OFF</div>
-</div>
+        <div
+          className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
+          style={{
+            background: "#FFB800",
+            padding: "14px 10px 18px",
+            lineHeight: 1.1,
+            clipPath: "polygon(100% 0,0 0,0 75%,15% 100%,30% 75%,45% 100%,60% 75%,75% 100%,90% 75%,100% 100%)",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            minWidth: 44,
+          }}
+        >
+          <div className="text-[17px] font-black">{disc}%</div>
+          <div className="text-[10px] font-bold -mt-0.5">OFF</div>
+        </div>
       </div>
 
       {/* ── Card Body ── */}
       <div className="px-[18px] pt-4 pb-5">
-        {/* Badge */}
-        
-
         {/* Product Name */}
         <div className="inline-block group mb-1 max-w-full">
           <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
@@ -176,9 +184,7 @@ function ProductCard({ product, animDelay }) {
             overflow: "hidden",
           }}
         >
-   <span className="text-[#829b1c] font-extrabold">FOR :</span> {product.benefit}
-
-
+          <span className="text-[#829b1c] font-extrabold">FOR :</span> {product.benefit}
           {product.description}
         </p>
         <p
@@ -191,11 +197,9 @@ function ProductCard({ product, animDelay }) {
             overflow: "hidden",
           }}
         >
-  <span className="text-[#c9643a] font-extrabold">WITH :</span> {product.benefit}
-
+          <span className="text-[#c9643a] font-extrabold">WITH :</span> {product.benefit}
           {product.description}
         </p>
-        
 
         {/* Rating & Reviews */}
         {product.rating && (
@@ -258,14 +262,35 @@ function ProductCard({ product, animDelay }) {
 export default function TopSelling() {
   const trackRef  = useRef(null);
   const barRef    = useRef(null);
-  const [prog, setProg]         = useState(0);
-  const [active, setActive]     = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const [thumbW, setThumbW]     = useState(30);
-  const [thumbL, setThumbL]     = useState(0);
+  const sectionRef = useRef(null);
+  const [prog, setProg]             = useState(0);
+  const [active, setActive]         = useState(0);
+  const [dragging, setDragging]     = useState(false);
+  const [thumbW, setThumbW]         = useState(30);
+  const [thumbL, setThumbL]         = useState(0);
+  const [sectionVisible, setSectionVisible] = useState(false);
+  const [headerVisible, setHeaderVisible]   = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(false);
   const dragX   = useRef(0);
   const dragSL  = useRef(0);
   const isThumb = useRef(false);
+
+  // Section IntersectionObserver
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSectionVisible(true);
+          setHeaderVisible(true);
+          setTimeout(() => setControlsVisible(true), 600);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
 
   /* ── recalculate thumb width + position from current scroll state ── */
   const recalcThumb = useCallback(() => {
@@ -273,12 +298,8 @@ export default function TopSelling() {
     if (!el) return;
     const scrollable = el.scrollWidth - el.clientWidth;
     if (scrollable <= 0) { setThumbW(100); setThumbL(0); return; }
-
-    // thumb width shrinks as more content exists relative to viewport
     const visibleRatio = el.clientWidth / el.scrollWidth;
-    const w = Math.max(visibleRatio * 100, 6);          // min 6%
-
-    // thumb position: how far scrolled → map to remaining bar space
+    const w = Math.max(visibleRatio * 100, 6);
     const scrollProgress = el.scrollLeft / scrollable;
     const maxLeft = 100 - w;
     setThumbW(w);
@@ -309,23 +330,18 @@ export default function TopSelling() {
 
   const toCard = (i) => trackRef.current?.scrollTo({ left: i * (CARD_W + CARD_GAP), behavior: "smooth" });
   const byCard = (d) => {
-  const el = trackRef.current;
-  if (!el) return;
+    const el = trackRef.current;
+    if (!el) return;
+    const scrollAmount = d * (CARD_W + CARD_GAP);
+    el.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    requestAnimationFrame(() => {
+      const scrollable = el.scrollWidth - el.clientWidth;
+      const p = scrollable > 0 ? el.scrollLeft / scrollable : 0;
+      setProg(p);
+      recalcThumb();
+    });
+  };
 
-  const scrollAmount = d * (CARD_W + CARD_GAP);
-
-  el.scrollBy({
-    left: scrollAmount,
-    behavior: "smooth",
-  });
-
-  requestAnimationFrame(() => {
-    const scrollable = el.scrollWidth - el.clientWidth;
-    const p = scrollable > 0 ? el.scrollLeft / scrollable : 0;
-    setProg(p);
-    recalcThumb();
-  });
-};
   const startDrag = (e, thumb) => {
     e.preventDefault();
     isThumb.current = thumb;
@@ -398,24 +414,46 @@ export default function TopSelling() {
         .ts-fade-right { right: 0; background: linear-gradient(to left,  #fff, transparent); }
       `}</style>
 
-      <section className="bg-white relative" style={{ padding: "72px 0 60px" }}>
+      <section
+        ref={sectionRef}
+        className="bg-white relative"
+        style={{ padding: "72px 0 60px" }}
+      >
 
         {/* ── Header ── */}
-        <div className="flex justify-center  mb-7">
-          
+        <div
+          className="flex justify-center mb-7"
+          style={{
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? "translateY(0)" : "translateY(-24px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
           <h2
-            className=" font-bold text-[#111827]  leading-tight"
+            className="font-bold text-[#111827] leading-tight"
             style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
           >
             Shop by <span className="text-[#820c0c]">Category</span>
           </h2>
-          
         </div>
-        <div className="mt-3 flex items-center gap-1.5 flex justify-center">
-            <div className="w-9 h-[2.5px] bg-[#820c0c] rounded-full" />
-            <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
-            <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
-          </div>
+
+        <div
+          className="mt-3 flex items-center gap-1.5 flex justify-center"
+          style={{
+            opacity: headerVisible ? 1 : 0,
+            transition: "opacity 0.65s ease 0.15s",
+          }}
+        >
+          <div
+            className="h-[2.5px] bg-[#820c0c] rounded-full"
+            style={{
+              width: headerVisible ? 36 : 0,
+              transition: "width 0.7s ease 0.3s",
+            }}
+          />
+          <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
+          <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
+        </div>
 
         {/* ── Scroll Track ── */}
         <div className="relative overflow-hidden py-3">
@@ -428,13 +466,25 @@ export default function TopSelling() {
             onMouseDown={(e) => { if (e.button !== 0) return; startDrag(e, false); }}
           >
             {products.map((p, idx) => (
-              <ProductCard key={p.id} product={p} animDelay={idx * 0.06} />
+              <ProductCard
+                key={p.id}
+                product={p}
+                animDelay={idx * 0.06}
+                sectionVisible={sectionVisible}
+              />
             ))}
           </div>
         </div>
 
         {/* ── Bottom Controls ── */}
-        <div className="max-w-[1200px] mx-auto px-6 mt-3">
+        <div
+          className="max-w-[1200px] mx-auto px-6 mt-3"
+          style={{
+            opacity: controlsVisible ? 1 : 0,
+            transform: controlsVisible ? "translateY(0)" : "translateY(16px)",
+            transition: "opacity 0.5s ease, transform 0.5s ease",
+          }}
+        >
 
           {/* ── Scrollbar track ── */}
           <div
@@ -451,7 +501,7 @@ export default function TopSelling() {
                 background: "linear-gradient(to right, rgba(201,100,58,.3), rgba(130,12,12,.2))",
               }}
             />
-            {/* Draggable thumb — moves & resizes dynamically */}
+            {/* Draggable thumb */}
             <div
               onMouseDown={(e) => { e.stopPropagation(); startDrag(e, true); }}
               className="absolute top-0 h-full rounded-full"
