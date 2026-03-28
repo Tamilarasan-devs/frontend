@@ -1,6 +1,6 @@
 import React from 'react'
 // import img from '../assets/images/your-product-image.webp' // replace with your actual image path
-
+import btl from '../assets/images/btl.jpeg'
 const leftFeatures = [
   {
     icon: (
@@ -154,7 +154,7 @@ export default function FeaturesSection() {
                 }}
               >
                 <img
-                  src='https://www.optimumnutrition.co.in/cdn/shop/files/1156608_1_bd16ce60-fa01-42b4-872a-fd291f8fb5ad.png?v=1767850635&width=533'
+                  src={btl}
                   alt="Our Products"
                   className="w-full h-full object-cover"
                 />

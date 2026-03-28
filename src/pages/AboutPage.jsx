@@ -209,10 +209,11 @@ export default function OurBusiness() {
           className="text-center text-4xl font-extrabold tracking-tight text-[#820c0c] mb-2"
         
         >
-          Our Business
+          WHAT WE DO
         </h2>
         <p className="text-center text-slate-500 text-xl mb-3 font-semibold">
-          Powering pharmaceutical excellence across every domain
+          Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support. Maintain strict quality standards in production
+Provide safe and effective wellness solutions
         </p>
 
         {/* ── Divider ── */}

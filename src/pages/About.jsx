@@ -4,7 +4,7 @@ import mission from '../assets/images/mission.jpg';
 import vision from '../assets/images/vission.jpg';
 import FeaturesSection from "./AboutCard";
 // import bnr from '../assets/images/bn.png';
-import img0 from '../assets/images/emp.png';
+import img0 from '../assets/images/ourbegin.jpeg';
 import img1 from '../assets/images/cont.png';
 import img2 from '../assets/images/the.png';
 import img3 from '../assets/images/ com.png';
