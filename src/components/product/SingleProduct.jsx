@@ -29,12 +29,13 @@ const product = {
   stock: 14,
   images: [
     bottle,
-    bottle1,
-    bottle2,
-    bottle3,
     bottle5,
+    bottle1,
+    bottle3,
+    bottle2,
+    
   ],
-  badges: ["100% Natural", "No Preservatives", "GMP Certified"],
+  // badges: ["100% Natural", "No Preservatives", "GMP Certified"],
   shortDesc:
     "A time-tested blend of 18 Ayurvedic herbs and spices, crafted to energize your body and calm your mind — one cup at a time.",
   variants: [
@@ -170,7 +171,7 @@ useEffect(() => {
             />
 
             {/* Badge strip */}
-            <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10">
+            {/* <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10">
               {product.badges.slice(0, 2).map((b) => (
                 <span
                   key={b}
@@ -180,7 +181,7 @@ useEffect(() => {
                   ✓ {b}
                 </span>
               ))}
-            </div>
+            </div> */}
 
             {/* Discount badge */}
             
@@ -243,7 +244,7 @@ useEffect(() => {
           </div>
 
           {/* Badge chips */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          {/* <div className="flex flex-wrap gap-2 mb-4">
             {product.badges.map((b) => (
               <span
                 key={b}
@@ -253,7 +254,7 @@ useEffect(() => {
                 ✓ {b}
               </span>
             ))}
-          </div>
+          </div> */}
 
           {/* Short description */}
           <p className="text-lg font-bold text-gray-500 leading-7 mb-4">{product.shortDesc}</p>

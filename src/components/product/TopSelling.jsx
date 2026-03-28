@@ -5,15 +5,21 @@ import bottle from '../../assets/images/bt.jpeg'
 import bottle1 from '../../assets/images/bt.jpeg'
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-
+// import cate1 from '../../assets/images/category/cate1.jpeg'
+import cate2 from '../../assets/images/category/cate2.jpeg'
+import cate3 from '../../assets/images/category/cate3.jpeg'
+import cate4 from '../../assets/images/category/cate4.jpeg'
+// import cate5 from '../../assets/images/category/cate5.jpeg'
+import cate1 from '../../assets/images/prod/pro5.jpeg'
+import cate5 from '../../assets/images/prod/pro1.jpeg'
 const products = [
-  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic.", rating: 4.5, reviews: 248, badge: "New Launches", image: bottle, hoverImage: bottle1, tags: ["Spicy", "Healthy", "Indian"] },
-  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: bottle, hoverImage: bottle1, tags: ["Skin Care", "Herbal", "Refresh"] },
-  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement.", rating: 5, reviews: 512, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Fitness", "Protein", "Muscle"] },
-  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation.", rating: 3.5, reviews: 97, badge: "Must Try!", image: bottle, hoverImage: bottle1, tags: ["Immunity", "Ayurvedic", "Wellness"] },
-  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to.", rating: 4.2, reviews: 321, badge: "Fast Moving", image: bottle, hoverImage: bottle1, tags: ["Vitamin", "Immunity", "Daily"] },
-  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that.", rating: 4.7, reviews: 430, badge: "Limited Stock", image: bottle, hoverImage: bottle1, tags: ["Hair Care", "Botanical", "Serum"] },
-  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support.", rating: 4.0, reviews: 156, badge: "Top Rated", image: bottle, hoverImage: bottle1, tags: ["Digestive", "Ayurvedic", "Gut"] },
+  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic.", rating: 4.5, reviews: 248, badge: "New Launches", image: cate1, hoverImage: cate5, tags: ["Spicy", "Healthy", "Indian"] },
+  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Skin Care", "Herbal", "Refresh"] },
+  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement.", rating: 5, reviews: 512, badge: "Top Rated", image: cate1, hoverImage: cate5, tags: ["Fitness", "Protein", "Muscle"] },
+  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation.", rating: 3.5, reviews: 97, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Immunity", "Ayurvedic", "Wellness"] },
+  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to.", rating: 4.2, reviews: 321, badge: "Fast Moving", image: cate1, hoverImage: cate5, tags: ["Vitamin", "Immunity", "Daily"] },
+  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that.", rating: 4.7, reviews: 430, badge: "Limited Stock", image: cate1, hoverImage: cate5, tags: ["Hair Care", "Botanical", "Serum"] },
+  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support.", rating: 4.0, reviews: 156, badge: "Top Rated", image: cate1, hoverImage: cate5, tags: ["Digestive", "Ayurvedic", "Gut"] },
 ];
 
 const CARD_W = 272;

@@ -7,11 +7,11 @@ import pro3 from '../../assets/images/Group.webp'
 import pro4 from '../../assets/images/pro4.webp'
 
 
-import cate1 from '../../assets/images/allCate/cate1.jpeg'
-import cate2 from '../../assets/images/allCate/cate2.jpeg'
-import cate3 from '../../assets/images/allCate/cate3.jpeg'
-import cate4 from '../../assets/images/allCate/cate4.jpeg'
-import cate5 from '../../assets/images/allCate/cate5.jpeg'
+import cate1 from '../../assets/images/category/cate1.jpeg'
+import cate2 from '../../assets/images/category/cate2.jpeg'
+import cate3 from '../../assets/images/category/cate3.jpeg'
+import cate4 from '../../assets/images/category/cate4.jpeg'
+import cate5 from '../../assets/images/category/cate5.jpeg'
 
 const categories = [
   {
@@ -65,7 +65,7 @@ export default function CategoryList() {
           transition: "opacity 0.6s ease, transform 0.6s ease",
         }}
       >
-        Explore Our Categories
+        Explore Our Categories 
         <span
           className="block h-1 bg-[#729cfc] mx-auto mt-2 rounded-full"
           style={{

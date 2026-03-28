@@ -6,15 +6,23 @@ import Banner from "../layout/Banner";
 // import bottle1 from '../../assets/images/btl1.jpg';
 // import bottle from '../../assets/images/aaya.png'
 // import bottle1 from '../../assets/images/aaya-pro.png'
-import bottle from '../../assets/images/bt.jpeg'
-import bottle1 from '../../assets/images/bt.jpeg'
+// import bottle from '../../assets/images/bt.jpeg'
+// import bottle1 from '../../assets/images/bt.jpeg'
+
+import bottle from '../../assets/images/prod/pro5.jpeg'
+import bottle1 from '../../assets/images/prod/pro1.jpeg'
 import VideoCarousel from '../layout/ReelSection'
 import FirstBanner from "../layout/banner/FirstBanner";
-import cate1 from '../../assets/images/category/cate1.jpeg'
-import cate2 from '../../assets/images/category/cate2.jpeg'
-import cate3 from '../../assets/images/category/cate3.jpeg'
-import cate4 from '../../assets/images/category/cate4.jpeg'
-import cate5 from '../../assets/images/category/cate5.jpeg'
+
+
+
+
+import cate1 from '../../assets/images/allCate/cate1.jpeg'
+import cate2 from '../../assets/images/allCate/cate2.jpeg'
+import cate3 from '../../assets/images/allCate/cate3.jpeg'
+import cate4 from '../../assets/images/allCate/cate4.jpeg'
+import cate5 from '../../assets/images/allCate/cate5.jpeg'
+
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
@@ -41,11 +49,7 @@ const products = [
   { id: 3,  name: "Protein Nutrition Powder",  category: "Protein",     description: "High-quality protein blend for ",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Hot Seller",    tags: ["Muscle","Recovery"],   images: [bottle,bottle1] },
   { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Supplements", description: "Supports heart health and brain",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Must Try!", tags: ["Heart","Brain"],       images: [bottle,bottle1] },
   { id: 5,  name: "Herbal Skin Cleanser",      category: "Skincare",    description: "Gentle herbal cleanser that refreshes skin .", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "Limited Stock",        tags: ["Herbal","Gentle"],     images: [bottle,bottle1] },
-  { id: 6,  name: "Calcium Magnesium Tablets", category: "Supplements", description: "Essential minerals for bone strength.",             price: 479, originalPrice: 699, rating: 4.7, reviews: 143, badge: "Fasting Moving",    tags: ["Bones","Minerals"],    images: [bottle,bottle1] },
-  { id: 7,  name: "Vitamin C Boost Capsules",  category: "Vitamins",    description: "Powerful antioxidant capsules to boost .",       price: 279, originalPrice: 449, rating: 4.3, reviews: 89,  badge: "Top Rated",        tags: ["Antioxidant","Immunity"], images: [bottle,bottle1] },
-  { id: 8,  name: "Energy Booster Drink Mix",  category: "Protein",     description: "Instant mix to enhance energy levels.",    price: 329, originalPrice: 499, rating: 3.9, reviews: 52,  badge: "Hot Seller",        tags: ["Energy","Focus"],      images: [bottle,bottle1] },
-  { id: 9,  name: "Digestive Enzyme Tablets",  category: "Supplements", description: "Supports digestion and nutrient.",              price: 519, originalPrice: 749, rating: 4.9, reviews: 230, badge: "Top Rated",  tags: ["Gut Health","Digest"], images: [bottle,bottle1] },
-  { id: 10, name: "Immunity Support Syrup",    category: "Vitamins",    description: "Advanced herbal formula to strengthen.",              price: 399, originalPrice: 599, rating: 4.4, reviews: 167, badge: "Must Try!",    tags: ["Herbal","Immunity"],   images: [bottle,bottle1] },
+
 ];
 
 const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
