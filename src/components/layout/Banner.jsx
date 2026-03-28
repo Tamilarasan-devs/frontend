@@ -1,10 +1,21 @@
 import React, { useEffect, useRef } from "react";
-import bnnr1 from "../../assets/images/bnnr1.avif";
-import bnnr2 from "../../assets/images/bnnr2.avif";
-import bnnr3 from "../../assets/images/bnnr3.avif";
-import bnnr4 from "../../assets/images/bnnr4.avif";
-import bnnr5 from "../../assets/images/bnnr5.avif";
+// import bnnr1 from "../../assets/images/bnnr1.avif";
+// import bnnr2 from "../../assets/images/bnnr2.avif";
+// import bnnr3 from "../../assets/images/bnnr3.avif";
+// import bnnr4 from "../../assets/images/bnnr4.avif";
+// import bnnr5 from "../../assets/images/bnnr5.avif";
 
+import bnr1 from '../../assets/images/banners/bnr1.jpeg'
+import bnr2 from '../../assets/images/banners/bnr2.jpeg'
+import bnr3 from '../../assets/images/banners/bnr3.jpeg'
+import bnr4 from '../../assets/images/banners/bnr4.jpeg'
+import bnr5 from '../../assets/images/banners/bnr5.jpeg'
+import bnr6 from '../../assets/images/banners/bnr6.jpeg'
+import bnr7 from '../../assets/images/banners/bnr7.jpeg'
+import bnr8 from '../../assets/images/banners/bnr8.jpeg'
+import bnr9 from '../../assets/images/banners/bnr9.jpeg'
+import bnr10 from '../../assets/images/banners/bnr10.jpeg'
+import bnr11 from '../../assets/images/banners/bnr11.jpeg'
 export default function Banner() {
   const containerRef = useRef(null);
 
@@ -41,7 +52,10 @@ export default function Banner() {
     return () => clearInterval(scrollInterval);
   }, []);
 
-  const images = [bnnr1, bnnr2, bnnr3, bnnr4, bnnr5];
+  const images = [bnr1,bnr2,bnr3
+  ,bnr4,bnr5
+  ,bnr6,bnr7,bnr8,bnr9,bnr10,bnr11
+  ];
   const allImages = [...images, ...images];
 
   return (

@@ -2,11 +2,19 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import Banner from "../layout/Banner";
-import bottle from '../../assets/images/btl.jpg';
-import bottle1 from '../../assets/images/btl1.jpg';
+// import bottle from '../../assets/images/btl.jpg';
+// import bottle1 from '../../assets/images/btl1.jpg';
+// import bottle from '../../assets/images/aaya.png'
+// import bottle1 from '../../assets/images/aaya-pro.png'
+import bottle from '../../assets/images/bt.jpeg'
+import bottle1 from '../../assets/images/bt.jpeg'
 import VideoCarousel from '../layout/ReelSection'
 import FirstBanner from "../layout/banner/FirstBanner";
-
+import cate1 from '../../assets/images/category/cate1.jpeg'
+import cate2 from '../../assets/images/category/cate2.jpeg'
+import cate3 from '../../assets/images/category/cate3.jpeg'
+import cate4 from '../../assets/images/category/cate4.jpeg'
+import cate5 from '../../assets/images/category/cate5.jpeg'
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
@@ -20,11 +28,11 @@ const badgeMap = {
 };
 
 const categoryMeta = {
-  "All":         { image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80", icon: "🛍️", color: "#820c0c" },
-  "Supplements": { image: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=400&q=80", icon: "💊", color: "#7c3aed" },
-  "Vitamins":    { image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400&q=80", icon: "🧬", color: "#0369a1" },
-  "Protein":     { image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&q=80", icon: "💪", color: "#b45309" },
-  "Skincare":    { image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80", icon: "✨", color: "#be185d" },
+  "All":         { image: [cate1], icon: "🛍️", color: "#820c0c" },
+  "Supplements": { image: [cate2], icon: "💊", color: "#7c3aed" },
+  "Vitamins":    { image: [cate3], icon: "🧬", color: "#0369a1" },
+  "Protein":     { image: [cate4], icon: "💪", color: "#b45309" },
+  "Skincare":    { image: [cate5], icon: "✨", color: "#be185d" },
 };
 
 const products = [

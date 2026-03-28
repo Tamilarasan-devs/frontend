@@ -42,15 +42,16 @@ export default function ProfilePage() {
   const removeWishlist = (id) => setWishlist(wishlist.filter(i => i.id !== id));
 const navigate = useNavigate()
   return (
-    <div className="min-h-screen bg-[#faf7f2]" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="min-h-screen bg-[#faf7f2]" >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
         .fade-up { animation: fadeUp 0.5s ease both; }
       `}</style>
 
       {/* ── TOP HERO BANNER ── */}
-      <div className="relative overflow-hidden bg-[#faf7f2]">
+      
+    <div className="relative overflow-hidden bg-[#faf7f2]">
+
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row min-h-[220px]">
 
         {/* Left — crimson block */}
@@ -115,8 +116,9 @@ const navigate = useNavigate()
             </div>
           ))}
         </div>
+
       </div>
-    </div>
+      </div>
 
       <div className="max-w-6xl mx-auto px-6 py-8">
 
@@ -327,6 +329,7 @@ const navigate = useNavigate()
         )}
 
       </div>
+    
     </div>
   );
 }

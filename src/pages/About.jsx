@@ -13,6 +13,8 @@ import iconbc2 from "../assets/images/icon-bc2.svg";
 import iconbc3 from "../assets/images/icon-bc3.svg";
 import iconbc4 from "../assets/images/icon-bc4.svg";
 import {  useNavigate} from 'react-router-dom'
+import OurBusiness from "./AboutPage";
+import AboutAayubakwath from "./AboutAaya";
 
 
 /* ── useInView hook for scroll-triggered animations ── */
@@ -240,76 +242,9 @@ export default function About() {
 
         {/* Features */}
         <FeaturesSection />
-
+<OurBusiness/>
         {/* ══════════ ABOUT INTRO ══════════ */}
-<section className="leaf-bg py-28 px-6">
-  <div className="max-w-5xl mx-auto">
-
-    {/* ── HEADER ── */}
-    <Reveal className="text-center mb-16">
-      
-      <h2 className="display-font text-5xl md:text-6xl font-bold leading-tight">
-        <span className="gradient-text">About Aayubakwath</span>
-      </h2>
-      <Divider />
-    </Reveal>
-
-    {/* ── CONTENT ── */}
-    <div className="flex flex-col gap-0">
-
-      {/* Block 1 */}
-      <Reveal delay={0.1}>
-        <div className="flex flex-col md:flex-row items-center gap-10 py-12 border-b border-[#f0e4d4]">
-          <div className="flex-shrink-0 flex flex-col items-center gap-3">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-2xl shadow-lg shadow-[#820c0c]/20">
-              🌿
-            </div>
-            <div className="w-px h-12 bg-gradient-to-b from-[#c9643a] to-transparent hidden md:block" />
-          </div>
-          <div className="flex-1">
-            <p className="text-gray-700 leading-relaxed text-lg font-semibold">
-              <span className="font-bold text-[#820c0c]">Aayubakwath </span> 
-           Aayubakwath was founded with a simple yet powerful vision: to support healthier lives through natural wellness solutions. In today’s fast-paced world, people are facing increasing health challenges such as unstable blood sugar levels, high cholesterol, mental fatigue, poor concentration in children, and general lifestyle-related health issues. 
-            </p>
-          </div>
-        </div>
-      </Reveal>
-
-      {/* Block 2 */}
-      <Reveal delay={0.2}>
-        <div className="flex flex-col md:flex-row items-center gap-10 py-12">
-          <div className="flex-shrink-0 flex flex-col items-center gap-3">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-2xl shadow-lg shadow-[#820c0c]/20">
-              ⚗️
-            </div>
-          </div>
-          <div className="flex-1">
-            <p className="text-gray-700 leading-relaxed text-lg font-semibold">
-           At Aayubakwath, we believe that the right combination of nutrition, natural ingredients, and scientifically formulated supplements can help people regain balance and improve their overall well-being.
-
-            </p>
-          </div>
-        </div>
-      </Reveal>
-      <Reveal delay={0.2}>
-        <div className="flex flex-col md:flex-row items-center gap-10 py-12">
-          <div className="flex-shrink-0 flex flex-col items-center gap-3">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-2xl shadow-lg shadow-[#820c0c]/20">
-              ⚗️
-            </div>
-          </div>
-          <div className="flex-1">
-            <p className="text-gray-700 leading-relaxed text-lg font-semibold">
-  Our mission is to provide safe, effective, and high-quality health supplements that support everyday health needs for individuals and families. We focus on developing products that complement modern lifestyles while staying rooted in the principles of holistic wellness and nutritional balance.
-
-            </p>
-          </div>
-        </div>
-      </Reveal>
-
-    </div>
-  </div>
-</section>
+<AboutAayubakwath/>
 
         {/* ══════════ STORY SECTIONS (alternating) ══════════ */}
         <section className="py-24 bg-white">
@@ -470,42 +405,233 @@ Wellness – Support healthier lifestyles through effective nutritional support.
 
 
         {/* ══════════ WHY CHOOSE US ══════════ */}
-<section className="py-16 bg-[#f9f5f1]">
-      <div className="max-w-5xl mx-auto px-6">
 
-        <h1 className="text-3xl font-extrabold text-center text-[#820c0c] tracking-tight mb-2">
-          Why Aayubakwath
-        </h1>
-        <div className="w-10 h-[3px] bg-[#c9643a] rounded-full mx-auto mb-11" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {cards.map(({ title, desc }) => (
-            <div
-              key={title}
-              className="group relative h-52 rounded-[18px] overflow-hidden bg-white border border-[#e5d3c6] hover:border-[#820c0c] transition-colors duration-300"
-            >
-              {/* Front */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-7 transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-2.5">
-                <div className="w-14 h-14 rounded-[14px] bg-[#fbeee8] flex items-center justify-center">
-                  <img src={iconbc1} alt="icon" className="w-7 h-7 object-contain" />
-                </div>
-                <h2 className="text-[15.5px] font-bold text-gray-900 text-center leading-snug">
-                  {title}
-                </h2>
-              </div>
 
-              {/* Back */}
-              <div className="absolute inset-0 bg-[#820c0c] flex items-center justify-center px-7 opacity-0 translate-y-3.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <p className="text-[16px] text-white/88 leading-relaxed text-center">
-                  {desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
 
-      </div>
-    </section>
+      <style>
+        {`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap');
+
+        .ob-section {
+          background: #f0f4f8;
+          padding: 72px 24px 80px;
+          font-family: 'DM Sans', sans-serif;
+        }
+
+        .ob-heading {
+          font-family: 'Playfair Display', serif;
+          font-size: 2.4rem;
+          font-weight: 700;
+          text-align: center;
+          color: #111;
+          margin-bottom: 8px;
+          letter-spacing: -0.01em;
+        }
+
+        .ob-underline {
+          width: 56px;
+          height: 4px;
+          background: linear-gradient(90deg, #1565C0, #42a5f5);
+          border-radius: 4px;
+          margin: 0 auto 56px;
+        }
+
+        .ob-grid {
+          display: flex;
+          gap: 28px;
+          justify-content: center;
+          flex-wrap: wrap;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+
+        /* === CARD === */
+        .ob-card {
+          width: 220px;
+          cursor: pointer;
+          transform: translateY(0px);
+          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          position: relative;
+        }
+
+        .ob-card:hover {
+          transform: translateY(-14px);
+        }
+
+        /* The pill shape */
+        .ob-pill {
+          width: 220px;
+          border-radius: 50% 50% 50% 50% / 38% 38% 62% 62%;
+          overflow: visible;
+          position: relative;
+        }
+
+        /* Circular image */
+        .ob-img-wrap {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: 0 auto;
+          border: 6px solid white;
+          box-shadow: 0 8px 32px rgba(21,101,192,0.18);
+          position: relative;
+          z-index: 2;
+          transition: box-shadow 0.3s ease;
+        }
+
+        .ob-card:hover .ob-img-wrap {
+          box-shadow: 0 16px 48px rgba(21,101,192,0.32);
+        }
+
+        .ob-img-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .ob-card:hover .ob-img-wrap img {
+          transform: scale(1.08);
+        }
+
+        /* Yellow accent arc on top of some cards */
+        .ob-arc {
+          position: absolute;
+          top: 10px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 4px;
+          z-index: 3;
+          pointer-events: none;
+        }
+
+        .ob-arc-dot {
+          width: 10px;
+          height: 30px;
+          background: #f5a623;
+          border-radius: 8px;
+          opacity: 0.9;
+        }
+
+        /* Blue bottom body */
+        .ob-body {
+          background: linear-gradient(175deg, #1e88e5 0%, #1565C0 55%, #0d47a1 100%);
+          border-radius: 0 0 120px 120px;
+          margin-top: -90px;
+          padding-top: 104px;
+          padding-bottom: 36px;
+          text-align: center;
+          position: relative;
+          z-index: 1;
+          box-shadow: 0 10px 40px rgba(21,101,192,0.25);
+          transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ob-card:hover .ob-body {
+          background: linear-gradient(175deg, #2196f3 0%, #1565C0 55%, #0a3880 100%);
+          box-shadow: 0 20px 56px rgba(21,101,192,0.38);
+        }
+
+        .ob-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.08rem;
+          font-weight: 700;
+          color: white;
+          padding: 0 16px;
+          line-height: 1.35;
+          min-height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Arrow button */
+        .ob-arrow {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: 2.5px solid rgba(255,255,255,0.35);
+          background: rgba(255,255,255,0.1);
+          color: white;
+          font-size: 1.1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 14px auto 0;
+          cursor: pointer;
+          transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+          backdrop-filter: blur(4px);
+        }
+
+        .ob-card:hover .ob-arrow {
+          background: rgba(255,255,255,0.22);
+          border-color: rgba(255,255,255,0.7);
+          transform: scale(1.1);
+        }
+
+        /* Tooltip desc on hover */
+        .ob-desc-tooltip {
+          position: absolute;
+          bottom: calc(100% + 14px);
+          left: 50%;
+          transform: translateX(-50%) translateY(6px);
+          width: 210px;
+          background: white;
+          border-radius: 12px;
+          padding: 12px 14px;
+          font-size: 0.78rem;
+          color: #334155;
+          line-height: 1.55;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.25s ease, transform 0.25s ease;
+          z-index: 10;
+          text-align: center;
+          border: 1px solid #e2e8f0;
+        }
+
+        .ob-desc-tooltip::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          border: 7px solid transparent;
+          border-top-color: white;
+        }
+
+        .ob-card:hover .ob-desc-tooltip {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        /* Entrance animation */
+        @keyframes ob-fade-up {
+          from { opacity: 0; transform: translateY(36px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .ob-card {
+          animation: ob-fade-up 0.55s ease both;
+        }
+        .ob-card:nth-child(1) { animation-delay: 0.05s; }
+        .ob-card:nth-child(2) { animation-delay: 0.15s; }
+        .ob-card:nth-child(3) { animation-delay: 0.25s; }
+        .ob-card:nth-child(4) { animation-delay: 0.35s; }
+
+        @media (max-width: 600px) {
+          .ob-grid { gap: 36px; }
+          .ob-heading { font-size: 1.8rem; }
+        }
+      `}</style>
+
+    
+
 
         
         {/* ══════════ WHY CHOOSE US ══════════ */}

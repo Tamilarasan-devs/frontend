@@ -6,22 +6,33 @@ import pro2 from '../../assets/images/grp1.webp'
 import pro3 from '../../assets/images/Group.webp'
 import pro4 from '../../assets/images/pro4.webp'
 
+
+import cate1 from '../../assets/images/allCate/cate1.jpeg'
+import cate2 from '../../assets/images/allCate/cate2.jpeg'
+import cate3 from '../../assets/images/allCate/cate3.jpeg'
+import cate4 from '../../assets/images/allCate/cate4.jpeg'
+import cate5 from '../../assets/images/allCate/cate5.jpeg'
+
 const categories = [
   {
     id: 1,
-    image: pro,
+    image: cate1,
   },
   {
     id: 2,
-    image: pro1,
+    image: cate2,
   },
   {
     id: 3,
-    image: pro2,
+    image: cate3,
   },
   {
     id: 4,
-    image: pro3,
+    image: cate4,
+  },
+  {
+    id: 5,
+    image: cate5,
   },
 ];
 
@@ -47,7 +58,7 @@ export default function CategoryList() {
     <section ref={sectionRef} className="px-4 sm:px-6 lg:px-10 py-10">
       {/* Section Title */}
       <h2
-        className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-10"
+        className="text-2xl sm:text-3xl font-bold text-center text-[#0c2460] mb-10"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-24px)",
@@ -56,7 +67,7 @@ export default function CategoryList() {
       >
         Explore Our Categories
         <span
-          className="block h-1 bg-[#c9643a] mx-auto mt-2 rounded-full"
+          className="block h-1 bg-[#729cfc] mx-auto mt-2 rounded-full"
           style={{
             width: visible ? "80px" : "0px",
             transition: "width 0.8s ease 0.4s",
@@ -65,7 +76,7 @@ export default function CategoryList() {
       </h2>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 p-4 rounded-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 p-4 rounded-lg">
         {categories.map((category, index) => (
           <div
             key={category.id}

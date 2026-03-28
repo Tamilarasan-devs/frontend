@@ -48,7 +48,7 @@ export default function AppRoutes() {
     <BrowserRouter>
       <OfferModal />
 
-      <Suspense fallback={<div style={{padding:"40px",textAlign:"center"}}>Loading...</div>}>
+      {/* <Suspense fallback={<div style={{padding:"40px",textAlign:"center"}}></div>}> */}
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
@@ -72,7 +72,7 @@ export default function AppRoutes() {
             <Route path="/trackorder" element={<TrackOrder/> }   />
           </Route>
         </Routes>
-      </Suspense>
+      {/* </Suspense> */}
     </BrowserRouter>
   );
 }

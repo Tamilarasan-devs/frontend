@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import bottle from '../../assets/images/btl.jpg';
-import bottle1 from '../../assets/images/btl1.jpg';
+// import bottle from '../../assets/images/aaya.png'
+// import bottle1 from '../../assets/images/aaya-pro.png'
+import bottle from '../../assets/images/bt.jpeg'
+import bottle1 from '../../assets/images/bt.jpeg'
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 

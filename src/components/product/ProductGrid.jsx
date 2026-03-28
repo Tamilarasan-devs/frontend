@@ -6,8 +6,12 @@ import { useNavigate } from "react-router-dom";
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a 829b1c";
 const GREEN='#829b1c'
-import img from '../../assets/images/btl.jpg';
-import img1 from '../../assets/images/btl1.jpg';
+// import img from '../../assets/images/bt.jpeg';
+// import img1 from '../../assets/images/bt.jpeg';
+import img from '../../assets/images/prod/pro5.jpeg'
+import img1 from '../../assets/images/prod/pro1.jpeg'
+
+
 const products = [
   {
     id: 1,
@@ -166,17 +170,13 @@ export default function ProductGrid() {
   }, []);
   // --- End animation setup ---
 
-  const handleAddToCart = (id) => {
-    setAdded((prev) => ({ ...prev, [id]: true }));
-    setTimeout(() => setAdded((prev) => ({ ...prev, [id]: false })), 1500);
-  };
 
   const getDiscount = (sale, regular) =>
     Math.round(((regular - sale) / regular) * 100);
 const navigate =useNavigate()
 
   return (
-    <div className=" p-6" style={{ backgroundColor: "#fdf5f5" }}>
+    <div className=" p-6" style={{ backgroundColor: "#fff" }}>
 
       {/* Header */}
         <div

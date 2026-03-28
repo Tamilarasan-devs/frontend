@@ -145,7 +145,7 @@ export default function Testimonial() {
   const t = testimonials[current];
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-orange-50/40 flex items-center justify-center p-5 md:p-10">
+    <div ref={sectionRef} className="min-h-screen bg-white flex items-center justify-center p-5 md:p-10">
 
       <style>{`
         .card-anim { transition: opacity 0.28s ease, transform 0.28s ease; }

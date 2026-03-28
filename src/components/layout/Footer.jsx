@@ -5,6 +5,7 @@ import {
   FaLeaf, FaArrowRight
 } from "react-icons/fa";
 import logo from '../../assets/images/logo.jpg'
+
 const Logo = () => (
   <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 38 }}>
     <path d="M100 155 C60 155 10 120 10 80 C10 60 30 45 55 50 C70 52 85 65 100 85 C115 65 130 52 145 50 C170 45 190 60 190 80 C190 120 140 155 100 155Z" fill="#8B1010"/>
@@ -30,11 +31,10 @@ export default function Footer() {
       <style>{`
 
         .footer-root {
-          
-          background: linear-gradient(175deg, #820c0c 0%, #820c0c 40%, #820c0c 100%); 
-          position: relative;
-          overflow: hidden;
-        }
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+}
 
         .footer-display {
           font-family: 'Cormorant Garamond', Georgia, serif;

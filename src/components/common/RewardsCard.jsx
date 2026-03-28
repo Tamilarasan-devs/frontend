@@ -28,11 +28,11 @@ export default function RewardsCard() {
       <button
         onClick={() => setOpen(true)}
         className="relative p-4 rounded-2xl text-white shadow-2xl transition-all hover:scale-110 active:scale-95 float-anim"
-        style={{ background: "linear-gradient(135deg, #820c0c, #a81010)", boxShadow: "0 12px 40px rgba(130,12,12,0.4)" }}
+        style={{ background: "#FFB800", boxShadow: "0 12px 40px rgba(130,12,12,0.4)" }}
       >
         <Gift size={26} />
         <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-white text-[9px] font-black flex items-center justify-center border-2 border-white"
-          style={{ background: "#aab820" }}>3</span>
+          style={{ background: "#820c0c" }}>3</span>
       </button>
 
       {/* ── Modal ── */}

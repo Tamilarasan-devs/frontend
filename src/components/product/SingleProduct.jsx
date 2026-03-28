@@ -3,8 +3,18 @@ import {
   Star, ShoppingCart, Heart, Share2, Shield, Truck, RefreshCw,
   ChevronDown, ChevronUp, Plus, Minus, Check, Leaf, Award, Zap
 } from "lucide-react";
-import bottle from '../../assets/images/btl.jpg';
-import bottle1 from '../../assets/images/btl1.jpg';
+// import bottle from '../../assets/images/aaya.png'
+// import bottle1 from '../../assets/images/aaya-pro.png'
+// import bottle from '../../assets/images/bt.jpeg'
+// import bottle1 from '../../assets/images/bt.jpeg'
+
+
+
+import bottle from '../../assets/images/prod/pro5.jpeg'
+import bottle1 from '../../assets/images/prod/pro1.jpeg'
+import bottle3 from '../../assets/images/prod/pro2.jpeg'
+import bottle2 from '../../assets/images/prod/pro3.jpeg'
+import bottle5 from '../../assets/images/prod/pro4.jpeg'
 // ─── Constants ────────────────────────────────────────────────
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
@@ -20,8 +30,9 @@ const product = {
   images: [
     bottle,
     bottle1,
-    bottle,
-    bottle1
+    bottle2,
+    bottle3,
+    bottle5,
   ],
   badges: ["100% Natural", "No Preservatives", "GMP Certified"],
   shortDesc:
@@ -125,7 +136,7 @@ useEffect(() => {
   }, []);
   // ── Render ──────────────────────────────────────────────────
   return (
-    <div className="bg-[#faf8f6] min-h-screen text-gray-900 ">
+    <div className="bg-[#fff] min-h-screen text-gray-900 ">
 
       {/* ── Breadcrumb ── */}
       <nav className="bg-white border-b border-[#f0ece8] px-5 md:px-10 py-3 flex items-center gap-1.5 text-xs text-gray-400 flex-wrap">
@@ -174,7 +185,7 @@ useEffect(() => {
             {/* Discount badge */}
             
 
-            <div style={{ position:"absolute", top:0, right:0, zIndex:5, background:ACCENT, color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.4, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
+            <div style={{ position:"absolute", top:0, right:0, zIndex:5, background:'#FFB800', color:"#fff", padding:"10px 10px", fontWeight:800, textAlign:"center", lineHeight:1.7, clipPath:"polygon(0 0,100% 0,100% 75%,85% 100%,70% 75%,55% 100%,40% 75%,25% 100%,10% 75%,0 100%)", boxShadow:"0 4px 10px rgba(0,0,0,0.25)" }}>
           <div className="-mt-1.5">
             <div style={{ fontSize:16 }}>{disc}%</div>
             <div style={{ fontSize:10 }}>OFF</div>

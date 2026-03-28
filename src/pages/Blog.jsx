@@ -89,10 +89,7 @@ export default function BlogPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-        .blog-root { font-family: 'DM Sans', sans-serif; }
-        .blog-serif { font-family: 'Cormorant Garamond', serif; }
+  
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(16px); }
@@ -163,7 +160,7 @@ export default function BlogPage() {
         .load-btn:hover::after { transform: translateX(100%); }
       `}</style>
 
-      <div className="blog-root min-h-screen" style={{ background: "linear-gradient(160deg, #fff5f0 0%, #fef9f7 60%, #fff5f0 100%)" }}>
+      <div className="blog-root min-h-screen" style={{ backgroundColor:'white' }}>
 
         {/* ── Hero Header ── */}
         {/* ══════════ HERO ══════════ */}
