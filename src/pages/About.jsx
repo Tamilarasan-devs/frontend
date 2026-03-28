@@ -660,43 +660,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
 
         
         {/* ══════════ WHY CHOOSE US ══════════ */}
-        <section className="py-28 px-6 bg-[#fefbf6]">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <Reveal>
-              <div>
-                <Label text="Our Advantage" />
-                <h2 className="display-font text-4xl md:text-5xl font-bold text-[#820c0c] mb-2">
-                  Why Choose Aayubakwath?
-                </h2>
-                <span className="accent-bar mb-8 block" />
-                <ul className="space-y-4">
-                  {whyItems.map((item, i) => (
-                    <li key={i} className="flex items-center gap-4 group">
-                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-[#820c0c] to-[#c9643a] flex items-center justify-center text-white text-xs font-bold shadow-md group-hover:scale-110 transition-transform">✓</span>
-                      <span className="text-gray-700 text-lg group-hover:text-[#820c0c] transition-colors">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.15}>
-              <div className="relative overflow-hidden rounded-[32px] shadow-[0_20px_60px_rgba(130,12,12,0.12)]">
-                <img
-                  src="https://media.istockphoto.com/id/858309414/photo/why-choose-us.jpg?s=612x612&w=0&k=20&c=eagefEzm_QPMo3WFaDwlxqSA3qnfDTxN2PFuKhxuSac="
-                  alt="Wellness"
-                  className="story-img w-full h-[420px] object-cover"
-                />
-                {/* Floating badge */}
-                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-lg border border-[#f0e4d4]">
-                  <p className="text-[#820c0c] font-bold text-sm">🌿 Made in India</p>
-                  <p className="text-gray-500 text-xs mt-0.5">Herbal · Natural · Trusted</p>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
+       
         {/* ══════════ COMMITMENT ══════════ */}
         <section className="py-28 px-6 bg-gradient-to-br from-[#f5ede0] to-[#fef9f3]">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">

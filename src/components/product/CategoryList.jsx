@@ -6,13 +6,13 @@ import pro2 from '../../assets/images/grp1.webp'
 import pro3 from '../../assets/images/Group.webp'
 import pro4 from '../../assets/images/pro4.webp'
 
-
+// import {useNavigate}from 'react-router-dom'
 import cate1 from '../../assets/images/category/cate1.jpeg'
 import cate2 from '../../assets/images/category/cate2.jpeg'
 import cate3 from '../../assets/images/category/cate3.jpeg'
 import cate4 from '../../assets/images/category/cate4.jpeg'
 import cate5 from '../../assets/images/category/cate5.jpeg'
-
+import combo from '../../assets/images/combo.jpeg'
 const categories = [
   {
     id: 1,
@@ -34,7 +34,12 @@ const categories = [
     id: 5,
     image: cate5,
   },
+  {
+    id: 6,
+    image: combo,
+  },
 ];
+// const navigation = useNavigate()
 
 export default function CategoryList() {
   const [visible, setVisible] = useState(false);
@@ -53,12 +58,13 @@ export default function CategoryList() {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-
+const BRAND = "#820c0c";
+const ACCENT = "#c9643a";
   return (
     <section ref={sectionRef} className="px-4 sm:px-6 lg:px-10 py-10">
       {/* Section Title */}
       <h2
-        className="text-2xl sm:text-3xl font-bold text-center text-[#0c2460] mb-10"
+        className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-10"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-24px)",
@@ -67,7 +73,7 @@ export default function CategoryList() {
       >
         Explore Our Categories 
         <span
-          className="block h-1 bg-[#729cfc] mx-auto mt-2 rounded-full"
+          className="block h-1 bg-[#c9643a] mx-auto mt-2 rounded-full"
           style={{
             width: visible ? "80px" : "0px",
             transition: "width 0.8s ease 0.4s",
@@ -76,11 +82,11 @@ export default function CategoryList() {
       </h2>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 p-4 rounded-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3  sm:gap-8 p-4 rounded-lg">
         {categories.map((category, index) => (
           <div
             key={category.id}
-            className="flex flex-col items-center text-center cursor-pointer group p-4 rounded-lg transition-colors duration-300"
+            className="flex flex-col items-center text-center cursor-pointer group rounded-lg transition-colors duration-300"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.95)",
@@ -92,7 +98,7 @@ export default function CategoryList() {
               <img
                 src={category.image}
                 alt={category.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-[300px] h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>

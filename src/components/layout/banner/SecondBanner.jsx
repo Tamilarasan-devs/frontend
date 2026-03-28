@@ -114,7 +114,7 @@ export default function SecondBanner() {
                 {item.name}
               </h3>
 
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-md text-gray-800 ">
                 {item.category}
               </p>
             </div>

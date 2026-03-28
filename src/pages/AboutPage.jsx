@@ -1,5 +1,7 @@
 import { useState } from "react";
-
+import pure from '../assets/images/pure.jpeg'
+import health from '../assets/images/health.jpeg'
+import safe from '../assets/images/safe.jpeg'
 // ─── Add this to your global CSS / index.css ───────────────────────────────
 // @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
@@ -8,9 +10,9 @@ const cards = [
   {
     title: "Pure Herbal Formulation",
     desc: "Made with carefully selected natural ingredients, inspired by traditional herbal knowledge.",
-    image: "https://www.hopkinsmedicine.org/-/media/images/health/3_-wellness/integrative-medicine/essential-oils-teaser.jpg?h=260&iar=0&mh=260&mw=380&w=380&hash=37BC59D0A7736CCB0BBB26CD6235A7BF",
+    image: pure,
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         <path d="M9 12l2 2 4-4" />
@@ -20,9 +22,9 @@ const cards = [
   {
     title: "Daily Health Support",
     desc: "Designed for everyday wellness needs and helps maintain overall body balance.",
-    image: "https://www.hindustantimes.com/ht-img/img/2025/12/24/550x309/doc_1766559186634_1766559190159.jpg",
+    image: health,
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <rect x="2" y="7" width="20" height="14" rx="2" />
         <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
@@ -34,9 +36,9 @@ const cards = [
   {
     title: "Safe & Balanced Nutrition",
     desc: "Gentle on the body for regular use and supports a healthy lifestyle naturally.",
-    image: "https://thumbs.dreamstime.com/b/healthy-lifestyle-concept-vegetarian-food-heart-diet-fitness-medicine-abstract-137482576.jpg",
+    image: safe,
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
@@ -50,7 +52,7 @@ const cards = [
     desc: "Manufactured under strict quality standards ensuring purity, safety, and consistency.",
     image: "https://cdn.labmanager.com/assets/image/54181/6-cs-of-lab-quality-s.webp",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <circle cx="12" cy="12" r="10" />
         <line x1="2" y1="12" x2="22" y2="12" />
@@ -144,8 +146,8 @@ export default function OurBusiness() {
         }
         .circle-group:hover .icon-badge {
           transform: scale(1.22) rotate(-6deg);
-          box-shadow: 0 8px 28px rgba(21,101,192,.35),
-                      0 0 0 3px rgba(21,101,192,.2) !important;
+          box-shadow: 0 8px 28px #c9643a,
+                      0 0 0 3px #c9643a !important;
         }
 
         /* ── Ring glow ── */
@@ -153,7 +155,7 @@ export default function OurBusiness() {
           transition: box-shadow 0.4s ease;
         }
         .circle-group:hover .img-ring {
-          box-shadow: 0 16px 44px rgba(21,101,192,.38),
+          box-shadow: 0 16px 44px #3c9643a,
                       0 0 0 3px rgba(255,255,255,.95) !important;
         }
 

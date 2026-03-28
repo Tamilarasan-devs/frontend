@@ -20,7 +20,7 @@ export default function OfferScrollBar() {
           {repeated.map((text, i) => (
             <span
               key={i}
-              className="inline-flex items-center text-lg font-bold whitespace-nowrap mr-16"
+              className="inline-flex items-center text-lg font-bold whitespace-nowrap  mr-4"
             >
                  <span className="mr-4 ">•</span> 
                {text}
