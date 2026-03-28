@@ -247,7 +247,7 @@ const navigate =useNavigate()
 
             {/* Image Swap on Hover */}
             <div
-              className="relative w-full h-48 rounded-lg mb-4 overflow-hidden cursor-pointer"
+              className="relative w-full h-full rounded-lg mb-4 overflow-hidden cursor-pointer"
               onMouseEnter={() =>
                 setHovered((prev) => ({ ...prev, [product.id]: true }))
               }
@@ -256,12 +256,12 @@ const navigate =useNavigate()
               }
               onClick={()=>navigate("/product")}
             >
-              <div className="relative h-48 bg-white flex items-center justify-center overflow-hidden">
+              <div className="relative h-56 bg-white flex items-center justify-center overflow-hidden">
 
   <img
     src={product.image}
     alt={product.name}
-    className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${
+    className={`absolute inset-0 w-full h-full  transition-opacity duration-500 ${
       hovered[product.id] ? "opacity-0" : "opacity-100"
     }`}
   />
@@ -269,7 +269,7 @@ const navigate =useNavigate()
   <img
     src={product.hoverImage}
     alt={`${product.name} alternate`}
-    className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${
+    className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
       hovered[product.id] ? "opacity-100" : "opacity-0"
     }`}
   />
