@@ -22,7 +22,10 @@ import cate2 from '../../assets/images/allCate/cate2.jpeg'
 import cate3 from '../../assets/images/allCate/cate3.jpeg'
 import cate4 from '../../assets/images/allCate/cate4.jpeg'
 import cate5 from '../../assets/images/allCate/cate5.jpeg'
+
 import ShopPageBanner from "../layout/banner/ShopPageBanner";
+import TopScroll from "../layout/TopScroll";
+import OfferScrollBar from "../layout/OfferScrollBar";
 
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
@@ -37,23 +40,23 @@ const badgeMap = {
 };
 
 const categoryMeta = {
-  "All":         { image: [cate1], icon: "🛍️", color: "#820c0c" },
-  "Supplements": { image: [cate2], icon: "💊", color: "#7c3aed" },
-  "Vitamins":    { image: [cate3], icon: "🧬", color: "#0369a1" },
-  "Protein":     { image: [cate4], icon: "💪", color: "#b45309" },
-  "Skincare":    { image: [cate5], icon: "✨", color: "#be185d" },
+  "Energy & vitality":         { image: [cate1], icon: "🛍️", color: "#820c0c" },
+  "Diabetics Wellness": { image: [cate2], icon: "💊", color: "#7c3aed" },
+  "Cardiac Wellness":    { image: [cate3], icon: "🧬", color: "#0369a1" },
+  "Brain Wellness":     { image: [cate4], icon: "💪", color: "#b45309" },
+  "Daily Wellness":    { image: [cate5], icon: "✨", color: "#be185d" },
 };
 
 const products = [
-  { id: 1,  name: "Cherry Iron Supplement",    category: "Supplements", description: "Iron-rich supplement to support .", price: 299, originalPrice: 499, rating: 4.5, reviews: 128, badge: "New Launches", tags: ["Iron-Rich","Energy"],   images: [bottle,bottle1] },
-  { id: 2,  name: "Daily Multivitamin Tablets", category: "Vitamins",    description: "Complete multivitamin for immunity",   price: 449, originalPrice: 699, rating: 5,   reviews: 210, badge: "Top Rated",  tags: ["Immunity","Daily Use"], images: [bottle,bottle1] },
-  { id: 3,  name: "Protein Nutrition Powder",  category: "Protein",     description: "High-quality protein blend for ",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Hot Seller",    tags: ["Muscle","Recovery"],   images: [bottle,bottle1] },
-  { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Supplements", description: "Supports heart health and brain",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Must Try!", tags: ["Heart","Brain"],       images: [bottle,bottle1] },
-  { id: 5,  name: "Herbal Skin Cleanser",      category: "Skincare",    description: "Gentle herbal cleanser that refreshes skin .", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "Limited Stock",        tags: ["Herbal","Gentle"],     images: [bottle,bottle1] },
+  { id: 1,  name: "Cherry Iron Supplement",    category: "Diabetics Wellness", description: "Iron-rich supplement to support .", price: 299, originalPrice: 499, rating: 4.5, reviews: 128, badge: "New Launches", tags: ["Iron-Rich","Energy"],   images: [bottle,bottle1] },
+  { id: 2,  name: "Daily Multivitamin Tablets", category: "Cardiac Wellness",    description: "Complete multivitamin for immunity",   price: 449, originalPrice: 699, rating: 5,   reviews: 210, badge: "Top Rated",  tags: ["Immunity","Daily Use"], images: [bottle,bottle1] },
+  { id: 3,  name: "Protein Nutrition Powder",  category: "Brain Wellness",     description: "High-quality protein blend for ",          price: 599, originalPrice: 899, rating: 4.2, reviews: 96,  badge: "Hot Seller",    tags: ["Muscle","Recovery"],   images: [bottle,bottle1] },
+  { id: 4,  name: "Omega-3 Fish Oil Capsules", category: "Diabetics Wellness", description: "Supports heart health and brain",     price: 399, originalPrice: 599, rating: 4.8, reviews: 180, badge: "Must Try!", tags: ["Heart","Brain"],       images: [bottle,bottle1] },
+  { id: 5,  name: "Herbal Skin Cleanser",      category: "Daily Wellness",    description: "Gentle herbal cleanser that refreshes skin .", price: 349, originalPrice: 499, rating: 4.1, reviews: 74,  badge: "Limited Stock",        tags: ["Herbal","Gentle"],     images: [bottle,bottle1] },
 
 ];
 
-const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
+const categories = ["Energy & vitality", ...Array.from(new Set(products.map(p => p.category)))];
 
 
 
@@ -254,7 +257,7 @@ const DesktopSidebar = ({ selectedCategory, setSelectedCategory }) => {
         {categories.map(cat => {
           const meta = categoryMeta[cat];
           const isActive = selectedCategory === cat;
-          const count = cat === "All" ? totalProducts : products.filter(p => p.category === cat).length;
+          const count = cat === "Energy & vitality" ? totalProducts : products.filter(p => p.category === cat).length;
           
           return (
             <button
@@ -377,7 +380,7 @@ const MobileCategoryDrawer = ({ selectedCategory, setSelectedCategory, onClose }
           {categories.map(cat => {
             const meta = categoryMeta[cat];
             const isActive = selectedCategory === cat;
-            const count = cat === "All" ? products.length : products.filter(p => p.category === cat).length;
+            const count = cat === "Energy & vitality" ? products.length : products.filter(p => p.category === cat).length;
             return (
               <button key={cat} onClick={() => { setSelectedCategory(cat); onClose(); }}
                 className="relative rounded-2xl overflow-hidden cursor-pointer border-none h-24 transition-all duration-200 active:scale-95"
@@ -405,14 +408,14 @@ const MobileCategoryDrawer = ({ selectedCategory, setSelectedCategory, onClose }
 
 /* ── Main App ── */
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("Energy & vitality");
   const [sortBy, setSortBy] = useState("default");
   const [searchQuery, setSearchQuery] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const filtered = useMemo(() => {
     let list = products.filter(p => {
-      if (selectedCategory !== "All" && p.category !== selectedCategory) return false;
+      if (selectedCategory !== "Energy & vitality" && p.category !== selectedCategory) return false;
       if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       return true;
     });
@@ -440,7 +443,7 @@ export default function App() {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-rose-50">
 
         <Banner/>
-
+<OfferScrollBar/>
         {/* ── Sticky Toolbar ── */}
         <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
           <div className="max-w-screen-xl mx-auto px-3 sm:px-5 py-2.5 flex items-center gap-2">
@@ -473,7 +476,8 @@ export default function App() {
             </select>
           </div>
         </div>
-<ShopPageBanner/>
+{/* <ShopPageBanner/> */}
+<FirstBanner/>
 
         {/* ── Mobile Category Drawer ── */}
         {drawerOpen && (
@@ -511,7 +515,7 @@ export default function App() {
                 <span className="text-xl">{activeMeta?.icon}</span>
                 <div>
                   <h2 className="text-base sm:text-lg font-extrabold text-gray-900 leading-tight" style={{ fontFamily:"'Libre Baskerville',serif" }}>
-                    {selectedCategory === "All" ? "All Products" : selectedCategory}
+                    {selectedCategory === "Energy & vitality" ? "Energy & vitality Products" : selectedCategory}
                   </h2>
                   <p className="text-[10px] sm:text-xs text-gray-400">{filtered.length} product{filtered.length !== 1 ? "s" : ""} available</p>
                 </div>
@@ -524,7 +528,7 @@ export default function App() {
                 <div className="text-5xl mb-4">🔍</div>
                 <h3 className="text-base font-bold text-gray-700 mb-1">No products found</h3>
                 <p className="text-sm text-gray-400 mb-5">Try a different category or search term</p>
-                <button onClick={() => { setSelectedCategory("All"); setSearchQuery(""); }}
+                <button onClick={() => { setSelectedCategory("Energy & vitality"); setSearchQuery(""); }}
                   className="px-5 py-2.5 rounded-xl text-white font-bold text-sm border-none cursor-pointer"
                   style={{ background:`linear-gradient(135deg,${BRAND},${ACCENT})` }}>
                   View All
