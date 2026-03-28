@@ -84,7 +84,7 @@ export default function Register() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f5ede8] flex items-center justify-center p-4 lg:p-8" >
+    <div className="min-h-screen bg-[#fff] flex items-center justify-center p-4 lg:p-8" >
       <style>{`
         @keyframes slideUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
         .slide-up { animation: slideUp 0.55s cubic-bezier(0.16,1,0.3,1) both; }

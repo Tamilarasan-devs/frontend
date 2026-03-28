@@ -71,8 +71,7 @@ export default function CartPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;600;700;800&display=swap');
-        * { font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
+       
         @keyframes slideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
         @keyframes fadeOut { from { opacity:1; transform:scale(1); } to { opacity:0; transform:scale(.95); } }
         @keyframes popIn   { 0%{transform:scale(.8);opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1);opacity:1} }
@@ -80,13 +79,13 @@ export default function CartPage() {
         .card-out { animation: fadeOut .35s ease forwards; }
         .pop-in   { animation: popIn .4s cubic-bezier(.22,.68,0,1.3) both; }
         ::-webkit-scrollbar { width:4px; }
-        ::-webkit-scrollbar-thumb { background:#e0d6d6; border-radius:99px; }
+        ::-webkit-scrollbar-thumb { background:#ffff; border-radius:99px; }
       `}</style>
 
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-rose-50">
+      <div className="min-h-screen bg-white to-rose-50">
 
         {/* ── Navbar ── */}
-        <nav className="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
+        <nav className="sticky top-0 z-30 bg-white backdrop-blur border-b border-gray-100 shadow-sm">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-xl flex items-center justify-center text-white font-black text-sm shadow"
