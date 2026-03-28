@@ -2,6 +2,7 @@ import { useState } from "react";
 import pure from '../assets/images/pure.jpeg'
 import health from '../assets/images/health.jpeg'
 import safe from '../assets/images/safe.jpeg'
+import ht from '../assets/images/ht.jpeg'
 // ─── Add this to your global CSS / index.css ───────────────────────────────
 // @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
@@ -50,7 +51,7 @@ const cards = [
   {
     title: "Trusted Quality",
     desc: "Manufactured under strict quality standards ensuring purity, safety, and consistency.",
-    image: "https://cdn.labmanager.com/assets/image/54181/6-cs-of-lab-quality-s.webp",
+    image: ht,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
@@ -206,13 +207,16 @@ export default function OurBusiness() {
 
         {/* ── Heading ── */}
         <h2
-          className="text-center text-4xl font-extrabold tracking-tight text-[#820c0c] mb-2"
+          className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-2"
         
         >
           WHAT WE DO
         </h2>
-        <p className="text-center text-slate-500 text-xl mb-3 font-semibold">
-          Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support. Maintain strict quality standards in production
+        <p className="text-center text-[#c9643a] text-xl mb-3 font-semibold">
+          Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support. 
+        </p>
+        <p className="text-center text-[#c9643a] text-xl mb-3 font-semibold">
+          Maintain strict quality standards in production
 Provide safe and effective wellness solutions
         </p>
 

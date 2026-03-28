@@ -74,11 +74,13 @@ export default function FeaturesSection() {
           {/* ── Section Heading ── */}
           <div className="text-center mb-12">
             <p
-              className="text-3xl font-bold uppercase tracking-widest font-bold mb-2"
+              className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-2"
               style={{ color: "#c9643a" }}
             >
               Why Choose Us
             </p>
+
+  
             <h2
               className="text-3xl font-bold"
               style={{ color: "#820c0c", fontFamily: "'Georgia', serif" }}

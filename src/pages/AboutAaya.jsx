@@ -1,11 +1,6 @@
-// About Aayubakwath — Editorial Organic Redesign
-// Drop-in replacement; assumes Reveal & Divider are available globally.
-// Google Fonts loaded via <link> in your index.html:
-//   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
 import React, { useRef, useEffect, useState } from "react";
 
-/* ─── tiny inline Reveal (remove if you already have one) ─── */
+/* ─── Reveal animation ─── */
 function Reveal({ children, delay = 0, className = "" }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -23,8 +18,8 @@ function Reveal({ children, delay = 0, className = "" }) {
       className={className}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.75s ease ${delay}s, transform 0.75s ease ${delay}s`,
+        transform: visible ? "translateY(0)" : "translateY(32px)",
+        transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
       }}
     >
       {children}
@@ -32,31 +27,28 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-/* ─── pill label ─── */
+/* ─── Pill label ─── */
 function Pill({ children }) {
   return (
-    <span style={{
-      display: "inline-block",
-      padding: "3px 14px",
-      borderRadius: "999px",
-      border: "1px solid #c9643a55",
-      color: "#c9643a",
-      fontSize: "0.72rem",
-      letterSpacing: "0.14em",
-      textTransform: "uppercase",
-      fontWeight: 500,
-    }}>
+    <span className="inline-block px-4 py-1 rounded-full border border-[#c9643a55] text-[#c9643a] text-xs font-semibold tracking-widest uppercase">
       {children}
     </span>
   );
 }
 
-/* ─── decorative leaf SVG ─── */
-const LeafSVG = ({ style }) => (
-  <svg viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg" style={style}>
+/* ─── Decorative Leaf SVG ─── */
+const LeafSVG = ({ className, style }) => (
+  <svg
+    viewBox="0 0 80 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    style={style}
+  >
     <path
       d="M40 115 C40 115 8 80 8 45 C8 20 22 5 40 5 C58 5 72 20 72 45 C72 80 40 115 40 115Z"
-      fill="url(#leafGrad)" opacity="0.18"
+      fill="url(#leafGrad)"
+      opacity="0.18"
     />
     <line x1="40" y1="110" x2="40" y2="15" stroke="#820c0c" strokeWidth="0.8" strokeDasharray="3 4" opacity="0.35" />
     <defs>
@@ -68,7 +60,7 @@ const LeafSVG = ({ style }) => (
   </svg>
 );
 
-/* ─── main section ─── */
+/* ─── Main Section ─── */
 export default function AboutAayubakwath() {
   const blocks = [
     {
@@ -96,126 +88,115 @@ export default function AboutAayubakwath() {
 
   return (
     <section
+      className="relative overflow-hidden px-6 py-24 md:py-32"
       style={{
         background: "linear-gradient(160deg, #fdf8f3 0%, #fef4eb 60%, #fdf0e6 100%)",
-        padding: "96px 24px",
-        position: "relative",
-        overflow: "hidden",
-        
       }}
     >
-      {/* ── background decoration ── */}
-      <LeafSVG style={{
-        position: "absolute", top: "-30px", right: "-10px",
-        width: "220px", opacity: 0.6, pointerEvents: "none",
-      }} />
-      <LeafSVG style={{
-        position: "absolute", bottom: "0px", left: "-20px",
-        width: "160px", opacity: 0.4, transform: "scaleX(-1) rotate(15deg)",
-        pointerEvents: "none",
-      }} />
+      {/* ── Background Leaf Decorations ── */}
+      <LeafSVG
+        className="absolute pointer-events-none"
+        style={{ top: "-30px", right: "-10px", width: "240px", opacity: 0.55 }}
+      />
+      <LeafSVG
+        className="absolute pointer-events-none"
+        style={{
+          bottom: "0px",
+          left: "-20px",
+          width: "180px",
+          opacity: 0.35,
+          transform: "scaleX(-1) rotate(15deg)",
+        }}
+      />
 
-      <div style={{ maxWidth: "960px", margin: "0 auto", position: "relative" }}>
+      <div className="relative max-w-5xl mx-auto">
 
         {/* ── HEADER ── */}
-        <Reveal className="about-header" style={{ textAlign: "center", marginBottom: "72px" }}>
-          <div style={{ textAlign: "center", marginBottom: "72px" }}>
-            <Pill>Who We Are</Pill>
-            <h2 style={{
-              
-              fontSize: "clamp(2.8rem, 7vw, 5rem)",
-              fontWeight: 600,
-              lineHeight: 1.08,
-              margin: "20px 0 0",
-              background: "linear-gradient(135deg, #820c0c 0%, #c9643a 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              letterSpacing: "-0.02em",
-            }}>
+        <Reveal>
+          <div className="text-center mb-20">
+            {/* Decorative top line */}
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9643a]" />
+              <span className="text-[#c9643a] text-sm font-semibold tracking-[0.2em] uppercase">
+                Who We Are
+              </span>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9643a]" />
+            </div>
+
+            <h2
+              className="font-bold text-[#820c0c] leading-tight"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)", letterSpacing: "-0.02em" }}
+            >
               About Aayubakwath
             </h2>
-            <p style={{
-              color: "#a07060",
-              fontSize: "1rem",
-              fontWeight: 300,
-              letterSpacing: "0.06em",
-              marginTop: "10px",
-            }}>
+
+            <p
+              className="mt-4 text-[#a07060] font-light tracking-widest"
+              style={{ fontSize: "clamp(0.9rem, 2vw, 1.05rem)" }}
+            >
               Rooted in nature · Guided by science
             </p>
           </div>
         </Reveal>
 
         {/* ── BLOCKS ── */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+        <div className="flex flex-col">
           {blocks.map((b, i) => (
             <Reveal key={i} delay={0.12 * i}>
               <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "80px 1fr",
-                  gap: "32px",
-                  padding: "48px 0",
-                  borderBottom: i < blocks.length - 1 ? "1px solid #e8d5c4" : "none",
-                  alignItems: "start",
-                }}
+                className={`grid gap-8 md:gap-12 py-12 md:py-16 ${
+                  i < blocks.length - 1 ? "border-b border-[#e8d5c4]" : ""
+                }`}
+                style={{ gridTemplateColumns: "88px 1fr", alignItems: "start" }}
               >
-                {/* left column */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-                  <span style={{
-                    
-                    fontStyle: "italic",
-                    fontSize: "0.8rem",
-                    color: "#c9643a",
-                    letterSpacing: "0.1em",
-                    opacity: 0.7,
-                  }}>
+                {/* ── Left Column ── */}
+                <div className="flex flex-col items-center gap-3">
+                  <span
+                    className="italic text-[#c9643a] font-medium tracking-widest"
+                    style={{ fontSize: "0.8rem", opacity: 0.75 }}
+                  >
                     {b.num}
                   </span>
-                  <div style={{
-                    width: "52px",
-                    height: "52px",
-                    borderRadius: "14px",
-                    background: "linear-gradient(135deg, #820c0c, #c9643a)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "1.4rem",
-                    boxShadow: "0 8px 24px #820c0c28",
-                  }}>
+
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+                    style={{
+                      background: "linear-gradient(135deg, #820c0c, #c9643a)",
+                      boxShadow: "0 10px 28px #820c0c30",
+                    }}
+                  >
                     {b.icon}
                   </div>
+
                   {i < blocks.length - 1 && (
-                    <div style={{
-                      width: "1px",
-                      height: "56px",
-                      background: "linear-gradient(to bottom, #c9643a55, transparent)",
-                    }} />
+                    <div
+                      className="w-px"
+                      style={{
+                        height: "64px",
+                        background: "linear-gradient(to bottom, #c9643a55, transparent)",
+                      }}
+                    />
                   )}
                 </div>
 
-                {/* right column */}
-                <div style={{ paddingTop: "4px" }}>
+                {/* ── Right Column ── */}
+                <div className="pt-1">
                   <Pill>{b.label}</Pill>
-                  <h3 style={{
-                    
-                    fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
-                    fontWeight: 600,
-                    color: "#3a1a10",
-                    margin: "10px 0 14px",
-                    lineHeight: 1.2,
-                    letterSpacing: "-0.01em",
-                  }}>
+
+                  <h3
+                    className="font-bold text-[#3a1a10] mt-4 mb-4 leading-snug"
+                    style={{
+                      fontSize: "clamp(1.5rem, 3.2vw, 2.1rem)",
+                      letterSpacing: "-0.015em",
+                    }}
+                  >
                     {b.heading}
                   </h3>
-                  <p style={{
-                    color: "#6b4c3b",
-                    lineHeight: 1.85,
-                    fontSize: "1rem",
-                    fontWeight: 300,
-                    maxWidth: "620px",
-                  }}>
+
+                  <p
+                    className="text-[#5c3828] font-semibold  leading-relaxed max-w-2xl"
+                    style={{ fontSize: "clamp(1rem, 1.8vw, 1.1rem)", lineHeight: "1.9" }}
+                  >
                     {b.body}
                   </p>
                 </div>
@@ -226,27 +207,17 @@ export default function AboutAayubakwath() {
 
         {/* ── BOTTOM TAGLINE ── */}
         <Reveal delay={0.5}>
-          <div style={{
-            marginTop: "64px",
-            padding: "36px 40px",
-            borderRadius: "20px",
-            background: "linear-gradient(135deg, #820c0c08, #c9643a12)",
-            border: "1px solid #c9643a28",
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-            flexWrap: "wrap",
-          }}>
-            <span style={{ fontSize: "2rem" }}>🌱</span>
-            <p style={{
-              
-              fontSize: "clamp(1.1rem, 2.5vw, 1.45rem)",
-              fontStyle: "italic",
-              color: "#820c0c",
-              fontWeight: 400,
-              lineHeight: 1.5,
-              margin: 0,
-            }}>
+          <div
+            className="mt-16 px-8 py-10 md:px-12 md:py-12 rounded-3xl border border-[#c9643a28] flex flex-wrap items-center gap-5"
+            style={{
+              background: "linear-gradient(135deg, #820c0c08, #c9643a14)",
+            }}
+          >
+            <span className="text-4xl">🌱</span>
+            <p
+              className="italic text-[#820c0c] font-medium leading-relaxed flex-1"
+              style={{ fontSize: "clamp(1.1rem, 2.4vw, 1.5rem)", minWidth: "240px" }}
+            >
               "Wellness isn't a product — it's a practice. We're here to support yours, every day."
             </p>
           </div>

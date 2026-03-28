@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import img from "../assets/images/banner1.jpg";
-import mission from '../assets/images/mission.jpg';
-import vision from '../assets/images/vission.jpg';
+import mission from '../assets/images/fam.jpeg';
+import vision from '../assets/images/oldpa.jpeg';
 import FeaturesSection from "./AboutCard";
 // import bnr from '../assets/images/bn.png';
 import img0 from '../assets/images/ourbegin.jpeg';
-import img1 from '../assets/images/cont.png';
-import img2 from '../assets/images/the.png';
-import img3 from '../assets/images/ com.png';
+import img1 from '../assets/images/nat.jpeg';
+import img2 from '../assets/images/resr.jpeg';
+import img3 from '../assets/images/resar.jpeg';
 import iconbc1 from "../assets/images/icon-bc1.svg";
 import iconbc2 from "../assets/images/icon-bc2.svg";
 import iconbc3 from "../assets/images/icon-bc3.svg";
@@ -172,6 +172,7 @@ const cards = [
 /* ═══════════════════════════════════════════════════════════ */
 export default function About() {
   const navigate = useNavigate()
+    const [visible, setVisible] = useState(false);
   return (
     <>
       <style>{`
@@ -260,7 +261,23 @@ export default function About() {
       ">
         About Us
       </h1>
-
+<h2
+        className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-10"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(-24px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+      >
+        About Us 
+        <span
+          className="block h-1 bg-[#c9643a] mx-auto mt-2 rounded-full"
+          style={{
+            width: visible ? "80px" : "0px",
+            transition: "width 0.8s ease 0.4s",
+          }}
+        ></span>
+      </h2>
     </div>
   </div>
 </section>
@@ -296,8 +313,8 @@ export default function About() {
                       {item.title}
                     </h2>
                     <span className="accent-bar" />
-                    <p className="text-gray-700 text-lg leading-relaxed">{item.p1}</p>
-                    <p className="text-gray-500 text-base leading-relaxed">{item.p2}</p>
+                    <p className="text-gray-800 text-lg font-semibold leading-relaxed">{item.p1}</p>
+                    <p className="text-gray-800 text-md font-semibold leading-relaxed">{item.p2}</p>
                   </div>
                 </div>
               </Reveal>
@@ -333,7 +350,7 @@ export default function About() {
             Our Mission
           </h2>
 
-          <p className="text-gray-600 mt-4 leading-relaxed">
+          <p className="text-gray-800 font-semibold  mt-4 leading-relaxed">
          At Aayubakwath, our mission is centered around three core values:
           </p>
         </div>
@@ -345,14 +362,14 @@ export default function About() {
         At Aayubakwath, our mission is centered around three core values:
         </h3>
 
-        <p className="text-gray-700 text-lg leading-relaxed mb-6">
+        <p className="text-gray-800 text-lg font-semibold leading-relaxed mb-6">
         Quality – Deliver premium health supplements made with carefully selected ingredients.
         </p>
 
-        <p className="text-gray-600 leading-relaxed mb-6">
+        <p className="text-gray-800 font-semibold  leading-relaxed mb-6">
  Trust – Build long-term trust with customers through transparency and reliability.
         </p>
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-gray-800 font-semibold  leading-relaxed">
 Wellness – Support healthier lifestyles through effective nutritional support.
 
         </p>
@@ -370,11 +387,11 @@ Wellness – Support healthier lifestyles through effective nutritional support.
           Shaping the Future of Herbal Wellness
         </h3>
 
-        <p className="text-gray-700 text-lg leading-relaxed mb-6">
+        <p className="text-gray-800  text-lg font-semibold leading-relaxed mb-6">
          Our vision is to become a trusted wellness brand in India and globally, known for providing reliable and high-quality nutritional supplements that support long-term health.
         </p>
 
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-gray-800 font-semibold  leading-relaxed">
          We strive to empower people with natural health solutions that help maintain energy, improve mental clarity, and support vital body functions.
         </p>
       </div>
@@ -396,7 +413,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
             Our Vision
           </h2>
 
-          <p className="text-gray-600 mt-4 leading-relaxed">
+          <p className="text-gray-800 font-semibold  mt-4 leading-relaxed">
             Providing safe, effective, and high-quality health supplements that support everyday health needs for individuals and families.
           </p>
         </div>
@@ -412,9 +429,9 @@ Wellness – Support healthier lifestyles through effective nutritional support.
           <div className="max-w-6xl mx-auto">
             <Reveal className="text-center mb-16">
               <Label text="What We Offer" />
-              <h2 className="display-font text-5xl font-bold gradient-text">Our Product Range</h2>
+              <h2 className=" text-2xl sm:text-3xl font-bold text-center gradient-text">Our Product Range</h2>
               <Divider />
-              <p className="text-gray-500 text-lg mt-2">Specialized formulations supporting key health areas</p>
+              <p className="text-gray-800 text-lg mt-2 font-semibold">Specialized formulations supporting key health areas</p>
             </Reveal>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -672,10 +689,10 @@ Wellness – Support healthier lifestyles through effective nutritional support.
                   Our Commitment<br />to Quality
                 </h2>
                 <span className="accent-bar mb-8 block" />
-                <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                <p className="text-gray-800 leading-relaxed text-md font-semibold mb-6">
                   We follow strict quality guidelines during sourcing, formulation, and manufacturing. Every batch is produced with hygiene, consistency, and care to ensure premium standards.
                 </p>
-                <p className="text-gray-600 mt-4 leading-relaxed">
+                <p className="text-gray-800 mt-4 leading-relaxed font-semibold">
   Providing safe, effective, and high-quality health supplements that support everyday health needs for individuals and families.
 </p>
                 
@@ -695,7 +712,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
                       <span className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-[#820c0c]/10 to-[#c9643a]/15 flex items-center justify-center text-[#820c0c] font-bold text-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <p className="text-gray-700 leading-relaxed pt-0.5">{item}</p>
+                      <p className="text-gray-800 leading-relaxed pt-0.5 font-semibold">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -770,7 +787,7 @@ function ProductCard({ icon, name, desc }) {
         {name}
       </h3>
       {/* Desc */}
-      <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+      <p className="text-gray-800 font-semibold text-md leading-relaxed">{desc}</p>
       {/* Bottom hover line */}
       <div
         className="absolute bottom-0 left-6 h-[2px] rounded-full bg-gradient-to-r from-[#820c0c] to-[#c9643a]"
