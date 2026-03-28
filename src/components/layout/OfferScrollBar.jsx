@@ -31,8 +31,8 @@ export default function OfferScrollBar() {
 
       <style>{`
         @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-25%); }
+          0%   { transform: translateX(-25%); }
+          100% { transform: translateX(0); }
         }
         .animate-marquee {
           animation: marquee 20s linear infinite;

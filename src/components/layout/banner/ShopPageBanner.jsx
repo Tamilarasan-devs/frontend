@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import banner from '../../../assets/images/banner1.jpeg'
-// import banner from '../../../assets/images/rewards_deskt÷op.webp'
+import React,{useState,useEffect,useRef} from 'react'
+import banner from '../../../assets/images/combo.jpeg'
 
-export default function FirstBanner() {
-  const [visible, setVisible] = useState(false);
+export default function ShopPageBanner() {
+   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {

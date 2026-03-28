@@ -22,6 +22,7 @@ import cate2 from '../../assets/images/allCate/cate2.jpeg'
 import cate3 from '../../assets/images/allCate/cate3.jpeg'
 import cate4 from '../../assets/images/allCate/cate4.jpeg'
 import cate5 from '../../assets/images/allCate/cate5.jpeg'
+import ShopPageBanner from "../layout/banner/ShopPageBanner";
 
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
@@ -472,7 +473,7 @@ export default function App() {
             </select>
           </div>
         </div>
-<FirstBanner/>
+<ShopPageBanner/>
 
         {/* ── Mobile Category Drawer ── */}
         {drawerOpen && (
