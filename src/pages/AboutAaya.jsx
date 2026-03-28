@@ -131,7 +131,7 @@ export default function AboutAayubakwath() {
             </h2>
 
             <p
-              className="mt-4 text-[#a07060] font-light tracking-widest"
+              className=" text-[#a07060] font-light tracking-widest"
               style={{ fontSize: "clamp(0.9rem, 2vw, 1.05rem)" }}
             >
               Rooted in nature · Guided by science

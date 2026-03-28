@@ -83,17 +83,17 @@ const products = [
   },
   {
     icon: "💚",
-    name: "Cholesterol Balance",
+    name: "Blood Cholesterol Balance",
     desc: "Promotes heart health and supports maintaining healthy cholesterol levels.",
   },
   {
     icon: "🧠",
-    name: "Brain Vitality Plus",
+    name: "Vitality Power Plus",
     desc: "Enhances focus, memory, and cognitive performance in adults.",
   },
   {
     icon: "👶",
-    name: "Brain Tonic for Kids",
+    name: "Brain Tonic",
     desc: "Supports memory, concentration, and cognitive development in children.",
   },
   {
@@ -128,8 +128,8 @@ const storyItems = [
   },
   {
     img: img3,
-    title: "Our Commitment",
-    sub: "QUALITY YOU CAN TRUST",
+    title: "Our Promise of purity",
+    sub: "Trustworthy standards",
     p1: "We are committed to providing high-quality supplements made with carefully selected ingredients.",
     p2: "Every product is developed to meet high standards of safety, effectiveness, and reliability.",
   },
@@ -428,8 +428,9 @@ Wellness – Support healthier lifestyles through effective nutritional support.
         <section className="py-28 px-6 bg-white leaf-bg">
           <div className="max-w-6xl mx-auto">
             <Reveal className="text-center mb-16">
-              <Label text="What We Offer" />
-              <h2 className=" text-2xl sm:text-3xl font-bold text-center gradient-text">Our Product Range</h2>
+              {/* <Label text="What We Offer" /> */}
+              <h2 className=" text-2xl sm:text-3xl font-bold text-center gradient-text mb-2">What We Offer</h2>
+              <h2 className=" text-2xl sm:text-3xl font-semibold text-center  text-black">Our Product Range</h2>
               <Divider />
               <p className="text-gray-800 text-lg mt-2 font-semibold">Specialized formulations supporting key health areas</p>
             </Reveal>

@@ -210,12 +210,12 @@ export default function OurBusiness() {
           className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-2"
         
         >
-          WHAT WE DO
+          What We Do
         </h2>
-        <p className="text-center text-[#c9643a] text-xl mb-3 font-semibold">
+        <p className="text-center text-[black] text-xl mb-3 font-semibold">
           Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support. 
         </p>
-        <p className="text-center text-[#c9643a] text-xl mb-3 font-semibold">
+        <p className="text-center text-[black] text-xl mb-3 font-semibold">
           Maintain strict quality standards in production
 Provide safe and effective wellness solutions
         </p>

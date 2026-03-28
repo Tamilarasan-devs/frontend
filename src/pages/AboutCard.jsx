@@ -75,17 +75,17 @@ export default function FeaturesSection() {
           <div className="text-center mb-12">
             <p
               className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-2"
-              style={{ color: "#c9643a" }}
+              style={{ color: "#820c0c" }}
             >
               Why Choose Us
             </p>
 
   
             <h2
-              className="text-3xl font-bold"
-              style={{ color: "#820c0c", fontFamily: "'Georgia', serif" }}
+              className="text-2xl font-semibold"
+              style={{ color: "black"}}
             >
-              Our <span style={{ color: "#c9643a" }}>Promises</span> to You
+              Our Promises to You
             </h2>
             <div className="flex items-center justify-center gap-2 mt-3">
               <div className="w-8 h-0.5 rounded-full" style={{ background: "#820c0c" }} />
