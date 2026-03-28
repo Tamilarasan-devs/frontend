@@ -6,10 +6,9 @@ import { useState } from "react";
 // ─── Card data ─────────────────────────────────────────────────────────────
 const cards = [
   {
-    title: "Ethical Business",
-    desc: "Highest integrity standards across all pharmaceutical operations and partnerships.",
-    // 👉 Replace with your own image path, e.g. import img1 from './assets/ethical.jpg'
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop",
+    title: "Pure Herbal Formulation",
+    desc: "Made with carefully selected natural ingredients, inspired by traditional herbal knowledge.",
+    image: "https://www.hopkinsmedicine.org/-/media/images/health/3_-wellness/integrative-medicine/essential-oils-teaser.jpg?h=260&iar=0&mh=260&mw=380&w=380&hash=37BC59D0A7736CCB0BBB26CD6235A7BF",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
@@ -19,9 +18,9 @@ const cards = [
     ),
   },
   {
-    title: "3rd Party Manufacturing",
-    desc: "GMP-certified contract manufacturing with expert quality control teams.",
-    image: "https://sigmasoftgel.in/wp-content/uploads/2022/09/Nutraceutical-PCD-Company-in-India-300x300.jpg",
+    title: "Daily Health Support",
+    desc: "Designed for everyday wellness needs and helps maintain overall body balance.",
+    image: "https://www.hindustantimes.com/ht-img/img/2025/12/24/550x309/doc_1766559186634_1766559190159.jpg",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
@@ -33,9 +32,9 @@ const cards = [
     ),
   },
   {
-    title: "PCD Pharma Franchise",
-    desc: "Exclusive franchise rights with a comprehensive product portfolio for growth.",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=400&fit=crop",
+    title: "Safe & Balanced Nutrition",
+    desc: "Gentle on the body for regular use and supports a healthy lifestyle naturally.",
+    image: "https://thumbs.dreamstime.com/b/healthy-lifestyle-concept-vegetarian-food-heart-diet-fitness-medicine-abstract-137482576.jpg",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
@@ -47,9 +46,9 @@ const cards = [
     ),
   },
   {
-    title: "Export Business",
-    desc: "Expanding global reach with products meeting international pharma standards.",
-    image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=400&h=400&fit=crop",
+    title: "Trusted Quality",
+    desc: "Manufactured under strict quality standards ensuring purity, safety, and consistency.",
+    image: "https://cdn.labmanager.com/assets/image/54181/6-cs-of-lab-quality-s.webp",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" strokeWidth="1.8"
            strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">

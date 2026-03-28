@@ -1,9 +1,12 @@
 import React from "react";
 
 const items = [
-  "60 Days Money Back Guarantee 🔥",
-  "🎉 Upto 51% OFF + EXTRA 10% OFF Above 2999",
-  "💳 Secure Payment Available",
+  "🔒 100% Secure Checkout",
+  "🚀 Fast & Reliable Delivery",
+  "💥 Flat Discounts on All Products",
+  "🎉 Extra Savings on Bulk Orders",
+  "🔁 Easy Returns & Money Back Guarante",
+  "🌿 100% Herbal & Safe Products"
 ];
 
 export default function OfferScrollBar() {

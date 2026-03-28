@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import bnr from '../assets/images/bn.png';
+import bnr from '../assets/images/bann2.jpeg'
 
 /* ─── DATA ─────────────────────────────────────── */
 const inputFields = [
@@ -98,14 +98,37 @@ export default function Dealership() {
       <div className="f-manrope min-h-screen" style={{background:"white"}}>
 
         {/* ══ HERO ══ */}
-        <section className="relative hero-clip overflow-hidden" style={{height:"70vh",minHeight:460}}>
-          <img src="https://i.pinimg.com/originals/39/01/b4/3901b48706ebcd24722f58ce760818b8.jpg" alt="Bulk Orders" className="hero-img w-full h-full object-cover" />
-          <div className="absolute inset-0"
-               style={{background:"linear-gradient(135deg,rgba(130,12,12,.82) 0%,rgba(0,0,0,.5) 50%,rgba(201,100,58,.35) 100%)"}} />
-          <div className="absolute inset-0 opacity-20"
-               style={{backgroundImage:"radial-gradient(circle,rgba(255,255,255,.6) 1px,transparent 1px)",backgroundSize:"28px 28px"}} />
-
-        </section>
+     <section className="relative w-full overflow-hidden">
+                      {/* Background image */}
+                      <div className="relative">
+                        <img
+                          src={bnr}
+                          alt="About Banner"
+                          loading="lazy"
+                          className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+                        />
+                    
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+                    
+                        {/* Content */}
+                        <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 text-white max-w-full sm:max-w-md md:max-w-lg">
+                          
+                          <h1 className="
+                            text-2xl 
+                            sm:text-3xl 
+                            md:text-4xl 
+                            lg:text-5xl 
+                            font-bold 
+                            mb-2 sm:mb-3 md:mb-4 
+                            text-[#820c0c]
+                          ">
+                           Bulk Order 
+                          </h1>
+                    
+                        </div>
+                      </div>
+                    </section>
 
         {/* ══ MARQUEE ══ */}
         <div className="overflow-hidden py-3" style={{background:"var(--red)"}}>

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import bnr from "../../../assets/images/bnr-1.webp";
 import iconbc1 from "../../../assets/images/icon-bc1.svg";
 import iconbc2 from "../../../assets/images/icon-bc2.svg";
 import iconbc3 from "../../../assets/images/icon-bc3.svg";
@@ -9,31 +8,30 @@ export default function SecondBanner() {
   const data = [
     {
       icon: iconbc1,
-      name: "Milk Is Our Signature Ingredient",
+      name: "Preservative Free",
       category:
-        "Our products are made with the goodness of Goat Milk, Rice Milk, Oat Milk, Almond Milk & Soy Milk.",
+        "No artificial preservatives added. Maintains natural purity and is safe for daily use.",
     },
     {
       icon: iconbc2,
-      name: "Plant-Based Actives",
+      name: "GMO Free",
       category:
-        "Our advanced formulations are infused with plant-derived actives that are safe & gentle for everyone.",
+        "Made with non-GMO ingredients. No genetic modification, ensuring a pure and natural formulation.",
     },
     {
       icon: iconbc3,
-      name: "FDA-Approved Lab",
+      name: "Gluten Free",
       category:
-        "Our in-house R&D experts build powerful, world-class formulations that are gentle on all skin types.",
+        "Completely free from gluten. Suitable for gluten-sensitive individuals and gentle on digestion.",
     },
     {
       icon: iconbc4,
-      name: "Cruelty-Free",
+      name: "No Added Sugar",
       category:
-        "Our products are responsibly made, ethically created, and never tested on animals.",
+        "Contains no added sugar. Supports healthy lifestyle choices with a naturally balanced formulation.",
     },
   ];
 
-  // --- Animation state ---
   const sectionRef = useRef(null);
   const [headingVisible, setHeadingVisible] = useState(false);
   const [cardVisible, setCardVisible] = useState([false, false, false, false]);
@@ -60,13 +58,9 @@ export default function SecondBanner() {
     if (sectionRef.current) obs.observe(sectionRef.current);
     return () => obs.disconnect();
   }, []);
-  // --- End animation state ---
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-16 px-6 bg-cover bg-center"
-    >
+    <section ref={sectionRef} className="py-16 px-6 bg-cover bg-center">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
@@ -79,7 +73,7 @@ export default function SecondBanner() {
           }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Grounded In Nature, Growing With Science
+            Pure, Clean & Conscious Choices
           </h2>
         </div>
 
@@ -102,8 +96,11 @@ export default function SecondBanner() {
                 className="flex justify-center mb-4"
                 style={{
                   opacity: cardVisible[index] ? 1 : 0,
-                  transform: cardVisible[index] ? "scale(1) rotate(0deg)" : "scale(0.6) rotate(-15deg)",
-                  transition: `opacity 0.5s ease ${0.15}s, transform 0.5s cubic-bezier(.22,.68,0,1.4) ${0.15}s`,
+                  transform: cardVisible[index]
+                    ? "scale(1) rotate(0deg)"
+                    : "scale(0.6) rotate(-15deg)",
+                  transition:
+                    "opacity 0.5s ease 0.15s, transform 0.5s cubic-bezier(.22,.68,0,1.4) 0.15s",
                 }}
               >
                 <img

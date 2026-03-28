@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import bnr from '../assets/images/bann2.jpeg'
 // const FONT = `@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');`;
 
 const CSS = `
@@ -371,6 +371,37 @@ export default function ContactPage() {
 
 
       {/* Hero */}
+       <section className="relative w-full overflow-hidden">
+                        {/* Background image */}
+                        <div className="relative">
+                          <img
+                            src={bnr}
+                            alt="About Banner"
+                            loading="lazy"
+                            className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+                          />
+                      
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+                      
+                          {/* Content */}
+                          <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 text-white max-w-full sm:max-w-md md:max-w-lg">
+                            
+                            <h1 className="
+                              text-2xl 
+                              sm:text-3xl 
+                              md:text-4xl 
+                              lg:text-5xl 
+                              font-bold 
+                              mb-2 sm:mb-3 md:mb-4 
+                              text-[#820c0c]
+                            ">
+                             Contact 
+                            </h1>
+                      
+                          </div>
+                        </div>
+                      </section>
       <section className="ct-hero">
         <div className="ct-hero-left">
           {/* <div className="ct-eye ct-a0">

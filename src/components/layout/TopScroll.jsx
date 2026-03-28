@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 
 export default function TopScroll() {
   const messages = [
-    "Product Of The Month : Milk Mud Mask | Use code HURRY20 & Get FLAT 20% OFF",
-    "☀️ Your Newest Summer Obsession : Skin Finish Sunscreen SPF 50+ PA+++",
+    "Mix Any 2 Products | Get Up to 30% Off",
+    "Hurry! Free Delivery on Orders Above ₹999",
+    "Subscribe & Get Exclusive 10% Off ",
+    "Wellness Combo | Buy 3, Get 1 Free"
   ];
 
   const [index, setIndex] = useState(0);
