@@ -36,7 +36,7 @@ export default function Home() {
         <CategoryList/>
         <ProductGrid/>
         <FirstBanner/>
-<GridBanner/>
+{/* <GridBanner/> */}
 <VideoPage/>
         <TopSelling/>
         {/* <TwoSideBanner/>
