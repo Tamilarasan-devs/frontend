@@ -3,6 +3,7 @@ import iconbc1 from "../../../assets/images/icon-bc1.svg";
 import iconbc2 from "../../../assets/images/icon-bc2.svg";
 import iconbc3 from "../../../assets/images/icon-bc3.svg";
 import iconbc4 from "../../../assets/images/icon-bc4.svg";
+import ShopPageBanner from "./ShopPageBanner";
 
 export default function SecondBanner() {
   const data = [
@@ -61,6 +62,7 @@ export default function SecondBanner() {
 
   return (
     <section ref={sectionRef} className="py-16 px-6 bg-cover bg-center">
+      <ShopPageBanner/>
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef ,useState} from "react";
 // import bnnr1 from "../../assets/images/bnnr1.avif";
 // import bnnr2 from "../../assets/images/bnnr2.avif";
 // import bnnr3 from "../../assets/images/bnnr3.avif";
@@ -16,6 +16,8 @@ import bnr8 from '../../assets/images/banners/bnr8.jpeg'
 import bnr9 from '../../assets/images/banners/bnr9.jpeg'
 import bnr10 from '../../assets/images/banners/bnr10.jpeg'
 import bnr11 from '../../assets/images/banners/bnr11.jpeg'
+
+import { axiosInstance } from "../../utils/axiosInstance";
 export default function Banner() {
   const containerRef = useRef(null);
 
@@ -56,18 +58,39 @@ export default function Banner() {
   ,bnr4,bnr5
   ,bnr6,bnr7,bnr8,bnr9,bnr10,bnr11
   ];
-  const allImages = [...images, ...images];
+  const [banners, setBanners] = useState([])
+  const [loading, setLoading] = useState(true)
+  const allImages = [...banners, ...banners];
+// console.log('ALL :',allImages)
 
+
+  // Fetch banners
+  const getBanners = async () => {
+    try {
+      const res = await axiosInstance.get('/homeBanner/getAllHomeBanner')
+      setBanners(res.data.data || [])
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getBanners()
+  }, [])
   return (
-    <div ref={containerRef} className="flex overflow-hidden w-full">
+    <div ref={containerRef} className="flex overflow-hidden w-full gap-1 ">
       {allImages.map((img, index) => (
-        <img
-          key={index}
-          src={img}
-          alt={`Banner ${index + 1}`}
-          className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover"
-        />
-      ))}
+  <img
+    key={index}
+    // src={img}
+    src={`https://aayubakwath-backend.onrender.com/${img.homeBanner}`}
+    // src={`http://localhost:8080/${img.homeBanner}`}
+    alt={`Banner ${index + 1}`}
+    className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover rounded-lg"
+  />
+))}
     </div>
   );
 }

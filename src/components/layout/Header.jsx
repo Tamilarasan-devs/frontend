@@ -5,79 +5,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaUser, FaSearch, FaTimes, FaBars } from "react-icons/fa";
 
-/* ─────────────────────────────────────────────────────────────────────
-   FONTS + KEYFRAMES  (only things Tailwind can't do)
-───────────────────────────────────────────────────────────────────── */
-const FontLoader = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-    .font-cinzel    { font-family: 'Cinzel', serif; }
-    .font-cormorant { font-family: 'Cormorant Garamond', serif; }
-    .font-dm        { font-family: 'DM Sans', sans-serif; }
-
-    /* ribbon scroll */
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .marquee-track { animation: marquee 26s linear infinite; }
-
-    /* logo shine */
-    @keyframes shine {
-      0%,100% { opacity: 0; left: -60%; }
-      50%      { opacity: 1; left: 110%; }
-    }
-    .logo-shine { animation: shine 5s ease-in-out infinite; }
-
-    /* dropdown */
-    @keyframes dropIn {
-      from { opacity: 0; transform: translateY(-6px) scale(.97); }
-      to   { opacity: 1; transform: translateY(0)   scale(1);   }
-    }
-    .anim-drop { animation: dropIn .2s cubic-bezier(.4,0,.2,1) forwards; }
-
-    /* mobile panel */
-    @keyframes panelDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .anim-panel { animation: panelDown .25s cubic-bezier(.4,0,.2,1) forwards; }
-
-    /* desktop active bar slide-in */
-    @keyframes lineSlide {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
-    .active-bar {
-      animation: lineSlide .35s cubic-bezier(.4,0,.2,1) forwards;
-      transform-origin: center;
-    }
-
-    /* pulsing dot */
-    @keyframes dotPulse {
-      0%,100% { transform: translate(-50%, 0) scale(1);   opacity: 1; }
-      50%      { transform: translate(-50%, 0) scale(1.7); opacity: 0.4; }
-    }
-    .active-dot { animation: dotPulse 2.2s ease-in-out infinite; }
-
-    /* desktop inactive hover underline */
-    .nav-hover { position: relative; }
-    .nav-hover::after {
-      content: '';
-      position: absolute; bottom: -2px; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, #c9a84c, #e8d48a, #c9a84c);
-      transform: scaleX(0); transform-origin: center;
-      transition: transform .28s cubic-bezier(.4,0,.2,1);
-    }
-    .nav-hover:hover::after { transform: scaleX(1); }
-
-    /* expandable search */
-    .srch { width: 0; opacity: 0; overflow: hidden;
-            transition: width .35s cubic-bezier(.4,0,.2,1), opacity .28s; }
-    .srch.open { width: 170px; opacity: 1; }
-  `}</style>
-);
 
 /* ─── Gold vertical divider ──────────────────────────────────────────── */
 const VDivider = () => (
@@ -234,7 +161,7 @@ export default function Header() {
           <VDivider />
 
           {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
+          <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center">
             {navLinks.map((link, i) => (
               <React.Fragment key={link.href}>
                 {i > 0 && (
@@ -249,23 +176,7 @@ export default function Header() {
           <VDivider />
 
           {/* DESKTOP ACTIONS */}
-          <div className="hidden lg:flex items-center gap-1.5 flex-shrink-0">
-
-            {/* Search */}
-            <div className="flex items-center" ref={searchRef}>
-              <input className={`srch font-dm text-[13px] bg-transparent outline-none
-                                 border-b pb-0.5 placeholder-[#bba070] ${searchOpen ? "open" : ""}`}
-                     style={{ borderBottomColor: "#c9a84c", color: "#1a0a0a" }}
-                     placeholder="Search…" />
-              <button onClick={() => setSearchOpen(v => !v)}
-                      className="w-9 h-9 rounded-full flex items-center justify-center
-                                 border border-transparent
-                                 hover:border-[#c9a84c] hover:bg-[rgba(201,168,76,0.08)]
-                                 transition-all duration-200 hover:-translate-y-0.5"
-                      style={{ color: "#8b0000" }}>
-                {searchOpen ? <FaTimes size={13} /> : <FaSearch size={13} />}
-              </button>
-            </div>
+          <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
 
             {/* Wishlist */}
             <a href="/wishlist"
@@ -390,17 +301,6 @@ export default function Header() {
                             onClick={() => setMobileOpen(false)} />
               ))}
             </nav>
-
-            {/* Search bar */}
-            <div className="mx-4 sm:mx-6 my-3.5 flex items-center gap-3 px-4 py-2.5
-                            rounded-xl bg-white"
-                 style={{ border: "1px solid rgba(201,168,76,0.3)" }}>
-              <FaSearch size={11} style={{ color: "#c9a84c", flexShrink: 0 }} />
-              <input className="flex-1 min-w-0 bg-transparent font-dm text-[13px]
-                                outline-none placeholder-[#bba070]"
-                     style={{ color: "#1a0a0a" }}
-                     placeholder="Search for products…" />
-            </div>
 
             {/* CTA row — equal thirds, no overflow */}
             <div className="grid grid-cols-3 gap-2.5 px-4 sm:px-6 pb-5">

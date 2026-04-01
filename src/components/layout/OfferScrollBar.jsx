@@ -1,43 +1,59 @@
-import React from "react";
-
-const items = [
-  "🔒 100% Secure Checkout",
-  "🚀 Fast & Reliable Delivery",
-  "💥 Flat Discounts on All Products",
-  "🎉 Extra Savings on Bulk Orders",
-  "🔁 Easy Returns & Money Back Guarante",
-  "🌿 100% Herbal & Safe Products"
-];
+import React, { useEffect, useState } from "react";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 export default function OfferScrollBar() {
-  // Repeat items 4x to ensure seamless looping at any screen width
-  const repeated = [...items, ...items, ...items, ...items];
+  const [offers, setOffers] = useState([]);
+  // console.log(offers)
+  const [loading, setLoading] = useState(true);
+
+  // Fetch offers from API
+  const getOffers = async () => {
+    try {
+      const res = await axiosInstance.get("/offerBar/getOfferBar");
+      // Assuming your API returns { data: [{ text: '...' }, ...] }
+      setOffers(res.data.data || []);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getOffers();
+  }, []);
+
+  // Repeat offers to make smooth scrolling
+  const repeated = [...offers, ...offers, ...offers, ...offers];
+
+  if (loading) return <div className="text-center py-4">Loading offers...</div>;
+  if (offers.length === 0)
+    return <div className="text-center py-4">No offers available</div>;
 
   return (
-    <>
-      <div className="w-full h-16  overflow-hidden py-2 group flex justify-center">
-        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
-          {repeated.map((text, i) => (
-            <span
-              key={i}
-              className="inline-flex items-center text-lg font-bold whitespace-nowrap  mr-4"
-            >
-                 <span className="mr-4 ">•</span> 
-               {text}
-            </span>
-          ))}
-        </div>
+    <div className="w-full h-16 overflow-hidden py-2 group flex justify-center">
+      <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+        {repeated.map((offer, i) => (
+          <span
+            key={i}
+            className="inline-flex items-center text-lg font-bold whitespace-nowrap mr-6 "
+          >
+            <span className="mr-2">•</span>
+            {offer.offerText}
+          </span>
+        ))}
       </div>
 
+      {/* Tailwind custom animation */}
       <style>{`
         @keyframes marquee {
-          0%   { transform: translateX(-25%); }
+          0% { transform: translateX(-25%); }
           100% { transform: translateX(0); }
         }
         .animate-marquee {
           animation: marquee 20s linear infinite;
         }
       `}</style>
-    </>
+    </div>
   );
 }

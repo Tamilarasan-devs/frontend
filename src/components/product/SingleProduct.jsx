@@ -3,24 +3,20 @@ import {
   Star, ShoppingCart, Heart, Share2, Shield, Truck, RefreshCw,
   ChevronDown, ChevronUp, Plus, Minus, Check, Leaf, Award, Zap
 } from "lucide-react";
-// import bottle from '../../assets/images/aaya.png'
-// import bottle1 from '../../assets/images/aaya-pro.png'
-// import bottle from '../../assets/images/bt.jpeg'
-// import bottle1 from '../../assets/images/bt.jpeg'
-
-
-
 import bottle from '../../assets/images/prod/pro5.jpeg'
 import bottle1 from '../../assets/images/prod/pro1.jpeg'
 import bottle3 from '../../assets/images/prod/pro2.jpeg'
 import bottle2 from '../../assets/images/prod/pro3.jpeg'
 import bottle5 from '../../assets/images/prod/pro4.jpeg'
+import { axiosInstance } from "../../utils/axiosInstance";
+import {useParams} from "react-router-dom"
+
 // ─── Constants ────────────────────────────────────────────────
 const BRAND = "#820c0c";
 const ACCENT = "#c9643a";
 
 // ─── Data ─────────────────────────────────────────────────────
-const product = {
+const productx = {
   name: "Quista Active Milk Masala",
   subtitle: "Premium Ayurvedic Wellness Blend",
   sku: "QMM-200G-001",
@@ -117,9 +113,9 @@ export default function SingleProduct() {
   const [addedToCart,  setAddedToCart]  = useState(false);
   const [activeTab,    setActiveTab]    = useState("description");
   const [zoomOrigin,   setZoomOrigin]   = useState("center center");
-
-  const v    = product.variants[variant];
-  const disc = Math.round(((v.originalPrice - v.price) / v.originalPrice) * 100);
+const [product,setProduct] = useState(null)
+  // const v    = product.variants[variant];
+  const disc = Math.round(((product?.originalPrice - product?.price) / product?.originalPrice) * 100);
 
   const handleAddToCart = () => {
     setAddedToCart(true);
@@ -136,6 +132,21 @@ useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   // ── Render ──────────────────────────────────────────────────
+
+const productId = useParams().id; // Assuming route is defined as /product/:id
+  const fetchData = async()=>{
+    try {
+      const res= await axiosInstance.get(`/product/getProductById/${productId}`)
+      console.log(res.data)
+      setProduct(res?.data?.data)
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[])
   return (
     <div className="bg-[#fff] min-h-screen text-gray-900 ">
 
@@ -163,12 +174,16 @@ useEffect(() => {
             className="relative rounded-2xl overflow-hidden bg-white border border-[#f0ece8] aspect-square shadow-md cursor-zoom-in"
             onMouseMove={handleMouseMove}
           >
-            <img
-              src={product.images[activeImg]}
-              alt={product.name}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-150"
-              style={{ transformOrigin: zoomOrigin }}
-            />
+        <img
+  src={
+    product?.productImages?.[activeImg]
+      ? `https://aayubakwath-backend.onrender.com/${product.productImages[activeImg]}`
+      // ? `http://localhost:8080/${product.productImages[activeImg]}`
+      : "/fallback.png"
+  }
+  alt="product"
+  className="w-full h-full object-cover"
+/>
 
             {/* Badge strip */}
             {/* <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10">
@@ -194,23 +209,31 @@ useEffect(() => {
         </div>
           </div>
 
-          {/* Thumbnails */}
-          <div className="flex gap-2.5">
-            {product.images.map((img, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveImg(i)}
-                className={[
-                  "w-[72px] h-[72px] rounded-xl overflow-hidden border-2 bg-white transition-all duration-200 flex-shrink-0",
-                  activeImg === i
-                    ? "border-[#820c0c] shadow-[0_0_0_3px_rgba(130,12,12,0.12)]"
-                    : "border-transparent hover:border-[#c9643a66]",
-                ].join(" ")}
-              >
-                <img src={img} alt="" className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
+       <div className="flex gap-2.5">
+  {product?.productImages?.map((img, i) => (
+    <button
+      key={i}
+      onClick={() => setActiveImg(i)}
+      className={[
+        "w-[72px] h-[72px] rounded-xl overflow-hidden border-2 bg-white transition-all duration-200 flex-shrink-0",
+        activeImg === i
+          ? "border-[#820c0c] shadow-[0_0_0_3px_rgba(130,12,12,0.12)]"
+          : "border-transparent hover:border-[#c9643a66]",
+      ].join(" ")}
+    >
+      <img
+  src={
+    img?.startsWith("http")
+      ? img
+      : `https://aayubakwath-backend.onrender.com/${img.replace(/^\/+/, "")}`
+      // : `http://localhost:8080/${img.replace(/^\/+/, "")}`
+  }
+  alt=""
+  className="w-full h-full object-cover"
+/>
+    </button>
+  ))}
+</div>
         </div>
 
         {/* ════════════════════════════════
@@ -220,26 +243,26 @@ useEffect(() => {
 
           {/* Title */}
           <h1 className="text-[28px] md:text-[30px] font-bold text-gray-900 leading-tight mb-1.5">
-            {product.name}
+            {product?.productName || "Product Name"}
           </h1>
-          <p className="text-lg font-semibold text-gray-500 mb-3.5">{product.subtitle}</p>
+          {/* <p className="text-lg font-semibold text-gray-500 mb-3.5">{product.subtitle}</p> */}
 
           {/* Rating row */}
-          <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-[#f0ece8] flex-wrap">
+          {/* <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-[#f0ece8] flex-wrap">
             <span className="font-extrabold text-[15px] text-gray-900">{product.rating}</span>
             <StarRow rating={product.rating} size={15} />
             <span className="text-[12.5px] text-gray-400">{product.reviews.toLocaleString()} reviews</span>
             <span className="ml-auto px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold border border-amber-200">
               ⚡ Only {product.stock} left
             </span>
-          </div>
+          </div> */}
 
           {/* Price block */}
           <div className="flex items-baseline gap-2.5 mb-4">
-            <span className="text-[32px] font-bold" style={{ color: BRAND }}>₹{v.price}</span>
-            <span className="text-base text-gray-400 line-through">₹{v.originalPrice}</span>
+            <span className="text-[32px] font-bold" style={{ color: BRAND }}>₹{product?.finalPrice}</span>
+            <span className="text-base text-gray-400 line-through">₹{product?.price}</span>
             <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-extrabold border border-emerald-200">
-              Save ₹{v.originalPrice - v.price}
+              Save ₹{product?.price && product?.finalPrice ? product.price - product.finalPrice : 0}
             </span>
           </div>
 
@@ -257,11 +280,11 @@ useEffect(() => {
           </div> */}
 
           {/* Short description */}
-          <p className="text-lg font-bold text-gray-500 leading-7 mb-4">{product.shortDesc}</p>
+          <p className="text-lg font-bold text-gray-500 leading-7 mb-4">{product?.productDescription}</p>
 
           {/* Highlights grid */}
           <div className="grid grid-cols-2 gap-2.5 mb-5">
-            {product.highlights.map(({ icon: Icon, text }) => (
+            {productx.highlights.map(({ icon: Icon, text }) => (
               <div
                 key={text}
                 className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white border border-[#f0ece8] text-[12.5px] font-bold text-gray-700 transition-colors hover:border-[#c9643a55]"
@@ -276,7 +299,7 @@ useEffect(() => {
           <p className="text-xs font-extrabold text-gray-700 tracking-widest uppercase mb-2">
             Capsule Quantity
           </p>
-          <div className="flex gap-2 mb-5">
+          {/* <div className="flex gap-2 mb-5">
             {product.variants.map((vv, i) => (
               <button
                 key={i}
@@ -291,7 +314,7 @@ useEffect(() => {
                 {vv.label}
               </button>
             ))}
-          </div>
+          </div> */}
 
           {/* Qty + Add to Cart */}
           <div className="flex gap-3 mb-3.5 items-stretch">
@@ -341,7 +364,7 @@ useEffect(() => {
             onMouseEnter={(e) => { e.currentTarget.style.background = BRAND; e.currentTarget.style.color = "#fff"; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = BRAND; }}
           >
-            Buy Now — ₹{v.price * qty}
+            Buy Now — ₹{product?.finalPrice * qty}
           </button>
 
           {/* Wishlist + Share + SKU */}
@@ -363,9 +386,9 @@ useEffect(() => {
               <Share2 size={15} /> Share
             </button>
 
-            <span className="ml-auto text-[11.5px] text-gray-400 font-semibold">
+            {/* <span className="ml-auto text-[11.5px] text-gray-400 font-semibold">
               SKU: {product.sku}
-            </span>
+            </span> */}
           </div>
 
           {/* Trust bar */}
@@ -411,7 +434,7 @@ useEffect(() => {
               style={activeTab === tab ? { borderBottomColor: BRAND } : {}}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              {tab === "reviews" && ` (${product.reviews_data.length})`}
+              {/* {tab === "reviews" && ` (${product.reviews_data.length})`} */}
             </button>
           ))}
         </div>
@@ -420,13 +443,13 @@ useEffect(() => {
         {activeTab === "description" && (
           <div className="max-w-[700px]">
             <p className="text-[19px] text-gray-700  text-lg leading-7 mb-5">
-              {product.shortDesc} Enriched with a carefully curated selection of traditional Ayurvedic herbs,
+              Enriched with a carefully curated selection of traditional Ayurvedic herbs,
               this blend has been trusted by generations for its ability to naturally enhance vitality.
             </p>
 
             <AccordionItem title="Key Benefits " >
               <ul className="flex flex-col gap-2 list-none p-0 m-0">
-                {product.benefits.map((b) => (
+                {productx.benefits.map((b) => (
                   <li key={b} className="flex gap-2 items-start  text-lg">
                     <Check size={14} style={{ color: BRAND }} className="mt-0.5  flex-shrink-0" />
                     {b}
@@ -436,7 +459,7 @@ useEffect(() => {
             </AccordionItem>
 
             <AccordionItem title="How to Use">
-              <p className="text-lg" >{product.howToUse}</p>
+              <p className="text-lg" >{productx.howToUse}</p>
             </AccordionItem>
 
             <AccordionItem title="Storage Instructions">
@@ -455,7 +478,7 @@ useEffect(() => {
             <p className="text-md text-gray-700 leading-7 mb-4">
               <strong className="text-gray-900 text-lg">Full Ingredient List:</strong>
               <br />
-              {product.ingredients}
+              {productx.ingredients}
             </p>
             <div
               className="rounded-xl p-4 mt-4"
@@ -476,11 +499,11 @@ useEffect(() => {
             <div className="flex items-center gap-6 mb-7 bg-white border border-[#f0ece8] rounded-2xl p-5 flex-wrap gap-y-4">
               <div className="text-center">
                 <div className="text-5xl font-bold leading-none mb-1" style={{ color: BRAND }}>
-                  {product.rating}
+                  {productx.rating}
                 </div>
-                <StarRow rating={product.rating} size={16} />
+                <StarRow rating={productx.xrating} size={16} />
                 <p className="text-xs text-gray-400 mt-1 font-semibold">
-                  {product.reviews.toLocaleString()} reviews
+                  {productx.reviews.toLocaleString()} reviews
                 </p>
               </div>
 
@@ -509,7 +532,7 @@ useEffect(() => {
 
             {/* Review cards */}
             <div className="flex flex-col gap-4">
-              {product.reviews_data.map((r, i) => (
+              {productx.reviews_data.map((r, i) => (
                 <div
                   key={i}
                   className="bg-white border border-[#f0ece8] rounded-2xl p-5"

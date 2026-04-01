@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import bnr from '../assets/images/bann2.jpeg'
-
+import { Helmet } from "react-helmet-async";
 const blogPosts = [
   {
     id: 1,
@@ -161,7 +161,10 @@ export default function BlogPage() {
       `}</style>
 
       <div className="blog-root min-h-screen" style={{ backgroundColor:'white' }}>
-
+<Helmet>
+  <title>Blog - Aayubakwath</title>
+  <meta name="description" content="Read the latest articles on health, wellness, lifestyle, and more at Aayubakwath Blog. Stay informed with expert insights, tips, and trends to live your best life." />
+</Helmet>
         {/* ── Hero Header ── */}
         {/* ══════════ HERO ══════════ */}
                 <section className="relative w-full overflow-hidden">

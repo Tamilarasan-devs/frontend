@@ -16,6 +16,7 @@ import {  useNavigate} from 'react-router-dom'
 import OurBusiness from "./AboutPage";
 import AboutAayubakwath from "./AboutAaya";
 import bnr from '../assets/images/bann2.jpeg'
+import { Helmet } from "react-helmet-async";
 
 /* ── useInView hook for scroll-triggered animations ── */
 function useInView(threshold = 0.15) {
@@ -233,6 +234,9 @@ export default function About() {
 
       <div className="about-page bg-[#fefbf6] text-gray-800 overflow-x-hidden">
 
+<Helmet>
+          <title>About Us - Aayubakwath</title>
+</Helmet>
         {/* ══════════ HERO ══════════ */}
       <section className="relative w-full overflow-hidden">
   {/* Background image */}

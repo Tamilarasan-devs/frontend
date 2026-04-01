@@ -1,50 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
-import pro from '../../assets/images/grp.webp'
-import pro1 from '../../assets/images/grp2.webp'
-import pro2 from '../../assets/images/grp1.webp'
-import pro3 from '../../assets/images/Group.webp'
-import pro4 from '../../assets/images/pro4.webp'
+import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
-// import {useNavigate}from 'react-router-dom'
-import cate1 from '../../assets/images/category/cate1.jpeg'
-import cate2 from '../../assets/images/category/cate2.jpeg'
-import cate3 from '../../assets/images/category/cate3.jpeg'
-import cate4 from '../../assets/images/category/cate4.jpeg'
-import cate5 from '../../assets/images/category/cate5.jpeg'
-import combo from '../../assets/images/combo.jpeg'
-const categories = [
-  {
-    id: 1,
-    image: cate1,
-  },
-  {
-    id: 2,
-    image: cate2,
-  },
-  {
-    id: 3,
-    image: cate3,
-  },
-  {
-    id: 4,
-    image: cate4,
-  },
-  {
-    id: 5,
-    image: cate5,
-  },
-  {
-    id: 6,
-    image: combo,
-  },
-];
-// const navigation = useNavigate()
+import "swiper/css";
+import "swiper/css/navigation";
 
-export default function CategoryList() {
+export default function CategoryBannerList() {
   const [visible, setVisible] = useState(false);
+  const [banners, setBanners] = useState([]);
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
 
+  const API_URL = "https://aayubakwath-backend.onrender.com/api/v1/categoryBanner/getCategoryBanner/";
+  const BASE_URL = "https://aayubakwath-backend.onrender.com/";
+  // const API_URL = "http://localhost:8080/api/v1/categoryBanner/getCategoryBanner/";
+  // const BASE_URL = "http://localhost:8080/";
+
+  // 🔹 Animation Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -55,55 +28,128 @@ export default function CategoryList() {
       },
       { threshold: 0.15 }
     );
+
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-const BRAND = "#820c0c";
-const ACCENT = "#c9643a";
+
+  // 🔹 Fetch Banners
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        if (data.success) {
+          setBanners(data.date);
+        }
+      } catch (error) {
+        console.error("Error fetching banners:", error);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
+  const BRAND = "#820c0c";
+  const ACCENT = "#c9643a";
+
+  // 🔹 Flatten images
+  const allImages = banners.flatMap(item =>
+    item.categoryBanner.map(img => ({
+      id: item.id,
+      img
+    }))
+  );
+
+  const firstFour = allImages.slice(0, 4);
+  const remaining = allImages.slice(4);
+
   return (
+    <>
+      <style>
+        {`
+          .swiper-button-prev,
+          .swiper-button-next {
+            color: #000000;
+          }
+
+          .swiper-button-prev:hover,
+          .swiper-button-next:hover {
+            color: #820c0c;
+          }
+        `}
+      </style>
+    
     <section ref={sectionRef} className="px-4 sm:px-6 lg:px-10 py-10">
-      {/* Section Title */}
+      
+      {/* Title */}
       <h2
-        className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-10"
+        className="text-2xl sm:text-3xl font-bold text-center mb-10"
         style={{
+          color: BRAND,
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-24px)",
           transition: "opacity 0.6s ease, transform 0.6s ease",
         }}
       >
-        Explore Our Categories 
+        Explore Our Categories
         <span
-          className="block h-1 bg-[#c9643a] mx-auto mt-2 rounded-full"
+          className="block h-1 mx-auto mt-2 rounded-full"
           style={{
+            background: ACCENT,
             width: visible ? "80px" : "0px",
             transition: "width 0.8s ease 0.4s",
           }}
         ></span>
       </h2>
 
-      {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3  sm:gap-8 p-4 rounded-lg">
-        {categories.map((category, index) => (
+      {/* 🔹 First 4 Images */}
+    <div className="mt-6 px-4">
+  <Swiper
+    modules={[Navigation]}
+    navigation={true}
+    spaceBetween={20}
+    slidesPerView={1}
+    breakpoints={{
+      640: { slidesPerView: 2 },
+      768: { slidesPerView: 3 },
+      1024: { slidesPerView: 4 },
+    }}
+  >
+    {banners.map((item, index) =>
+      item.categoryBanner.map((img, i) => (
+        <SwiperSlide key={`${item.id}-${i}`}>
           <div
-            key={category.id}
-            className="flex flex-col items-center text-center cursor-pointer group rounded-lg transition-colors duration-300"
+            className="group cursor-pointer rounded-xl overflow-hidden"
             style={{
               opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.95)",
-              transition: `opacity 0.6s ease ${0.15 * index + 0.2}s, transform 0.6s ease ${0.15 * index + 0.2}s`,
+              transform: visible
+                ? "translateY(0) scale(1)"
+                : "translateY(40px) scale(0.95)",
+              transition: `all 0.6s ease ${0.1 * index}s`,
             }}
           >
-            {/* Circular Image */}
-            <div className="overflow-hidden group-hover:shadow-xl transition-shadow duration-300">
+            {/* Image */}
+            <div
+              className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
+              onClick={() => navigate("/productListing")}
+            >
               <img
-                src={category.image}
-                alt={category.name}
-                className="w-[300px] h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                src={BASE_URL + img}
+                alt="banner"
+                className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>
-        ))}
-      </div>
+        </SwiperSlide>
+      ))
+    )}
+  </Swiper>
+</div>
+
+
     </section>
+    </>
   );
 }

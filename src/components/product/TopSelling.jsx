@@ -1,26 +1,19 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-// import bottle from '../../assets/images/aaya.png'
-// import bottle1 from '../../assets/images/aaya-pro.png'
-import bottle from '../../assets/images/bt.jpeg'
-import bottle1 from '../../assets/images/bt.jpeg'
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-// import cate1 from '../../assets/images/category/cate1.jpeg'
-import cate2 from '../../assets/images/category/cate2.jpeg'
-import cate3 from '../../assets/images/category/cate3.jpeg'
-import cate4 from '../../assets/images/category/cate4.jpeg'
-// import cate5 from '../../assets/images/category/cate5.jpeg'
 import cate1 from '../../assets/images/prod/pro5.jpeg'
 import cate5 from '../../assets/images/prod/pro1.jpeg'
-const products = [
-  { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic.", rating: 4.5, reviews: 248, badge: "New Launches", image: cate1, hoverImage: cate5, tags: ["Spicy", "Healthy", "Indian"] },
-  { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Skin Care", "Herbal", "Refresh"] },
-  { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement.", rating: 5, reviews: 512, badge: "Top Rated", image: cate1, hoverImage: cate5, tags: ["Fitness", "Protein", "Muscle"] },
-  { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation.", rating: 3.5, reviews: 97, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Immunity", "Ayurvedic", "Wellness"] },
-  { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to.", rating: 4.2, reviews: 321, badge: "Fast Moving", image: cate1, hoverImage: cate5, tags: ["Vitamin", "Immunity", "Daily"] },
-  { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that.", rating: 4.7, reviews: 430, badge: "Limited Stock", image: cate1, hoverImage: cate5, tags: ["Hair Care", "Botanical", "Serum"] },
-  { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support.", rating: 4.0, reviews: 156, badge: "Top Rated", image: cate1, hoverImage: cate5, tags: ["Digestive", "Ayurvedic", "Gut"] },
-];
+import ProductCard from "./ProductCard";
+import { axiosInstance } from "../../utils/axiosInstance";
+// const products = [
+//   { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic. ffrwerwrt rtwert ewrtwert", rating: 4.5, reviews: 248, badge: "New Launches", image: cate1, hoverImage: cate5, tags: ["Spicy", "Healthy", "Indian"] },
+//   { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Skin Care", "Herbal", "Refresh"] },
+//   { id: 3, name: "Protein Powder", price: 299.99, originalPrice: 499.99, description: "High-quality protein supplement.", rating: 5, reviews: 512, badge: "Top Rated", image: cate1, hoverImage: cate5, tags: ["Fitness", "Protein", "Muscle"] },
+//   { id: 4, name: "Ayurvedic Tablets", price: 199.99, originalPrice: 329.99, description: "Traditional Ayurvedic formulation.", rating: 3.5, reviews: 97, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Immunity", "Ayurvedic", "Wellness"] },
+//   { id: 5, name: "Vitamin C Boost", price: 179.99, originalPrice: 289.99, description: "Effervescent Vitamin C tablets to.", rating: 4.2, reviews: 321, badge: "Fast Moving", image: cate1, hoverImage: cate5, tags: ["Vitamin", "Immunity", "Daily"] },
+//   { id: 6, name: "Hair Growth Serum", price: 349.99, originalPrice: 549.99, description: "Advanced botanical serum that dawe. werwe wer. t 5er ert r tw45y6h5hh 6.", rating: 4.7, reviews: 430, badge: "Limited Stock", image: cate1, hoverImage: cate5, tags: ["Hair Care", "Botanical", "Serum"] },
+//   { id: 7, name: "Digestive Churna", price: 89.99, originalPrice: 149.99, description: "Classic Ayurvedic churna blend to support sfafserg rtwertw wrqerw 4q34r.", rating: 4.0, reviews: 156, badge: "Top Rated", image: cate1, hoverImage: cate5, tags: ["Digestive", "Ayurvedic", "Gut"] },
+// ];
 
 const CARD_W = 272;
 const CARD_GAP = 20;
@@ -51,220 +44,225 @@ function ArrowBtn({ dir, onClick }) {
   );
 }
 
-/* ─── Product Card ────────────────────────────────────────── */
-function ProductCard({ product, animDelay, sectionVisible }) {
-  const [hov, setHov] = useState(false);
-  const [btnHov, setBtnHov] = useState(false);
-  const [cardVisible, setCardVisible] = useState(false);
-  const disc = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-  const navigate = useNavigate();
 
-  // Trigger card entrance after section becomes visible + stagger delay
-  useEffect(() => {
-    if (!sectionVisible) return;
-    const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
-    return () => clearTimeout(t);
-  }, [sectionVisible, animDelay]);
 
-  return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      onMouseDown={(e) => e.stopPropagation()}
-      className="flex-shrink-0 bg-whiterounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none"
-      style={{
-        width: CARD_W,
-        border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
-        zIndex: hov ? 40 : 10,
-        transform: hov
-          ? "translateY(-12px) scale(1.015)"
-          : cardVisible
-          ? "translateY(0) scale(1)"
-          : "translateY(32px) scale(0.96)",
-        opacity: cardVisible ? 1 : 0,
-        boxShadow: hov
-          ? "0 20px 48px rgba(130,12,12,.10), 0 4px 16px rgba(0,0,0,.06)"
-          : "0 1px 4px rgba(0,0,0,.04)",
-        transition: cardVisible
-          ? "opacity 0.5s ease, transform 0.5s cubic-bezier(.22,.68,0,1.15), box-shadow .35s ease, border-color .3s ease"
-          : "none",
-      }}
-    >
-      {/* ── Image Area ── */}
-      {product.badge && (
-        <span
-          className="absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold"
-          style={{
-            backgroundColor: badgeColors[product.badge]?.bg || "#A1A1AA",
-            color: badgeColors[product.badge]?.text || "#FFFFFF",
-            border: `1px solid ${badgeColors[product.badge]?.border || "#888"}`,
-          }}
-        >
-          {product.badge}
-        </span>
-      )}
+/*   ─── Product Card  ────────────────────────────────────────── */
 
-      <div
-        className="relative overflow-hidden bg-[#f9f5f2] rounded-xl"
-        style={{ height: 250 }}
-        onClick={() => navigate('/product')}
-      >
-        {/* Primary image */}
-        <img
-          src={product.image}
-          alt={product.name}
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-cover "
-          style={{
-            opacity: hov ? 0 : 1,
-            transform: hov ? "scale(1.06)" : "scale(1)",
-            transition: "opacity .4s ease, transform .6s ease",
-          }}
-        />
-        {/* Hover image */}
-        <img
-          src={product.hoverImage}
-          alt={product.name}
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            opacity: hov ? 1 : 0,
-            transform: hov ? "scale(1)" : "scale(1.06)",
-            transition: "opacity .4s ease, transform .6s ease",
-          }}
-        />
+// function ProductCard({ product, animDelay, sectionVisible }) {
 
-        {/* Tags — bottom-left, revealed on hover */}
-        <div
-          className="absolute bottom-2 left-2 flex flex-col gap-1 z-10"
-          style={{
-            opacity: hov ? 1 : 0,
-            transform: hov ? "translateY(0)" : "translateY(6px)",
-            transition: "opacity .25s ease, transform .25s ease",
-          }}
-        >
-          {product.tags.map((t, i) => (
-            <span
-              key={i}
-              className="text-[9.5px] px-2.5 py-[3px] rounded-full bg-[#820c0c] text-white
-                font-bold tracking-[.05em] uppercase shadow-sm w-fit"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+//   const [hov, setHov] = useState(false);
+//   const [btnHov, setBtnHov] = useState(false);
+//   const [cardVisible, setCardVisible] = useState(false);
+//   const disc = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+//   const navigate = useNavigate();
 
-        {/* Discount ribbon — top-right corner */}
-        <div
-          className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
-          style={{
-            background: "#FFB800",
-            padding: "14px 10px 18px",
-            lineHeight: 1.1,
-            clipPath: "polygon(100% 0,0 0,0 75%,15% 100%,30% 75%,45% 100%,60% 75%,75% 100%,90% 75%,100% 100%)",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-            minWidth: 44,
-          }}
-        >
-          <div className="text-[17px] font-black">{disc}%</div>
-          <div className="text-[10px] font-bold -mt-0.5">OFF</div>
-        </div>
-      </div>
+//   // Trigger card entrance after section becomes visible + stagger delay
+//   useEffect(() => {
+//     if (!sectionVisible) return;
+//     const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
+//     return () => clearTimeout(t);
+//   }, [sectionVisible, animDelay]);
 
-      {/* ── Card Body ── */}
-      <div className="px-[18px] pt-4 pb-5">
-        {/* Product Name */}
-        <div className="inline-block group mb-1 max-w-full">
-          <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
-            {product.name}
-          </h3>
-          <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#820c0c]" />
-        </div>
+//   return (
 
-        {/* Description */}
-        <p
-          className="text-sm font-bold text-gray-600 mb-3"
-          style={{
-            lineHeight: 1.65,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          <span className="text-[#829b1c] font-extrabold">FOR :</span> {product.benefit}
-          {product.description}
-        </p>
-        <p
-          className="text-sm font-bold text-gray-600 mb-3"
-          style={{
-            lineHeight: 1.65,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          <span className="text-[#c9643a] font-extrabold">WITH :</span> {product.benefit}
-          {product.description}
-        </p>
+//     <div
+//       onMouseEnter={() => setHov(true)}
+//       onMouseLeave={() => setHov(false)}
+//       onMouseDown={(e) => e.stopPropagation()}
+//       className="flex-shrink-0 bg-whiterounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none"
+//       style={{
+//         width: CARD_W,
+//         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
+//         zIndex: hov ? 40 : 10,
+//         transform: hov
+//           ? "translateY(-12px) scale(1.015)"
+//           : cardVisible
+//           ? "translateY(0) scale(1)"
+//           : "translateY(32px) scale(0.96)",
+//         opacity: cardVisible ? 1 : 0,
+//         boxShadow: hov
+//           ? "0 20px 48px rgba(130,12,12,.10), 0 4px 16px rgba(0,0,0,.06)"
+//           : "0 1px 4px rgba(0,0,0,.04)",
+//         transition: cardVisible
+//           ? "opacity 0.5s ease, transform 0.5s cubic-bezier(.22,.68,0,1.15), box-shadow .35s ease, border-color .3s ease"
+//           : "none",
+//       }}
+//     >
+//       {/* ── Image Area ── */}
+//       {product.badge && (
+//         <span
+//           className="absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold"
+//           style={{
+//             backgroundColor: badgeColors[product.badge]?.bg || "#A1A1AA",
+//             color: badgeColors[product.badge]?.text || "#FFFFFF",
+//             border: `1px solid ${badgeColors[product.badge]?.border || "#888"}`,
+//           }}
+//         >
+//           {product.badge}
+//         </span>
+//       )}
 
-        {/* Rating & Reviews */}
-        {product.rating && (
-          <div className="flex items-center gap-3 mb-1 justify-between">
-            <span className="text-xs font-semibold text-amber-400 flex items-center gap-1 ">
-              <span>⭐</span>
-              <span>{product.rating.toFixed(1)} Ratings</span>
-            </span>
-            <span className="text-xs font-semibold text-gray-500">
-              ({product.reviews}) Reviews
-            </span>
-          </div>
-        )}
+//       <div
+//         className="relative overflow-hidden bg-[#f9f5f2] rounded-xl"
+//         style={{ height: 250 }}
+//         onClick={() => navigate('/product')}
+//       >
+//         {/* Primary image */}
+//         <img
+//           src={product.image}
+//           alt={product.name}
+//           draggable={false}
+//           className="absolute inset-0 w-full h-full object-cover "
+//           style={{
+//             opacity: hov ? 0 : 1,
+//             transform: hov ? "scale(1.06)" : "scale(1)",
+//             transition: "opacity .4s ease, transform .6s ease",
+//           }}
+//         />
+//         {/* Hover image */}
+//         <img
+//           src={product.hoverImage}
+//           alt={product.name}
+//           draggable={false}
+//           className="absolute inset-0 w-full h-full object-cover"
+//           style={{
+//             opacity: hov ? 1 : 0,
+//             transform: hov ? "scale(1)" : "scale(1.06)",
+//             transition: "opacity .4s ease, transform .6s ease",
+//           }}
+//         />
 
-        {/* Price */}
-        <div className="flex items-baseline gap-1.5 mt-2.5 mb-1.5">
-          <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#820c0c]">
-            ₹{product.price}
-          </span>
-          <span className="text-[13px] text-gray-400 line-through">
-            ₹{product.originalPrice}
-          </span>
-          <span className="ml-auto text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">
-            Save ₹{(product.originalPrice - product.price).toFixed(0)}
-          </span>
-        </div>
+//         {/* Tags — bottom-left, revealed on hover */}
+//         <div
+//           className="absolute bottom-2 left-2 flex flex-col gap-1 z-10"
+//           style={{
+//             opacity: hov ? 1 : 0,
+//             transform: hov ? "translateY(0)" : "translateY(6px)",
+//             transition: "opacity .25s ease, transform .25s ease",
+//           }}
+//         >
+//           {product.tags.map((t, i) => (
+//             <span
+//               key={i}
+//               className="text-[9.5px] px-2.5 py-[3px] rounded-full bg-[#820c0c] text-white
+//                 font-bold tracking-[.05em] uppercase shadow-sm w-fit"
+//             >
+//               {t}
+//             </span>
+//           ))}
+//         </div>
 
-        {/* Promo code */}
-        <div
-          className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed text-[#820c0c] bg-[#fff4f4]"
-          style={{ borderColor: "rgba(130,12,12,.25)" }}
-        >
-          Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
-        </div>
+//         {/* Discount ribbon — top-right corner */}
+//         <div
+//           className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
+//           style={{
+//             background: "#FFB800",
+//             padding: "14px 10px 18px",
+//             lineHeight: 1.1,
+//             clipPath: "polygon(100% 0,0 0,0 75%,15% 100%,30% 75%,45% 100%,60% 75%,75% 100%,90% 75%,100% 100%)",
+//             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+//             minWidth: 44,
+//           }}
+//         >
+//           <div className="text-[17px] font-black">{disc}%</div>
+//           <div className="text-[10px] font-bold -mt-0.5">OFF</div>
+//         </div>
+//       </div>
 
-        <div className="h-px bg-gray-100 my-3" />
+//       {/* ── Card Body ── */}
+//       <div className="px-[18px] pt-4 pb-5">
+//         {/* Product Name */}
+//         <div className="inline-block group mb-1 max-w-full">
+//           <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
+//             {product.name}
+//           </h3>
+//           <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#820c0c]" />
+//         </div>
 
-        {/* Add to Cart */}
-        <button
-          onMouseEnter={() => setBtnHov(true)}
-          onMouseLeave={() => setBtnHov(false)}
-          className="w-full py-3 text-sm font-semibold tracking-wide uppercase
-            flex items-center justify-center gap-2 text-white cursor-pointer
-            rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none
-            transition-all duration-300 ease-in-out"
-          style={{
-            background: btnHov ? "#c9643a" : "#820c0c",
-            boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
-          }}
-        >
-          <FaShoppingCart size={14} />
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  );
-}
+//         {/* Description */}
+//         <p
+//           className="text-sm font-bold text-gray-600 mb-3"
+//           style={{
+//             lineHeight: 1.65,
+//             display: "-webkit-box",
+//             WebkitLineClamp: 2,
+//             WebkitBoxOrient: "vertical",
+//             overflow: "hidden",
+//           }}
+//         >
+//           <span className="text-[#829b1c] font-extrabold">FOR :</span> {product.benefit}
+//           {product.description}
+//         </p>
+//         <p
+//           className="text-sm font-bold text-gray-600 mb-3"
+//           style={{
+//             lineHeight: 1.65,
+//             display: "-webkit-box",
+//             WebkitLineClamp: 2,
+//             WebkitBoxOrient: "vertical",
+//             overflow: "hidden",
+//           }}
+//         >
+//           <span className="text-[#c9643a] font-extrabold">WITH :</span> {product.benefit}
+//           {product.description}
+//         </p>
+
+//         {/* Rating & Reviews */}
+//         {product.rating && (
+//           <div className="flex items-center gap-3 mb-1 justify-between">
+//             <span className="text-xs font-semibold text-amber-400 flex items-center gap-1 ">
+//               <span>⭐</span>
+//               <span>{product.rating.toFixed(1)} Ratings</span>
+//             </span>
+//             <span className="text-xs font-semibold text-gray-500">
+//               ({product.reviews}) Reviews
+//             </span>
+//           </div>
+//         )}
+
+//         {/* Price */}
+//         <div className="flex items-baseline gap-1.5 mt-2.5 mb-1.5">
+//           <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#820c0c]">
+//             ₹{product.price}
+//           </span>
+//           <span className="text-[13px] text-gray-400 line-through">
+//             ₹{product.originalPrice}
+//           </span>
+//           <span className="ml-auto text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">
+//             Save ₹{(product.originalPrice - product.price).toFixed(0)}
+//           </span>
+//         </div>
+
+//         {/* Promo code */}
+//         <div
+//           className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed text-[#820c0c] bg-[#fff4f4]"
+//           style={{ borderColor: "rgba(130,12,12,.25)" }}
+//         >
+//           Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
+//         </div>
+
+//         <div className="h-px bg-gray-100 my-3" />
+
+//         {/* Add to Cart */}
+//         <button
+//           onMouseEnter={() => setBtnHov(true)}
+//           onMouseLeave={() => setBtnHov(false)}
+//           className="w-full py-3 text-sm font-semibold tracking-wide uppercase
+//             flex items-center justify-center gap-2 text-white cursor-pointer
+//             rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none
+//             transition-all duration-300 ease-in-out"
+//           style={{
+//             background: btnHov ? "#c9643a" : "#820c0c",
+//             boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
+//           }}
+//         >
+//           <FaShoppingCart size={14} />
+//           Add to Cart
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
 
 /* ─── Main Component ──────────────────────────────────────── */
 export default function TopSelling() {
@@ -391,7 +389,25 @@ export default function TopSelling() {
     const ratio = (e.clientX - rect.left) / rect.width;
     el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
   };
+const [products, setProducts] = useState([]);
+ console.log('data :',products)
+  const [loading, setLoading] = useState(true);
 
+  const fetchProducts = async () => {
+    try {
+      const response = await axiosInstance.get("/product/getAllProduct");
+      console.log('response :',response)
+      setProducts(response.data.data || []);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
     <>
       <style>{`
@@ -473,12 +489,17 @@ export default function TopSelling() {
             style={{ cursor: dragging && !isThumb.current ? "grabbing" : "grab" }}
             onMouseDown={(e) => { if (e.button !== 0) return; startDrag(e, false); }}
           >
-            {products.map((p, idx) => (
+            {products.map((product, idx) => (
               <ProductCard
-                key={p.id}
-                product={p}
-                animDelay={idx * 0.06}
-                sectionVisible={sectionVisible}
+                key={product.id}
+                product={product}
+                
+
+                //  product={product}   // ✅ PASS DATA
+                animDelay={idx * 0.08}
+                sectionVisible={true}
+                onClick={(item) => console.log("Go to product", item)}
+                onAddToCart={(item) => console.log("Add to cart", item)}
               />
             ))}
           </div>

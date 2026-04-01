@@ -1,46 +1,59 @@
-import React, { useEffect, useRef, useState } from "react";
-import banner from '../../../assets/images/banner1.jpeg'
-// import banner from '../../../assets/images/rewards_deskt÷op.webp'
+import React, { useEffect, useState } from "react";
+import { axiosInstance } from "../../../utils/axiosInstance";
 
 export default function FirstBanner() {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef(null);
+  const [banner, setBanner] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const BASE_URL = "https://aayubakwath-backend.onrender.com/";
+
+  const getBanners = async () => {
+    try {
+      const res = await axiosInstance.get("/offerBanner/getAllOfferBanner");
+
+      if (res.data.success && res.data.data.length > 0) {
+        // ✅ Take first banner
+        setBanner(res.data.data[0].offerBanner[0]);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    getBanners();
   }, []);
 
+  // 🔹 Loading Skeleton
+  if (loading) {
+    return (
+      <div className="w-full h-[250px] md:h-[400px] lg:h-[500px] bg-gray-200 animate-pulse"></div>
+    );
+  }
+
+  // 🔹 No banner
+  if (!banner) return null;
+
   return (
-    <div className="px-6 py-10">
-      <div
-        ref={ref}
-        className="relative rounded-3xl overflow-hidden shadow-lg"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "scale(1) translateY(0)" : "scale(0.96) translateY(32px)",
-          transition: "opacity 0.7s ease, transform 0.7s ease",
-        }}
-      >
+    <div className="w-full overflow-hidden">
+
+      {/* Full Banner */}
+      <div className="relative w-full  group cursor-pointer">
+
+        {/* Image */}
         <img
-          src={banner}
-          alt="Banner"
-          className="w-full"
-          style={{
-            transform: visible ? "scale(1)" : "scale(1.05)",
-            transition: "transform 0.9s ease",
-          }}
+          src={BASE_URL + banner}
+          alt="Offer Banner"
+          className="w-full  object-cover group-hover:scale-105 transition duration-700"
         />
+
+
+  
+
       </div>
+
     </div>
   );
 }

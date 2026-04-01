@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import bnr from '../assets/images/bann2.jpeg'
+import { Helmet } from "react-helmet-async";
 
 /* ─── DATA ─────────────────────────────────────── */
 const inputFields = [
@@ -96,7 +97,9 @@ export default function Dealership() {
       `}</style>
 
       <div className="f-manrope min-h-screen" style={{background:"white"}}>
-
+<Helmet>
+  <title>Bulk Dealership - Aayubakwath</title>
+</Helmet>
         {/* ══ HERO ══ */}
      <section className="relative w-full overflow-hidden">
                       {/* Background image */}

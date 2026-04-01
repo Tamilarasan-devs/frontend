@@ -19,10 +19,15 @@ import ClientReview from '../components/clientReview/ClientReview'
 import BanrCombo from '../components/layout/banner/BanrCombo'
 import Certificate from './Certificate'
 import ReelSection from '../components/layout/ReelSection'
+import VideoPage from './VideoPage'
+import { Helmet } from "react-helmet-async";
+
 export default function Home() {
   return (
     <div>
-        
+        <Helmet>
+        <title>Home - Aayubakwath</title>
+      </Helmet>
         <Banner/>
         <div className='mt-10'>
 
@@ -31,7 +36,8 @@ export default function Home() {
         <CategoryList/>
         <ProductGrid/>
         <FirstBanner/>
-
+<GridBanner/>
+<VideoPage/>
         <TopSelling/>
         {/* <TwoSideBanner/>
         <GridBanner/> */}
@@ -46,7 +52,7 @@ export default function Home() {
 
         <Certificate/>
 <ReelSection/>
-        <Testimonial/>
+        {/* <Testimonial/> */}
         
     </div>
   )

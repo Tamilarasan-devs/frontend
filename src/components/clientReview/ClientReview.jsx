@@ -130,7 +130,7 @@ export default function BeforeAfterGrid() {
         ></div>
 
         <h1 className="text-xl font-semibold flex justify-center text-[#820c0c] text-center">
-          Explore Clinically Proven Formulations For South Indian Skin & Hair
+          Discover Science-Backed Herbal Wellness Solutions
         </h1>
       </div>
 
