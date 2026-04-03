@@ -68,9 +68,9 @@ const allImages = (banners || []).flatMap(item =>
   }))
 );
 
-const images=[
-  cate1,cate2,cate3,cate4,cate5
-]
+// const images=[
+//   cate1,cate2,cate3,cate4,cate5
+// ]
 
 
   return (
@@ -95,7 +95,7 @@ const images=[
       <h2
         className="text-2xl sm:text-3xl font-bold text-center mb-10"
         style={{
-          color: BRAND,
+          color: '#03349a',
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(-24px)",
           transition: "opacity 0.6s ease, transform 0.6s ease",
@@ -105,7 +105,7 @@ const images=[
         <span
           className="block h-1 mx-auto mt-2 rounded-full"
           style={{
-            background: ACCENT,
+            background: '#0048d4',
             width: visible ? "80px" : "0px",
             transition: "width 0.8s ease 0.4s",
           }}
@@ -125,7 +125,7 @@ const images=[
       1024: { slidesPerView: 4 },
     }}
   >
-    {/* {banners.map((item, index) =>
+    {banners.map((item, index) =>
       item.categoryBanner.map((img, i) => (
         <SwiperSlide key={`${item.id}-${i}`}>
           <div
@@ -152,9 +152,9 @@ const images=[
           </div>
         </SwiperSlide>
       ))
-    )} */}
+    )}
 
-    {images.map((img, i) => (
+    {/* {images.map((img, i) => (
   <SwiperSlide key={i}>
     <div
       className="group cursor-pointer rounded-xl overflow-hidden"
@@ -166,7 +166,6 @@ const images=[
         transition: `all 0.6s ease ${0.1 * i}s`,
       }}
     >
-      {/* Image */}
       <div
         className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
         onClick={() => navigate("/productListing")}
@@ -179,7 +178,7 @@ const images=[
       </div>
     </div>
   </SwiperSlide>
-))}
+))} */}
   </Swiper>
 </div>
 

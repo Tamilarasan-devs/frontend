@@ -37,7 +37,9 @@ export default function Home() {
         <ProductGrid/>
         <FirstBanner/>
 {/* <GridBanner/> */}
+<div className='mb-20'>
 <VideoPage/>
+  </div>
         <TopSelling/>
         {/* <TwoSideBanner/>
         <GridBanner/> */}

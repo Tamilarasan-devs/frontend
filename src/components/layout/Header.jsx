@@ -28,8 +28,10 @@ const DesktopLink = ({ href, label, active }) => (
      className={`relative font-dm text-[13px] font-bold tracking-[1.8px] uppercase
                  px-3 py-1.5 rounded transition-colors duration-200
                  ${active ? "" : "nav-hover"}`}
-     style={{ color: active ? "#8b0000" : "#1a0a0a" }}
-     onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#8b0000"; }}
+     style={{ color: active ? "#0337a4" : "#1a0a0a" }}
+    //  style={{ color: active ? "#8b0000" : "#1a0a0a" }}
+     onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#0337a4"; }}
+    //  onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#8b0000"; }}
      onMouseLeave={e => { if (!active) e.currentTarget.style.color = "#1a0a0a"; }}>
 
     {label}
@@ -55,7 +57,8 @@ const MobileLink = ({ href, label, active, onClick }) => (
      className="flex items-center gap-3 py-3.5 font-dm text-[11.5px] tracking-[2px] uppercase
                 transition-colors duration-150"
      style={{
-       color: active ? "#8b0000" : "#4a3030",
+       color: active ? "#03349a" : "#4a3030",
+      //  color: active ? "#8b0000" : "#4a3030",
        fontWeight: active ? "600" : "400",
        borderBottom: "1px solid rgba(201,168,76,0.12)",
      }}>
@@ -150,7 +153,7 @@ export default function Header() {
             <span className="logo-shine absolute inset-y-0 w-10 pointer-events-none"
                   style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)" }} />
             <p className="font-cinzel text-[19px] sm:text-[22px] font-semibold tracking-wide leading-none"
-               style={{ color: "#8b0000" }}>
+               style={{ color: "#03349a" }}>
               Aayubakwath
             </p>
             
@@ -184,7 +187,7 @@ export default function Header() {
                           border border-[#c9a84c] transition-all duration-200 bg-[rgba(201,168,76,0.08)]
                           hover:border-[#c9a84c] hover:bg-[rgba(201,168,76,0.08)]
                           hover:-translate-y-0.5"
-               style={{ color: "#8b0000" }}>
+               style={{ color: "#03349a" }}>
               <FaHeart size={14} />
               {/* <Badge n={3} /> */}
             </a>
@@ -194,15 +197,15 @@ export default function Header() {
                className="flex items-center gap-2 px-4 h-9 rounded-full text-white
                           font-dm text-[11px] font-semibold tracking-[1.5px] uppercase
                           transition-all duration-200 hover:-translate-y-0.5"
-               style={{ background: "linear-gradient(135deg,#8b0000,#5a0000)",
+               style={{ background: "linear-gradient(135deg,#03349a,#0145cc)",
                         boxShadow: "0 3px 14px rgba(139,0,0,0.28)" }}
-               onMouseEnter={e => e.currentTarget.style.background = "linear-gradient(135deg,#b91c1c,#8b0000)"}
-               onMouseLeave={e => e.currentTarget.style.background = "linear-gradient(135deg,#8b0000,#5a0000)"}>
+               onMouseEnter={e => e.currentTarget.style.background = "linear-gradient(135deg,#03349a,#0145cc)"}
+               onMouseLeave={e => e.currentTarget.style.background = "linear-gradient(135deg,#03349a,#0145cc)"}>
               <FaShoppingCart size={12} />
               Cart
               <span className="min-w-[17px] h-[17px] flex items-center justify-center
                                rounded-full text-[9px] font-bold border border-white/25"
-                    style={{ background: "#c9a84c" }}>2</span>
+                    style={{ background: "#04308e" }}>2</span>
             </a>
 
             {/* Profile */}
@@ -210,7 +213,7 @@ export default function Header() {
               <button onClick={() => setDropdown(v => !v)}
                       className="w-9 h-9 rounded-full flex items-center justify-center
                                  text-white transition-transform duration-200 hover:scale-[1.07]"
-                      style={{ background: "linear-gradient(135deg,#8b0000,#4a0000)",
+                      style={{ background: "linear-gradient(135deg,#03349a,#0145cc)",
                                border: "2px solid #c9a84c",
                                boxShadow: "0 3px 12px rgba(139,0,0,0.28)" }}>
                 <FaUser size={12} />

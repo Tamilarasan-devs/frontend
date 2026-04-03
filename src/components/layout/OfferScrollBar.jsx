@@ -3,16 +3,16 @@ import { axiosInstance } from "../../utils/axiosInstance";
 
 export default function OfferScrollBar() {
 
-const offers = [
-  { offerText: "🌿 100% Herbal & Natural Formula" },
-  { offerText: "🎉 Save More on Combos" },
-  { offerText: "⚡ Revitalize Your Everyday Life" },
-  { offerText: "🔁 Confidence with Every Purchase" },
-  { offerText: "🎯 Wellness You Can Trust" },
-  { offerText: "💪 Built for Strength & Energy" }
-];
-  // const [offers, setOffers] = useState([]);
-  // console.log(offers)
+// const offers = [
+//   { offerText: "🌿 100% Herbal & Natural Formula" },
+//   { offerText: "🎉 Save More on Combos" },
+//   { offerText: "⚡ Revitalize Your Everyday Life" },
+//   { offerText: "🔁 Confidence with Every Purchase" },
+//   { offerText: "🎯 Wellness You Can Trust" },
+//   { offerText: "💪 Built for Strength & Energy" }
+// ];
+  const [offers, setOffers] = useState([]);
+  console.log(offers)
   const [loading, setLoading] = useState(true);
 
   // Fetch offers from API
@@ -20,7 +20,7 @@ const offers = [
     try {
       const res = await axiosInstance.get("/offerBar/getOfferBar");
       // Assuming your API returns { data: [{ text: '...' }, ...] }
-      // setOffers(res.data.data || []);
+      setOffers(res.data.data || []);
     } catch (err) {
       console.log(err);
     } finally {

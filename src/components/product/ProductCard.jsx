@@ -9,7 +9,7 @@ import React, { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { API_URL } from "../../utils/axiosInstance";
-const CARD_W = 272;
+const CARD_W = 402;
 const CARD_GAP = 20;
 export default  function ProductCard({ product, animDelay, sectionVisible }) {
 console.log('shop page :',product)
@@ -41,9 +41,9 @@ const badgeColors = {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       onMouseDown={(e) => e.stopPropagation()}
-      className="flex-shrink-0 bg-white rounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none"
+      className="flex-shrink-0  rounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none w-full sm:w-[48%] md:w-[300px] lg:w-[340px] xl:w-[400px]"
       style={{
-        width: CARD_W,
+        
         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
         zIndex: hov ? 40 : 10,
         transform: hov
@@ -74,11 +74,10 @@ const badgeColors = {
         </span>
       )}
 
-      <div
-        className="relative overflow-hidden bg-[#f9f5f2] rounded-xl"
-        style={{ height: 250 }}
-        onClick={() => navigate(`/product/${product.id}`)}
-      >
+     <div
+  className="relative overflow-hidden bg-[#f9f5f2] w-full aspect-[4/3] rounded-xl"
+  onClick={() => navigate(`/product/${product.id}`)}
+>
         {/* Primary image */}
         <img
           src={ product.productImages[0]}
@@ -150,7 +149,7 @@ const badgeColors = {
           <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
             {product.productName}
           </h3>
-          <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#820c0c]" />
+          <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#03349a]" />
         </div>
 
         {/* Description */}
@@ -197,7 +196,7 @@ const badgeColors = {
 
         {/* Price */}
         <div className="flex items-baseline gap-1.5 mt-2.5 mb-1.5">
-          <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#820c0c]">
+          <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#03349a]">
             ₹{product.finalPrice}
           </span>
           <span className="text-[13px] text-gray-400 line-through">
@@ -210,8 +209,8 @@ const badgeColors = {
 
         {/* Promo code */}
         <div
-          className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed text-[#820c0c] bg-[#fff4f4]"
-          style={{ borderColor: "rgba(130,12,12,.25)" }}
+          className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed mt-2 bg-[#c0d5ff]"
+          style={{ borderColor: "#558af3" }}
         >
           Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
         </div>
@@ -227,7 +226,7 @@ const badgeColors = {
             rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none
             transition-all duration-300 ease-in-out"
           style={{
-            background: btnHov ? "#c9643a" : "#820c0c",
+            background: btnHov ? "#0147d3" : "#03349a",
             boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
           }}
         >

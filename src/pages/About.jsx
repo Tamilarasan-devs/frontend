@@ -15,7 +15,7 @@ import iconbc4 from "../assets/images/icon-bc4.svg";
 import {  useNavigate} from 'react-router-dom'
 import OurBusiness from "./AboutPage";
 import AboutAayubakwath from "./AboutAaya";
-import bnr from '../assets/images/bann2.jpeg'
+import bnr from '../assets/images/abtUs.jpg'
 import { Helmet } from "react-helmet-async";
 
 /* ── useInView hook for scroll-triggered animations ── */
@@ -245,44 +245,9 @@ export default function About() {
       src={bnr}
       alt="About Banner"
       loading="lazy"
-      className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover"
-    />
+      className="w-full h-full  object-cover"
+/>
 
-    {/* Gradient overlay */}
-    {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" /> */}
-
-    {/* Content */}
-    <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 text-white max-w-full sm:max-w-md md:max-w-lg">
-      
-      <h1 className="
-        text-2xl 
-        sm:text-3xl 
-        md:text-4xl 
-        lg:text-6xl 
-        font-bold 
-        mb-2 sm:mb-3 md:mb-4 
-        text-black
-      ">
-        About Us
-      </h1>
-<h2
-        className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-10"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(-24px)",
-          transition: "opacity 0.6s ease, transform 0.6s ease",
-        }}
-      >
-        About Us 
-        <span
-          className="block h-1 bg-[#c9643a] mx-auto mt-2 rounded-full"
-          style={{
-            width: visible ? "80px" : "0px",
-            transition: "width 0.8s ease 0.4s",
-          }}
-        ></span>
-      </h2>
-    </div>
   </div>
 </section>
 

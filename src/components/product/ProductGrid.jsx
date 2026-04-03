@@ -6,7 +6,7 @@ export default function ProductGrid() {
   
 const headerRef = useRef(null);
 
-const BRAND = "#820c0c";
+const BRAND = "#03349a";
 const ACCENT = "#c9643a 829b1c";
 const GREEN='#829b1c'
 
@@ -37,10 +37,10 @@ const GREEN='#829b1c'
       <div className="m-5 opacity-100 translate-y-0 transition-all duration-700 ease-in-out">
 
         <h2 className="text-[clamp(26px,4vw,36px)] font-bold text-gray-900 m-0 leading-[1.15]">
-    Fuel Your Day,  <span className="text-[#820c0c]">Naturally</span>
+    Fuel Your Day,  <span className="text-[#03349a]">Naturally</span>
   </h2>
  <div className="mt-3 flex items-center gap-1.5">
-    <div className="w-9 h-[2.5px] bg-[#820c0c] rounded-full" />
+    <div className="w-9 h-[2.5px] bg-[#03349a] rounded-full" />
     <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
     <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
   </div>
@@ -61,19 +61,19 @@ const GREEN='#829b1c'
       ) : (
 
         /* 🔥 Product Grid */
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {products.map((product, idx) => (
-            <div key={product.id} className="flex justify-center">
-              <ProductCard
-                product={product}   // ✅ PASS DATA
-                animDelay={idx * 0.08}
-                sectionVisible={true}
-                onClick={(item) => console.log("Go to product", item)}
-                onAddToCart={(item) => console.log("Add to cart", item)}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 ">
+  {products.map((product, idx) => (
+    <div key={product.id} className="flex justify-center">
+      <ProductCard
+        product={product}
+        animDelay={idx * 0.08}
+        sectionVisible={true}
+        onClick={(item) => console.log("Go to product", item)}
+        onAddToCart={(item) => console.log("Add to cart", item)}
+      />
+    </div>
+  ))}
+</div>
         
       )}
     </div>

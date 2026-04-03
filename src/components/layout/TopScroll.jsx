@@ -3,13 +3,14 @@ import { axiosInstance } from "../../utils/axiosInstance";
 
 export default function TopScroll() {
 
-  const announcements = [
-  { title: "0% Harmful Chemicals" },
-  { title: "Manufactured in GMP & ISO 9001 Certified Facility" },
-  { title: "Made with Natural Ingredients" },
-  { title: "Power of Nature, Strength for Life" }
-];
-  // const [announcements, setAnnouncements] = useState([]);
+//   const announcements = [
+//   { title: "0% Harmful Chemicals" },
+//   { title: "Manufactured in GMP & ISO 9001 Certified Facility" },
+//   { title: "Made with Natural Ingredients" },
+//   { title: "Power of Nature, Strength for Life" }
+// ];
+  const [announcements, setAnnouncements] = useState([]);
+  console.log('announcements :',announcements)
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +19,7 @@ export default function TopScroll() {
     try {
       const res = await axiosInstance.get("announcement/getAllAnnouncements");
       // Assuming res.data.data is an array of { id, title } objects
-      // setAnnouncements(res.data.data || []);
+      setAnnouncements(res.data.data || []);
     } catch (err) {
       console.error(err);
     } finally {
@@ -53,14 +54,17 @@ export default function TopScroll() {
 
   if (loading) return null; // Or a small loader
 
-  if (announcements.length === 0) return null; // Nothing to show
+  if (announcements.length === 0) return <h1 >No data</h1>; // Nothing to show
 
   return (
     <div
       className="text-white py-3 flex justify-center"
       style={{
         background:
-          "linear-gradient(90deg, #4a0000 0%, #8b0000 50%, #4a0000 100%)",
+          // "linear-gradient(90deg, #4a0000 0%, #8b0000 50%, #4a0000 100%)",
+          "linear-gradient(90deg, #061e5a 0%, #0145cb 50%, #061e5a 100%)",
+
+
       }}
     >
       <div className="flex items-center w-full max-w-3xl justify-between px-4">

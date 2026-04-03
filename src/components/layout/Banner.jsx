@@ -5,12 +5,11 @@ import React, { useEffect, useRef ,useState} from "react";
 // import bnnr4 from "../../assets/images/bnnr4.avif";
 // import bnnr5 from "../../assets/images/bnnr5.avif";
 
-import bnr1 from '../../assets/images/banners/bnr1.png'
-import bnr2 from '../../assets/images/banners/bnr2.png'
-import bnr3 from '../../assets/images/banners/bnr3.png'
-import bnr4 from '../../assets/images/banners/bnr4.png'
-import bnr5 from '../../assets/images/banners/bnr5.png'
-import bnr6 from '../../assets/images/banners/bnr6.png'
+import bnr1 from '../../assets/images/banners/bnr1.jpg'
+import bnr2 from '../../assets/images/banners/bnr2.jpg'
+import bnr3 from '../../assets/images/banners/bnr3.jpg'
+import bnr4 from '../../assets/images/banners/bnr4.jpg'
+import bnr5 from '../../assets/images/banners/bnr5.jpg'
 // import bnr7 from '../../assets/images/banners/bnr7.png'
 // import bnr8 from '../../assets/images/banners/bnr8.png'
 // import bnr9 from '../../assets/images/banners/bnr9.png'
@@ -56,7 +55,6 @@ export default function Banner() {
 
   const images = [bnr1,bnr2,bnr3
   ,bnr4,bnr5
-  ,bnr6,
   ];
   const [banners, setBanners] = useState([])
   const [loading, setLoading] = useState(true)
