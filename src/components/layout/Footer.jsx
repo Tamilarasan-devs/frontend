@@ -14,7 +14,15 @@ const Logo = () => (
   </svg>
 );
 
-const quickLinks = ["Home", "About", "Shop", "Dealership", "Download", "Blog", "Contact"];
+const quickLinks = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/aboutpage" },
+  { label: "Shop", path: "/productListing" },
+  { label: "Dealership", path: "/dealership" },
+  // { label: "Download", path: "/download" },
+  { label: "Blog", path: "/blog" },
+  { label: "Contact", path: "/contact" }
+];
 const helpLinks = [
   { label: "FAQ'S", path: "/faq" },
   { label: "Shipping Policy", path: "/shipping-policy" },
@@ -264,16 +272,16 @@ export default function Footer() {
 
             {/* ── Quick Links ── */}
             <div>
-              <h4 className="section-heading">Quick Links</h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-                {quickLinks.map((link, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "center" }}>
-                    <span className="badge-dot" />
-                    <a href="#" className="footer-link">{link}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+  <h4 className="section-heading">Quick Links</h4>
+  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+    {quickLinks.map((link, i) => (
+      <li key={i} style={{ display: "flex", alignItems: "center" }}>
+        <span className="badge-dot" />
+        <a href={link.path} className="footer-link">{link.label}</a>
+      </li>
+    ))}
+  </ul>
+</div>
 
             {/* ── Help ── */}
             <div>

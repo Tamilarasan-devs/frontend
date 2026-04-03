@@ -11,10 +11,10 @@ import bnr3 from '../../assets/images/banners/bnr3.png'
 import bnr4 from '../../assets/images/banners/bnr4.png'
 import bnr5 from '../../assets/images/banners/bnr5.png'
 import bnr6 from '../../assets/images/banners/bnr6.png'
-import bnr7 from '../../assets/images/banners/bnr7.png'
-import bnr8 from '../../assets/images/banners/bnr8.png'
-import bnr9 from '../../assets/images/banners/bnr9.png'
-import bnr10 from '../../assets/images/banners/bnr10.png'
+// import bnr7 from '../../assets/images/banners/bnr7.png'
+// import bnr8 from '../../assets/images/banners/bnr8.png'
+// import bnr9 from '../../assets/images/banners/bnr9.png'
+// import bnr10 from '../../assets/images/banners/bnr10.png'
 
 
 import { axiosInstance,API_URL } from "../../utils/axiosInstance";
@@ -56,7 +56,7 @@ export default function Banner() {
 
   const images = [bnr1,bnr2,bnr3
   ,bnr4,bnr5
-  ,bnr6,bnr7,bnr8,bnr9,bnr10,
+  ,bnr6,
   ];
   const [banners, setBanners] = useState([])
   const [loading, setLoading] = useState(true)

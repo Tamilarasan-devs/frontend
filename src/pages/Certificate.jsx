@@ -1,41 +1,45 @@
 import React from "react";
-
+import img1 from '../assets/images/nat:img/1.jpg'
+import img2 from '../assets/images/nat:img/2.jpg'
+import img3 from '../assets/images/nat:img/3.jpg'
+import img4 from '../assets/images/nat:img/4.jpg'
+import img5 from '../assets/images/nat:img/5.jpg'
+import img6 from '../assets/images/nat:img/6.jpg'
+import img7 from '../assets/images/nat:img/7.jpg'
 export default function Certificate() {
   const features = [
     {
       label: "Purity Tested Ingredients",
-      image:
-        "https://img.freepik.com/premium-vector/premium-ingredients-icon-vector-flat-thin-line-illustration_1223784-31773.jpg?semt=ais_hybrid&w=740&q=80",
+      image:img1
     },
     {
       label: "Free from Toxins & Additives",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/016/872/211/small/no-additives-icon-design-free-vector.jpg",
+        img2
     },
     {
       label: "Herbal & Natural Formula",
-      image:
-        "https://media.gettyimages.com/id/2157335082/vector/herbal-medicine-duocolor-line-icon-design-with-editable-stroke.jpg?s=612x612&w=0&k=20&c=ZsR8D3oGBr76nC8MLCPyeFhQK6Y81dD0-w2LLN984Ds=",
+      image:img3
     },
     {
       label: "Quality Assured Manufacturing",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/077/137/314/small/award-badge-icon-with-checkmark-and-certificate-design-element-in-simple-style-featuring-graphic-symbol-achievement-with-recognition-and-verification-elements-for-approval-confirmation-projects-vector.jpg",
+        img4
     },
     {
       label: "GMP & ISO Certified Facility",
       image:
-        "https://t4.ftcdn.net/jpg/19/14/05/67/360_F_1914056798_kNkErZfZ142SYzPDLvZJgr4fQZidpCIY.jpg",
+        img5
     },
     {
       label: "Clean & Safe Supplement",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/070/405/729/small/icon-a-supplement-isolated-against-a-clean-background-free-vector.jpg",
+img6
     },
     {
       label: "Made for Everyday Health",
       image:
-        "https://static.vecteezy.com/system/resources/thumbnails/019/974/777/small/healthy-icon-design-free-vector.jpg",
+        img7
     },
   ];
 
