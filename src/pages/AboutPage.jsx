@@ -207,7 +207,7 @@ export default function OurBusiness() {
 
         {/* ── Heading ── */}
         <h2
-          className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-2"
+          className="text-2xl sm:text-3xl font-bold text-center text-[#03349a] mb-2"
         
         >
           What We Do
@@ -225,14 +225,14 @@ Provide safe and effective wellness solutions
           <span
             className="block h-[3px] w-12 rounded-full"
             style={{
-              background: "linear-gradient(90deg, #820c0c, #d85454)",
+              background: "linear-gradient(90deg, #03349a, #d85454)",
             }}
           />
-          <span className="block w-2 h-2 rounded-full bg-[#820c0c]" />
+          <span className="block w-2 h-2 rounded-full bg-[#03349a]" />
           <span
             className="block h-[3px] w-12 rounded-full"
             style={{
-              background: "linear-gradient(90deg, #820c0c, #d85454)",
+              background: "linear-gradient(90deg, #03349a, #d85454)",
             }}
           />
         </div>
@@ -294,7 +294,7 @@ Provide safe and effective wellness solutions
               <div
                 className="group relative z-[2] overflow-hidden text-center w-56"
                 style={{
-                  background:"#820c0c",
+                  background:"#03349a",
                   borderRadius: "0 0 100px 100px",
                   marginTop: "-72px",
                   paddingTop: "88px",

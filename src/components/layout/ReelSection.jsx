@@ -48,7 +48,7 @@
 
 //       {/* Title */}
 //       <div className="text-center mb-8">
-//         <h2 className="text-xl md:text-3xl font-bold text-[#820c0c]">
+//         <h2 className="text-xl md:text-3xl font-bold text-[#03349a]">
 //           Real People Real Stories
 //         </h2>
 //         <p className="text-sm md:text-lg mt-2 font-semibold text-gray-700">
@@ -155,7 +155,7 @@ export default function VideoCarousel() {
 
       {/* Title */}
       <div className="text-center mb-8">
-        <h2 className="text-xl md:text-3xl font-bold text-[#820c0c]">
+        <h2 className="text-xl md:text-3xl font-bold text-[#03349a]">
           Real People Real Stories
         </h2>
         <p className="text-sm md:text-lg mt-2 font-semibold text-gray-700">

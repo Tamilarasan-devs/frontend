@@ -56,7 +56,7 @@ export default function Login() {
         @keyframes slideUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
         .slide-up { animation: slideUp 0.55s cubic-bezier(0.16,1,0.3,1) both; }
         .inp-field { transition: border-color 0.2s, box-shadow 0.2s; }
-        .inp-field:focus { outline: none; border-color: #820c0c; box-shadow: 0 0 0 3px rgba(130,12,12,0.10); }
+        .inp-field:focus { outline: none; border-color: #03349a; box-shadow: 0 0 0 3px rgba(130,12,12,0.10); }
         .inp-field::placeholder { color: #d1bfbf; }
         .submit-btn { transition: transform 0.15s, box-shadow 0.15s; }
         .submit-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(130,12,12,0.32) !important; }
@@ -73,7 +73,7 @@ export default function Login() {
           {/* ════ LEFT PANEL ════ */}
           <div
             className="lg:w-[42%] relative flex flex-col justify-between px-10 py-12 overflow-hidden"
-            style={{ background: "linear-gradient(155deg, #820c0c 0%, #5a0808 55%, #3a0404 100%)" }}
+            style={{ background: "linear-gradient(155deg, #03349a 0%, #5a0808 55%, #3a0404 100%)" }}
           >
             {/* Background blobs */}
             <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.04)" }} />
@@ -147,19 +147,19 @@ export default function Login() {
 
             {/* Mobile logo */}
             <div className="flex lg:hidden items-center gap-2 mb-8">
-              <div className="w-8 h-8 rounded-lg bg-[#820c0c] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#03349a] flex items-center justify-center">
                 <span className="text-white font-black text-sm">W</span>
               </div>
-              <span className="text-[#820c0c] font-bold text-lg">Aayubakwath</span>
+              <span className="text-[#03349a] font-bold text-lg">Aayubakwath</span>
             </div>
 
             {/* Heading */}
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-3">
-                <div className="h-[3px] w-5 rounded-full bg-[#820c0c]" />
-                <span className="text-[16px] font-extrabold tracking-[3px] uppercase text-[#820c0c]/55">Sign In</span>
+                <div className="h-[3px] w-5 rounded-full bg-[#03349a]" />
+                <span className="text-[16px] font-extrabold tracking-[3px] uppercase text-[#03349a]/55">Sign In</span>
               </div>
-              <h1 className="text-2xl font-black text-[#820c0c] mb-1.5">
+              <h1 className="text-2xl font-black text-[#03349a] mb-1.5">
                 Welcome Back
               </h1>
               <p className="text-gray-600 text-md  font-black">Enter your credentials to access your account.</p>
@@ -170,11 +170,11 @@ export default function Login() {
 
               {/* Email */}
               <div>
-                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">
+                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">
                   Email Address
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "email" ? "#820c0c" : "#d1bfbf" }}>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "email" ? "#03349a" : "#d1bfbf" }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
                     </svg>
@@ -191,15 +191,15 @@ export default function Login() {
               {/* Password */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c]">
+                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a]">
                     Password
                   </label>
-                  <a href="forgot-password" className="text-md text-[#820c0c] font-bold hover:underline">
+                  <a href="forgot-password" className="text-md text-[#03349a] font-bold hover:underline">
                     Forgot password?
                   </a>
                 </div>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "password" ? "#820c0c" : "#d1bfbf" }}>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "password" ? "#03349a" : "#d1bfbf" }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
@@ -226,8 +226,8 @@ export default function Login() {
                     htmlFor="remember"
                     className="w-5 h-5 rounded-md flex items-center justify-center cursor-pointer transition-all duration-200"
                     style={{
-                      background: form.remember ? "#820c0c" : "white",
-                      border: `2px solid ${form.remember ? "#820c0c" : "#e5e7eb"}`,
+                      background: form.remember ? "#03349a" : "white",
+                      border: `2px solid ${form.remember ? "#03349a" : "#e5e7eb"}`,
                     }}
                   >
                     {form.remember && (
@@ -248,7 +248,7 @@ export default function Login() {
                 disabled={mutation.isLoading}
                 className="submit-btn w-full py-3.5 rounded-xl text-white text-sm font-extrabold tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{
-                  background: "linear-gradient(135deg, #820c0c 0%, #a81010 100%)",
+                  background: "linear-gradient(135deg, #03349a 0%, #a81010 100%)",
                   boxShadow: "0 8px 24px rgba(130,12,12,0.25)",
                 }}
               >
@@ -275,7 +275,7 @@ export default function Login() {
             {/* Register link */}
             <p className="mt-5 text-center text-sm font-semibold text-gray-600">
               Don't have an account?{" "}
-              <a href="register" className="text-[#820c0c] font-extrabold hover:underline">Create Account</a>
+              <a href="register" className="text-[#03349a] font-extrabold hover:underline">Create Account</a>
             </p>
 
             {/* Security note */}

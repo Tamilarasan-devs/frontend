@@ -56,7 +56,7 @@ export default function Dealership() {
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@300;400;500;600;700&display=swap');
 
         *, *::before, *::after { box-sizing: border-box; }
-        :root { --red:#820c0c; --amber:#c9643a; --cream:#fdf8f4; }
+        :root { --red:#03349a; --amber:#c9643a; --cream:#fdf8f4; }
 
         
 

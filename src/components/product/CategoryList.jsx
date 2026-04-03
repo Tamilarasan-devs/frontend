@@ -68,9 +68,9 @@ const allImages = (banners || []).flatMap(item =>
   }))
 );
 
-// const images=[
-//   cate1,cate2,cate3,cate4,cate5
-// ]
+const images=[
+  cate1,cate2,cate3,cate4,cate5
+]
 
 
   return (
@@ -101,7 +101,8 @@ const allImages = (banners || []).flatMap(item =>
           transition: "opacity 0.6s ease, transform 0.6s ease",
         }}
       >
-        Explore Our Categories
+        Explore Our <span className="text-[#03349a]">Categories</span>
+        
         <span
           className="block h-1 mx-auto mt-2 rounded-full"
           style={{
@@ -166,6 +167,7 @@ const allImages = (banners || []).flatMap(item =>
         transition: `all 0.6s ease ${0.1 * i}s`,
       }}
     >
+     
       <div
         className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
         onClick={() => navigate("/productListing")}

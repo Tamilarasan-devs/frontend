@@ -4,14 +4,10 @@ import mission from '../assets/images/fam.jpeg';
 import vision from '../assets/images/oldpa.jpeg';
 import FeaturesSection from "./AboutCard";
 // import bnr from '../assets/images/bn.png';
-import img0 from '../assets/images/ourbegin.jpeg';
+import img0 from '../assets/images/bo.jpg';
 import img1 from '../assets/images/nat.jpeg';
 import img2 from '../assets/images/resr.jpeg';
 import img3 from '../assets/images/resar.jpeg';
-import iconbc1 from "../assets/images/icon-bc1.svg";
-import iconbc2 from "../assets/images/icon-bc2.svg";
-import iconbc3 from "../assets/images/icon-bc3.svg";
-import iconbc4 from "../assets/images/icon-bc4.svg";
 import {  useNavigate} from 'react-router-dom'
 import OurBusiness from "./AboutPage";
 import AboutAayubakwath from "./AboutAaya";
@@ -66,11 +62,11 @@ function Label({ text }) {
 function Divider() {
   return (
     <div className="flex items-center justify-center gap-2 my-6">
-      <div className="w-12 h-px bg-[#820c0c] opacity-30" />
+      <div className="w-12 h-px bg-[#03349a] opacity-30" />
       <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
-      <div className="w-2 h-2 rounded-full bg-[#820c0c]" />
+      <div className="w-2 h-2 rounded-full bg-[#03349a]" />
       <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
-      <div className="w-12 h-px bg-[#820c0c] opacity-30" />
+      <div className="w-12 h-px bg-[#03349a] opacity-30" />
     </div>
   );
 }
@@ -198,7 +194,7 @@ export default function About() {
         .hero-text { animation: slideUp 0.9s ease 0.4s both; }
 
         .gradient-text {
-          background: linear-gradient(135deg, #820c0c 0%, #c9643a 50%, #820c0c 100%);
+          background: linear-gradient(135deg, #03349a 0%, #c9643a 50%, #03349a 100%);
           background-size: 200% auto;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -227,7 +223,7 @@ export default function About() {
         .accent-bar {
           display: inline-block;
           width: 48px; height: 3px;
-          background: linear-gradient(to right, #820c0c, #c9643a);
+          background: linear-gradient(to right, #03349a, #c9643a);
           border-radius: 99px;
         }
       `}</style>
@@ -272,7 +268,7 @@ export default function About() {
                         className=" w-full  h-full"
                       />
                       {/* Corner accent */}
-                      {/* <div className={`absolute top-0 ${i % 2 === 1 ? "left-0 rounded-tl-[32px]" : "right-0 rounded-tr-[32px]"} w-20 h-20 bg-gradient-to-br from-[#820c0c]/20 to-transparent`} /> */}
+                      {/* <div className={`absolute top-0 ${i % 2 === 1 ? "left-0 rounded-tl-[32px]" : "right-0 rounded-tr-[32px]"} w-20 h-20 bg-gradient-to-br from-[#03349a]/20 to-transparent`} /> */}
                     </div>
                   </div>
                   {/* Text */}
@@ -311,11 +307,11 @@ export default function About() {
         />
 
         <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-2xl shadow-xl max-w-sm">
-          <span className="text-sm text-[#820c0c] font-semibold tracking-wider">
+          <span className="text-sm text-[#03349a] font-semibold tracking-wider">
             OUR PURPOSE
           </span>
 
-          <h2 className="text-3xl font-bold text-[#820c0c] mt-2 display-font">
+          <h2 className="text-3xl font-bold text-[#03349a] mt-2 display-font">
             Our Mission
           </h2>
 
@@ -327,7 +323,7 @@ export default function About() {
 
       {/* Text */}
       <div>
-        <h3 className="text-4xl font-bold text-[#820c0c] mb-6 display-font">
+        <h3 className="text-4xl font-bold text-[#03349a] mb-6 display-font">
         At Aayubakwath, our mission is centered around three core values:
         </h3>
 
@@ -352,7 +348,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
 
       {/* Text */}
       <div className="order-2 md:order-1">
-        <h3 className="text-4xl font-bold text-[#820c0c] mb-6 display-font">
+        <h3 className="text-4xl font-bold text-[#03349a] mb-6 display-font">
           Shaping the Future of Herbal Wellness
         </h3>
 
@@ -374,11 +370,11 @@ Wellness – Support healthier lifestyles through effective nutritional support.
         />
 
         <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-2xl shadow-xl max-w-sm">
-          <span className="text-sm text-[#820c0c] font-semibold tracking-wider">
+          <span className="text-sm text-[#03349a] font-semibold tracking-wider">
             OUR FUTURE
           </span>
 
-          <h2 className="text-3xl font-bold text-[#820c0c] mt-2 display-font">
+          <h2 className="text-3xl font-bold text-[#03349a] mt-2 display-font">
             Our Vision
           </h2>
 
@@ -655,7 +651,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
             <Reveal>
               <div>
                 <Label text="Quality Assurance" />
-                <h2 className="display-font text-4xl md:text-5xl font-bold text-[#820c0c] mb-2">
+                <h2 className="display-font text-4xl md:text-5xl font-bold text-[#03349a] mb-2">
                   Our Commitment<br />to Quality
                 </h2>
                 <span className="accent-bar mb-8 block" />
@@ -671,7 +667,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
 
             <Reveal delay={0.15}>
               <div>
-                <h3 className="display-font text-3xl font-semibold text-[#820c0c] mb-2">Our Products Are:</h3>
+                <h3 className="display-font text-3xl font-semibold text-[#03349a] mb-2">Our Products Are:</h3>
                 <span className="accent-bar mb-8 block" />
                 <div className="space-y-4">
                   {commitItems.map((item, i) => (
@@ -679,7 +675,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
                       key={i}
                       className="bg-white rounded-2xl p-6 border border-[#f0e4d4] shadow-sm card-hover flex items-start gap-4"
                     >
-                      <span className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-[#820c0c]/10 to-[#c9643a]/15 flex items-center justify-center text-[#820c0c] font-bold text-sm">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-[#03349a]/10 to-[#c9643a]/15 flex items-center justify-center text-[#03349a] font-bold text-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <p className="text-gray-800 leading-relaxed pt-0.5 font-semibold">{item}</p>
@@ -695,7 +691,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
       <section className="relative py-20 px-6 overflow-hidden">
 
   {/* Background Gradient */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#820c0c] via-[#a63a1f] to-[#c9643a]" />
+  <div className="absolute inset-0 bg-gradient-to-br from-[#03349a] via-[#a63a1f] to-[#c9643a]" />
 
   {/* Soft Glow Effects */}
   <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-white/10 rounded-full blur-3xl" />
@@ -719,7 +715,7 @@ Wellness – Support healthier lifestyles through effective nutritional support.
     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
       
 
-      <button className="border border-white/70 px-8 py-3 rounded-full font-semibold hover:bg-[#820c0c] transition" onClick={()=>navigate('/contact')}>
+      <button className="border border-white/70 px-8 py-3 rounded-full font-semibold hover:bg-[#03349a] transition" onClick={()=>navigate('/contact')}>
         Contact Us
       </button>
     </div>
@@ -742,17 +738,17 @@ function ProductCard({ icon, name, desc }) {
     >
       {/* Animated left accent bar */}
       <div
-        className="absolute top-0 left-0 w-[3px] rounded-r-full bg-gradient-to-b from-[#820c0c] to-[#c9643a]"
+        className="absolute top-0 left-0 w-[3px] rounded-r-full bg-gradient-to-b from-[#03349a] to-[#c9643a]"
         style={{ height: hov ? "100%" : "0%", transition: "height 0.4s ease" }}
       />
       {/* Icon */}
-      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#820c0c]/08 to-[#c9643a]/12 flex items-center justify-center text-2xl mb-5 border border-[#f0e4d4]">
+      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#03349a]/08 to-[#c9643a]/12 flex items-center justify-center text-2xl mb-5 border border-[#f0e4d4]">
         {icon}
       </div>
       {/* Name */}
       <h3
         className="font-['Cormorant_Garamond'] text-xl font-bold mb-3 leading-snug"
-        style={{ color: "#820c0c" }}
+        style={{ color: "#03349a" }}
       >
         {name}
       </h3>
@@ -760,7 +756,7 @@ function ProductCard({ icon, name, desc }) {
       <p className="text-gray-800 font-semibold text-md leading-relaxed">{desc}</p>
       {/* Bottom hover line */}
       <div
-        className="absolute bottom-0 left-6 h-[2px] rounded-full bg-gradient-to-r from-[#820c0c] to-[#c9643a]"
+        className="absolute bottom-0 left-6 h-[2px] rounded-full bg-gradient-to-r from-[#03349a] to-[#c9643a]"
         style={{ width: hov ? "calc(100% - 48px)" : "0%", transition: "width 0.4s ease" }}
       />
     </div>

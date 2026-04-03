@@ -50,11 +50,11 @@ function Reveal({ children, delay = 0, className = "" }) {
 const BotanicalCircle = ({ style }) => (
   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", pointerEvents: "none", ...style }}>
     <circle cx="100" cy="100" r="90" stroke="#c9643a" strokeWidth="0.6" fill="none" strokeDasharray="6 8" opacity="0.3" />
-    <circle cx="100" cy="100" r="68" stroke="#820c0c" strokeWidth="0.4" fill="none" opacity="0.15" />
+    <circle cx="100" cy="100" r="68" stroke="#03349a" strokeWidth="0.4" fill="none" opacity="0.15" />
     <path d="M100 10 C100 10 130 50 100 100 C70 50 100 10 100 10Z" fill="#c9643a" opacity="0.08" />
-    <path d="M100 190 C100 190 70 150 100 100 C130 150 100 190 100 190Z" fill="#820c0c" opacity="0.06" />
+    <path d="M100 190 C100 190 70 150 100 100 C130 150 100 190 100 190Z" fill="#03349a" opacity="0.06" />
     <path d="M10 100 C10 100 50 70 100 100 C50 130 10 100 10 100Z" fill="#c9643a" opacity="0.06" />
-    <path d="M190 100 C190 100 150 130 100 100 C150 70 190 100 190 100Z" fill="#820c0c" opacity="0.05" />
+    <path d="M190 100 C190 100 150 130 100 100 C150 70 190 100 190 100Z" fill="#03349a" opacity="0.05" />
   </svg>
 );
 
@@ -80,7 +80,7 @@ function Card({ num, icon, label, heading, body, delay }) {
           transition: "all 0.5s cubic-bezier(.22,1,.36,1)",
           transform: hovered ? "translateY(-8px)" : "translateY(0)",
           boxShadow: hovered
-            ? "0 32px 64px -16px #c9643a28, 0 8px 24px -8px #820c0c14, 0 0 0 1px #c9643a18"
+            ? "0 32px 64px -16px #c9643a28, 0 8px 24px -8px #03349a14, 0 0 0 1px #c9643a18"
             : "0 4px 24px -6px #b8906840, 0 1px 4px #e8cbb820",
         }}
       >
@@ -111,11 +111,11 @@ function Card({ num, icon, label, heading, body, delay }) {
         <div style={{
           width: "64px", height: "64px", borderRadius: "20px",
           background: hovered
-            ? "linear-gradient(135deg, #820c0c, #d9643a)"
+            ? "linear-gradient(135deg, #03349a, #d9643a)"
             : "linear-gradient(135deg, #9a1a0e, #c9643a)",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: "28px",
-          boxShadow: hovered ? "0 16px 36px #820c0c50" : "0 8px 20px #820c0c2a",
+          boxShadow: hovered ? "0 16px 36px #03349a50" : "0 8px 20px #03349a2a",
           marginBottom: "28px",
           transition: "all 0.5s ease",
           transform: hovered ? "scale(1.06) rotate(-2deg)" : "scale(1) rotate(0deg)",
@@ -200,7 +200,7 @@ function StatBadge({ value, label, delay }) {
       }}>
         <div style={{
           fontSize: "clamp(2rem, 4vw, 2.8rem)",
-          fontWeight: 700, color: "#820c0c",
+          fontWeight: 700, color: "#03349a",
           lineHeight: 1, marginBottom: "8px",
           letterSpacing: "-0.02em",
         }}>
@@ -305,7 +305,7 @@ export default function AboutAayubakwath() {
               }}>
                 <span style={{
                   width: "6px", height: "6px", borderRadius: "50%",
-                  background: "linear-gradient(135deg, #820c0c, #c9643a)",
+                  background: "linear-gradient(135deg, #03349a, #c9643a)",
                   display: "inline-block",
                   animation: "pulse-dot 2s ease infinite",
                 }} />
@@ -329,7 +329,7 @@ export default function AboutAayubakwath() {
               }}>
                 About{" "}
                 <span style={{
-                  background: "linear-gradient(135deg, #820c0c 0%, #c9643a 60%, #e8845a 100%)",
+                  background: "linear-gradient(135deg, #03349a 0%, #c9643a 60%, #e8845a 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}>
@@ -352,7 +352,7 @@ export default function AboutAayubakwath() {
                 <div style={{ height: "1px", width: "60px", background: "linear-gradient(to right, transparent, #c9643a)" }} />
                 <div style={{
                   width: "8px", height: "8px", borderRadius: "50%",
-                  background: "linear-gradient(135deg, #820c0c, #c9643a)",
+                  background: "linear-gradient(135deg, #03349a, #c9643a)",
                   boxShadow: "0 0 10px #c9643a60",
                 }} />
                 <div style={{ height: "1px", width: "60px", background: "linear-gradient(to left, transparent, #c9643a)" }} />
@@ -397,7 +397,7 @@ export default function AboutAayubakwath() {
               <div style={{
                 position: "absolute", left: 0, top: "15%", bottom: "15%",
                 width: "4px", borderRadius: "0 4px 4px 0",
-                background: "linear-gradient(to bottom, #820c0c, #c9643a, #f0a070)",
+                background: "linear-gradient(to bottom, #03349a, #c9643a, #f0a070)",
               }} />
 
               {/* Top shimmer */}

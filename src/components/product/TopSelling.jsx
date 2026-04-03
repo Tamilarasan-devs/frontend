@@ -5,7 +5,7 @@ import cate1 from '../../assets/images/prod/pro5.jpeg'
 import cate5 from '../../assets/images/prod/pro1.jpeg'
 import ProductCard from "./ProductCard";
 import { axiosInstance } from "../../utils/axiosInstance";
-import {products} from '../../services/productData'
+// import {products} from '../../services/productData'
 // const products = [
 //   { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic. ffrwerwrt rtwert ewrtwert", rating: 4.5, reviews: 248, badge: "New Launches", image: cate1, hoverImage: cate5, tags: ["Spicy", "Healthy", "Indian"] },
 //   { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Skin Care", "Herbal", "Refresh"] },
@@ -35,7 +35,7 @@ function ArrowBtn({ dir, onClick }) {
       onClick={onClick}
       className="w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-700 text-lg
         flex items-center justify-center cursor-pointer flex-shrink-0
-        hover:bg-[#820c0c] hover:text-white hover:border-[#820c0c]
+        hover:bg-[#03349a] hover:text-white hover:border-[#03349a]
         hover:shadow-[0_4px_14px_rgba(130,12,12,0.25)]
         shadow-[0_1px_4px_rgba(0,0,0,0.07)]
         transition-all duration-200 ease-in-out"
@@ -145,7 +145,7 @@ function ArrowBtn({ dir, onClick }) {
 //           {product.tags.map((t, i) => (
 //             <span
 //               key={i}
-//               className="text-[9.5px] px-2.5 py-[3px] rounded-full bg-[#820c0c] text-white
+//               className="text-[9.5px] px-2.5 py-[3px] rounded-full bg-[#03349a] text-white
 //                 font-bold tracking-[.05em] uppercase shadow-sm w-fit"
 //             >
 //               {t}
@@ -177,7 +177,7 @@ function ArrowBtn({ dir, onClick }) {
 //           <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
 //             {product.name}
 //           </h3>
-//           <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#820c0c]" />
+//           <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#03349a]" />
 //         </div>
 
 //         {/* Description */}
@@ -223,7 +223,7 @@ function ArrowBtn({ dir, onClick }) {
 
 //         {/* Price */}
 //         <div className="flex items-baseline gap-1.5 mt-2.5 mb-1.5">
-//           <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#820c0c]">
+//           <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#03349a]">
 //             ₹{product.price}
 //           </span>
 //           <span className="text-[13px] text-gray-400 line-through">
@@ -236,7 +236,7 @@ function ArrowBtn({ dir, onClick }) {
 
 //         {/* Promo code */}
 //         <div
-//           className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed text-[#820c0c] bg-[#fff4f4]"
+//           className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed text-[#03349a] bg-[#fff4f4]"
 //           style={{ borderColor: "rgba(130,12,12,.25)" }}
 //         >
 //           Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
@@ -253,7 +253,7 @@ function ArrowBtn({ dir, onClick }) {
 //             rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none
 //             transition-all duration-300 ease-in-out"
 //           style={{
-//             background: btnHov ? "#c9643a" : "#820c0c",
+//             background: btnHov ? "#c9643a" : "#03349a",
 //             boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
 //           }}
 //         >
@@ -390,7 +390,7 @@ export default function TopSelling() {
     const ratio = (e.clientX - rect.left) / rect.width;
     el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
   };
-// const [products, setProducts] = useState([]);
+const [products, setProducts] = useState([]);
  console.log('data :',products)
   const [loading, setLoading] = useState(true);
 
@@ -458,7 +458,7 @@ export default function TopSelling() {
             className="font-bold text-[#111827] leading-tight"
             style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
           >
-            Shop by <span className="text-[#820c0c]">Category</span>
+            Shop by <span className="text-[#03349a]">Category</span>
           </h2>
         </div>
 
@@ -470,7 +470,7 @@ export default function TopSelling() {
           }}
         >
           <div
-            className="h-[2.5px] bg-[#820c0c] rounded-full"
+            className="h-[2.5px] bg-[#03349a] rounded-full"
             style={{
               width: headerVisible ? 36 : 0,
               transition: "width 0.7s ease 0.3s",
@@ -538,7 +538,7 @@ export default function TopSelling() {
               style={{
                 width:      `${thumbW}%`,
                 left:       `${thumbL}%`,
-                background: "linear-gradient(to right, #c9643a, #820c0c)",
+                background: "linear-gradient(to right, #c9643a, #03349a)",
                 boxShadow:  "0 0 8px rgba(201,100,58,.5)",
                 cursor:     dragging && isThumb.current ? "grabbing" : "grab",
                 transition: dragging ? "none" : "left .08s linear, width .15s ease",
@@ -559,7 +559,7 @@ export default function TopSelling() {
                   style={{
                     width: i === active ? 26 : 8,
                     background: i === active
-                      ? "linear-gradient(to right, #c9643a, #820c0c)"
+                      ? "linear-gradient(to right, #c9643a, #03349a)"
                       : "#e5e7eb",
                     boxShadow: i === active ? "0 0 6px rgba(201,100,58,.4)" : "none",
                     transition: "all .28s cubic-bezier(.22,.68,0,1.2)",

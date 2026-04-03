@@ -9,7 +9,7 @@ export default function VideoPage() {
         autoPlay
         loop
         muted
-        className="w-full h-[100] object-cover"
+        className="w-full h-full object-cover"
       />
     </div>
   );

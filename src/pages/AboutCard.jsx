@@ -1,6 +1,6 @@
 import React from 'react'
 // import img from '../assets/images/your-product-image.webp' // replace with your actual image path
-import btl from '../assets/images/btl.jpeg'
+import btl from '../assets/images/vit.jpg'
 const leftFeatures = [
   {
     icon: (
@@ -74,8 +74,8 @@ export default function FeaturesSection() {
           {/* ── Section Heading ── */}
           <div className="text-center mb-12">
             <p
-              className="text-2xl sm:text-3xl font-bold text-center text-[#820c0c] mb-2"
-              style={{ color: "#820c0c" }}
+              className="text-2xl sm:text-3xl font-bold text-center text-[#03349a] mb-2"
+              style={{ color: "#03349a" }}
             >
               Why Choose Us
             </p>
@@ -88,7 +88,7 @@ export default function FeaturesSection() {
               Our Promises to You
             </h2>
             <div className="flex items-center justify-center gap-2 mt-3">
-              <div className="w-8 h-0.5 rounded-full" style={{ background: "#820c0c" }} />
+              <div className="w-8 h-0.5 rounded-full" style={{ background: "#03349a" }} />
               <div className="w-2 h-2 rounded-full opacity-60" style={{ background: "#c9643a" }} />
               <div className="w-4 h-0.5 rounded-full" style={{ background: "#f0ece8" }} />
             </div>
@@ -108,7 +108,7 @@ export default function FeaturesSection() {
                     className="flex-shrink-0 p-2.5 rounded-xl"
                     style={{
                       background: "linear-gradient(135deg, rgba(201,100,58,0.15), rgba(130,12,12,0.1))",
-                      color: "#820c0c",
+                      color: "#03349a",
                     }}
                   >
                     {f.icon}
@@ -187,7 +187,7 @@ export default function FeaturesSection() {
                     className="flex-shrink-0 p-2.5 rounded-xl"
                     style={{
                       background: "linear-gradient(135deg, rgba(201,100,58,0.15), rgba(130,12,12,0.1))",
-                      color: "#820c0c",
+                      color: "#03349a",
                     }}
                   >
                     {f.icon}

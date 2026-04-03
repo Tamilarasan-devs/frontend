@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const BRAND = "#820c0c";
+const BRAND = "#03349a";
 const ACCENT = "#c9643a";
 
 const initialCart = [

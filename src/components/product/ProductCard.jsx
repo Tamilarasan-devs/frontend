@@ -13,8 +13,7 @@ const CARD_W = 402;
 const CARD_GAP = 20;
 export default  function ProductCard({ product, animDelay, sectionVisible }) {
 console.log('shop page :',product)
-    // console.log('. for catgoiyr',product)
-// const API_URL = "https://aayubakwath-backend.onrender.com/";
+
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
@@ -22,6 +21,7 @@ console.log('shop page :',product)
   const navigate = useNavigate();
 
   // Trigger card entrance after section becomes visible + stagger delay
+
   useEffect(() => {
     if (!sectionVisible) return;
     const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
@@ -41,7 +41,7 @@ const badgeColors = {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       onMouseDown={(e) => e.stopPropagation()}
-      className="flex-shrink-0  rounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none w-full sm:w-[48%] md:w-[300px] lg:w-[340px] xl:w-[400px]"
+      className="flex-shrink-0  rounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none w-full sm:w-[48%] md:w-[300px] lg:w-[340px] xl:w-[450px]"
       style={{
         
         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
@@ -80,11 +80,11 @@ const badgeColors = {
 >
         {/* Primary image */}
         <img
-          src={ product.productImages[0]}
-          // src={API_URL + product.productImages[0]}
+          // src={ product.productImages[0]}
+          src={API_URL + product.productImages[0]}
           alt={product.productName}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-cover "
+          className="absolute inset-0 w-full h-full object-contain "
           style={{
             opacity: hov ? 0 : 1,
             transform: hov ? "scale(1.06)" : "scale(1)",
@@ -93,37 +93,17 @@ const badgeColors = {
         />
         {/* Hover image */}
         <img
-          src={ product.productImages[1]}
-          // src={API_URL + product.productImages[1]}
+          // src={ product.productImages[1]}
+          src={API_URL + product.productImages[1]}
           alt={product.productName}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain"
           style={{
             opacity: hov ? 1 : 0,
             transform: hov ? "scale(1)" : "scale(1.06)",
             transition: "opacity .4s ease, transform .6s ease",
           }}
         />
-
-        {/* Tags — bottom-left, revealed on hover */}
-        {/* <div
-          className="absolute bottom-2 left-2 flex flex-col gap-1 z-10"
-          style={{
-            opacity: hov ? 1 : 0,
-            transform: hov ? "translateY(0)" : "translateY(6px)",
-            transition: "opacity .25s ease, transform .25s ease",
-          }}
-        >
-          {product.productTags.map((t, i) => (
-            <span
-              key={i}
-              className="text-[9.5px] px-2.5 py-[3px] rounded-full bg-[#820c0c] text-white
-                font-bold tracking-[.05em] uppercase shadow-sm w-fit"
-            >
-              {t}
-            </span>
-          ))}
-        </div> */}
 
         {/* Discount ribbon — top-right corner */}
         <div

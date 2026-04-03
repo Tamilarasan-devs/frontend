@@ -6,7 +6,7 @@ import {
 } from "react-icons/fa";
 import { MdOutlineInventory2 } from "react-icons/md";
 
-const BRAND  = "#820c0c";
+const BRAND  = "#03349a";
 const ACCENT = "#c9643a";
 
 // ─── Demo Data ────────────────────────────────────────────────
@@ -171,7 +171,7 @@ export default function TrackOrder() {
         .to-sbtn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 10px 28px rgba(130,12,12,.3) !important; }
         .to-sbtn:active { transform:scale(.97) !important; }
         .to-dtag { transition:all .2s ease; cursor:pointer; user-select:none; }
-        .to-dtag:hover { background:rgba(130,12,12,.08) !important; border-color:rgba(130,12,12,.25) !important; color:#820c0c !important; }
+        .to-dtag:hover { background:rgba(130,12,12,.08) !important; border-color:rgba(130,12,12,.25) !important; color:#03349a !important; }
         .to-srow { transition:background .2s, border-color .2s; }
         .to-srow:hover { background:#fff8f4 !important; }
         .to-icard { transition:all .3s ease; }

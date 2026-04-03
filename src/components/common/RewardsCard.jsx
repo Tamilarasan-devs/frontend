@@ -32,7 +32,7 @@ export default function RewardsCard() {
       >
         <Gift size={26} />
         <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-white text-[9px] font-black flex items-center justify-center border-2 border-white"
-          style={{ background: "#820c0c" }}>3</span>
+          style={{ background: "#03349a" }}>3</span>
       </button>
 
       {/* ── Modal ── */}
@@ -47,7 +47,7 @@ export default function RewardsCard() {
 
             {/* ── Hero Top ── */}
             <div className="relative overflow-hidden px-6 pt-8 pb-10"
-              style={{ background: "linear-gradient(135deg, #820c0c 0%, #5a0808 60%, #3a0404 100%)" }}
+              style={{ background: "linear-gradient(135deg, #03349a 0%, #5a0808 60%, #3a0404 100%)" }}
               
               >
 
@@ -109,7 +109,7 @@ Aayubakwath Rewards</em>
               <div className="flex gap-3 mb-5 slide-up" style={{ animationDelay: "0.1s" }}>
                 <button
                   className="flex-1 py-3 rounded-2xl text-white text-sm font-bold tracking-wide transition-all hover:opacity-90 active:scale-[0.97] flex items-center justify-center gap-2"
-                  style={{ background: "linear-gradient(135deg, #820c0c, #a81010)", boxShadow: "0 6px 20px rgba(130,12,12,0.3)" }}
+                  style={{ background: "linear-gradient(135deg, #03349a, #a81010)", boxShadow: "0 6px 20px rgba(130,12,12,0.3)" }}
                 >
                   <Sparkles size={14} />
                   Join Now
@@ -151,12 +151,12 @@ Aayubakwath Rewards</em>
                   style={{ borderColor: "#f5f5f5", background: "#faf7f2" }}>
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center"
                     style={{ background: "rgba(130,12,12,0.08)" }}>
-                    <Users size={13} style={{ color: "#820c0c" }} />
+                    <Users size={13} style={{ color: "#03349a" }} />
                   </div>
                   <p className="font-bold text-gray-800 text-sm">Referral Program</p>
                   <span
                     className="ml-auto text-[9px] tracking-widest uppercase font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: "rgba(130,12,12,0.08)", color: "#820c0c" }}
+                    style={{ background: "rgba(130,12,12,0.08)", color: "#03349a" }}
                   >
                     Active
                   </span>
@@ -174,7 +174,7 @@ Aayubakwath Rewards</em>
                     <div className="p-3 rounded-xl text-center"
                       style={{ background: "rgba(130,12,12,0.04)", border: "1.5px solid rgba(130,12,12,0.12)" }}>
                       <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-1">You get</p>
-                      <p className="font-black text-sm" style={{ color: "#820c0c" }}>100 Points</p>
+                      <p className="font-black text-sm" style={{ color: "#03349a" }}>100 Points</p>
                       <p className="text-[10px]" style={{ color: "#a83030" }}>≈ ₹100 off</p>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ Aayubakwath Rewards</em>
                     >
                       {copied
                         ? <Check size={12} className="text-green-600" />
-                        : <Copy size={12} style={{ color: "#820c0c" }} />}
+                        : <Copy size={12} style={{ color: "#03349a" }} />}
                     </button>
                   </div>
                 </div>

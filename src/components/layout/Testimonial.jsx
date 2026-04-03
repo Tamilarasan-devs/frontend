@@ -49,10 +49,10 @@ const testimonials = [
 ];
 
 const stats = [
-  { icon: Users,      value: "10K+", label: "Happy Customers",  bg: "bg-orange-50",  icon_color: "text-orange-500" },
-  { icon: TrendingUp, value: "4.8★", label: "Average Rating",   bg: "bg-amber-50",   icon_color: "text-amber-500"  },
-  { icon: ShieldCheck,value: "100%", label: "Verified Reviews", bg: "bg-emerald-50", icon_color: "text-emerald-500"},
-  { icon: Award,      value: "50+",  label: "Awards Won",       bg: "bg-blue-50",    icon_color: "text-blue-500"   },
+  { icon: Users,       value: "10K+", label: "Happy Customers",  bg: "bg-blue-50",   icon_color: "text-blue-600"  },
+  { icon: TrendingUp,  value: "4.8★", label: "Average Rating",   bg: "bg-indigo-50", icon_color: "text-indigo-500"},
+  { icon: ShieldCheck, value: "100%", label: "Verified Reviews", bg: "bg-sky-50",    icon_color: "text-sky-500"   },
+  { icon: Award,       value: "50+",  label: "Awards Won",       bg: "bg-blue-50",   icon_color: "text-blue-700"  },
 ];
 
 const ratingRows = [
@@ -64,9 +64,9 @@ const ratingRows = [
 ];
 
 const trustItems = [
-  { emoji: "🌿", text: "100% Natural" },
+  { emoji: "🌿", text: "100% Natural"  },
   { emoji: "🧪", text: "Lab Certified" },
-  { emoji: "♻️", text: "Eco Sourced"  },
+  { emoji: "♻️", text: "Eco Sourced"   },
   { emoji: "🚫", text: "No Additives"  },
 ];
 
@@ -89,14 +89,13 @@ export default function Testimonial() {
   const [animating, setAnimating] = useState(false);
   const timerRef = useRef(null);
 
-  // --- Scroll animation state ---
-  const sectionRef       = useRef(null);
-  const [headerVis,   setHeaderVis]   = useState(false);
-  const [statsVis,    setStatsVis]    = useState(false);
-  const [leftVis,     setLeftVis]     = useState(false);
-  const [rightVis,    setRightVis]    = useState(false);
-  const [trustVis,    setTrustVis]    = useState(false);
-  const [ratingBars,  setRatingBars]  = useState(false);
+  const sectionRef      = useRef(null);
+  const [headerVis,  setHeaderVis]  = useState(false);
+  const [statsVis,   setStatsVis]   = useState(false);
+  const [leftVis,    setLeftVis]    = useState(false);
+  const [rightVis,   setRightVis]   = useState(false);
+  const [trustVis,   setTrustVis]   = useState(false);
+  const [ratingBars, setRatingBars] = useState(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -116,7 +115,6 @@ export default function Testimonial() {
     if (sectionRef.current) obs.observe(sectionRef.current);
     return () => obs.disconnect();
   }, []);
-  // --- End scroll animation state ---
 
   const go = (dir) => {
     if (animating) return;
@@ -145,25 +143,31 @@ export default function Testimonial() {
   const t = testimonials[current];
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-white flex items-center justify-center p-5 md:p-10">
-
+    <div
+      ref={sectionRef}
+      className="min-h-screen flex items-center justify-center"
+      style={{
+        background: "linear-gradient(160deg, #f0f5ff 0%, #e8eeff 60%, #dce8ff 100%)",
+        padding: "clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem)",
+      }}
+    >
       <style>{`
         .card-anim { transition: opacity 0.28s ease, transform 0.28s ease; }
-        .card-visible  { opacity: 1; transform: translateY(0)    scale(1); }
-        .card-hidden   { opacity: 0; transform: translateY(10px) scale(0.99); }
+        .card-visible { opacity: 1; transform: translateY(0) scale(1); }
+        .card-hidden  { opacity: 0; transform: translateY(10px) scale(0.99); }
         .reviewer-item { transition: all 0.18s ease; }
-        .reviewer-item:hover { background: #fff7f3; }
+        .reviewer-item:hover { background: #eef3ff; }
         .stat-tile { transition: all 0.2s ease; }
-        .stat-tile:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(234,88,12,0.12); }
+        .stat-tile:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(3,52,154,0.13); }
         .nav-btn { transition: all 0.2s ease; }
-        .nav-btn:hover { background: #ea580c !important; border-color: #ea580c !important; color: white !important; }
+        .nav-btn:hover { background: #03349a !important; border-color: #03349a !important; color: white !important; }
         .helpful-btn { transition: all 0.18s ease; }
-        .helpful-btn:hover { background: #fff1eb !important; border-color: #f97316 !important; color: #c2410c !important; }
+        .helpful-btn:hover { background: #dce8ff !important; border-color: #03349a !important; color: #03349a !important; }
         .dot-btn { transition: all 0.35s cubic-bezier(0.22, 0.68, 0, 1.2); }
         .progress-bar { transition: width 0.45s cubic-bezier(0.4,0,0.2,1); }
       `}</style>
 
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full" style={{ maxWidth: 1200 }}>
 
         {/* ── HEADER ── */}
         <div
@@ -177,25 +181,48 @@ export default function Testimonial() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
             <div>
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-white border border-orange-100 rounded-full px-4 py-1.5 mb-4 shadow-sm">
-                <span className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center flex-shrink-0">
+              <div
+                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4 shadow-sm"
+                style={{ background: "#fff", border: "1px solid #c7d8f8" }}
+              >
+                <span
+                  className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ background: "linear-gradient(135deg, #6095ff, #03349a)" }}
+                >
                   <Star className="w-2.5 h-2.5 fill-white stroke-white" />
                 </span>
-                <span className="text-xs font-semibold text-orange-700 tracking-wide">Customer Reviews</span>
+                <span className="text-xs font-semibold tracking-wide" style={{ color: "#03349a" }}>
+                  Customer Reviews
+                </span>
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight">
-                Loved by <span className="italic text-orange-600">10,000+</span><br />
+
+              <h2
+                className="font-bold leading-tight"
+                style={{
+                  color: "#03349a",
+                  fontSize: "clamp(1.7rem, 5vw, 3.5rem)",
+                  lineHeight: 1.15,
+                }}
+              >
+                Loved by{" "}
+                <span className="italic" style={{ color: "#6095ff" }}>10,000+</span>
+                <br />
                 Aayubakwath Champions
               </h2>
             </div>
-            <div className="md:text-right max-w-xs">
-              <p className="text-sm text-stone-500 leading-relaxed">
+
+            <div className="md:text-right" style={{ maxWidth: 280 }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#4a6fa5" }}>
                 Every review is 100% genuine — no edits, no incentives. Real results from real people.
               </p>
             </div>
           </div>
+
           {/* Divider */}
-          <div className="h-px w-full rounded-full" style={{ background: 'linear-gradient(90deg, #f9731622, #f9731688, #b91c1c44, transparent)' }} />
+          <div
+            className="h-px w-full rounded-full"
+            style={{ background: "linear-gradient(90deg, #6095ff44, #03349a88, #6095ff22, transparent)" }}
+          />
         </div>
 
         {/* ── STATS ROW ── */}
@@ -203,8 +230,10 @@ export default function Testimonial() {
           {stats.map((s, i) => (
             <div
               key={s.label}
-              className={`stat-tile bg-white rounded-2xl border border-orange-100 p-4 shadow-sm`}
+              className="stat-tile rounded-2xl p-4 shadow-sm"
               style={{
+                background: "#fff",
+                border: "1px solid #c7d8f8",
                 opacity: statsVis ? 1 : 0,
                 transform: statsVis ? "translateY(0) scale(1)" : "translateY(24px) scale(0.96)",
                 transition: `opacity 0.5s ease ${i * 0.1}s, transform 0.5s cubic-bezier(.22,.68,0,1.15) ${i * 0.1}s`,
@@ -214,9 +243,9 @@ export default function Testimonial() {
                 <div className={`w-9 h-9 rounded-xl ${s.bg} flex items-center justify-center flex-shrink-0`}>
                   <s.icon className={`w-4 h-4 ${s.icon_color}`} />
                 </div>
-                <span className="text-2xl font-bold text-stone-900">{s.value}</span>
+                <span className="text-2xl font-bold" style={{ color: "#03349a" }}>{s.value}</span>
               </div>
-              <p className="text-xs text-stone-400 font-medium">{s.label}</p>
+              <p className="text-xs font-medium" style={{ color: "#7a9cc8" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -233,29 +262,49 @@ export default function Testimonial() {
               transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
             }}
           >
-
             {/* Reviewer List */}
-            <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-4">
-              <p className="text-xs font-bold text-orange-400 uppercase tracking-widest mb-3 px-1">All Reviewers</p>
+            <div
+              className="rounded-2xl p-4 shadow-sm"
+              style={{ background: "#fff", border: "1px solid #c7d8f8" }}
+            >
+              <p
+                className="text-xs font-bold uppercase tracking-widest mb-3 px-1"
+                style={{ color: "#6095ff" }}
+              >
+                All Reviewers
+              </p>
               <div className="flex flex-col gap-1">
                 {testimonials.map((r, i) => (
                   <button
                     key={r.id}
                     onClick={() => { if (!animating && i !== current) go(i > current ? "next" : "prev"); }}
-                    className={`reviewer-item w-full flex items-center gap-3 p-2.5 rounded-xl text-left border
-                      ${i === current
-                        ? "bg-orange-50 border-orange-200 shadow-sm"
-                        : "border-transparent bg-transparent"
-                      }`}
+                    className="reviewer-item w-full flex items-center gap-3 p-2.5 rounded-xl text-left"
+                    style={{
+                      border: i === current ? "1px solid #b3caee" : "1px solid transparent",
+                      background: i === current ? "#eef3ff" : "transparent",
+                    }}
                   >
-                    <div className={`rounded-full p-0.5 flex-shrink-0 ${i === current ? "bg-gradient-to-br from-orange-400 to-red-700" : "bg-transparent"}`}>
+                    <div
+                      className="rounded-full p-0.5 flex-shrink-0"
+                      style={{
+                        background: i === current
+                          ? "linear-gradient(135deg, #6095ff, #03349a)"
+                          : "transparent",
+                      }}
+                    >
                       <img src={r.image} alt={r.name} className="w-9 h-9 rounded-full object-cover block" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-700 truncate ${i === current ? "text-orange-700 font-bold" : "text-stone-700 font-semibold"}`}>
+                      <p
+                        className="text-sm truncate"
+                        style={{
+                          color: i === current ? "#03349a" : "#374151",
+                          fontWeight: i === current ? 700 : 600,
+                        }}
+                      >
                         {r.name}
                       </p>
-                      <p className="text-xs text-stone-400 truncate">{r.title}</p>
+                      <p className="text-xs truncate" style={{ color: "#7a9cc8" }}>{r.title}</p>
                     </div>
                     <Stars rating={r.rating} size="w-2.5 h-2.5" />
                   </button>
@@ -264,36 +313,51 @@ export default function Testimonial() {
             </div>
 
             {/* Rating Breakdown */}
-            <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-5">
-              <p className="text-xs font-bold text-orange-400 uppercase tracking-widest mb-4">Rating Breakdown</p>
+            <div
+              className="rounded-2xl p-5 shadow-sm"
+              style={{ background: "#fff", border: "1px solid #c7d8f8" }}
+            >
+              <p
+                className="text-xs font-bold uppercase tracking-widest mb-4"
+                style={{ color: "#6095ff" }}
+              >
+                Rating Breakdown
+              </p>
               <div className="flex items-start gap-4 mb-4">
                 <div className="text-center flex-shrink-0">
-                  <p className="text-5xl font-bold text-stone-900 leading-none">4.8</p>
+                  <p className="text-5xl font-bold leading-none" style={{ color: "#03349a" }}>4.8</p>
                   <Stars rating={5} size="w-3 h-3" />
-                  <p className="text-xs text-stone-400 mt-1">out of 5</p>
+                  <p className="text-xs mt-1" style={{ color: "#7a9cc8" }}>out of 5</p>
                 </div>
                 <div className="flex-1 flex flex-col gap-2">
                   {ratingRows.map((row, i) => (
                     <div key={row.stars} className="flex items-center gap-2">
-                      <span className="text-xs text-stone-400 w-3 text-right">{row.stars}</span>
+                      <span className="text-xs w-3 text-right" style={{ color: "#7a9cc8" }}>{row.stars}</span>
                       <Star className="w-2.5 h-2.5 fill-amber-400 stroke-amber-400 flex-shrink-0" />
-                      <div className="flex-1 h-1.5 bg-orange-100 rounded-full overflow-hidden">
+                      <div
+                        className="flex-1 h-1.5 rounded-full overflow-hidden"
+                        style={{ background: "#dce8ff" }}
+                      >
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-600 progress-bar"
+                          className="h-full rounded-full progress-bar"
                           style={{
+                            background: "linear-gradient(90deg, #6095ff, #03349a)",
                             width: ratingBars ? `${row.pct}%` : "0%",
                             transition: `width 0.7s cubic-bezier(.4,0,.2,1) ${i * 0.1}s`,
                           }}
                         />
                       </div>
-                      <span className="text-xs text-stone-400 w-7 text-right">{row.pct}%</span>
+                      <span className="text-xs w-7 text-right" style={{ color: "#7a9cc8" }}>{row.pct}%</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="flex items-center gap-2 bg-emerald-50 rounded-xl px-3 py-2">
+              <div
+                className="flex items-center gap-2 rounded-xl px-3 py-2"
+                style={{ background: "#eef8f3" }}
+              >
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                <span className="text-xs text-emerald-700 font-medium">Verified purchasers only</span>
+                <span className="text-xs font-medium text-emerald-700">Verified purchasers only</span>
               </div>
             </div>
           </div>
@@ -307,51 +371,87 @@ export default function Testimonial() {
               transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.15)",
             }}
           >
-
             {/* Main Quote Card */}
-            <div className={`card-anim bg-white rounded-2xl border border-orange-100 shadow-md overflow-hidden flex-1 ${visible ? "card-visible" : "card-hidden"}`}>
-
+            <div
+              className={`card-anim rounded-2xl overflow-hidden flex-1 shadow-md ${visible ? "card-visible" : "card-hidden"}`}
+              style={{ background: "#fff", border: "1px solid #c7d8f8" }}
+            >
               {/* Card Top Bar */}
-              <div className="bg-gradient-to-r from-orange-50 to-red-50/40 border-b border-orange-100 px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
-                <div className="flex items-center gap-2 bg-white border border-orange-100 rounded-full px-3 py-1.5 shadow-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
-                  <span className="text-xs font-semibold text-orange-700">{t.product}</span>
+              <div
+                className="border-b px-6 py-4 flex items-center justify-between gap-4 flex-wrap"
+                style={{
+                  background: "linear-gradient(90deg, #eef3ff, #f5f8ff)",
+                  borderColor: "#c7d8f8",
+                }}
+              >
+                <div
+                  className="flex items-center gap-2 rounded-full px-3 py-1.5 shadow-sm"
+                  style={{ background: "#fff", border: "1px solid #c7d8f8" }}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ background: "#03349a" }}
+                  />
+                  <span className="text-xs font-semibold" style={{ color: "#03349a" }}>{t.product}</span>
                 </div>
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="text-xs text-stone-400">{t.date}</span>
+                  <span className="text-xs" style={{ color: "#7a9cc8" }}>{t.date}</span>
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Verified Purchase</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-emerald-600">
+                      Verified Purchase
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Quote Body */}
               <div className="px-7 pt-8 pb-6 relative">
-                {/* Decorative quote mark */}
-                <span className="absolute top-3 left-5 text-8xl font-bold text-orange-100 leading-none select-none pointer-events-none">
+                <span
+                  className="absolute top-3 left-5 text-8xl font-bold leading-none select-none pointer-events-none"
+                  style={{ color: "#dce8ff" }}
+                >
                   "
                 </span>
                 <div className="relative z-10">
                   <Stars rating={t.rating} size="w-4 h-4" />
-                  <p className="text-xl md:text-2xl text-stone-800 leading-relaxed mt-4 font-semibold">
+                  <p
+                    className="leading-relaxed mt-4 font-semibold"
+                    style={{
+                      color: "#1e3a6e",
+                      fontSize: "clamp(1rem, 2.5vw, 1.35rem)",
+                    }}
+                  >
                     {t.quote}
                   </p>
                 </div>
               </div>
 
               {/* Card Footer */}
-              <div className="border-t border-orange-100 px-7 py-5 flex items-center justify-between gap-4 flex-wrap">
+              <div
+                className="border-t px-7 py-5 flex items-center justify-between gap-4 flex-wrap"
+                style={{ borderColor: "#c7d8f8" }}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="p-0.5 rounded-full bg-gradient-to-br from-orange-400 to-red-700 flex-shrink-0">
+                  <div
+                    className="p-0.5 rounded-full flex-shrink-0"
+                    style={{ background: "linear-gradient(135deg, #6095ff, #03349a)" }}
+                  >
                     <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover block" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-stone-900">{t.name}</p>
-                    <p className="text-xs text-stone-400 font-medium mt-0.5">{t.title}</p>
+                    <p className="text-sm font-bold" style={{ color: "#03349a" }}>{t.name}</p>
+                    <p className="text-xs font-medium mt-0.5" style={{ color: "#7a9cc8" }}>{t.title}</p>
                   </div>
                 </div>
-                <button className="helpful-btn flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-full px-4 py-2 text-xs font-semibold text-orange-700 cursor-pointer">
+                <button
+                  className="helpful-btn flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold cursor-pointer"
+                  style={{
+                    background: "#eef3ff",
+                    border: "1px solid #b3caee",
+                    color: "#03349a",
+                  }}
+                >
                   <ThumbsUp className="w-3.5 h-3.5" />
                   Helpful ({t.helpful})
                 </button>
@@ -360,7 +460,7 @@ export default function Testimonial() {
 
             {/* Navigation Controls */}
             <div className="flex items-center justify-between px-1">
-              {/* Animated dots */}
+              {/* Dots */}
               <div className="flex items-center gap-2">
                 {testimonials.map((_, i) => (
                   <button
@@ -370,30 +470,32 @@ export default function Testimonial() {
                     style={{
                       width: i === current ? 28 : 8,
                       background: i === current
-                        ? "linear-gradient(90deg, #f97316, #b91c1c)"
-                        : "#fed7aa",
-                      boxShadow: i === current ? "0 2px 8px rgba(234,88,12,0.4)" : "none",
+                        ? "linear-gradient(90deg, #6095ff, #03349a)"
+                        : "#b3caee",
+                      boxShadow: i === current ? "0 2px 8px rgba(3,52,154,0.35)" : "none",
                     }}
                   />
                 ))}
               </div>
 
               {/* Counter */}
-              <span className="text-xs font-bold text-stone-400 tracking-widest">
+              <span className="text-xs font-bold tracking-widest" style={{ color: "#7a9cc8" }}>
                 {String(current + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
               </span>
 
-              {/* Arrow buttons */}
+              {/* Arrows */}
               <div className="flex gap-2">
                 <button
                   onClick={() => go("prev")}
-                  className="nav-btn w-10 h-10 rounded-full bg-white border border-orange-200 flex items-center justify-center text-stone-500 shadow-sm cursor-pointer"
+                  className="nav-btn w-10 h-10 rounded-full flex items-center justify-center shadow-sm cursor-pointer"
+                  style={{ background: "#fff", border: "1px solid #b3caee", color: "#03349a" }}
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => go("next")}
-                  className="nav-btn w-10 h-10 rounded-full bg-white border border-orange-200 flex items-center justify-center text-stone-500 shadow-sm cursor-pointer"
+                  className="nav-btn w-10 h-10 rounded-full flex items-center justify-center shadow-sm cursor-pointer"
+                  style={{ background: "#fff", border: "1px solid #b3caee", color: "#03349a" }}
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -401,17 +503,22 @@ export default function Testimonial() {
             </div>
 
             {/* Progress bar */}
-            <div className="h-1 bg-orange-100 rounded-full overflow-hidden">
+            <div className="h-1 rounded-full overflow-hidden" style={{ background: "#dce8ff" }}>
               <div
-                className="progress-bar h-full rounded-full bg-gradient-to-r from-orange-400 to-red-700"
-                style={{ width: `${((current + 1) / testimonials.length) * 100}%` }}
+                className="progress-bar h-full rounded-full"
+                style={{
+                  background: "linear-gradient(90deg, #6095ff, #03349a)",
+                  width: `${((current + 1) / testimonials.length) * 100}%`,
+                }}
               />
             </div>
 
             {/* Trust Strip */}
             <div
-              className="bg-white rounded-2xl border border-orange-100 shadow-sm px-6 py-4 flex items-center justify-between gap-3 flex-wrap"
+              className="rounded-2xl px-6 py-4 flex items-center justify-between gap-3 flex-wrap shadow-sm"
               style={{
+                background: "#fff",
+                border: "1px solid #c7d8f8",
                 opacity: trustVis ? 1 : 0,
                 transform: trustVis ? "translateY(0)" : "translateY(20px)",
                 transition: "opacity 0.55s ease, transform 0.55s ease",
@@ -428,11 +535,10 @@ export default function Testimonial() {
                   }}
                 >
                   <span className="text-lg leading-none">{item.emoji}</span>
-                  <span className="text-xs font-semibold text-stone-600">{item.text}</span>
+                  <span className="text-xs font-semibold" style={{ color: "#1e3a6e" }}>{item.text}</span>
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </div>

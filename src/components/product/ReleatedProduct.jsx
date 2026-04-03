@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Star, ShoppingCart, Heart, Eye, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-const BRAND = "#820c0c";
+const BRAND = "#03349a";
 const ACCENT = "#c9643a";
 
 const related = [

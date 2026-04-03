@@ -1,7 +1,7 @@
 import React, { useState, useEffect ,useRef} from "react";
 import { axiosInstance } from "../../utils/axiosInstance";
 import ProductCard from "./ProductCard";
-import { products } from "../../services/productData";
+// import { products } from "../../services/productData";
 export default function ProductGrid() {
   
 const headerRef = useRef(null);
@@ -12,14 +12,14 @@ const GREEN='#829b1c'
 
   const [headerVisible, setHeaderVisible] = useState(false);
   // 🔹 Fetch Products
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
     try {
       const response = await axiosInstance.get("/product/getAllProduct");
       console.log('response :',response)
-      // setProducts(response.data.data || []);
+      setProducts(response.data.data || []);
     } catch (error) {
       console.error(error);
     } finally {

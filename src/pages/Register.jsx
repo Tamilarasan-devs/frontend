@@ -89,7 +89,7 @@ export default function Register() {
         @keyframes slideUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
         .slide-up { animation: slideUp 0.55s cubic-bezier(0.16,1,0.3,1) both; }
         .inp-field { transition: border-color 0.2s, box-shadow 0.2s; }
-        .inp-field:focus { outline: none; border-color: #820c0c; box-shadow: 0 0 0 3px rgba(130,12,12,0.1); }
+        .inp-field:focus { outline: none; border-color: #03349a; box-shadow: 0 0 0 3px rgba(130,12,12,0.1); }
         .inp-field::placeholder { color: #d1bfbf; }
         .submit-btn { transition: transform 0.15s, box-shadow 0.15s; }
         .submit-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(130,12,12,0.32) !important; }
@@ -108,7 +108,7 @@ export default function Register() {
           {/* ════ LEFT PANEL ════ */}
           <div
             className="lg:w-[42%] relative flex flex-col justify-between px-10 py-12 overflow-hidden"
-            style={{ background: "linear-gradient(155deg, #820c0c 0%, #5a0808 55%, #3a0404 100%)" }}
+            style={{ background: "linear-gradient(155deg, #03349a 0%, #5a0808 55%, #3a0404 100%)" }}
           >
             {/* Background blobs */}
             <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.04)" }} />
@@ -179,19 +179,19 @@ export default function Register() {
 
             {/* Mobile logo */}
             <div className="flex lg:hidden items-center gap-2 mb-8">
-              <div className="w-8 h-8 rounded-lg bg-[#820c0c] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#03349a] flex items-center justify-center">
                 <span className="text-white font-black text-sm">W</span>
               </div>
-              <span className="text-[#820c0c] font-bold text-lg">Aayubakwath</span>
+              <span className="text-[#03349a] font-bold text-lg">Aayubakwath</span>
             </div>
 
             {/* Heading */}
             <div className="mb-7">
               <div className="flex items-center gap-2 mb-3">
-                <div className="h-[3px] w-5 rounded-full bg-[#820c0c]" />
-                <span className="text-[15px] font-extrabold tracking-[3px] uppercase text-[#820c0c]/70">New Account</span>
+                <div className="h-[3px] w-5 rounded-full bg-[#03349a]" />
+                <span className="text-[15px] font-extrabold tracking-[3px] uppercase text-[#03349a]/70">New Account</span>
               </div>
-              <h1 className="text-2xl font-black text-[#820c0c] mb-1.5" >
+              <h1 className="text-2xl font-black text-[#03349a] mb-1.5" >
                 Create Account
               </h1>
               <p className="text-gray-600 text-md font-semibold">Fill in your details below to get started.</p>
@@ -202,9 +202,9 @@ export default function Register() {
 
               {/* Full Name */}
               <div>
-                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Full Name</label>
+                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Full Name</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "name" ? "#820c0c" : "#d1bfbf" }}>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "name" ? "#03349a" : "#d1bfbf" }}>
                     <UserIcon />
                   </span>
                   <input
@@ -218,9 +218,9 @@ export default function Register() {
 
               {/* Email */}
               <div>
-                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Email Address</label>
+                <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Email Address</label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "email" ? "#820c0c" : "#d1bfbf" }}>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "email" ? "#03349a" : "#d1bfbf" }}>
                     <MailIcon />
                   </span>
                   <input
@@ -236,9 +236,9 @@ export default function Register() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Password */}
                 <div>
-                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Password</label>
+                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Password</label>
                   <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "password" ? "#820c0c" : "#d1bfbf" }}>
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "password" ? "#03349a" : "#d1bfbf" }}>
                       <LockIcon />
                     </span>
                     <input
@@ -257,9 +257,9 @@ export default function Register() {
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#820c0c] mb-1.5">Confirm</label>
+                  <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Confirm</label>
                   <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "confirmPassword" ? "#820c0c" : "#d1bfbf" }}>
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: focused === "confirmPassword" ? "#03349a" : "#d1bfbf" }}>
                       <LockIcon />
                     </span>
                     <input
@@ -292,8 +292,8 @@ export default function Register() {
                     htmlFor="agree"
                     className="w-5 h-5 rounded-md flex items-center justify-center cursor-pointer transition-all duration-200"
                     style={{
-                      background: form.agree ? "#820c0c" : "white",
-                      border: `2px solid ${form.agree ? "#820c0c" : "#e5e7eb"}`,
+                      background: form.agree ? "#03349a" : "white",
+                      border: `2px solid ${form.agree ? "#03349a" : "#e5e7eb"}`,
                     }}
                   >
                     {form.agree && (
@@ -305,9 +305,9 @@ export default function Register() {
                 </div>
                 <label htmlFor="agree" className="text-sm font-bold text-gray-600 cursor-pointer leading-relaxed">
                   I agree to the{" "}
-                  <a href="#" className="text-[#820c0c] font-bold hover:underline">Terms & Conditions</a>
+                  <a href="#" className="text-[#03349a] font-bold hover:underline">Terms & Conditions</a>
                   {" "}and{" "}
-                  <a href="#" className="text-[#820c0c] font-bold hover:underline">Privacy Policy</a>
+                  <a href="#" className="text-[#03349a] font-bold hover:underline">Privacy Policy</a>
                 </label>
               </div>
 
@@ -317,7 +317,7 @@ export default function Register() {
                 disabled={mutation.isLoading}
                 className="submit-btn w-full py-3.5 rounded-xl text-white text-sm font-extrabold tracking-wide disabled:opacity-60 disabled:cursor-not-allowed mt-2"
                 style={{
-                  background: "linear-gradient(135deg, #820c0c 0%, #a81010 100%)",
+                  background: "linear-gradient(135deg, #03349a 0%, #a81010 100%)",
                   boxShadow: "0 8px 24px rgba(130,12,12,0.25)",
                 }}
               >
@@ -344,7 +344,7 @@ export default function Register() {
             {/* Sign-in link */}
             <p className="mt-4 text-center text-sm  font-semibold text-gray-600">
               Already have an account?{" "}
-              <a href="login" className="text-[#820c0c] font-extrabold hover:underline">Sign In</a>
+              <a href="login" className="text-[#03349a] font-extrabold hover:underline">Sign In</a>
             </p>
 
             {/* Security note */}

@@ -72,7 +72,7 @@ const blogPosts = [
 
 const categories = ["All", "Lifestyle", "Health", "Technology", "Wellness", "Nutrition"];
 
-const BRAND = "#820c0c";
+const BRAND = "#03349a";
 const ACCENT = "#c9643a";
 
 export default function BlogPage() {
@@ -128,7 +128,7 @@ export default function BlogPage() {
         }
         .cat-btn-inactive:hover {
           border-color: rgba(130,12,12,0.4);
-          color: #820c0c;
+          color: #03349a;
         }
 
         .read-more-link {
@@ -137,7 +137,7 @@ export default function BlogPage() {
           gap: 6px;
           font-size: 13px;
           font-weight: 600;
-          color: #820c0c;
+          color: #03349a;
           transition: gap 0.2s ease, color 0.2s ease;
         }
         .read-more-link:hover {

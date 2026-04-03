@@ -8,7 +8,7 @@ export default function OurStory() {
         <p className="text-3xl font-bold uppercase tracking-widest text-[#829b1c] mb-2 ">
           Our Story
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#820c0c]">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#03349a]">
           Empowering People, Driving Wellness
         </h2>
       </div>

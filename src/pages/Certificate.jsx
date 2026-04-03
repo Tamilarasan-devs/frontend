@@ -45,7 +45,7 @@ img6
 
   return (
     <div className="overflow-hidden w-full py-6 bg-white">
-      <h1 className="text-2xl font-bold text-center mb-6 text-[#820c0c]">
+      <h1 className="text-2xl font-bold text-center mb-6 text-[#03349a]">
         Only Nature. Only Wellness.
       </h1>
 

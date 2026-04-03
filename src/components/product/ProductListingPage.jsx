@@ -9,7 +9,7 @@ import cate3 from '../../assets/images/allCate/cate3.jpeg'
 import cate4 from '../../assets/images/allCate/cate4.jpeg'
 import Banner from '../layout/Banner'
 import OfferScrollBar from '../layout/OfferScrollBar'
-import {products} from '../../services/productData'
+// import {products} from '../../services/productData'
 
 // ─── Static Categories (replace with your real categories API) ─────────────────
 const CATEGORIES = [
@@ -210,7 +210,7 @@ function MobileDrawer({ categories, selected, onSelect, open, onClose }) {
 // ─── Main Page Component ───────────────────────────────────────────────────────
 export default function ProductListingPage() {
 
-  // const [products, setProducts]     = useState([]);
+  const [products, setProducts]     = useState([]);
   const [loading, setLoading]       = useState(true);
   const [category, setCategory]     = useState("all");
   const [search, setSearch]         = useState("");
@@ -226,7 +226,7 @@ export default function ProductListingPage() {
         const response = await axiosInstance.get("/product/getAllProduct");
         const raw = response.data.data;
         // Handle both single object and array response
-        // setProducts(Array.isArray(raw) ? raw : [raw]);
+        setProducts(Array.isArray(raw) ? raw : [raw]);
       } catch (error) {
         console.error("Failed to fetch products:", error);
       } finally {
@@ -372,9 +372,9 @@ export default function ProductListingPage() {
                       />
                     ))}
             </div> */}
-   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
           {filteredProducts.map((product, idx) => (
-            <div key={product.id} className="flex justify-center">
+            <div key={product.id} className="flex ">
               <ProductCard
                 product={product}   // ✅ PASS DATA
                 animDelay={idx * 0.08}

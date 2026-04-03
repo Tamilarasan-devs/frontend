@@ -37,14 +37,14 @@ const CSS = `
   }
   .ct-logo-gem {
     width:28px; height:28px; border-radius:8px;
-    background:linear-gradient(135deg,#820c0c,#c9643a);
+    background:linear-gradient(135deg,#03349a,#c9643a);
     display:flex; align-items:center; justify-content:center;
   }
   .ct-logo-gem svg { width:14px; height:14px; fill:white; }
   .ct-nav-pill {
     font-family:'Syne',sans-serif; font-size:10px; font-weight:700;
     letter-spacing:.16em; text-transform:uppercase;
-    color:#820c0c; padding:7px 16px;
+    color:#03349a; padding:7px 16px;
     border:1.5px solid rgba(130,12,12,0.18);
     border-radius:100px; background:rgba(130,12,12,0.04);
   }
@@ -103,7 +103,7 @@ const CSS = `
   .ct-ring-dot {
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     width:14px; height:14px; border-radius:50%;
-    background:linear-gradient(135deg,#820c0c,#c9643a);
+    background:linear-gradient(135deg,#03349a,#c9643a);
     box-shadow:0 0 24px rgba(201,100,58,0.4);
     animation:ct-pulse 2.5s ease-in-out infinite;
   }
@@ -120,9 +120,9 @@ const CSS = `
   .ct-eye {
     display:inline-flex; align-items:center; gap:10px; margin-bottom:26px;
      font-size:10px; font-weight:700;
-    letter-spacing:.22em; text-transform:uppercase; color:#820c0c;
+    letter-spacing:.22em; text-transform:uppercase; color:#03349a;
   }
-  .ct-eye-dot { width:6px; height:6px; border-radius:50%; background:#820c0c; }
+  .ct-eye-dot { width:6px; height:6px; border-radius:50%; background:#03349a; }
 
   /* Headline */
   .ct-h1 {
@@ -132,7 +132,7 @@ const CSS = `
   }
   .ct-h1 em {
     font-style:italic; font-weight:400;
-    background:linear-gradient(120deg,#820c0c 0%,#c9643a 50%,#e8845a 100%);
+    background:linear-gradient(120deg,#03349a 0%,#c9643a 50%,#e8845a 100%);
     background-size:200%;
     -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
     animation:ct-shim 4s ease-in-out infinite;
@@ -199,7 +199,7 @@ const CSS = `
   .ct-card::after {
     content:''; position:absolute; bottom:0; left:0; right:0;
     height:3px; border-radius:0 0 22px 22px;
-    background:linear-gradient(90deg,#820c0c,#c9643a);
+    background:linear-gradient(90deg,#03349a,#c9643a);
     transform:scaleX(0); transform-origin:left; transition:transform .35s ease;
   }
   .ct-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(130,12,12,0.1); border-color:rgba(130,12,12,0.15); }
@@ -207,9 +207,9 @@ const CSS = `
   .ct-card-ico {
     width:44px; height:44px; border-radius:13px;
     display:flex; align-items:center; justify-content:center; margin-bottom:18px;
-    background:rgba(130,12,12,0.06); color:#820c0c; border:1px solid rgba(130,12,12,0.1);
+    background:rgba(130,12,12,0.06); color:#03349a; border:1px solid rgba(130,12,12,0.1);
   }
-  .ct-card-lbl { font-size:20px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color: #820c0c; margin-bottom:7px; }
+  .ct-card-lbl { font-size:20px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color: #03349a; margin-bottom:7px; }
   .ct-card-val { font-size:15px; font-weight:700; color:#1a1008; line-height:1.35; word-break:break-word; }
   .ct-card-sub { font-size:15px; color:black; margin-top:5px; font-weight:600; }
 
@@ -226,12 +226,12 @@ const CSS = `
   .ct-panel::before {
     content:''; position:absolute; top:0; left:0; bottom:0; width:4px;
     border-radius:24px 0 0 24px;
-    background:linear-gradient(180deg,#820c0c,#c9643a,#829b1c);
+    background:linear-gradient(180deg,#03349a,#c9643a,#829b1c);
   }
   .ct-panel-tag {
     display:inline-flex; align-items:center; gap:7px;
     font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-    color:#820c0c; padding:6px 13px; border:1.5px solid rgba(130,12,12,0.15);
+    color:#03349a; padding:6px 13px; border:1.5px solid rgba(130,12,12,0.15);
     border-radius:100px; width:fit-content; background:rgba(130,12,12,0.04);
   }
   .ct-panel-title {font-size:19px; font-weight:800; color:#1a1008; line-height:1.2; }
@@ -240,7 +240,7 @@ const CSS = `
   .ct-panel-item { display:flex; align-items:center; gap:10px; font-size:16px; color:black; }
   .ct-panel-bullet {
     width:22px; height:22px; border-radius:6px; flex-shrink:0;
-    background:rgba(130,12,12,0.07); color:#820c0c;
+    background:rgba(130,12,12,0.07); color:#03349a;
     display:flex; align-items:center; justify-content:center;
   }
   .ct-panel-foot {
@@ -256,11 +256,11 @@ const CSS = `
   }
   .ct-fbox::before {
     content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background:linear-gradient(90deg,#820c0c,#c9643a,#829b1c);
+    background:linear-gradient(90deg,#03349a,#c9643a,#829b1c);
   }
 
   /* Label / Input */
-  .ct-lbl { display:block; font-size:15px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#820c0c; margin-bottom:9px; }
+  .ct-lbl { display:block; font-size:15px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#03349a; margin-bottom:9px; }
   .ct-inp {
     width:100%; background:#fdf9f6;
     border:1.5px solid rgba(130,12,12,0.1); border-radius:13px;
@@ -269,7 +269,7 @@ const CSS = `
     transition:border-color .22s,box-shadow .22s,background .22s;
   }
   .ct-inp::placeholder { color:rgba(26,16,8,.22); }
-  .ct-inp:focus { border-color:#820c0c; background:#fff; box-shadow:0 0 0 4px rgba(130,12,12,0.07); }
+  .ct-inp:focus { border-color:#03349a; background:#fff; box-shadow:0 0 0 4px rgba(130,12,12,0.07); }
   .ct-row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   @media(max-width:480px){ .ct-row2{grid-template-columns:1fr} }
   .ct-fspace { display:flex; flex-direction:column; gap:16px; }
@@ -279,7 +279,7 @@ const CSS = `
     width:100%; padding:16px; border:none; border-radius:14px; cursor:pointer;
     font-family:'Syne',sans-serif; font-size:11px; font-weight:700;
     letter-spacing:.2em; text-transform:uppercase; color:#fff;
-    background:linear-gradient(135deg,#820c0c 0%,#a01310 40%,#c9643a 100%);
+    background:linear-gradient(135deg,#03349a 0%,#a01310 40%,#c9643a 100%);
     box-shadow:0 8px 28px rgba(130,12,12,0.28);
     position:relative; overflow:hidden; transition:transform .22s,box-shadow .22s;
   }
@@ -462,7 +462,7 @@ export default function ContactPage() {
         <div className="ct-fg">
           <div className="ct-panel ct-a1">
             <div className="ct-panel-tag">
-              <span style={{width:5,height:5,borderRadius:"50%",background:"#820c0c",display:"inline-block"}} />
+              <span style={{width:5,height:5,borderRadius:"50%",background:"#03349a",display:"inline-block"}} />
               Why Contact Us
             </div>
             <div className="ct-panel-title">Every message gets a personal reply.</div>

@@ -117,19 +117,19 @@ export default function BeforeAfterGrid() {
           transition: "opacity 0.65s ease, transform 0.65s ease",
         }}
       >
-        <h1 className="text-3xl font-bold flex justify-center text-[#820c0c] text-center">
+        <h1 className="text-3xl font-bold flex justify-center text-[#03349a] text-center">
           Over 1 Million People Trust Aayubakawath
         </h1>
 
         <div
-          className="h-1 bg-[#c9643a] mx-auto rounded-full mb-4 mt-4"
+          className="h-1 bg-[#6095ff] mx-auto rounded-full mb-4 mt-4"
           style={{
             width: headingVisible ? 96 : 0,
             transition: "width 0.7s ease 0.3s",
           }}
         ></div>
 
-        <h1 className="text-xl font-semibold flex justify-center text-[#820c0c] text-center">
+        <h1 className="text-xl font-semibold flex justify-center text-[#03349a] text-center">
           Discover Science-Backed Herbal Wellness Solutions
         </h1>
       </div>

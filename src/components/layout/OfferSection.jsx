@@ -7,7 +7,7 @@ export default function OffersSection() {
       description: "Sign up and enjoy 20% off your first purchase!",
       cta: "Claim Now",
       bg: "bg-[#f3f6f2]", // light subtle green
-      btn: "#820c0c", // deep red accent
+      btn: "#03349a", // deep red accent
     },
     {
       title: "Buy 2 Get 1 Free",

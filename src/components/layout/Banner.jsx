@@ -1,19 +1,10 @@
 import React, { useEffect, useRef ,useState} from "react";
-// import bnnr1 from "../../assets/images/bnnr1.avif";
-// import bnnr2 from "../../assets/images/bnnr2.avif";
-// import bnnr3 from "../../assets/images/bnnr3.avif";
-// import bnnr4 from "../../assets/images/bnnr4.avif";
-// import bnnr5 from "../../assets/images/bnnr5.avif";
-
 import bnr1 from '../../assets/images/banners/bnr1.jpg'
 import bnr2 from '../../assets/images/banners/bnr2.jpg'
 import bnr3 from '../../assets/images/banners/bnr3.jpg'
 import bnr4 from '../../assets/images/banners/bnr4.jpg'
 import bnr5 from '../../assets/images/banners/bnr5.jpg'
-// import bnr7 from '../../assets/images/banners/bnr7.png'
-// import bnr8 from '../../assets/images/banners/bnr8.png'
-// import bnr9 from '../../assets/images/banners/bnr9.png'
-// import bnr10 from '../../assets/images/banners/bnr10.png'
+
 
 
 import { axiosInstance,API_URL } from "../../utils/axiosInstance";
@@ -79,12 +70,11 @@ export default function Banner() {
   }, [])
   return (
     <div ref={containerRef} className="flex overflow-hidden w-full gap-1 ">
-      {images.map((img, index) => (
+      {allImages.map((img, index) => (
   <img
     key={index}
-    src={img}
-    // src={`${API_URL}${img.homeBanner}`}
-    // src={`http://localhost:8080/${img.homeBanner}`}
+    // src={img}
+    src={`${API_URL}${img.homeBanner}`}
     alt={`Banner ${index + 1}`}
     className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover rounded-lg"
   />
