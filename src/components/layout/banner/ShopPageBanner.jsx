@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import banner from '../../../assets/images/bn.jpeg'
+import banner from '../../../assets/images/bnrnm.jpg'
 
 export default function ShopPageBanner() {
    const [visible, setVisible] = useState(false);
@@ -42,24 +42,6 @@ export default function ShopPageBanner() {
             transition: "transform 0.9s ease",
           }}
         />
-
-        {/* Overlay Content */}
-        <div className="absolute inset-0 flex items-center justify-between px-8 left-32">
-          
-          {/* Left Text */}
-          <h2 className="text-white text-2xl md:text-4xl font-bold">
-            Sacred Wellness 
-          </h2>
-          <h2 className="text-white text-2xl md:text-4xl font-bold">
-           Blend
-          </h2>
-
-          {/* Right Text */}
-          <h2 className="text-white text-2xl md:text-4xl font-bold text-right right-32">
-            Ancient Purity, <br /> Modern Care
-          </h2>
-
-        </div>
       </div>
     </div>
   );

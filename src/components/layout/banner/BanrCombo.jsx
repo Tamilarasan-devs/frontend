@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../../../utils/axiosInstance";
+import { axiosInstance,API_URL } from "../../../utils/axiosInstance";
 
 export default function  BanrCombo() {
   const [banner, setBanner] = useState(null);
   console.log(banner)
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = "https://aayubakwath-backend.onrender.com/";
-  // const BASE_URL = "http://localhost:8080/";
+  // const API_URL = "https://aayubakwath-backend.onrender.com/";
+  // const API_URL = "http://localhost:8080/";
 
   const getBanners = async () => {
     try {
@@ -46,7 +46,7 @@ console.log('sec ; ban',res)
 
         {/* Image */}
         <img
-          src={BASE_URL + banner}
+          src={API_URL + banner}
           alt="Offer Banner"
           className="w-full  object-cover group-hover:scale-105 transition duration-700"
         />

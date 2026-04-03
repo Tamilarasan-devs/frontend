@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../../../utils/axiosInstance";
+import { axiosInstance ,API_URL} from "../../../utils/axiosInstance";
 
 export default function FirstBanner() {
   const [banner, setBanner] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = "https://aayubakwath-backend.onrender.com/";
+  // const API_URL = "https://aayubakwath-backend.onrender.com/";
 
   const getBanners = async () => {
     try {
@@ -44,7 +44,7 @@ export default function FirstBanner() {
 
         {/* Image */}
         <img
-          src={BASE_URL + banner}
+          src={API_URL + banner}
           alt="Offer Banner"
           className="w-full  object-cover group-hover:scale-105 transition duration-700"
         />

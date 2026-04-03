@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../../utils/axiosInstance";
 
 export default function TopScroll() {
-  const [announcements, setAnnouncements] = useState([]);
+
+  const announcements = [
+  { title: "0% Harmful Chemicals" },
+  { title: "Manufactured in GMP & ISO 9001 Certified Facility" },
+  { title: "Made with Natural Ingredients" },
+  { title: "Power of Nature, Strength for Life" }
+];
+  // const [announcements, setAnnouncements] = useState([]);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +18,7 @@ export default function TopScroll() {
     try {
       const res = await axiosInstance.get("announcement/getAllAnnouncements");
       // Assuming res.data.data is an array of { id, title } objects
-      setAnnouncements(res.data.data || []);
+      // setAnnouncements(res.data.data || []);
     } catch (err) {
       console.error(err);
     } finally {

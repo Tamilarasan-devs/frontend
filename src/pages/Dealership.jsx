@@ -198,17 +198,17 @@ export default function Dealership() {
               <div className="rounded-3xl p-6" style={{background:"#fff",border:"1.5px solid #f0ece8",boxShadow:"0 8px 24px rgba(0,0,0,.05)"}}>
                 <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{color:"var(--amber)"}}>Quick Contact</p>
                 <div className="space-y-3">
-                  <a href="mailto:info.sblsmarketing@gmail.com" className="flex items-center gap-3 text-sm font-medium text-gray-700 no-underline hover:text-red-800 transition-colors">
+                  <a href="mailto:info.sblsmarketing@gmail.com" className="flex items-center gap-3 text-sm font-semibold text-gray-900 no-underline hover:text-red-800 transition-colors">
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0" style={{background:"#fdf4f4"}}>✉️</span>
                     info.sblsmarketing@gmail.com
                   </a>
-                  <a href="tel:+919344398462" className="flex items-center gap-3 text-sm font-medium text-gray-700 no-underline hover:text-red-800 transition-colors">
+                  <a href="tel:+919344398462" className="flex items-center gap-3 text-sm font-semibold text-gray-900 no-underline hover:text-red-800 transition-colors">
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0" style={{background:"#fdf4f4"}}>📞</span>
                     +91 94431 57282
                   </a>
                 </div>
                 <div className="mt-4 pt-4 border-t border-stone-100">
-                  <p className="text-xs text-stone-400 m-0">Response within</p>
+                  <p className="font-semibold text-gray-900 m-0">Response within</p>
                   <p className="f-syne font-bold text-lg m-0" style={{color:"var(--red)"}}>24 – 48 hrs</p>
                 </div>
               </div>
@@ -255,7 +255,7 @@ export default function Dealership() {
                   </div>
                   <div className="h-px my-6" style={{background:"#f0ece8"}} />
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <p className="text-xs text-stone-400 leading-relaxed max-w-xs m-0">
+                    <p className="text-xs font-semibold text-gray-900 leading-relaxed max-w-xs m-0">
                       Our team will reach out within{" "}
                       <span className="font-semibold" style={{color:"var(--red)"}}>24–48 hours</span>.
                     </p>
@@ -278,13 +278,27 @@ export default function Dealership() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {features.map((f,i)=>(
-              <div key={f.title}
-                   className={`feat-card reveal d${i+1} rounded-2xl p-6 text-center`}
-                   style={{background:"#fff",border:"1px solid #f0ece8",boxShadow:"0 6px 20px rgba(0,0,0,.05)"}}>
-                <div className="text-4xl mb-3">{f.img}</div>
-                <h4 className="f-syne font-bold text-sm text-gray-900 mb-1.5 leading-snug">{f.title}</h4>
-                <p className="text-xs text-stone-400 leading-relaxed m-0">{f.desc}</p>
-              </div>
+              <div
+  key={f.title}
+  className={`feat-card reveal d${i+1} rounded-2xl p-6 text-center h-full flex flex-col min-h-[180px]`}
+  style={{
+    background: "#fff",
+    border: "1px solid #f0ece8",
+    boxShadow: "0 6px 20px rgba(0,0,0,.05)"
+  }}
+>
+  <div className="text-4xl mb-3 flex justify-center items-center">
+    {f.img}
+  </div>
+
+  <h4 className="f-syne font-bold text-sm text-gray-900 mb-1.5 leading-snug break-words">
+    {f.title}
+  </h4>
+
+  <p className="text-gray-900 leading-relaxed m-0 break-words line-clamp-3">
+    {f.desc}
+  </p>
+</div>
             ))}
           </div>
         </div>

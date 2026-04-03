@@ -15,7 +15,13 @@ const Logo = () => (
 );
 
 const quickLinks = ["Home", "About", "Shop", "Dealership", "Download", "Blog", "Contact"];
-const helpLinks = ["FAQ'S", "Shipping Policy", "Return & Cancellation", "Terms of Use", "Privacy Policy"];
+const helpLinks = [
+  { label: "FAQ'S", path: "/faq" },
+  { label: "Shipping Policy", path: "/shipping-policy" },
+  { label: "Return & Cancellation", path: "/returns" },
+  { label: "Terms of Use", path: "/terms" },
+  { label: "Privacy Policy", path: "/privacy" }
+];
 
 const socials = [
   { icon: <FaFacebookF size={14} />, link: "https://www.facebook.com/", label: "Facebook" },
@@ -271,16 +277,16 @@ export default function Footer() {
 
             {/* ── Help ── */}
             <div>
-              <h4 className="section-heading">Help & Support</h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-                {helpLinks.map((link, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "center" }}>
-                    <span className="badge-dot" />
-                    <a href="#" className="footer-link">{link}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+  <h4 className="section-heading">Help & Support</h4>
+  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+    {helpLinks.map((link, i) => (
+      <li key={i} style={{ display: "flex", alignItems: "center" }}>
+        <span className="badge-dot" />
+        <a href={link.path} className="footer-link">{link.label}</a>
+      </li>
+    ))}
+  </ul>
+</div>
 
             {/* ── Newsletter ── */}
             <div>

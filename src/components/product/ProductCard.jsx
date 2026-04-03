@@ -8,13 +8,13 @@
 import React, { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-
+import { API_URL } from "../../utils/axiosInstance";
 const CARD_W = 272;
 const CARD_GAP = 20;
 export default  function ProductCard({ product, animDelay, sectionVisible }) {
 console.log('shop page :',product)
     // console.log('. for catgoiyr',product)
-const BASE_URL = "https://aayubakwath-backend.onrender.com/";
+// const API_URL = "https://aayubakwath-backend.onrender.com/";
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
@@ -81,7 +81,8 @@ const badgeColors = {
       >
         {/* Primary image */}
         <img
-          src={BASE_URL + product.productImages[0]}
+          src={ product.productImages[0]}
+          // src={API_URL + product.productImages[0]}
           alt={product.productName}
           draggable={false}
           className="absolute inset-0 w-full h-full object-cover "
@@ -93,7 +94,8 @@ const badgeColors = {
         />
         {/* Hover image */}
         <img
-          src={BASE_URL + product.productImages[1]}
+          src={ product.productImages[1]}
+          // src={API_URL + product.productImages[1]}
           alt={product.productName}
           draggable={false}
           className="absolute inset-0 w-full h-full object-cover"
@@ -105,7 +107,7 @@ const badgeColors = {
         />
 
         {/* Tags — bottom-left, revealed on hover */}
-        <div
+        {/* <div
           className="absolute bottom-2 left-2 flex flex-col gap-1 z-10"
           style={{
             opacity: hov ? 1 : 0,
@@ -122,7 +124,7 @@ const badgeColors = {
               {t}
             </span>
           ))}
-        </div>
+        </div> */}
 
         {/* Discount ribbon — top-right corner */}
         <div

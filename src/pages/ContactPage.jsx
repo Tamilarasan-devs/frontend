@@ -138,8 +138,8 @@ const CSS = `
     animation:ct-shim 4s ease-in-out infinite;
   }
   .ct-sub {
-    font-size:20px; line-height:1.75; font-weight:300;
-    color:rgba(26,16,8,.5); max-width:360px; margin-bottom:44px;
+    font-size:20px; line-height:1.75; font-weight:400;
+    color:black; max-width:360px; margin-bottom:44px;
   }
 
   /* Stats */
@@ -150,7 +150,7 @@ const CSS = `
   }
   .ct-stat-l {
     font-size:15px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-    color:rgba(4, 3, 2, 0.35); display:block; margin-top:4px;
+    color:black; display:block; margin-top:4px;
   }
   .ct-stat-sep { width:1px; height:36px; background:rgba(130,12,12,0.1); }
 
@@ -176,14 +176,14 @@ const CSS = `
     margin-bottom:36px; flex-wrap:wrap; gap:12px;
   }
   .ct-sh-num {
-     font-size:10px; font-weight:700;
-    letter-spacing:.2em; text-transform:uppercase; color:rgba(130,12,12,.45); margin-bottom:6px;
+     font-size:12px; font-weight:700;
+    letter-spacing:.2em; text-transform:uppercase; color:#8b0000; margin-bottom:6px;
   }
   .ct-sh-title {
      font-size:clamp(30px,3.5vw,42px);
     font-weight:800; color:#1a1008; line-height:1;
   }
-  .ct-sh-note { font-size:12px; color:rgba(26,16,8,.38); font-weight:300; max-width:220px; text-align:right; line-height:1.55; }
+  .ct-sh-note { font-size:12px; color:black; font-weight:300; max-width:220px; text-align:right; line-height:1.55; }
 
   /* Cards */
   .ct-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
@@ -211,7 +211,7 @@ const CSS = `
   }
   .ct-card-lbl { font-size:20px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color: #820c0c; margin-bottom:7px; }
   .ct-card-val { font-size:15px; font-weight:700; color:#1a1008; line-height:1.35; word-break:break-word; }
-  .ct-card-sub { font-size:15px; color:rgba(0, 0, 0, 0.38); margin-top:5px; font-weight:300; }
+  .ct-card-sub { font-size:15px; color:black; margin-top:5px; font-weight:600; }
 
   /* Form grid */
   .ct-fg { display:grid; grid-template-columns:1fr 2fr; gap:20px; }
@@ -235,16 +235,16 @@ const CSS = `
     border-radius:100px; width:fit-content; background:rgba(130,12,12,0.04);
   }
   .ct-panel-title {font-size:19px; font-weight:800; color:#1a1008; line-height:1.2; }
-  .ct-panel-body { font-size:15px; font-weight:600; line-height:1.75; color:rgba(0, 0, 0, 0.45); }
+  .ct-panel-body { font-size:15px; font-weight:600; line-height:1.75; color:black; }
   .ct-panel-div { height:1px; background:rgba(130,12,12,0.07); }
-  .ct-panel-item { display:flex; align-items:center; gap:10px; font-size:16px; color:rgba(26,16,8,.55); }
+  .ct-panel-item { display:flex; align-items:center; gap:10px; font-size:16px; color:black; }
   .ct-panel-bullet {
     width:22px; height:22px; border-radius:6px; flex-shrink:0;
     background:rgba(130,12,12,0.07); color:#820c0c;
     display:flex; align-items:center; justify-content:center;
   }
   .ct-panel-foot {
-    font-size:18px; color:rgba(0, 0, 0, 0.35); font-weight:300; line-height:1.7;
+    font-size:18px; color:black; font-weight:400; line-height:1.7;
     padding:14px 16px; background:rgba(130,12,12,0.03);
     border:1px solid rgba(130,12,12,0.07); border-radius:13px;
   }
@@ -314,7 +314,7 @@ const CSS = `
     border-bottom:1px solid rgba(130,12,12,0.07);
   }
   .ct-map-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:#1a1008; }
-  .ct-map-addr { font-size:12px; color:rgba(26,16,8,.38); font-weight:300; margin-top:2px; }
+  .ct-map-addr { font-size:12px; color:black; font-weight:300; margin-top:2px; }
   .ct-live { display:flex; align-items:center; gap:6px; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#5a7010; }
   .ct-live-dot { width:7px; height:7px; border-radius:50%; background:#829b1c; animation:ct-pulse 2s ease-in-out infinite; }
 `;

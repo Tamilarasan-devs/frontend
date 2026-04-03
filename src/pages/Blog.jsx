@@ -267,9 +267,9 @@ export default function BlogPage() {
                     >
                       {featured.title}
                     </h2>
-                    <p className="text-gray-500 leading-relaxed mb-6 text-sm">{featured.excerpt}</p>
+                    <p className="text-gray-900 font-semibold leading-relaxed mb-6 text-sm">{featured.excerpt}</p>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3 text-xs text-gray-400 font-medium">
+                      <div className="flex items-center gap-3 text-xs text-gray-900 font-semibold">
                         <span>📅 {featured.date}</span>
                         <span>·</span>
                         <span>⏱ {featured.readTime}</span>
@@ -313,12 +313,12 @@ export default function BlogPage() {
                       {/* Body */}
                       <div className="p-5">
                         <h3
-                          className="blog-serif font-bold text-gray-900 mb-2 leading-snug"
+                          className="blog-serif font-bold text-gray-900   mb-2 leading-snug"
                           style={{ fontSize: 19 }}
                         >
                           {post.title}
                         </h3>
-                        <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">
+                        <p className="text-gray-900 text-md leading-relaxed mb-4 line-clamp-2">
                           {post.excerpt}
                         </p>
 
@@ -327,7 +327,7 @@ export default function BlogPage() {
                           className="pt-3 flex items-center justify-between"
                           style={{ borderTop: "1px solid #f0ece8" }}
                         >
-                          <div className="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                          <div className="flex items-center gap-2 text-sm font-semibold text-gray-900 font-medium">
                             <span>{post.date}</span>
                             <span>·</span>
                             <span>{post.readTime}</span>

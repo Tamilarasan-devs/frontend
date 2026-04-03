@@ -2,21 +2,27 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-
+import { API_URL ,axiosInstance} from "../../utils/axiosInstance";
+import cate1 from '../../assets/images/category/cate1.png'
+import cate2 from '../../assets/images/category/cate2.png'
+import cate3 from '../../assets/images/category/cate3.png'
+import cate4 from '../../assets/images/category/cate4.png'
+import cate5 from '../../assets/images/category/cate5.png'
 import "swiper/css";
 import "swiper/css/navigation";
 
 export default function CategoryBannerList() {
   const [visible, setVisible] = useState(false);
   const [banners, setBanners] = useState([]);
+  console.log('bnner :',banners)
   const sectionRef = useRef(null);
   const navigate = useNavigate();
 
-  const API_URL = "https://aayubakwath-backend.onrender.com/api/v1/categoryBanner/getCategoryBanner/";
-  const BASE_URL = "https://aayubakwath-backend.onrender.com/";
+  // const API_URL = "https://aayubakwath-backend.onrender.com/api/v1/categoryBanner/getCategoryBanner/";
+  // const BASE_URL = "https://aayubakwath-backend.onrender.com/";
   // const API_URL = "http://localhost:8080/api/v1/categoryBanner/getCategoryBanner/";
-  // const BASE_URL = "http://localhost:8080/";
-
+  const BASE_URL = "http://localhost:8080/";
+console.log('vv',API_URL)
   // 🔹 Animation Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,36 +40,38 @@ export default function CategoryBannerList() {
   }, []);
 
   // 🔹 Fetch Banners
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
+useEffect(() => {
+  const fetchBanners = async () => {
+    try {
+      const res = await axiosInstance.get("/categoryBanner/getCategoryBanner");
+      console.log("res:", res?.data);
 
-        if (data.success) {
-          setBanners(data.date);
-        }
-      } catch (error) {
-        console.error("Error fetching banners:", error);
+      if (res.data.success) {
+        setBanners(res.data.data); // ✅ fixed
       }
-    };
+    } catch (error) {
+      console.error("Error fetching banners:", error);
+    }
+  };
 
-    fetchBanners();
-  }, []);
+  fetchBanners();
+}, []);
 
   const BRAND = "#820c0c";
   const ACCENT = "#c9643a";
 
   // 🔹 Flatten images
-  const allImages = banners.flatMap(item =>
-    item.categoryBanner.map(img => ({
-      id: item.id,
-      img
-    }))
-  );
+const allImages = (banners || []).flatMap(item =>
+  (item.categoryBanner || []).map(img => ({
+    id: item.id,
+    img
+  }))
+);
 
-  const firstFour = allImages.slice(0, 4);
-  const remaining = allImages.slice(4);
+const images=[
+  cate1,cate2,cate3,cate4,cate5
+]
+
 
   return (
     <>
@@ -117,7 +125,7 @@ export default function CategoryBannerList() {
       1024: { slidesPerView: 4 },
     }}
   >
-    {banners.map((item, index) =>
+    {/* {banners.map((item, index) =>
       item.categoryBanner.map((img, i) => (
         <SwiperSlide key={`${item.id}-${i}`}>
           <div
@@ -130,13 +138,13 @@ export default function CategoryBannerList() {
               transition: `all 0.6s ease ${0.1 * index}s`,
             }}
           >
-            {/* Image */}
+           
             <div
               className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
               onClick={() => navigate("/productListing")}
             >
               <img
-                src={BASE_URL + img}
+                src={API_URL+ img}
                 alt="banner"
                 className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
@@ -144,7 +152,34 @@ export default function CategoryBannerList() {
           </div>
         </SwiperSlide>
       ))
-    )}
+    )} */}
+
+    {images.map((img, i) => (
+  <SwiperSlide key={i}>
+    <div
+      className="group cursor-pointer rounded-xl overflow-hidden"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible
+          ? "translateY(0) scale(1)"
+          : "translateY(40px) scale(0.95)",
+        transition: `all 0.6s ease ${0.1 * i}s`,
+      }}
+    >
+      {/* Image */}
+      <div
+        className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
+        onClick={() => navigate("/productListing")}
+      >
+        <img
+          src={img}
+          alt="banner"
+          className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+    </div>
+  </SwiperSlide>
+))}
   </Swiper>
 </div>
 

@@ -4,6 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import OfferModal from "../components/layout/OfferModel";
 import TrackOrder from "../components/product/TrackOrder";
+import ShippingPolicy from "../pages/help-support/ShippingPolicy";
+import TermsOfService from "../pages/help-support/TermsConditions";
+import Policy from "../pages/help-support/Policy";
+import RefundPolicy from "../pages/help-support/RefundPolicy";
+import Faq from "../pages/help-support/Faq";
+
+
 
 /* Lazy Loaded Pages */
 const Home = lazy(() => import("../pages/Home"));
@@ -70,6 +77,11 @@ export default function AppRoutes() {
             <Route path="/productgrid" element={<ProductGrid />} />
             <Route path="/clientreview" element={<ClientReview />} />
             <Route path="/trackorder" element={<TrackOrder/> }   />
+            <Route path="/shipping-policy" element={<ShippingPolicy/> }  />
+            <Route path="/terms"  element={<TermsOfService/> } />
+         <Route path="/privacy" element={<Policy/> } />
+         <Route path="/returns" element={<RefundPolicy/> } />
+         <Route path="/faq" element={<Faq/> } />
           </Route>
         </Routes>
       {/* </Suspense> */}

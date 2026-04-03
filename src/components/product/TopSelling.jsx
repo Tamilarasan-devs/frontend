@@ -5,6 +5,7 @@ import cate1 from '../../assets/images/prod/pro5.jpeg'
 import cate5 from '../../assets/images/prod/pro1.jpeg'
 import ProductCard from "./ProductCard";
 import { axiosInstance } from "../../utils/axiosInstance";
+import {products} from '../../services/productData'
 // const products = [
 //   { id: 1, name: "Quista Active Milk Masala", price: 99.99, originalPrice: 199.99, description: "A nutritious blend of Ayurvedic. ffrwerwrt rtwert ewrtwert", rating: 4.5, reviews: 248, badge: "New Launches", image: cate1, hoverImage: cate5, tags: ["Spicy", "Healthy", "Indian"] },
 //   { id: 2, name: "Herbal Face Wash", price: 149.99, originalPrice: 249.99, description: "Gentle herbal formulation that.", rating: 4, reviews: 184, badge: "Must Try!", image: cate1, hoverImage: cate5, tags: ["Skin Care", "Herbal", "Refresh"] },
@@ -389,7 +390,7 @@ export default function TopSelling() {
     const ratio = (e.clientX - rect.left) / rect.width;
     el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
   };
-const [products, setProducts] = useState([]);
+// const [products, setProducts] = useState([]);
  console.log('data :',products)
   const [loading, setLoading] = useState(true);
 

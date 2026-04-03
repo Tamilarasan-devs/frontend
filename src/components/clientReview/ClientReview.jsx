@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import beforeImg1 from "../../assets/images/pro1.webp";
-import afterImg1 from "../../assets/images/pro.webp";
+import beforeImg1 from "../../assets/images/bf:af/b1.jpg";
+import afterImg1 from "../../assets/images/bf:af/a1.jpg";
 
-import beforeImg2 from "../../assets/images/pro2.webp";
-import afterImg2 from "../../assets/images/img1.jpg";
+import beforeImg2 from "../../assets/images/bf:af/b2.jpg";
+import afterImg2 from "../../assets/images/bf:af/a2.jpg";
 
-import beforeImg3 from "../../assets/images/pro3.webp";
-import afterImg3 from "../../assets/images/img2.jpg";
+import beforeImg3 from "../../assets/images/bf:af/b3.jpg";
+import afterImg3 from "../../assets/images/bf:af/a3.jpg";
 
 export default function BeforeAfterGrid() {
 
@@ -155,13 +155,15 @@ export default function BeforeAfterGrid() {
             onTouchMove={handleTouchMove1}
             onTouchEnd={stopDrag1}
           >
-            <img src={beforeImg1} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={afterImg1} className="w-full h-full object-cover" />
+
 
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position1}%` }}
             >
-              <img src={afterImg1} className="w-full h-full object-cover" />
+            <img src={beforeImg1} className="absolute inset-0 w-full h-full object-cover" />
+
             </div>
 
             <div style={{ left: `${position1}%` }} className="absolute top-0 h-full w-[2px] bg-white">
@@ -206,13 +208,15 @@ export default function BeforeAfterGrid() {
             onTouchMove={handleTouchMove2}
             onTouchEnd={stopDrag2}
           >
-            <img src={beforeImg2} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={afterImg2} className="w-full h-full object-cover" />
+
 
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position2}%` }}
             >
-              <img src={afterImg2} className="w-full h-full object-cover" />
+            <img src={beforeImg2} className="absolute inset-0 w-full h-full object-cover" />
+
             </div>
 
             <div style={{ left: `${position2}%` }} className="absolute top-0 h-full w-[2px] bg-white">
@@ -257,13 +261,15 @@ export default function BeforeAfterGrid() {
             onTouchMove={handleTouchMove3}
             onTouchEnd={stopDrag3}
           >
-            <img src={beforeImg3} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={afterImg3} className="w-full h-full object-cover" />
+
 
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position3}%` }}
             >
-              <img src={afterImg3} className="w-full h-full object-cover" />
+            <img src={beforeImg3} className="absolute inset-0 w-full h-full object-cover" />
+
             </div>
 
             <div style={{ left: `${position3}%` }} className="absolute top-0 h-full w-[2px] bg-white">
