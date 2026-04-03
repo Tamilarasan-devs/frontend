@@ -76,7 +76,16 @@ const badgeColors = {
 
      <div
   // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[450px] sm:h-[350px] aspect-[4/3] rounded-xl"
-  className="relative overflow-hidden bg-[#f9f5f2] w-full h-[350px] sm:h-[450px] aspect-[4/3] rounded-xl"
+  // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[350px] sm:h-[450px] aspect-[4/3] rounded-xl"
+  className="
+  relative overflow-hidden bg-[#f9f5f2] w-full 
+  h-[350px]        // 📱 mobile (default)
+  sm:h-[350px]     // 📲 small devices (≥640px)
+  md:h-[400px]     // 💻 tablets (≥768px)
+  lg:h-[450px]     // 🖥️ desktops (≥1024px)
+  xl:h-[450px]     // 🖥️ large screens (≥1280px)
+  aspect-[4/3] rounded-xl
+"
   onClick={() => navigate(`/product/${product.id}`)}
 >
         {/* Primary image */}
