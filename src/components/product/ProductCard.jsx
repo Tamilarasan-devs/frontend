@@ -75,7 +75,8 @@ const badgeColors = {
       )}
 
      <div
-  className="relative overflow-hidden bg-[#f9f5f2] w-full aspect-[4/3] rounded-xl"
+  // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[450px] sm:h-[350px] aspect-[4/3] rounded-xl"
+  className="relative overflow-hidden bg-[#f9f5f2] w-full h-[350px] sm:h-[450px] aspect-[4/3] rounded-xl"
   onClick={() => navigate(`/product/${product.id}`)}
 >
         {/* Primary image */}
@@ -84,7 +85,7 @@ const badgeColors = {
           src={API_URL + product.productImages[0]}
           alt={product.productName}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-contain "
+          className="absolute inset-0 w-full h-full  "
           style={{
             opacity: hov ? 0 : 1,
             transform: hov ? "scale(1.06)" : "scale(1)",
@@ -97,7 +98,7 @@ const badgeColors = {
           src={API_URL + product.productImages[1]}
           alt={product.productName}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full "
           style={{
             opacity: hov ? 1 : 0,
             transform: hov ? "scale(1)" : "scale(1.06)",
