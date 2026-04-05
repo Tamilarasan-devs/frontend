@@ -145,7 +145,7 @@ const images=[
               onClick={() => navigate("/productListing")}
             >
               <img
-                src={API_URL+ img}
+                src={img}
                 alt="banner"
                 className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
               />

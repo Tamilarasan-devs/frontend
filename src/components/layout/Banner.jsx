@@ -48,6 +48,7 @@ export default function Banner() {
   ,bnr4,bnr5
   ];
   const [banners, setBanners] = useState([])
+  console.log('banners :',banners)
   const [loading, setLoading] = useState(true)
   const allImages = [...banners, ...banners];
 // console.log('ALL :',allImages)
@@ -74,7 +75,7 @@ export default function Banner() {
   <img
     key={index}
     // src={img}
-    src={`${API_URL}${img.homeBanner}`}
+    src={`${img.homeBanner}`}
     alt={`Banner ${index + 1}`}
     className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover rounded-lg"
   />

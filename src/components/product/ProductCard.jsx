@@ -91,7 +91,7 @@ const badgeColors = {
         {/* Primary image */}
         <img
           // src={ product.productImages[0]}
-          src={API_URL + product.productImages[0]}
+         src={product?.productImages?.[0]?.url} 
           alt={product.productName}
           draggable={false}
           className="absolute inset-0 w-full h-full  "
@@ -104,7 +104,7 @@ const badgeColors = {
         {/* Hover image */}
         <img
           // src={ product.productImages[1]}
-          src={API_URL + product.productImages[1]}
+         src={product?.productImages?.[1]?.url} 
           alt={product.productName}
           draggable={false}
           className="absolute inset-0 w-full h-full "

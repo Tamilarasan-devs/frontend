@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { axiosInstance, API_URL } from "../../utils/axiosInstance";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 // ─── Static Fallback Data ─────────────────────────────────────────────────────
 
@@ -44,10 +44,7 @@ const RATING_BARS = [
   { star: 1, pct: 2 },
 ];
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 
-/** Build full image URL from a relative upload path */
-const buildImgUrl = (path) => `${API_URL}${path}`;
 
 /**
  * Given base finalPrice + price from the API, generate 3 pack options
@@ -165,9 +162,7 @@ export default function SingleProduct() {
   }, [productId]);
 
   // ── Derived values from API data ──────────────────────────────────────────
-  const IMAGES = product?.productImages?.length
-    ? product.productImages.map(buildImgUrl)
-    : [];
+const IMAGES = product?.productImages || [];
     console.log('IMAGES',IMAGES)
   const PACKS = product
     ? buildPacks(product.finalPrice, product.price)
@@ -251,7 +246,7 @@ export default function SingleProduct() {
                           : "border-stone-200 bg-white hover:border-red-400"
                         }`}
                     >
-                      <img src={src} alt={`view ${i + 1}`} className="w-full h-full object-cover" />
+                      <img src={src?.url} alt={`view ${i + 1}`} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
@@ -260,7 +255,7 @@ export default function SingleProduct() {
                 <div className="flex-1 relative rounded-2xl overflow-hidden aspect-square bg-[#faf7f3] border border-stone-200">
                   {IMAGES.length > 0 ? (
                     <img
-                      src={IMAGES[activeImg]}
+                     src={IMAGES[activeImg]?.url}
                       alt={product.productName}
                       className={`w-full h-full object-cover transition-opacity duration-200 ${imgFade ? "opacity-0" : "opacity-100"}`}
                     />
@@ -301,7 +296,7 @@ export default function SingleProduct() {
                         : "border-stone-200 hover:border-red-400"
                       }`}
                   >
-                    <img src={src} alt={`view ${i + 1}`} className="w-full h-full object-cover" />
+                    <img src={src?.url} alt={`view ${i + 1}`} className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
