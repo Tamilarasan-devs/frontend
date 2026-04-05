@@ -46,7 +46,7 @@ console.log('sec ; ban',res)
 
         {/* Image */}
         <img
-          src={API_URL + banner}
+          src={banner}
           alt="Offer Banner"
           className="w-full  object-cover group-hover:scale-105 transition duration-700"
         />

@@ -398,7 +398,7 @@ const [products, setProducts] = useState([]);
     try {
       const response = await axiosInstance.get("/product/getAllProduct");
       console.log('response :',response)
-      setProducts(response.data.data || []);
+      setProducts(response.data.products || []);
     } catch (error) {
       console.error(error);
     } finally {
