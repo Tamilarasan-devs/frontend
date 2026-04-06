@@ -224,7 +224,7 @@ export default function ProductListingPage() {
     const fetchProducts = async () => {
       try {
         const response = await axiosInstance.get("/product/getAllProduct");
-        const raw = response.data.data;
+        const raw = response.data.products;
         // Handle both single object and array response
         setProducts(Array.isArray(raw) ? raw : [raw]);
       } catch (error) {
@@ -237,11 +237,18 @@ export default function ProductListingPage() {
   }, []);
 
   // ── Derive offer tags from products ──
-  const offerTags = useMemo(() => {
-    const set = new Set(["All"]);
-    products.forEach((p) => p.offerTags?.forEach((t) => t && set.add(t)));
-    return [...set];
-  }, [products]);
+const offerTags = useMemo(() => {
+  const set = new Set(["All"]);
+
+  products
+    ?.filter(Boolean) // removes undefined/null items
+    .forEach((p) => {
+      p.offerTags?.forEach((t) => t && set.add(t));
+    });
+
+  return [...set];
+}, [products]);
+console.log(products)
 
   // ── Filter + sort products ──
   const filteredProducts = useMemo(() => {
@@ -373,18 +380,20 @@ export default function ProductListingPage() {
                     ))}
             </div> */}
    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
-          {filteredProducts.map((product, idx) => (
-            <div key={product.id} className="flex ">
-              <ProductCard
-                product={product}   // ✅ PASS DATA
-                animDelay={idx * 0.08}
-                sectionVisible={true}
-                onClick={(item) => console.log("Go to product", item)}
-                onAddToCart={(item) => console.log("Add to cart", item)}
-              />
-            </div>
-          ))}
-        </div>
+  {filteredProducts
+    ?.filter(Boolean) // removes undefined/null
+    .map((product, idx) => (
+      <div key={product.id || idx} className="flex">
+        <ProductCard
+          product={product}
+          animDelay={idx * 0.08}
+          sectionVisible={true}
+          onClick={(item) => console.log("Go to product", item)}
+          onAddToCart={(item) => console.log("Add to cart", item)}
+        />
+      </div>
+    ))}
+</div>
           </main>
         </div>
       </div>
