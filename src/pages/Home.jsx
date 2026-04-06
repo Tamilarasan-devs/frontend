@@ -37,16 +37,11 @@ export default function Home() {
         <ProductGrid/>
         <FirstBanner/>
 {/* <GridBanner/> */}
-<div className='mb-20'>
+
 <VideoPage/>
-  </div>
+
         <TopSelling/>
-        {/* <TwoSideBanner/>
-        <GridBanner/> */}
-        {/* <OurStory/> */}
-        {/* 
-        <OffersSection/> */}
-        {/* <Newsletter/> */}
+     
         <BanrCombo/>
         <RewardsCard/>
         <ClientReview/>
@@ -54,7 +49,7 @@ export default function Home() {
 
         <Certificate/>
 <ReelSection/>
-        {/* <Testimonial/> */}
+        <Testimonial/>
         
     </div>
   )

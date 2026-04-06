@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import iconbc1 from "../../../assets/images/icon-bc1.svg";
-import iconbc2 from "../../../assets/images/icon-bc2.svg";
-import iconbc3 from "../../../assets/images/icon-bc3.svg";
-import iconbc4 from "../../../assets/images/icon-bc4.svg";
+import iconbc2 from "../../../assets/images/gmo.jpg";
+import iconbc1 from "../../../assets/images/noadd.jpg";
+import iconbc3 from "../../../assets/images/gltn.jpg";
+import iconbc4 from "../../../assets/images/sugar.jpg";
 import ShopPageBanner from "./ShopPageBanner";
 
 export default function SecondBanner() {
