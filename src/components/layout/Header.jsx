@@ -2,7 +2,7 @@ import logo from '../../assets/images/logo.jpg'
 
 import TopScroll from './TopScroll'
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaUser, FaSearch, FaTimes, FaBars } from "react-icons/fa";
 
 
@@ -131,8 +131,15 @@ export default function Header() {
   const currentPage = navLinks.find(l => isActive(l.href))?.label;
 
   /* ─── RENDER ─────────────────────────────────────────────────── */
+
+  const navigate = useNavigate();
   return (
     <>
+     <style>{`
+        :root { --red:#03349a; --amber:#c9643a; --cream:#fdf8f4; }
+        @keyframes shim{0%{background-position:200% center}100%{background-position:-200% center}}
+        .shim-btn{background:linear-gradient(90deg,var(--red),var(--amber),#c2410c,var(--red));background-size:200% auto;animation:shim 3s linear infinite;}
+      `}</style>
      <TopScroll />
 
       {/* ── Main header ───────────────────────────────────────────── */}
@@ -192,8 +199,26 @@ export default function Header() {
               {/* <Badge n={3} /> */}
             </a>
 
+
+  <button
+                  type="button"
+                  className="flex shim-btn items-center justify-center gap-2 w-[100px] text-white text-sm font-semibold uppercase tracking-wide px-6 py-3 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+                  style={{ boxShadow: "0 10px 24px rgba(130,12,12,.35)" }}
+                  onClick={()=>navigate('/cart')}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg>
+                  <span>Cart</span>
+                  <span className="min-w-[17px] h-[17px] flex items-center justify-center
+                               rounded-full text-[9px] font-bold border border-white/25"
+                    style={{ background: "#04308e" }}>2</span>
+                </button>
+
+
             {/* Cart */}
-            <a href="/cart"
+            {/* <a href="/cart"
                className="flex items-center gap-2 px-4 h-9 rounded-full text-white
                           font-dm text-[11px] font-semibold tracking-[1.5px] uppercase
                           transition-all duration-200 hover:-translate-y-0.5"
@@ -206,7 +231,7 @@ export default function Header() {
               <span className="min-w-[17px] h-[17px] flex items-center justify-center
                                rounded-full text-[9px] font-bold border border-white/25"
                     style={{ background: "#04308e" }}>2</span>
-            </a>
+            </a> */}
 
             {/* Profile */}
             <div className="relative" ref={dropRef}>

@@ -33,9 +33,10 @@ export default function Home() {
 
         <OfferScrollBar/>
         </div>
+        <FirstBanner/>
         <CategoryList/>
         <ProductGrid/>
-        <FirstBanner/>
+        
 {/* <GridBanner/> */}
 
 <VideoPage/>
@@ -45,6 +46,7 @@ export default function Home() {
         <BanrCombo/>
         <RewardsCard/>
         <ClientReview/>
+        <OurStory/>
         <SecondBanner/>
 
         <Certificate/>

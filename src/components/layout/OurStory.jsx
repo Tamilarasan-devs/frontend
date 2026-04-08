@@ -1,58 +1,90 @@
 import React from "react";
-import { Flag, Smile } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function OurStory() {
+  const navigate = useNavigate();
+
   return (
-    <div className="px-6 md:px-16 py-16 bg-[#f9f9f9]">
-      <div className="text-center mb-12">
-        <p className="text-3xl font-bold uppercase tracking-widest text-[#829b1c] mb-2 ">
-          Our Story
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#03349a]">
-          Empowering People, Driving Wellness
-        </h2>
-      </div>
-
-      {/* 4 Column Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div className="w-full bg-white text-stone-800">
+      
+      {/* Hero Section */}
+      <div className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
         
-        {/* Column 1 */}
-        <div className="flex flex-col items-center gap-4 p-4 bg-white rounded-2xl shadow hover:shadow-lg transition duration-300">
-          <Flag className="w-8 h-8 text-green-700" />
-          <h3 className="text-xl font-semibold">20+ Years</h3>
-          <p className="text-gray-600 text-sm">
-            Empowering people to live better, healthier lives with our flagship brands Nutrilite & Artistry
+        {/* Left Content */}
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            Our Roots
+          </h1>
+
+          <p className="text-lg text-stone-600">
+            Founded on a simple, powerful vision.
           </p>
+
+          <p className="text-stone-600 leading-relaxed">
+            Aayubakwath was founded to support healthier lives through natural
+            wellness solutions. In today's fast-paced world, people face
+            increasing health challenges — unstable blood sugar, high
+            cholesterol, mental fatigue, poor concentration in children, and
+            general lifestyle-related issues.
+          </p>
+
+          <p className="text-stone-600 leading-relaxed">
+            Our mission is to bring balance back to everyday life using trusted,
+            natural ingredients and time-tested practices.
+          </p>
+
+          {/* CTA Button */}
+          <button
+            onClick={() => navigate("/about")}
+            className="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-full font-semibold hover:bg-blue-800 transition"
+          >
+            Learn More About Us →
+          </button>
         </div>
 
-        {/* Column 2 */}
-        <div className="flex flex-col items-center gap-4 p-4 bg-white rounded-2xl shadow hover:shadow-lg transition duration-300">
-          <Flag className="w-8 h-8 text-green-700" />
-          <h3 className="text-xl font-semibold">Unleashing Entrepreneurship</h3>
-          <p className="text-gray-600 text-sm">
-            Proud to have more than 5.50 lakh passionate distributors including &gt; 60% women
-          </p>
-        </div>
+        {/* Right Image */}
+        <div className="relative">
+          <img
+            src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71"
+            alt="natural wellness"
+            className="w-full h-[400px] object-cover rounded-2xl shadow-sm"
+          />
 
-        {/* Column 3 */}
-        <div className="flex flex-col items-center gap-4 p-4 bg-white rounded-2xl shadow hover:shadow-lg transition duration-300">
-          <Flag className="w-8 h-8 text-green-700" />
-          <h3 className="text-xl font-semibold">Making In India</h3>
-          <p className="text-gray-600 text-sm">
-            Manufacturing in a state-of-the-art, LEED Gold Certified plant in Tamil Nadu
-          </p>
+          {/* Decorative Badge */}
+          <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold shadow">
+            Natural • Trusted • Effective
+          </div>
         </div>
-
-        {/* Column 4 */}
-        <div className="flex flex-col items-center gap-4 p-4 bg-white rounded-2xl shadow hover:shadow-lg transition duration-300">
-          <Smile className="w-8 h-8 text-green-700" />
-          <h3 className="text-xl font-semibold">100% Satisfaction</h3>
-          <p className="text-gray-600 text-sm">
-            We offer our customers a money-back guarantee & seamless product experience
-          </p>
-        </div>
-
       </div>
+
+      {/* Highlight Section */}
+      <div className="bg-stone-50 py-14">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center">
+          
+          <div className="space-y-2">
+            <h3 className="text-xl font-bold">🌿 Natural Ingredients</h3>
+            <p className="text-stone-600 text-sm">
+              Carefully selected for purity and effectiveness.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="text-xl font-bold">💚 Holistic Wellness</h3>
+            <p className="text-stone-600 text-sm">
+              Supporting body and mind together.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="text-xl font-bold">⚡ Modern Lifestyle Fit</h3>
+            <p className="text-stone-600 text-sm">
+              Designed for today’s fast-paced world.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   );
 }

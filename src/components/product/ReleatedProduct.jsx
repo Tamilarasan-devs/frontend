@@ -2,89 +2,12 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Star, ShoppingCart, Heart, Eye, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ProductCart from '../product/ProductCard'
+import { axiosInstance } from "../../utils/axiosInstance";
 const BRAND = "#03349a";
 const ACCENT = "#c9643a";
 
-const related = [
-  {
-    id: 1,
-    name: "Ashwagandha Gold Capsules",
-    category: "Stress & Immunity",
-    price: 349,
-    originalPrice: 599,
-    rating: 4.8,
-    reviews: 2341,
-    badge: "Best Seller",
-    isNew: false,
-    image: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    hoverImage: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-  },
-  {
-    id: 2,
-    name: "Brahmi Memory Booster",
-    category: "Brain & Focus",
-    price: 249,
-    originalPrice: 449,
-    rating: 4.6,
-    reviews: 1187,
-    badge: "New",
-    isNew: true,
-    image: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    hoverImage: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-  },
-  {
-    id: 3,
-    name: "Turmeric Glow Face Pack",
-    category: "Skin Care",
-    price: 199,
-    originalPrice: 349,
-    rating: 4.5,
-    reviews: 876,
-    badge: null,
-    isNew: false,
-    image: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    hoverImage: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-  },
-  {
-    id: 4,
-    name: "Triphala Digestive Churna",
-    category: "Gut Health",
-    price: 159,
-    originalPrice: 299,
-    rating: 4.7,
-    reviews: 3102,
-    badge: "Top Rated",
-    isNew: false,
-    image: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    hoverImage: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-  },
-  {
-    id: 5,
-    name: "Shatavari Women's Wellness",
-    category: "Women's Health",
-    price: 399,
-    originalPrice: 699,
-    rating: 4.9,
-    reviews: 954,
-    badge: "Premium",
-    isNew: false,
-    image: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    hoverImage: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-  },
-  {
-    id: 6,
-    name: "Neem Tulsi Face Wash",
-    category: "Skin Care",
-    price: 179,
-    originalPrice: 299,
-    rating: 4.4,
-    reviews: 1423,
-    badge: "Sale",
-    isNew: false,
-    image: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-    hoverImage: "https://himalayawellness.in/cdn/shop/products/QUISTAACTIVEMILKMASALA200G.jpg?v=1629879986",
-  },
-];
+
 
 const badgeMeta = {
   "Best Seller": { bg: "#fff7ed", color: "#c2410c", border: "#fed7aa" },
@@ -107,89 +30,28 @@ const StarRow = ({ rating, size = 12 }) => (
   </div>
 );
 
-const ProductCard = ({ p }) => {
-  const [wishlisted, setWishlisted] = useState(false);
-  const [added, setAdded] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
-  const handleCart = (e) => {
-    e.stopPropagation();
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1800);
-  };
-
-  const bm = p.badge ? badgeMeta[p.badge] : null;
+function ArrowBtn({ dir, onClick }) {
   return (
-    <div
-      className="rp-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <button
+      onClick={onClick}
+      className="w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-700 text-lg
+        flex items-center justify-center cursor-pointer flex-shrink-0
+        hover:bg-[#03349a] hover:text-white hover:border-[#03349a]
+        hover:shadow-[0_4px_14px_rgba(130,12,12,0.25)]
+        shadow-[0_1px_4px_rgba(0,0,0,0.07)]
+        transition-all duration-200 ease-in-out"
     >
-      {/* Image */}
-      <div className="rp-imgbox">
-        <img className="rp-img-a" src={p.image} alt={p.name} draggable={false} />
-        <img className="rp-img-b" src={p.hoverImage} alt={p.name} draggable={false} />
-
-        {/* Discount pill */}
-        <div className="rp-disc">-{disc(p)}%</div>
-
-        {/* Badge */}
-        {bm && (
-          <span className="rp-badge" style={{ background: bm.bg, color: bm.color, border: `1px solid ${bm.border}` }}>
-            {p.badge}
-          </span>
-        )}
-
-        {/* Hover action buttons */}
-        <div className="rp-actions">
-          <button
-            className={`rp-action-btn${wishlisted ? " rp-wish-active" : ""}`}
-            onClick={(e) => { e.stopPropagation(); setWishlisted(w => !w); }}
-            title="Wishlist"
-          >
-            <Heart size={15} style={{ fill: wishlisted ? "#ef4444" : "none", stroke: wishlisted ? "#ef4444" : "currentColor" }} />
-          </button>
-          <button className="rp-action-btn" title="Quick View">
-            <Eye size={15} />
-          </button>
-        </div>
-      </div>
-
-      {/* Body */}
-      <div className="rp-body">
-        <span className="rp-category">{p.category}</span>
-        <h3 className="rp-name">{p.name}</h3>
-
-        <div className="rp-meta">
-          <StarRow rating={p.rating} />
-          <span className="rp-reviews">({p.reviews.toLocaleString()})</span>
-        </div>
-
-        <div className="rp-price-row">
-          <span className="rp-price">₹{p.price}</span>
-          <span className="rp-orig">₹{p.originalPrice}</span>
-          <span className="rp-save">Save ₹{p.originalPrice - p.price}</span>
-        </div>
-
-        <button
-          className={`rp-cart-btn${added ? " rp-added" : ""}`}
-          onClick={handleCart}
-        >
-          {added ? (
-            <>✓ Added to Cart</>
-          ) : (
-            <><ShoppingCart size={14} /> Add to Cart</>
-          )}
-        </button>
-      </div>
-    </div>
+      {dir === "prev" ? "‹" : "›"}
+    </button>
   );
-};
+}
 
 export default function RelatedProduct() {
 const navigate = useNavigate();
-
+  const [thumbW, setThumbW]         = useState(30);
+  const [thumbL, setThumbL]         = useState(0);
   const trackRef = useRef(null);
+  const barRef    = useRef(null);
   const [prog, setProg] = useState(0);
   const [active, setActive] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -205,7 +67,14 @@ const navigate = useNavigate();
     setProg(max > 0 ? el.scrollLeft / max : 0);
     setActive(Math.min(Math.round(el.scrollLeft / (CW + GAP)), related.length - 1));
   }, []);
-
+  const onBarClick = (e) => {
+    const bar = barRef.current;
+    const el  = trackRef.current;
+    if (!bar || !el) return;
+    const rect  = bar.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
+  };
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -253,6 +122,25 @@ const navigate = useNavigate();
     return { w, l: prog * (100 - w) };
   })();
 
+
+const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axiosInstance.get("/product/getAllProduct");
+      console.log('response :',response)
+      setProducts(response.data.products || []);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
     <>
       <style>{`
@@ -500,6 +388,26 @@ const navigate = useNavigate();
           .rp-h2 { font-size: 26px; }
           .rp-track { padding: 8px 40px 20px; }
         }
+
+
+         #ts-track {
+          display: flex;
+          gap: 10px;
+          overflow-x: auto;
+          overflow-y: visible;
+          padding: 8px 40px 20px;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          scroll-behavior: smooth;
+        }
+        #ts-track::-webkit-scrollbar { display: none; }
+
+        .ts-fade-left, .ts-fade-right {
+          position: absolute; top: 0; bottom: 0;
+          width: 50px; z-index: 20; pointer-events: none;
+        }
+        .ts-fade-left  { left:  0; background: linear-gradient(to right, #fff, transparent); }
+        .ts-fade-right { right: 0; background: linear-gradient(to left,  #fff, transparent); }
       `}</style>
 
       <section className="rp-root">
@@ -515,74 +423,97 @@ const navigate = useNavigate();
                 <div className="rp-ul-bar2" />
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div className="rp-arrows">
-                <button className="rp-arrow" onClick={() => byCard(-1)}>‹</button>
-                <button className="rp-arrow" onClick={() => byCard(1)}>›</button>
-              </div>
-              <button className="rp-view-all" onhapiplaClick={() => navigate("/productListing")}>
-                View All <ArrowRight size={13} />
-              </button>
-            </div>
+           
           </div>
         </div>
 
         {/* Cards */}
-        <div className="rp-inner" style={{ padding: 0 }} onClick={() => navigate("/product")}>
-          <div className="rp-outer">
+       <div className="relative overflow-hidden py-3">
+                 <div className="ts-fade-left" />
+                 <div className="ts-fade-right" />
+                 <div
+                   id="ts-track"
+                   ref={trackRef}
+                   style={{ cursor: dragging && !isThumb.current ? "grabbing" : "grab" }}
+                   onMouseDown={(e) => { if (e.button !== 0) return; startDrag(e, false); }}
+                 >
+                   {products.map((product, idx) => (
+                     <ProductCart
+                       key={product.id}
+                       product={product}
+                       
+       
+                       //  product={product}   // ✅ PASS DATA
+                       animDelay={idx * 0.08}
+                       sectionVisible={true}
+                       onClick={(item) => console.log("Go to product", item)}
+                       onAddToCart={(item) => console.log("Add to cart", item)}
+                     />
+                   ))}
+                 </div>
+               </div>
+
+     {/* ── Scrollbar track ── */}
+          <div
+            ref={barRef}
+            onClick={onBarClick}
+            className="relative h-[4px] rounded-full cursor-pointer"
+            style={{ background: "#f0ede9" }}
+          >
+            {/* Background fill (progress) */}
             <div
-              ref={trackRef}
-              className={`rp-track${dragging && !isThumb.current ? " grabbing" : ""}`}
-              onMouseDown={(e) => { if (e.button !== 0) return; startDrag(e, false); }}
-            >
-              {related.map((p, idx) => (
-                <div key={p.id} style={{ animationDelay: `${idx * 0.06}s` }}
-                  onMouseDown={(e) => e.stopPropagation()}>
-                  <ProductCard p={p} />
-                </div>
+              className="absolute top-0 left-0 h-full rounded-full pointer-events-none"
+              style={{
+                width: `${prog * 100}%`,
+                background: "linear-gradient(to right, rgba(201,100,58,.3), rgba(130,12,12,.2))",
+              }}
+            />
+            {/* Draggable thumb */}
+            <div
+              onMouseDown={(e) => { e.stopPropagation(); startDrag(e, true); }}
+              className="absolute top-0 h-full rounded-full"
+              style={{
+                width:      `${thumbW}%`,
+                left:       `${thumbL}%`,
+                background: "linear-gradient(to right, #c9643a, #03349a)",
+                boxShadow:  "0 0 8px rgba(201,100,58,.5)",
+                cursor:     dragging && isThumb.current ? "grabbing" : "grab",
+                transition: dragging ? "none" : "left .08s linear, width .15s ease",
+              }}
+            />
+          </div>
+
+          {/* ── Dots + Counter + Arrows ── */}
+          <div className="flex items-center justify-between mt-4">
+
+            {/* Dots */}
+            <div className="flex items-center gap-1.5">
+              {products.map((_, i) => (
+                <div
+                  key={i}
+                  onClick={() => toCard(i)}
+                  className="h-[3px] rounded-full cursor-pointer"
+                  style={{
+                    width: i === active ? 26 : 8,
+                    background: i === active
+                      ? "linear-gradient(to right, #c9643a, #03349a)"
+                      : "#e5e7eb",
+                    boxShadow: i === active ? "0 0 6px rgba(201,100,58,.4)" : "none",
+                    transition: "all .28s cubic-bezier(.22,.68,0,1.2)",
+                  }}
+                />
               ))}
             </div>
-          </div>
-        </div>
 
-        {/* Scrollbar + dots */}
-        <div className="rp-inner">
-          <div className="rp-sb-wrap">
-            <div
-              id="rp-bar"
-              className="rp-sb"
-              onClick={(e) => {
-                const r = e.currentTarget.getBoundingClientRect();
-                const ratio = (e.clientX - r.left) / r.width;
-                const el = trackRef.current;
-                if (el) el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
-              }}
-            >
-              <div className="rp-sb-fill" style={{ width: `${prog * 100}%` }} />
-              <div
-                className="rp-sb-thumb"
-                style={{ width: `${thumb.w}%`, left: `${thumb.l}%` }}
-                onMouseDown={(e) => { e.stopPropagation(); startDrag(e, true); }}
-              />
-            </div>
-
-            <div className="rp-bottom-bar">
-              <div className="rp-dots">
-                {related.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`rp-dot${i === active ? " rp-dot-on" : ""}`}
-                    style={{ width: i === active ? 24 : 8 }}
-                    onClick={() => toCard(i)}
-                  />
-                ))}
-              </div>
-              <span className="rp-counter">
-                {String(active + 1).padStart(2, "0")} / {String(related.length).padStart(2, "0")}
+            {/* Counter + Arrows */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-gray-400 font-semibold tracking-[.1em]">
+                {String(active + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
               </span>
+              <ArrowBtn dir="prev" onClick={() => byCard(-1)} />
+              <ArrowBtn dir="next" onClick={() => byCard(1)} />
             </div>
           </div>
-        </div>
       </section>
     </>
   );

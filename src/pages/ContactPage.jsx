@@ -353,11 +353,30 @@ export default function ContactPage() {
 
   const onChange = e => setForm({ ...form, [e.target.name]: e.target.value });
   const onSubmit = e => {
-    e.preventDefault();
-    setSubmitted(true);
-    setForm({ name:"", email:"", phone:"", message:"" });
-    setTimeout(() => setSubmitted(false), 5000);
-  };
+  e.preventDefault();
+
+  const phoneNumber = "919443157282"; // India code +91
+
+  const message = `Hello, I would like to contact you.
+
+Name: ${form.name}
+Phone: ${form.phone}
+Email: ${form.email}
+Message: ${form.message}`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  // Open WhatsApp
+  window.open(whatsappURL, "_blank");
+
+  // Optional UI actions
+  setSubmitted(true);
+  setForm({ name:"", email:"", phone:"", message:"" });
+
+  setTimeout(() => setSubmitted(false), 5000);
+};
 
   const contacts = [
     { Icon: Pin,   label:"Address", value:"No:1/770, K.Ayyampalayam (PO)", sub:"Palladam, Tiruppur, TN 641662" },
@@ -387,9 +406,7 @@ export default function ContactPage() {
                       </section>
       <section className="ct-hero">
         <div className="ct-hero-left">
-          {/* <div className="ct-eye ct-a0">
-            <div className="ct-eye-dot" /> Get In Touch
-          </div> */}
+          
           <h1 className="ct-h1 ct-a1">
             Let's Start<br />a <em>Great</em><br />Conversation
           </h1>

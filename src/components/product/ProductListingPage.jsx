@@ -9,6 +9,7 @@ import cate3 from '../../assets/images/allCate/cate3.jpeg'
 import cate4 from '../../assets/images/allCate/cate4.jpeg'
 import Banner from '../layout/Banner'
 import OfferScrollBar from '../layout/OfferScrollBar'
+import FirstBanner from "../layout/banner/FirstBanner";
 // import {products} from '../../services/productData'
 
 // ─── Static Categories (replace with your real categories API) ─────────────────
@@ -284,7 +285,7 @@ console.log(products)
       {/* <TopScroll/> */}
       <OfferScrollBar/>
       <Header cartCount={cartCount} search={search} setSearch={setSearch} />
-
+<FirstBanner/>
       {/* ── Mobile Drawer ── */}
       <MobileDrawer
         categories={CATEGORIES}

@@ -35,10 +35,31 @@ export default function Dealership() {
 
   const handleChange = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
   const handleSubmit = e => {
-    e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3800)
-  }
+  e.preventDefault()
+
+  const phoneNumber = "919443157282" // include country code (91 for India)
+
+  const message = `Hello, I am interested in bulk purchase.
+
+Name: ${form.name}
+Email: ${form.email}
+Mobile: ${form.mobile}
+State: ${form.state}
+Product / Quantity: ${form.productQuantity}
+Total Quantity: ${form.totalQuantity}
+Details: ${form.details}`
+
+  const encodedMessage = encodeURIComponent(message)
+
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+
+  // Redirect to WhatsApp
+  window.open(whatsappURL, "_blank")
+
+  // Optional: show toast
+  setSubmitted(true)
+  setTimeout(() => setSubmitted(false), 3800)
+}
 
   /* scroll-reveal */
   useEffect(() => {
