@@ -2,8 +2,10 @@ import logo from '../../assets/images/logo.jpg'
 
 import TopScroll from './TopScroll'
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation ,useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaUser, FaSearch, FaTimes, FaBars } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import { getCart } from "../../services/cartService";
 
 
 /* ─── Gold vertical divider ──────────────────────────────────────────── */
@@ -133,6 +135,14 @@ export default function Header() {
   /* ─── RENDER ─────────────────────────────────────────────────── */
 
   const navigate = useNavigate();
+
+  // Fetch cart count from backend
+  const { data: cartData } = useQuery({
+    queryKey: ["cart"],
+    queryFn: getCart,
+    retry: false, // Don't retry if user isn't logged in
+  });
+  const cartCount = cartData?.data?.reduce((sum, item) => sum + item.quantity, 0) || 0;
   return (
     <>
      <style>{`
@@ -211,9 +221,11 @@ export default function Header() {
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                   </svg>
                   <span>Cart</span>
-                  <span className="min-w-[17px] h-[17px] flex items-center justify-center
-                               rounded-full text-[9px] font-bold border border-white/25"
-                    style={{ background: "#04308e" }}>2</span>
+                  {cartCount > 0 && (
+                    <span className="min-w-[17px] h-[17px] flex items-center justify-center
+                                   rounded-full text-[9px] font-bold border border-white/25"
+                      style={{ background: "#04308e" }}>{cartCount}</span>
+                  )}
                 </button>
 
 
@@ -333,8 +345,8 @@ export default function Header() {
             {/* CTA row — equal thirds, no overflow */}
             <div className="grid grid-cols-3 gap-2.5 px-4 sm:px-6 pb-5">
               {[
-                { icon: <FaShoppingCart size={12} />, label: "Cart",     href: "/cart",     badge: 2, accent: false },
-                { icon: <FaHeart size={12} />,        label: "Wishlist", href: "/wishlist", badge: 3, accent: true  },
+                { icon: <FaShoppingCart size={12} />, label: "Cart",     href: "/cart",     badge: cartCount || null, accent: false },
+                { icon: <FaHeart size={12} />,        label: "Wishlist", href: "/wishlist", badge: null, accent: true  },
                 { icon: <FaUser size={12} />,          label: "Account",  href: "/profile",  badge: null },
               ].map(item => (
                 <a key={item.href} href={item.href}

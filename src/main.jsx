@@ -36,8 +36,8 @@ function Root() {
 
 createRoot(document.getElementById('root')).render(
   <HelmetProvider>
-  <App />
-</HelmetProvider>
+    <Root />
+  </HelmetProvider>
 );
 
 

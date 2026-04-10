@@ -1,24 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const mockUser = {
-  name: "John Doe",
-  email: "john.doe@example.com",
-  phone: "+1 (555) 123-4567",
-  joined: "January 2025",
-  avatar: "JD",
-  addresses: [
-    { id: 1, label: "Home", details: "123 Main Street, City, Country", default: true },
-    { id: 2, label: "Office", details: "456 Office Blvd, City, Country", default: false },
-  ],
-};
-    const addresses = [1, 2];
-
-const mockOrders = [
-  { id: 101, date: "Jan 20, 2026", status: "Delivered", total: 89.99, items: 3 },
-  { id: 102, date: "Feb 10, 2026", status: "Processing", total: 49.99, items: 1 },
-  { id: 103, date: "Feb 18, 2026", status: "Shipped", total: 129.99, items: 2 },
-];
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getProfile, addAddress, removeAddress } from "../services/userService";
+import { getMyOrders } from "../services/orderService";
 
 const mockWishlist = [
   { id: 201, name: "Vitamin C Serum", price: 29.99, originalPrice: 39.99, image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&q=80" },
@@ -35,12 +19,53 @@ const statusConfig = {
 const tabs = ["Overview", "Orders", "Wishlist", "Addresses"];
 
 export default function ProfilePage() {
-  const [user] = useState(mockUser);
+  const navigate = useNavigate();
+  const qc = useQueryClient();
   const [activeTab, setActiveTab] = useState("Overview");
+  
   const [wishlist, setWishlist] = useState(mockWishlist);
-
   const removeWishlist = (id) => setWishlist(wishlist.filter(i => i.id !== id));
-const navigate = useNavigate()
+
+  const [newAddress, setNewAddress] = useState("");
+  const [showAddressForm, setShowAddressForm] = useState(false);
+
+  const { data: userProfile, isLoading: isUserLoading } = useQuery({
+    queryKey: ["profile"],
+    queryFn: getProfile
+  });
+
+  const { data: ordersData, isLoading: isOrdersLoading } = useQuery({
+    queryKey: ["orders"],
+    queryFn: getMyOrders
+  });
+
+  const addAddrMut = useMutation({
+    mutationFn: addAddress,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["profile"] });
+      setNewAddress("");
+      setShowAddressForm(false);
+    }
+  });
+
+  const remAddrMut = useMutation({
+    mutationFn: removeAddress,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["profile"] });
+    }
+  });
+
+  if (isUserLoading || isOrdersLoading) {
+    return <div className="min-h-screen flex items-center justify-center bg-[#faf7f2]">Loading Profile...</div>;
+  }
+
+  const user = userProfile || { name: "Guest User", email: "" };
+  const orders = ordersData || [];
+  const addresses = user.addresses || [];
+  const nameParts = (user.name || "").split(" ");
+  const firstName = nameParts[0] || "Guest";
+  const lastName = nameParts[1] || "";
+  const avatar = nameParts[0]?.charAt(0)?.toUpperCase() || "G";
   return (
     <div className="min-h-screen bg-[#fff]" >
       <style>{`
@@ -63,9 +88,9 @@ const navigate = useNavigate()
 
           <div className="relative z-10 flex items-center gap-6">
             {/* Large avatar */}
-            <div className="w-20 h-20 rounded-2xl shrink-0 flex items-center justify-center text-2xl font-black"
+            <div className="w-20 h-20 rounded-2xl shrink-0 flex items-center justify-center text-4xl font-black"
               style={{ background: "linear-gradient(135deg,#aab820,#d4e020)", color: "#03349a", boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}>
-              {user.avatar}
+              {avatar}
             </div>
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -73,8 +98,8 @@ const navigate = useNavigate()
                 <span className="text-[9px] tracking-[4px] uppercase text-[#aab820] font-bold">My Account</span>
               </div>
               <h1 className="text-3xl font-black text-white leading-tight">
-                {user.name.split(" ")[0]}{" "}
-                <span style={{ color: "#aab820" }}>{user.name.split(" ")[1]}</span>
+                {firstName}{" "}
+                <span style={{ color: "#aab820" }}>{lastName}</span>
               </h1>
               <p className="text-white/40 text-xs mt-1">{user.email}</p>
             </div>
@@ -88,7 +113,7 @@ const navigate = useNavigate()
         {/* Right — stats on cream */}
         <div className="flex-1 flex items-center justify-around px-10 py-10 gap-4">
           {[
-            { label: "Total Orders", value: mockOrders.length, color: "#03349a", bg: "rgba(130,12,12,0.06)", icon: (
+            { label: "Total Orders", value: orders.length, color: "#03349a", bg: "rgba(130,12,12,0.06)", icon: (
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
@@ -174,8 +199,8 @@ const navigate = useNavigate()
                 <button onClick={() => setActiveTab("Orders")} className="text-sm text-[#03349a] font-semibold hover:underline">View All →</button>
               </div>
               <div className="space-y-3">
-                {mockOrders.slice(0, 2).map(order => {
-                  const s = statusConfig[order.status];
+                {orders.slice(0, 2).map(order => {
+                  const s = statusConfig[order.status] || statusConfig.Processing;
                   return (
                     <div key={order.id} className="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-red-100 hover:bg-[#faf7f2] transition-all">
                       <div className="flex items-center gap-4">
@@ -185,8 +210,8 @@ const navigate = useNavigate()
                           </svg>
                         </div>
                         <div>
-                          <p className="font-semibold text-gray-800 text-sm">Order #{order.id}</p>
-                          <p className="text-gray-400 text-xs">{order.date} · {order.items} items</p>
+                          <p className="font-semibold text-gray-800 text-sm">Order #{order.id.split("-")[0]}</p>
+                          <p className="text-gray-400 text-xs">{new Date(order.createdAt).toLocaleDateString()} · {order.items?.length || 0} items</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
@@ -194,11 +219,12 @@ const navigate = useNavigate()
                           <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
                           {order.status}
                         </span>
-                        <p className="font-bold text-gray-800 text-sm">${order.total.toFixed(2)}</p>
+                        <p className="font-bold text-gray-800 text-sm">₹{parseFloat(order.totalAmount).toFixed(2)}</p>
                       </div>
                     </div>
                   );
                 })}
+                {orders.length === 0 && <p className="text-sm text-gray-500">No orders yet.</p>}
               </div>
             </div>
           </div>
@@ -209,8 +235,8 @@ const navigate = useNavigate()
           <div className="fade-up bg-white rounded-2xl shadow-sm border border-red-50 p-8">
             <h3 className="text-lg font-bold text-[#03349a] mb-6">Order History</h3>
             <div className="space-y-4">
-              {mockOrders.map(order => {
-                const s = statusConfig[order.status];
+              {orders.map(order => {
+                const s = statusConfig[order.status] || statusConfig.Processing;
                 return (
                   <div key={order.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-2xl border border-gray-100 hover:border-red-100 hover:shadow-md transition-all gap-4">
                     <div className="flex items-center gap-4">
@@ -220,8 +246,8 @@ const navigate = useNavigate()
                         </svg>
                       </div>
                       <div>
-                        <p className="font-bold text-gray-900">Order #{order.id}</p>
-                        <p className="text-gray-400 text-xs mt-0.5">{order.date} · {order.items} item{order.items > 1 ? "s" : ""}</p>
+                        <p className="font-bold text-gray-900">Order #{order.id.split("-")[0]}</p>
+                        <p className="text-gray-400 text-xs mt-0.5">{new Date(order.createdAt).toLocaleDateString()} · {order.items?.length || 0} items</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 sm:gap-6">
@@ -229,7 +255,7 @@ const navigate = useNavigate()
                         <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
                         {order.status}
                       </span>
-                      <p className="font-black text-lg text-gray-900">${order.total.toFixed(2)}</p>
+                      <p className="font-black text-lg text-gray-900">₹{parseFloat(order.totalAmount).toFixed(2)}</p>
                       <button className="text-xs font-semibold text-[#03349a] border border-[#03349a]/20 px-3 py-1.5 rounded-lg hover:bg-[#03349a]/5 transition-all" onClick={()=>navigate('/trackorder')}>
                         Details
                       </button>
@@ -237,6 +263,7 @@ const navigate = useNavigate()
                   </div>
                 );
               })}
+              {orders.length === 0 && <p className="text-sm text-gray-500">You haven't placed any orders yet.</p>}
             </div>
           </div>
         )}
@@ -293,7 +320,7 @@ const navigate = useNavigate()
         {/* ── ADDRESSES TAB ── */}
         {activeTab === "Addresses" && (
           <div className="fade-up space-y-4">
-            {user.addresses.map((addr, i) => (
+            {addresses.map((addr) => (
               <div key={addr.id} className="bg-white rounded-2xl shadow-sm border border-red-50 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-all">
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg,#03349a,#a81010)" }}>
@@ -304,7 +331,7 @@ const navigate = useNavigate()
                   <div>
                     <div className="flex items-center gap-2 mb-0.5">
                       <p className="font-bold text-gray-900">{addr.label}</p>
-                      {addr.default && (
+                      {addr.isDefault && (
                         <span className="text-[10px] tracking-widest uppercase font-semibold text-[#03349a] bg-[#03349a]/8 px-2 py-0.5 rounded-full border border-[#03349a]/15">Default</span>
                       )}
                     </div>
@@ -313,18 +340,35 @@ const navigate = useNavigate()
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <button className="text-sm font-semibold text-[#03349a] border border-[#03349a]/20 px-4 py-2 rounded-xl hover:bg-[#03349a]/5 transition-all">Edit</button>
-                  <button className="text-sm font-semibold text-gray-400 border border-gray-200 px-4 py-2 rounded-xl hover:bg-gray-50 transition-all">Remove</button>
+                  <button onClick={() => remAddrMut.mutate(addr.id)} className="text-sm font-semibold text-gray-400 border border-gray-200 px-4 py-2 rounded-xl hover:bg-gray-50 transition-all">{remAddrMut.isPending ? 'Removing...' : 'Remove'}</button>
                 </div>
               </div>
             ))}
 
-            {/* Add new address */}
-            <button className="w-full p-5 rounded-2xl border-2 border-dashed border-[#03349a]/20 text-[#03349a]/60 font-semibold text-sm hover:border-[#03349a]/40 hover:text-[#03349a] hover:bg-[#03349a]/5 transition-all flex items-center justify-center gap-2">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-              Add New Address
-            </button>
+            {showAddressForm && (
+              <div className="p-4 border border-gray-200 rounded-xl space-y-3 fade-up">
+                <textarea 
+                  value={newAddress}
+                  onChange={e => setNewAddress(e.target.value)}
+                  placeholder="Enter full address here..."
+                  className="w-full p-3 border border-gray-200 rounded-lg outline-none focus:border-[#03349a]"
+                  rows="3"
+                />
+                <div className="flex gap-2">
+                  <button onClick={() => addAddrMut.mutate({ label: "Home", details: newAddress })} className="bg-[#03349a] text-white px-4 py-2 rounded-lg text-sm font-bold">Save Address</button>
+                  <button onClick={() => setShowAddressForm(false)} className="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm font-bold">Cancel</button>
+                </div>
+              </div>
+            )}
+
+            {!showAddressForm && (
+              <button onClick={() => setShowAddressForm(true)} className="w-full p-5 rounded-2xl border-2 border-dashed border-[#03349a]/20 text-[#03349a]/60 font-semibold text-sm hover:border-[#03349a]/40 hover:text-[#03349a] hover:bg-[#03349a]/5 transition-all flex items-center justify-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                  <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Add New Address
+              </button>
+            )}
           </div>
         )}
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation ,QueryClient} from "@tanstack/react-query";
 import { registerUser } from "../config/authApi";
 
 export default function Register() {

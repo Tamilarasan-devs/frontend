@@ -123,24 +123,7 @@ Aayubakwath Rewards</em>
               </div>
 
               {/* Points banner */}
-              <div
-                className="rounded-2xl p-4 mb-4 flex items-center gap-4 slide-up"
-                style={{
-                  background: "linear-gradient(135deg, #fefbf6, #fdf5e0)",
-                  border: "1.5px solid rgba(170,184,32,0.3)",
-                  animationDelay: "0.15s"
-                }}
-              >
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: "linear-gradient(135deg, #aab820, #c8d520)" }}>
-                  <Star size={18} className="text-white" fill="white" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-xs font-semibold" style={{ color: "#7a8a10" }}>Earn on every order</p>
-                  <p className="font-black text-sm" style={{ color: "#4a5a08" }}>1 Point = ₹1 Discount</p>
-                </div>
-                <ChevronRight size={16} style={{ color: "#aab820" }} />
-              </div>
+            
 
               {/* Referral Card */}
               <div className="rounded-2xl overflow-hidden slide-up"

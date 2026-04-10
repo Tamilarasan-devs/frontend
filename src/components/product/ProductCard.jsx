@@ -2,6 +2,8 @@ import React, { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { API_URL } from "../../utils/axiosInstance";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addToCart } from "../../services/cartService";
 const CARD_W = 402;
 const CARD_GAP = 20;
 export default  function ProductCard({ product, animDelay, sectionVisible }) {
@@ -12,6 +14,34 @@ console.log('shop page :',product)
   const [cardVisible, setCardVisible] = useState(false);
   const disc = Math.round(((product.price - product.finalPrice) / product.price) * 100);
   const navigate = useNavigate();
+  const qc = useQueryClient();
+
+  const addMut = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["cart"] });
+      alert("Item added to cart!");
+    },
+    onError: (err) => {
+      if (err.response?.status === 401) {
+        alert("Please login first to add items to cart.");
+        navigate('/login');
+      } else {
+        alert("Failed to add to cart.");
+      }
+    }
+  });
+
+  const handleAddToCart = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+       alert("Please login first to add items to cart.");
+       navigate('/login');
+       return;
+    }
+    
+    addMut.mutate({ productId: product.id, quantity: 1 });
+  };
 
   // Trigger card entrance after section becomes visible + stagger delay
 
@@ -202,6 +232,7 @@ const badgeColors = {
 
         {/* Add to Cart */}
         <button
+          onClick={handleAddToCart}
           onMouseEnter={() => setBtnHov(true)}
           onMouseLeave={() => setBtnHov(false)}
           className="w-full py-3 text-sm font-semibold tracking-wide uppercase
@@ -213,8 +244,14 @@ const badgeColors = {
             boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
           }}
         >
-          <FaShoppingCart size={14} />
-          Add to Cart
+          {addMut.isPending ? (
+            <span>Adding...</span>
+          ) : (
+            <>
+              <FaShoppingCart size={14} />
+              Add to Cart
+            </>
+          )}
         </button>
       </div>
     </div>

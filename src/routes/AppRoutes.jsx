@@ -24,6 +24,8 @@ const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 const WishlistPage = lazy(() => import("../pages/WishlistPage"));
 const Dealership = lazy(() => import("../pages/Dealership"));
 const About = lazy(() => import("../pages/About"));
+const Checkout = lazy(() => import("../pages/Checkout"));
+const NewAbout = lazy(()=> import("../pages/NewAbout"))
 
 /* Lazy Loaded Components */
 const ProductListingPage = lazy(() =>
@@ -64,14 +66,16 @@ export default function AppRoutes() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
+            {/* <Route path="/about" element={<NewAbout />} /> */}
+            {/* <Route path="/about" element={<AboutPage />} /> */}
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/productListing" element={<ProductListingPage />} />
             <Route path="/cart" element={<CartCheckout />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/dealership" element={<Dealership />} />
-            <Route path="/aboutpage" element={<About />} />
+            <Route path="/aboutpage" element={<NewAbout />} />
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/categorylist" element={<CategoryList />} />
             <Route path="/productgrid" element={<ProductGrid />} />

@@ -11,7 +11,15 @@ export default function Login() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("Login successful:", data);
+      // Backend returns data: { user, token } wrapped in another data object 
+      // or directly if axios extracted it. From auth.controller.js we saw data: result.
+      const token = data?.data?.token || data?.token;
+      if (token) {
+        localStorage.setItem("token", token);
+      }
       alert("Logged in successfully!");
+      // Optionally redirect user here
+      window.location.href = "/";
     },
     onError: (error) => {
       alert(error.response?.data?.message || "Login failed");
