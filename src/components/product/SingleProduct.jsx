@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import pincodeData from "../../data/pincodeData.json";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToCart } from "../../services/cartService";
@@ -6,7 +7,7 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import RelatedProduct from "../product/ReleatedProduct";
 import ReviewSection from "../clientReview/ReviewSection";
 import FAQ from "./FAQ";
-
+import { HiOutlineTrendingUp } from "react-icons/hi";
 // ─── Static Data ──────────────────────────────────────────────────────────────
 
 const OFFERS = [
@@ -164,8 +165,57 @@ export default function SingleProduct() {
   const resetZoom = () => setZoomStyle({ transform: "scale(1)", transition: "transform 0.25s ease", transformOrigin: "center" });
 
   const checkPincode = () => {
-    if (pincode.length !== 6) { setPincodeMsg({ type: "error", msg: "Enter a valid 6-digit pincode." }); return; }
-    setPincodeMsg({ type: "success", msg: "✓ Delivery available! Expected in 4–7 working days." });
+    if (pincode.length !== 6) {
+      setPincodeMsg({ type: "error", msg: "Enter a valid 6-digit pincode." });
+      return;
+    }
+
+    const state = pincodeData[pincode];
+
+    if (!state) {
+      setPincodeMsg({
+        type: "error",
+        msg: "❌ Sorry, we couldn't find this pincode. Please check and try again.",
+      });
+      return;
+    }
+
+    // Delivery days based on state
+    const FAST_STATES = ["TAMIL NADU"];
+    const MEDIUM_STATES = ["KERALA", "KARNATAKA", "ANDHRA PRADESH", "TELANGANA"];
+
+    let days;
+    let label;
+
+    if (FAST_STATES.includes(state)) {
+      days = 4;
+      label = "Express";
+    } else if (MEDIUM_STATES.includes(state)) {
+      days = 5;
+      label = "Standard";
+    } else {
+      days = 7;
+      label = "Standard";
+    }
+
+    // Calculate estimated delivery date
+    const deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + days);
+    const options = { weekday: "short", month: "short", day: "numeric" };
+    const formattedDate = deliveryDate.toLocaleDateString("en-IN", options);
+
+    // Format state name nicely
+    const stateName = state
+      .split(" ")
+      .map((w) => w.charAt(0) + w.slice(1).toLowerCase())
+      .join(" ");
+
+    setPincodeMsg({
+      type: "success",
+      msg: `✓ ${label} Delivery to ${stateName} — Estimated by ${formattedDate} (${days} working days)`,
+      days,
+      stateName,
+    });
   };
 
   if (loading) return (
@@ -221,7 +271,7 @@ export default function SingleProduct() {
 
             {/* Main image container */}
             <div className="relative rounded-3xl overflow-hidden bg-white border border-stone-100 shadow-sm"
-              style={{ aspectRatio: "4/5" }}
+              // style={{ aspectRatio: "4/5" }}
             >
               {/* Top action row: Wishlist + Share */}
               <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
@@ -245,8 +295,8 @@ export default function SingleProduct() {
                   </svg>
                 </button>
               </div>
-
-              {/* Discount badge */}
+<div className=" flex justify-between">
+{/* Discount badge */}
               {discPct > 0 && (
                 <div className="absolute top-4 left-4 z-20 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide shadow">
                   {discPct}% OFF
@@ -259,6 +309,8 @@ export default function SingleProduct() {
                   {offerTags[0]}
                 </div>
               )}
+</div>
+              
 
               {/* Zoom image */}
               <div
@@ -346,13 +398,13 @@ export default function SingleProduct() {
               </p>
             )}
             {/* ── IN STOCK + SALES BADGE ── */}
-            <div className="flex items-center gap-3 mb-5 flex-wrap">
+            <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 stock-pulse" />
                 In Stock
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700 bg-orange-50 border border-orange-200 rounded-full px-3 py-1.5">
-                🔥 300+ sold this month
+                <HiOutlineTrendingUp size={20} /> 300+ sold in 30 days
               </span>
               
             </div>
@@ -382,7 +434,6 @@ export default function SingleProduct() {
             </div>
 
            
-
             {/* Pack Selector */}
             <div className="mb-6">
               <p className="text-[15px] font-bold uppercase tracking-widest mb-3">Choose Pack Size</p>
@@ -440,9 +491,33 @@ export default function SingleProduct() {
                 </button>
               </div>
               {pincodeMsg && (
-                <p className={`mt-2 text-xs font-medium ${pincodeMsg.type === "success" ? "text-emerald-700" : "text-red-600"}`}>
-                  {pincodeMsg.msg}
-                </p>
+                <div className={`mt-3 rounded-xl p-3 ${pincodeMsg.type === "success" ? "bg-emerald-50 border border-emerald-200" : "bg-red-50 border border-red-200"}`}>
+                  {pincodeMsg.type === "success" ? (
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl flex-shrink-0">🚚</span>
+                      <div className="flex-1">
+                        <p className="text-sm font-bold text-emerald-800 mb-0.5">{pincodeMsg.msg}</p>
+                        <div className="flex items-center gap-2 mt-1.5">
+                          <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${
+                            pincodeMsg.days === 4 
+                              ? "bg-emerald-600 text-white" 
+                              : pincodeMsg.days === 5 
+                                ? "bg-blue-600 text-white" 
+                                : "bg-amber-500 text-white"
+                          }`}>
+                            {pincodeMsg.days === 4 ? "⚡ Express" : pincodeMsg.days === 5 ? "📦 Standard" : "📦 Standard"}
+                          </span>
+                          <span className="text-[11px] text-emerald-600 font-medium">Free delivery on orders ₹499+</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">⚠️</span>
+                      <p className="text-sm font-semibold text-red-700">{pincodeMsg.msg}</p>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
@@ -546,9 +621,9 @@ export default function SingleProduct() {
                       <div className="space-y-3">
                         {BENEFITS_LIST.map((b) => (
                           <div key={b.key} className="flex gap-3 p-3 rounded-xl bg-stone-50 border border-stone-100">
-                            <span className="text-emerald-500 font-bold mt-0.5 flex-shrink-0">✓</span>
+                            
                             <div>
-                              <span className="font-semibold text-stone-900 text-sm">{b.key}: </span>
+                              <span className="text-stone-600 text-sm">{b.key}: </span>
                               <span className="text-sm text-stone-600">{b.val}</span>
                             </div>
                           </div>

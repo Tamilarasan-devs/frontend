@@ -210,40 +210,25 @@ export default function Header() {
             </a>
 
 
-  <button
-                  type="button"
-                  className="flex shim-btn items-center justify-center gap-2 w-[100px] text-white text-sm font-semibold uppercase tracking-wide px-6 py-3 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-                  style={{ boxShadow: "0 10px 24px rgba(130,12,12,.35)" }}
-                  onClick={()=>navigate('/cart')}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                  </svg>
-                  <span>Cart</span>
-                  {cartCount > 0 && (
-                    <span className="min-w-[17px] h-[17px] flex items-center justify-center
-                                   rounded-full text-[9px] font-bold border border-white/25"
-                      style={{ background: "#04308e" }}>{cartCount}</span>
-                  )}
-                </button>
+<button
+  type="button"
+  className="flex shim-btn items-center justify-center gap-2 px-4 py-3 text-white text-sm font-semibold uppercase tracking-wide rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+  style={{ boxShadow: "0 10px 24px rgba(130,12,12,.35)" }}
+  onClick={()=>navigate('/cart')}
+>
+  <FaShoppingCart className="w-4 h-4 flex-shrink-0" />
+  <span>Cart</span>
+  {cartCount > 0 && (
+    <span className="min-w-[17px] h-[17px] flex items-center justify-center
+                     rounded-full text-[9px] font-bold border border-white/25 bg-blue-800">
+      {cartCount}
+    </span>
+  )}
+</button>
 
 
-            {/* Cart */}
-            {/* <a href="/cart"
-               className="flex items-center gap-2 px-4 h-9 rounded-full text-white
-                          font-dm text-[11px] font-semibold tracking-[1.5px] uppercase
-                          transition-all duration-200 hover:-translate-y-0.5"
-               style={{ background: "linear-gradient(135deg,#03349a,#0145cc)",
-                        boxShadow: "0 3px 14px rgba(139,0,0,0.28)" }}
-               onMouseEnter={e => e.currentTarget.style.background = "linear-gradient(135deg,#03349a,#0145cc)"}
-               onMouseLeave={e => e.currentTarget.style.background = "linear-gradient(135deg,#03349a,#0145cc)"}>
-              <FaShoppingCart size={12} />
-              Cart
-              <span className="min-w-[17px] h-[17px] flex items-center justify-center
-                               rounded-full text-[9px] font-bold border border-white/25"
-                    style={{ background: "#04308e" }}>2</span>
-            </a> */}
+
+        
 
             {/* Profile */}
             <div className="relative" ref={dropRef}>

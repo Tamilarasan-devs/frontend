@@ -1,76 +1,8 @@
 import React, { useState } from "react";
-import bnr from '../assets/images/bann2.jpg'
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-const blogPosts = [
-  {
-    id: 1,
-    category: "Lifestyle",
-    title: "The Future of Sustainable Living",
-    excerpt: "Discover how sustainable practices are shaping the way we live, work, and consume in the modern world.",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
-    date: "Mar 01, 2026",
-    readTime: "5 min read",
-    link: "#",
-    featured: true,
-  },
-  {
-    id: 2,
-    category: "Health",
-    title: "Top 10 Health Tips for 2026",
-    excerpt: "Stay healthy and active with these practical tips recommended by leading health experts.",
-    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80",
-    date: "Feb 22, 2026",
-    readTime: "4 min read",
-    link: "#",
-    featured: false,
-  },
-  {
-    id: 3,
-    category: "Technology",
-    title: "Innovations in Eco-Friendly Technology",
-    excerpt: "Explore the latest tech innovations that are helping reduce our collective carbon footprint.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
-    date: "Feb 15, 2026",
-    readTime: "6 min read",
-    link: "#",
-    featured: false,
-  },
-  {
-    id: 4,
-    category: "Wellness",
-    title: "Mindfulness and Productivity",
-    excerpt: "Learn how daily mindfulness practices can help you boost focus, reduce stress, and achieve more.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80",
-    date: "Feb 10, 2026",
-    readTime: "3 min read",
-    link: "#",
-    featured: false,
-  },
-  {
-    id: 5,
-    category: "Nutrition",
-    title: "Eating Well on a Budget",
-    excerpt: "Nutritious meals don't have to be expensive. Here's how to eat well without breaking the bank.",
-    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80",
-    date: "Feb 05, 2026",
-    readTime: "4 min read",
-    link: "#",
-    featured: false,
-  },
-  {
-    id: 6,
-    category: "Lifestyle",
-    title: "Designing a Home You'll Love",
-    excerpt: "Simple design principles that transform any space into a warm, welcoming sanctuary.",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80",
-    date: "Jan 28, 2026",
-    readTime: "5 min read",
-    link: "#",
-    featured: false,
-  },
-];
-
-const categories = ["All", "Lifestyle", "Health", "Technology", "Wellness", "Nutrition"];
+import bnr from '../assets/images/bann2.jpg';
+import blogPosts, { categories } from "../data/blogData";
 
 const BRAND = "#03349a";
 const ACCENT = "#c9643a";
@@ -78,6 +10,7 @@ const ACCENT = "#c9643a";
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [hoveredId, setHoveredId] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const filtered = activeCategory === "All"
     ? blogPosts
@@ -85,11 +18,12 @@ export default function BlogPage() {
 
   const featured = filtered.find((p) => p.featured) || filtered[0];
   const rest = filtered.filter((p) => p.id !== featured?.id);
+  const visibleRest = rest.slice(0, visibleCount);
 
   return (
     <>
       <style>{`
-  
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(16px); }
@@ -158,6 +92,10 @@ export default function BlogPage() {
         }
         .load-btn:hover { transform: translateY(-2px); }
         .load-btn:hover::after { transform: translateX(100%); }
+
+        .blog-serif {
+          font-family: 'Playfair Display', serif;
+        }
       `}</style>
 
       <div className="blog-root min-h-screen" style={{ backgroundColor:'white' }}>
@@ -165,22 +103,16 @@ export default function BlogPage() {
   <title>Blog - Aayubakwath</title>
   <meta name="description" content="Read the latest articles on health, wellness, lifestyle, and more at Aayubakwath Blog. Stay informed with expert insights, tips, and trends to live your best life." />
 </Helmet>
-        {/* ── Hero Header ── */}
         {/* ══════════ HERO ══════════ */}
                 <section className="relative w-full overflow-hidden">
                   {/* Background image */}
                   <div className="relative">
                     <img
                       src={bnr}
-                      alt="About Banner"
+                      alt="Blog Banner"
                       loading="lazy"
                       className="w-full lg:h-full object-cover"
                     />
-                
-      
-                
-                    
-                   
                   </div>
                 </section>
 
@@ -191,7 +123,7 @@ export default function BlogPage() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => { setActiveCategory(cat); setVisibleCount(6); }}
                 className={`cat-btn px-5 py-2 rounded-full text-sm font-semibold ${
                   activeCategory === cat ? "cat-btn-active" : "cat-btn-inactive"
                 }`}
@@ -208,13 +140,14 @@ export default function BlogPage() {
           {featured && (
             <>
               {/* ── Featured Post ── */}
-              <a
-                href={featured.link}
+              <Link
+                to={`/blog/${featured.slug}`}
                 className="featured-card fade-up block rounded-3xl overflow-hidden mb-12 cursor-pointer"
                 style={{
                   background: "#fff",
                   border: "1.5px solid rgba(201,100,58,0.18)",
                   boxShadow: "0 8px 40px rgba(130,12,12,0.08)",
+                  textDecoration: "none",
                 }}
               >
                 <div className="flex flex-col lg:flex-row">
@@ -265,17 +198,17 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
 
               {/* ── Grid Posts ── */}
-              {rest.length > 0 && (
+              {visibleRest.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {rest.map((post, i) => (
-                    <a
+                  {visibleRest.map((post, i) => (
+                    <Link
                       key={post.id}
-                      href={post.link}
+                      to={`/blog/${post.slug}`}
                       className="blog-card fade-up bg-white rounded-2xl overflow-hidden block cursor-pointer"
-                      style={{ animationDelay: `${i * 0.07}s` }}
+                      style={{ animationDelay: `${i * 0.07}s`, textDecoration: "none" }}
                       onMouseEnter={() => setHoveredId(post.id)}
                       onMouseLeave={() => setHoveredId(null)}
                     >
@@ -322,7 +255,7 @@ export default function BlogPage() {
                           </span>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -330,18 +263,21 @@ export default function BlogPage() {
           )}
 
           {/* ── Load More ── */}
-          <div className="mt-14 text-center">
-            <button
-              className="load-btn text-white text-sm font-semibold uppercase tracking-widest px-10 py-4 rounded-full border-none cursor-pointer"
-              style={{
-                background: `linear-gradient(135deg, ${BRAND} 0%, ${ACCENT} 100%)`,
-                boxShadow: "0 8px 24px rgba(130,12,12,0.3)",
-              }}
-            >
-              Load More Posts
-            </button>
-            <p className="text-xs text-gray-400 mt-3">Showing {filtered.length} of 24 articles</p>
-          </div>
+          {rest.length > visibleCount && (
+            <div className="mt-14 text-center">
+              <button
+                className="load-btn text-white text-sm font-semibold uppercase tracking-widest px-10 py-4 rounded-full border-none cursor-pointer"
+                style={{
+                  background: `linear-gradient(135deg, ${BRAND} 0%, ${ACCENT} 100%)`,
+                  boxShadow: "0 8px 24px rgba(130,12,12,0.3)",
+                }}
+                onClick={() => setVisibleCount((prev) => prev + 6)}
+              >
+                Load More Posts
+              </button>
+              <p className="text-xs text-gray-400 mt-3">Showing {Math.min(visibleCount + 1, filtered.length)} of {filtered.length} articles</p>
+            </div>
+          )}
 
         </div>
       </div>

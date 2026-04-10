@@ -19,6 +19,7 @@ const Register = lazy(() => import("../pages/Register"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
 const BlogPage = lazy(() => import("../pages/Blog"));
+const BlogDetail = lazy(() => import("../pages/BlogDetail"));
 const CartCheckout = lazy(() => import("../pages/Cart"));
 const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 const WishlistPage = lazy(() => import("../pages/WishlistPage"));
@@ -69,6 +70,7 @@ export default function AppRoutes() {
             {/* <Route path="/about" element={<NewAbout />} /> */}
             {/* <Route path="/about" element={<AboutPage />} /> */}
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogDetail />} />
             <Route path="/productListing" element={<ProductListingPage />} />
             <Route path="/cart" element={<CartCheckout />} />
             <Route path="/checkout" element={<Checkout />} />

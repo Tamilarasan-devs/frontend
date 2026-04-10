@@ -50,10 +50,6 @@ export default function Footer() {
   overflow: hidden;
 }
 
-        .footer-display {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-        }
-
         /* Subtle texture overlay */
         .footer-root::before {
           content: '';
@@ -135,7 +131,7 @@ export default function Footer() {
         }
 
         .section-heading {
-          font-family: 'Cormorant Garamond', serif;
+          
           font-size: 18px;
           font-weight: 600;
           color: #f5ede8;
@@ -161,7 +157,6 @@ export default function Footer() {
           border-radius: 8px 0 0 8px;
           color: white;
           padding: 10px 14px;
-          font-family: 'Nunito Sans', sans-serif;
           font-size: 13px;
           outline: none;
           flex: 1;
