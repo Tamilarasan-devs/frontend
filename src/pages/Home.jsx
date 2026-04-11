@@ -21,6 +21,7 @@ import Certificate from './Certificate'
 import ReelSection from '../components/layout/ReelSection'
 import VideoPage from './VideoPage'
 import { Helmet } from "react-helmet-async";
+import LazySection from '../components/common/LazySection'
 
 export default function Home() {
   return (
@@ -28,31 +29,63 @@ export default function Home() {
         <Helmet>
         <title>Home - Aayubakwath</title>
       </Helmet>
+
+        {/* ── Above the fold — loads immediately ── */}
         <Banner/>
         <div className='mt-10'>
-
         <OfferScrollBar/>
         </div>
         <FirstBanner/>
         <CategoryList/>
-        <ProductGrid/>
-        
+
+        {/* ── Below the fold — loads only when scrolled near ── */}
+
+        <LazySection minHeight={400}>
+          <ProductGrid/>
+        </LazySection>
+
 {/* <GridBanner/> */}
 
-<VideoPage/>
+        <LazySection minHeight={300}>
+          <VideoPage/>
+        </LazySection>
 
-        <TopSelling/>
-     
-        <BanrCombo/>
-        <RewardsCard/>
-        <ClientReview/>
-        <OurStory/>
-        <SecondBanner/>
+        <LazySection minHeight={400}>
+          <TopSelling/>
+        </LazySection>
 
-        <Certificate/>
-<ReelSection/>
-        <Testimonial/>
-        
+        <LazySection minHeight={250}>
+          <BanrCombo/>
+        </LazySection>
+
+        <LazySection minHeight={100}>
+          <RewardsCard/>
+        </LazySection>
+
+        <LazySection minHeight={300}>
+          <ClientReview/>
+        </LazySection>
+
+        <LazySection minHeight={300}>
+          <OurStory/>
+        </LazySection>
+
+        <LazySection minHeight={250}>
+          <SecondBanner/>
+        </LazySection>
+
+        <LazySection minHeight={200}>
+          <Certificate/>
+        </LazySection>
+
+        <LazySection minHeight={400}>
+          <ReelSection/>
+        </LazySection>
+
+        <LazySection minHeight={500}>
+          <Testimonial/>
+        </LazySection>
+
     </div>
   )
 }
