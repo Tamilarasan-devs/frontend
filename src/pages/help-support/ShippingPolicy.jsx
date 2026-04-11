@@ -1,75 +1,97 @@
 import React from "react";
 
 export default function ShippingPolicy() {
+  const content = `AAYUBAKWATH – SHIPPING POLICY
+
+Shipping Policy
+Aayubakwath is committed to ensuring that all products ordered through our website are delivered in a timely and efficient manner. We have partnered with reputed logistics service providers to facilitate safe and reliable delivery across serviceable locations.
+
+All products are carefully inspected, securely packaged, and then handed over to our delivery partners to ensure they reach you in good condition.
+
+By placing an order on our website, you agree to the terms outlined in this Shipping Policy.
+
+Shipping Coverage
+We currently ship products to most locations within India, subject to serviceability of our logistics partners. Delivery availability may vary depending on pin code.
+
+Order Processing and Dispatch
+Once an order is placed, it is processed and undergoes verification before dispatch. Orders are typically dispatched within [ ] business days.
+
+Orders may be shipped from different warehouses. Items within a single order may be dispatched separately.
+
+Delivery Timelines
+Estimated delivery time is generally [ ] business days from dispatch. Delays may occur due to weather, logistics disruptions, or unforeseen circumstances.
+
+Shipping Charges
+Shipping charges (if applicable) will be clearly displayed at checkout before order confirmation.
+
+Order Delivery Process
+Our logistics partner will deliver the product(s) to the provided address. Failed delivery attempts due to incorrect address or unavailability may result in return to warehouse.
+
+Tracking of Orders
+Once dispatched, you will receive a tracking ID via email or SMS. You may also track orders through your account dashboard.
+
+Delivery Attempts
+Delivery partners will attempt multiple deliveries. If unsuccessful, re-shipping may incur additional charges.
+
+Shipping Restrictions
+We currently do not support international shipping. Some pin codes may be non-serviceable.
+
+Risk and Responsibility
+Products are inspected before dispatch. Responsibility transfers to the logistics partner once shipped.
+
+Delays and Unforeseen Circumstances
+We are not liable for delays caused by external logistics issues or unforeseen conditions.
+
+Policy Updates
+We may update this Shipping Policy at any time. Continued use indicates acceptance.
+
+Contact Information
+For shipping-related queries, please contact us through our official support channels.
+
+Final Note
+By placing an order, you acknowledge that you have read and agreed to this Shipping Policy.`;
+
+  const sections = content.split("\n\n");
+
   return (
     <div className="bg-gray-50 min-h-screen py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-2xl p-8">
-        
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">
+      <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl p-8">
+
+        {/* Title */}
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-8 text-center">
           Shipping Policy
         </h1>
 
-        <section className="space-y-6 text-gray-600 leading-relaxed">
-          
-          <p>
-            We deliver across India through our logistics partners. Estimated
-            delivery timelines will be displayed after you enter your delivery
-            pincode on the Site. Delays may occur due to courier issues, force
-            majeure, or regulatory checks. Risk of loss transfers to you once
-            the products are handed over to the courier.
-          </p>
+        {/* Dynamic Sections */}
+        <div className="space-y-6">
+          {sections.map((section, index) => {
+            const lines = section.split("\n");
+            const title = lines[0];
+            const body = lines.slice(1).join(" ");
 
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Refund of Shipping Charges
-            </h2>
-            <p>
-              If your return is approved because of an error on our part, such
-              as a wrong item being delivered, damage in transit, or a tampered
-              seal, we will also refund the original shipping charges you paid,
-              along with the product cost. Refunds will be made to your original
-              payment method within 4–5 working days after inspection and
-              approval.
-            </p>
-          </div>
+            return (
+              <div
+                key={index}
+                className="border-b border-gray-200 pb-5 last:border-none"
+              >
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                  {title}
+                </h2>
 
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Shipping Costs
-            </h2>
-            <p>
-              Shipping costs are calculated at checkout based on weight and
-              delivery location. We aim to keep shipping charges fair and
-              transparent.
-            </p>
-          </div>
+                {body && (
+                  <p className="text-gray-600 leading-relaxed">
+                    {body}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Order Tracking
-            </h2>
-            <p>
-              Once dispatched, you’ll receive a tracking number by email or SMS.
-              This allows you to monitor your order until it arrives safely at
-              your door.
-            </p>
-          </div>
-
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md">
-            <h2 className="text-lg font-semibold text-yellow-800 mb-1">
-              Friendly Reminder
-            </h2>
-            <p className="text-yellow-700">
-              Please double-check your shipping address before confirming your
-              order. While we will always do our best to assist, an incorrect
-              address may cause delays.
-            </p>
-          </div>
-
-          <p className="text-sm text-gray-400 mt-6">
-            Last updated: March 2026
-          </p>
-        </section>
+        {/* Footer */}
+        <p className="text-sm text-gray-400 mt-10 text-center border-t pt-4">
+          Last updated: April 2026
+        </p>
       </div>
     </div>
   );

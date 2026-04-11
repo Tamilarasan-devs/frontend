@@ -1,4 +1,10 @@
 import { useEffect, useRef } from "react";
+import img0 from '../assets/images/bo.jpg';
+import img1 from '../assets/images/nat.jpeg';
+import img2 from '../assets/images/resr.jpeg';
+import img3 from '../assets/images/resar.jpeg';
+import img4 from '../assets/images/pure.jpeg';
+
 
 const sections = [
   {
@@ -6,6 +12,7 @@ const sections = [
     title: "Founded on a Vision of Healthier Lives",
     body: "Aayubakwath was founded to support healthier lives through natural wellness solutions. In today's fast-paced world, individuals face increasing health challenges — unstable blood sugar, high cholesterol, mental fatigue, and reduced concentration in children.\n\nWe address these issues through carefully developed, scientifically formulated supplements that combine nutrition, natural ingredients, and evidence-based formulations.",
     reverse: false,
+    image: img0,
     icon: (
       <svg viewBox="0 0 200 200" className="w-36 h-36" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="100" cy="178" rx="60" ry="12" fill="#03349a" opacity="0.08" />
@@ -28,6 +35,7 @@ const sections = [
     title: "Herbal & Nutraceutical Supplements for Modern Life",
     body: "We develop supplements that integrate scientifically backed ingredients with traditional knowledge to create effective solutions for modern lifestyles.\n\nWe are committed to maintaining strict quality standards throughout our production processes, ensuring every product is safe, reliable, and beneficial for individuals and families alike.",
     reverse: true,
+    image: img1,
     icon: (
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-36 h-36">
         <path d="M72 68 L72 112 L46 164 Q43 172 53 172 L147 172 Q157 172 154 164 L128 112 L128 68 Z" fill="#eef3ff" stroke="#03349a" strokeWidth="2.5" />
@@ -54,6 +62,7 @@ const sections = [
       { label: "Wellness", desc: "Supporting healthier lifestyles through effective nutritional support." },
     ],
     reverse: false,
+    image: img2,
     icon: (
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-36 h-36">
         <circle cx="100" cy="100" r="74" fill="none" stroke="#dce8ff" strokeWidth="1.5" strokeDasharray="6 4" />
@@ -73,6 +82,7 @@ const sections = [
     title: "Shaping the Future of Herbal Wellness",
     body: "Our vision is to become a trusted wellness brand in India and globally, known for providing reliable and high-quality nutritional supplements that support long-term health.\n\nWe strive to empower people with natural health solutions that help maintain energy, improve mental clarity, and support vital body functions.",
     reverse: true,
+    image: img3,
     icon: (
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-36 h-36">
         <circle cx="100" cy="108" r="66" fill="#eef3ff" stroke="#03349a" strokeWidth="2" />
@@ -94,6 +104,7 @@ const sections = [
     title: "Strict Standards, Every Batch",
     body: "We follow strict quality guidelines during sourcing, formulation, and manufacturing. Every batch is produced with hygiene, consistency, and care to ensure premium standards.\n\nOur goal is to provide safe, effective, and high-quality health supplements that support everyday health needs for individuals and families.",
     reverse: false,
+    image: img4,
     icon: (
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-36 h-36">
         <rect x="48" y="62" width="104" height="118" rx="8" fill="#fdf8f4" stroke="#03349a" strokeWidth="2" />
@@ -113,6 +124,8 @@ const sections = [
     ),
   },
 ];
+
+
 
 function useScrollReveal() {
   const ref = useRef(null);
@@ -137,7 +150,7 @@ function useScrollReveal() {
 
 function Section({ section, index }) {
   const ref = useScrollReveal();
-  const { tag, title, body, values, icon, reverse } = section;
+  const { tag, title, body, values, icon, reverse, image } = section;
 
   return (
     <div
@@ -154,29 +167,19 @@ function Section({ section, index }) {
           reverse ? "lg:flex-row-reverse" : "lg:flex-row"
         } items-center gap-12 lg:gap-20 py-16 lg:py-20`}
       >
-        {/* ── Illustration side ── */}
-        <div className="flex-shrink-0 w-full lg:w-[420px] flex flex-col items-center justify-center gap-6">
-          {/* Floating card */}
-          <div
-            className="w-full rounded-3xl flex items-center justify-center py-14 px-10"
-            style={{
-              background: index % 2 === 0 ? "#eef3ff" : "#fdf8f4",
-              border: "1.5px solid #dce4f5",
-            }}
-          >
-            {icon}
+        
+        <div className="w-full lg:w-1/2 flex-shrink-0">
+          <div className="relative overflow-hidden rounded-[32px] shadow-2xl">
+            <img
+              src={image}
+              className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
+              alt={title}
+            />
           </div>
-          {/* Tag pill under illustration */}
-          <span
-            className="text-sm font-bold tracking-widest uppercase px-5 py-2 rounded-full"
-            style={{ background: "#03349a", color: "#ffffff", letterSpacing: "0.18em" }}
-          >
-            {tag}
-          </span>
         </div>
 
         {/* ── Content side ── */}
-        <div className="flex-1 min-w-0">
+        <div className="lg:w-1/2 min-w-0">
           {/* Accent bar */}
           <div
             className="w-14 h-1 rounded-full mb-6"
@@ -240,6 +243,7 @@ function Section({ section, index }) {
 }
 
 export default function AboutPage() {
+
   return (
     <div className="min-h-screen" style={{ background: "#fdf8f4" }}>
 
@@ -325,9 +329,12 @@ export default function AboutPage() {
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
         >
+
+          
           <path d="M0,32 C360,80 1080,0 1440,40 L1440,64 L0,64 Z" />
         </svg>
       </div>
+    
 
       {/* ── Zig-Zag Sections ── */}
       <div className="max-w-6xl mx-auto px-6 lg:px-12 pb-24">
