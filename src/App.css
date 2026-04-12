@@ -1,27 +1,14 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'RocaTwo';
-  src: url('/fonts/fonnts.com-Roca_Two_Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RocaTwo';
-  src: url('/fonts/fonnts.com-Roca_Two_Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
   font-family: 'Futura';
-  src: url('/frontend/public/fonts/futura-pt/FuturaCyrillicDemi.ttf') format('truetype');
+  src: url('/frontend/public/fonts/Intrepid-Regular/intrepid.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 
 body {
-  font-family: 'Futura', sans-serif;
+  font-family: 'Futura';
   background-color: #fff;
 }
