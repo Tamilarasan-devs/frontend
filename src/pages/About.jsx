@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import img from "../assets/images/banner1.jpg";
 import mission from '../assets/images/fam.jpeg';
 import vision from '../assets/images/oldpa.jpeg';
 import FeaturesSection from "./AboutCard";
