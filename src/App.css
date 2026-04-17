@@ -2,13 +2,18 @@
 
 @font-face {
   font-family: 'Futura';
-  src: url('/frontend/public/fonts/Intrepid-Regular/intrepid.ttf') format('truetype');
-  font-weight: 700;
+  src: url('/fonts/Intrepid-Regular/intrepid.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
 }
 
+@theme {
+  --font-sans: "Futura", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Futura", ui-sans-serif, system-ui, sans-serif;
+}
 
 body {
-  font-family: 'Futura';
+  font-family: var(--font-sans);
   background-color: #fff;
+  color: #1a0a0a;
 }

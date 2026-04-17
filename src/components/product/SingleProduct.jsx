@@ -42,14 +42,87 @@ const REVIEWS = [
   { name: "Rahul M.", initial: "R", rating: 5, date: "20 Feb 2025", text: "Best Ayurvedic supplement I have ever tried. The difference in my stamina after the gym is night and day.", verified: true },
 ];
 
-const INGREDIENTS_LIST = [
-  { key: "Primary herbs", val: "Ashwagandha, Shatavari, Brahmi, Shilajit Extract, Safed Musli" },
-  { key: "Spices & adaptogens", val: "Cardamom, Cinnamon, Ginger, Turmeric, Black Pepper, Saffron, Nutmeg, Clove, Long Pepper" },
-  { key: "Supportive herbs", val: "Mulethi, Vidarikand, Gokhuru, Kaunch Beej" },
-  { key: "Base / excipient", val: "Microcrystalline Cellulose (plant-based), Vegetarian HPMC Capsule" },
-  { key: "Allergen info", val: "May contain traces of tree nuts. Gluten-free. Dairy-free." },
-  { key: "Non-GMO", val: "Yes — all herbs are non-GMO sourced" },
-];
+const PRODUCT_INGREDIENTS = {
+  "Blood Cholesterol Balance": {
+    list: [
+      { key: "Main Ingredients", val: "Guggul, Arjuna, Garlic, Amla, Turmeric, Ashwagandha" },
+      { key: "Other Ingredients", val: "Hydroxypropyl Methylcellulose (HPMC), Microcrystalline Cellulose capsule" },
+    ],
+    pills: ["Guggul", "Arjuna", "Garlic", "Amla", "Turmeric", "Ashwagandha"],
+    details: [
+      "Guggul: Traditionally used to support healthy cholesterol levels and lipid metabolism.",
+      "Arjuna: Renowned heart tonic that supports cardiovascular strength and circulation.",
+      "Garlic: Helps maintain healthy cholesterol and supports heart health.",
+      "Amla: Rich in antioxidants that support lipid balance and vascular protection.",
+      "Turmeric: Anti-inflammatory herb that supports overall cardiovascular health.",
+      "Ashwagandha: Adaptogen that helps manage stress and supports heart wellness.",
+    ],
+  },
+
+  "Blood Sugar": {
+    list: [
+      { key: "Main Ingredients", val: "Gurmar, Bitter Gourd, Jamun Seed, Fenugreek, Jackfruit Leaf, Garcinia" },
+      { key: "Other Ingredients", val: "Hydroxypropyl Methylcellulose (HPMC), Microcrystalline Cellulose capsule" },
+    ],
+    pills: ["Gurmar", "Bitter Gourd", "Jamun Seed", "Fenugreek", "Jackfruit Leaf", "Garcinia"],
+    details: [
+      "Gurmar: Known as the 'sugar destroyer,' helps reduce sugar absorption and cravings.",
+      "Bitter Gourd: Supports healthy glucose metabolism and insulin activity.",
+      "Jamun Seed: Traditionally used to maintain healthy blood sugar levels.",
+      "Fenugreek: Helps regulate glucose levels and improve metabolic function.",
+      "Jackfruit Leaf: Supports glycaemic control and slows carbohydrate absorption.",
+      "Garcinia: Supports metabolic balance and helps manage weight-related factors.",
+    ],
+  },
+
+  "Brain Tonic": {
+    list: [
+      { key: "Main Ingredients", val: "Brahmi, Gotu Kola, Ashwagandha, Shankhpushpi, Jatamansi, Mulethi" },
+      { key: "Other Ingredients", val: "Hydroxypropyl Methylcellulose (HPMC), Microcrystalline Cellulose capsule" },
+    ],
+    pills: ["Brahmi", "Gotu Kola", "Ashwagandha", "Shankhpushpi", "Jatamansi", "Mulethi"],
+    details: [
+      "Brahmi: Powerful nootropic that enhances memory and cognitive function.",
+      "Gotu Kola: Supports brain circulation and mental clarity.",
+      "Ashwagandha: Helps reduce stress and improve cognitive performance.",
+      "Shankhpushpi: Traditional herb for enhancing memory and focus.",
+      "Jatamansi: Supports mental calmness and reduces stress-related fatigue.",
+      "Mulethi: Supports nervous system health and cognitive balance.",
+    ],
+  },
+
+  "General Health": {
+    list: [
+      { key: "Main Ingredients", val: "Ashwagandha, Amla, Giloy, Tulsi, Turmeric, Shatavari" },
+      { key: "Other Ingredients", val: "Hydroxypropyl Methylcellulose (HPMC), Microcrystalline Cellulose capsule" },
+    ],
+    pills: ["Ashwagandha", "Amla", "Giloy", "Tulsi", "Turmeric", "Shatavari"],
+    details: [
+      "Ashwagandha: Supports energy, stress management, and vitality.",
+      "Amla: Rich in Vitamin C, supports immunity and overall health.",
+      "Giloy: Known for immune-boosting and detoxifying properties.",
+      "Tulsi: Supports respiratory health and immune balance.",
+      "Turmeric: Provides anti-inflammatory and antioxidant support.",
+      "Shatavari: Supports hormonal balance and overall vitality.",
+    ],
+  },
+
+  "Vitality Power Plus": {
+    list: [
+      { key: "Main Ingredients", val: "Ashwagandha, Safed Musli, Shilajit, Kaunch Beej, Gokshura" },
+      { key: "Other Ingredients", val: "Hydroxypropyl Methylcellulose (HPMC), Microcrystalline Cellulose capsule" },
+    ],
+    pills: ["Ashwagandha", "Safed Musli", "Shilajit", "Kaunch Beej", "Gokshura"],
+    details: [
+      "Ashwagandha: Enhances strength, stamina, and stress resilience.",
+      "Safed Musli: Supports energy, stamina, and physical performance.",
+      "Shilajit: Boosts vitality, endurance, and overall energy levels.",
+      "Kaunch Beej: Supports strength, performance, and vitality.",
+      "Gokshura: Promotes stamina, strength, and overall wellness.",
+    ],
+  },
+};
+
 
 const INGREDIENT_PILLS = [
   "Ashwagandha","Shatavari","Brahmi","Shilajit","Safed Musli","Cardamom",
@@ -102,11 +175,14 @@ export default function SingleProduct() {
   const [qty,       setQty]       = useState(1);
   const [wishlisted, setWishlisted] = useState(false);
   const [product,   setProduct]   = useState(null);
-  const [loading,   setLoading]   = useState(true);
+  console.log('product :',product)
+    const [loading,   setLoading]   = useState(true);
   const [zoomStyle, setZoomStyle] = useState({});
   const [openTab,   setOpenTab]   = useState("description");
   const [pincode,   setPincode]   = useState("");
   const [pincodeMsg, setPincodeMsg] = useState(null);
+
+  const currentIngredients = product ? PRODUCT_INGREDIENTS[product.productName] : null;
 
   const productId = useParams().id;
   const navigate  = useNavigate();
@@ -632,25 +708,42 @@ export default function SingleProduct() {
                     </>
                   )}
 
-                  {id === "ingredients" && (
-                    <>
-                      <div className="space-y-2.5 mb-5">
-                        {INGREDIENTS_LIST.map((row) => (
-                          <div key={row.key} className="flex gap-2 p-3 rounded-xl bg-stone-50 border border-stone-100">
-                            <span className="font-semibold text-stone-800 text-sm flex-shrink-0">{row.key}:</span>
-                            <span className="text-sm text-stone-600">{row.val}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {INGREDIENT_PILLS.map((ing) => (
-                          <span key={ing} className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
-                            {ing}
-                          </span>
-                        ))}
-                      </div>
-                    </>
-                  )}
+                  {id === "ingredients" && currentIngredients && (
+  <>
+    <div className="space-y-2.5 mb-5">
+      {currentIngredients.list.map((row) => (
+        <div
+          key={row.key}
+          className="flex gap-2 p-3 rounded-xl bg-stone-50 border border-stone-100"
+        >
+          <span className="font-semibold text-stone-800 text-sm flex-shrink-0">
+            {row.key}:
+          </span>
+          <span className="text-sm text-stone-600">{row.val}</span>
+        </div>
+      ))}
+    </div>
+
+    <div className="flex flex-wrap gap-2 mb-5">
+      {currentIngredients.pills.map((ing) => (
+        <span
+          key={ing}
+          className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold"
+        >
+          {ing}
+        </span>
+      ))}
+    </div>
+
+    <div className="space-y-2">
+      {currentIngredients.details.map((item, index) => (
+        <p key={index} className="text-sm text-stone-600">
+          • {item}
+        </p>
+      ))}
+    </div>
+  </>
+)}
 
                   {id === "warning" && (
                     <>
@@ -720,7 +813,7 @@ export default function SingleProduct() {
       </div>
 
       <ReviewSection />
-      <FAQ />
+      <FAQ productName={product.productName} />
       <RelatedProduct />
     </div>
   );

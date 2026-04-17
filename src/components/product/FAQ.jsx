@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const faqs = [
   {
-    question: "Blood Cholesterol Support",
+    question: "Blood Cholesterol Balance",
     answer: `How does this nutraceutical help maintain healthy cholesterol levels naturally?
 It supports lipid metabolism using herbs like berberine, garlic, and green tea to help balance cholesterol naturally.
 
@@ -19,7 +19,7 @@ What makes this combination of herbs effective for lipid metabolism?
 The synergistic blend targets multiple pathways like fat absorption, synthesis, and clearance.`,
   },
   {
-    question: "Blood Sugar Support",
+    question: "Blood Sugar",
     answer: `How does this product help support healthy blood glucose levels?
 It supports glucose metabolism and insulin function using berberine, cinnamon, and fenugreek.
 
@@ -88,41 +88,93 @@ It is generally best taken in the morning for optimal energy support.`,
   },
 ];
 
-function FAQ() {
+function FAQ({ productName }) {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // If a productName is provided, filter and parse the matching category
+  if (productName) {
+    const matchedCategory = faqs.find(f => f.question === productName);
+    
+    if (matchedCategory) {
+      // Split the bulk answer into individual Q&A pairs
+      const items = matchedCategory.answer.split('\n\n').map(block => {
+        const lines = block.split('\n');
+        return {
+          question: lines[0],
+          answer: lines.slice(1).join('\n')
+        };
+      });
+
+      return (
+        <div className="max-w-5xl mx-auto mt-16 p-6">
+          <h2 className="text-3xl font-extrabold text-stone-800 mb-8 text-center uppercase tracking-wider">
+            {matchedCategory.question} FAQs
+          </h2>
+          <div className="space-y-4">
+            {items.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-sm overflow-hidden border border-stone-100 hover:border-stone-200 transition-colors"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50 transition"
+                >
+                  <span className="text-lg font-bold text-stone-900">{faq.question}</span>
+                  <span className={`text-xl text-stone-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
+                    ⌄
+                  </span>
+                </button>
+                <div
+                  className={`px-6 overflow-hidden transition-all duration-300 ${
+                    openIndex === index ? 'max-h-96 py-5' : 'max-h-0'
+                  }`}
+                >
+                  <p className="text-stone-600 text-lg leading-relaxed whitespace-pre-line">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // Fallback to default behavior if no productName or no match
   return (
     <div className="max-w-5xl mx-auto mt-16 p-6">
-      <h1 className="text-4xl font-extrabold text-gray-800 mb-10 text-center">
+      <h1 className="text-4xl font-extrabold text-stone-800 mb-10 text-center uppercase tracking-wider">
         Frequently Asked Questions
       </h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200"
+            className="bg-white rounded-2xl shadow-sm overflow-hidden border border-stone-100 hover:border-stone-200 transition-colors"
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition"
+              className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50 transition"
             >
-              <span className="text-lg font-medium text-gray-900">{faq.question}</span>
-              <span className="text-2xl text-gray-500 transform transition-transform duration-300">
-                {openIndex === index ? '−' : '+'}
+              <span className="text-lg font-bold text-stone-900">{faq.question}</span>
+              <span className={`text-xl text-stone-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
+                ⌄
               </span>
             </button>
             <div
               className={`px-6 overflow-hidden transition-all duration-300 ${
-                openIndex === index ? 'max-h-96 py-4' : 'max-h-0'
+                openIndex === index ? 'max-h-96 py-5' : 'max-h-0'
               }`}
             >
-              <p className="text-gray-700 whitespace-pre-line">
-  {faq.answer}
-</p> 
+              <p className="text-stone-600 text-lg leading-relaxed whitespace-pre-line">
+                {faq.answer}
+              </p>
             </div>
           </div>
         ))}

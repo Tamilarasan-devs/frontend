@@ -1,126 +1,141 @@
 import React from "react";
 
 export default function RefundPolicy() {
+  const data = `Cancellation, Returns and Refund Policy
+At Aayubakwath, we are committed to delivering high-quality nutraceutical products formulated with care and precision. Due to the nature of health supplements, we maintain strict policies to ensure product safety, hygiene, and quality standards.
+Please read the following policy carefully before making a purchase.
+
+Cancellation Policy
+Orders placed on our website can be cancelled only if they have not yet been dispatched from our warehouse.
+To request a cancellation, you may contact our customer support team with your order details.
+Once your order has been successfully cancelled, the refund will be initiated to your original mode of payment within a reasonable period of time.
+Please note that once the order has been dispatched, it cannot be cancelled.
+We reserve the right to cancel any order at our sole discretion in case of suspected fraudulent activity or violation of our Terms of Use.
+
+Returns Policy
+Due to the nature of nutraceutical and health supplement products, returns are accepted only under specific conditions.
+We accept return or replacement requests only if:
+• The product received is damaged during transit 
+• The product received is defective 
+• An incorrect product has been delivered 
+• The product packaging is tampered at the time of delivery 
+Return requests must be raised within 48 hours of delivery.
+To initiate a return, you must contact our customer support team with:
+• Order ID and purchase details 
+• Clear images of the product showing the issue 
+• Unboxing video (recommended for faster validation) 
+All return requests are subject to verification and approval by our quality team.
+
+Conditions for Return
+Returns will only be accepted if:
+• The product is unused and in its original condition 
+• The original packaging, labels, seals, and barcodes are intact 
+• The product has not been tampered with or consumed 
+Returns will not be accepted under the following conditions:
+• Product has been used or opened 
+• Request is made beyond the specified time frame 
+• Product is returned without original packaging 
+• Damage is limited only to outer shipping packaging 
+
+Replacement Policy
+If your return request is approved, we will offer a replacement of the product, subject to availability of stock.
+In case a replacement is not available, a refund will be processed.
+
+Refund Policy
+Refunds will be processed under the following circumstances:
+• Cancellation of order before shipment 
+• Approved return due to damaged, defective, or incorrect product 
+• Orders returned due to failed delivery attempts or incorrect address 
+Once the returned product is received and verified at our warehouse, the refund will be initiated.
+Refunds will be processed as follows:
+• Online Payments: Refunded to the original payment method 
+• Cash on Delivery (COD): Refunded via bank transfer based on details provided by the customer 
+The refund process may take 7–14 business days, and additional time may be required for the amount to reflect in your account.
+
+Partial Returns
+If your order contains multiple products, you may request a return for individual items.
+All applicable conditions must be met for each product being returned.
+
+Non-Returnable Items
+The following items are not eligible for return:
+• Products that have been opened or consumed 
+• Free or promotional items 
+• Products returned without prior approval 
+
+Failed Delivery and Refunds
+In cases where:
+• The customer is unavailable to receive the order 
+• Incorrect or incomplete address is provided 
+• Delivery attempts are unsuccessful 
+The order may be returned to us by our logistics partner. Refunds will be processed after receipt of the product at our warehouse.
+
+Policy Updates
+Aayubakwath reserves the right to modify or update this Cancellation, Returns and Refund Policy at any time without prior notice.
+Users are advised to review this page periodically to stay informed of any changes.
+
+Contact Information
+For any queries related to cancellations, returns, or refunds, please contact our customer support team.
+`;
+
+  const sections = data.trim().split("\n\n");
+
   return (
-    <div className="bg-gray-50 min-h-screen py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+    <div className="bg-gray-100 min-h-screen py-12 px-4">
+      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-10">
 
         {/* Title */}
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Refund & Return Policy
-        </h1>
-
-        <p className="text-gray-600 mb-6">Welcome</p>
-
-        {/* Intro */}
-        <p className="text-gray-700 mb-6 leading-relaxed">
-          At <span className="font-semibold">Aayubakawath</span>, we want you to feel confident 
-          when purchasing our products. If something goes wrong, we’re here to help.
-        </p>
-
-        {/* Returns */}
-        <Section title="Returns">
-          <p className="mb-3">
-            We accept returns under the following conditions:
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900">
+            Refund & Return Policy
+          </h1>
+          <p className="text-gray-500 text-sm mt-2">
+            Please review our cancellation, return and refund guidelines carefully
           </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>The product was wrongly delivered.</li>
-            <li>The product was damaged during transit.</li>
-            <li>The product has a tampered safety seal.</li>
-          </ul>
+        </div>
 
-          <p className="mt-3">
-            To request a return, please email us at{" "}
-            <span className="text-blue-600">
-              customercare@snablabs.com
-            </span>{" "}
-            with your order details and a brief description of the issue.
-          </p>
+        {/* Sections */}
+        <div className="space-y-10">
+          {sections.map((section, index) => {
+            const lines = section.trim().split("\n");
+            const title = lines[0];
+            const contentLines = lines.slice(1);
 
-          <p className="mt-3 font-medium text-red-600">
-            Important: We cannot accept returns of opened or used products due to hygiene reasons.
-          </p>
-        </Section>
+            return (
+              <Section key={index} title={title}>
+                {contentLines.map((line, i) => {
+                  const trimmed = line.trim();
 
-        {/* Refunds */}
-        <Section title="Refunds">
-          <p>
-            Once the returned product is received and inspected, your refund will be issued 
-            to the original payment method within 4–5 working days after approval.
-          </p>
-        </Section>
+                  if (trimmed.startsWith("•")) {
+                    return (
+                      <li
+                        key={i}
+                        className="ml-5 list-disc text-gray-600 text-sm md:text-base"
+                      >
+                        {trimmed.replace("•", "").trim()}
+                      </li>
+                    );
+                  }
 
-        {/* Shipping Refund */}
-        <Section title="Refund of Shipping Charges">
-          <p>
-            If your return is approved due to an error on our part (wrong item, damage, or tampered seal), 
-            we will also refund the original shipping charges along with the product cost.
-          </p>
-        </Section>
-
-        {/* Processing */}
-        <Section title="Processing Time">
-          <p>
-            Orders are processed and shipped within 24 hours (excluding weekends and holidays). 
-            You’ll receive a confirmation email or SMS once your order has been dispatched.
-          </p>
-        </Section>
-
-        {/* Delivery */}
-        <Section title="Delivery Time">
-          <p>
-            Most orders arrive within 4–5 working days, depending on your location. 
-            External courier delays may occasionally occur.
-          </p>
-        </Section>
-
-        {/* Shipping Costs */}
-        <Section title="Shipping Costs">
-          <p>
-            Shipping costs are calculated at checkout based on weight and delivery location. 
-            We aim to keep charges fair and transparent.
-          </p>
-        </Section>
-
-        {/* Tracking */}
-        <Section title="Order Tracking">
-          <p>
-            Once dispatched, you’ll receive a tracking number via email or SMS to monitor your order.
-          </p>
-        </Section>
-
-        {/* Reminder */}
-        <Section title="Friendly Reminder">
-          <p>
-            Please double-check your shipping address before confirming your order. 
-            Incorrect addresses may cause delays, but we’ll always try to assist you.
-          </p>
-        </Section>
-
-        {/* Cancellation */}
-        <Section title="Cancellation Policy">
-          <p className="mb-2">
-            If you need to cancel an order, please contact us with your order number at{" "}
-            <span className="text-blue-600">
-              customercare@snablabs.com
-            </span>.
-          </p>
-
-          <p className="mb-2">
-            Once confirmed, cancellations are typically processed within one business day.
-          </p>
-
-          <p>
-            If your order has already been dispatched, please decline delivery. 
-            Refunds will be processed as per our Return & Refund Policy.
-          </p>
-        </Section>
+                  return (
+                    <p
+                      key={i}
+                      className="text-gray-600 leading-relaxed text-sm md:text-base"
+                    >
+                      {trimmed}
+                    </p>
+                  );
+                })}
+              </Section>
+            );
+          })}
+        </div>
 
         {/* Footer */}
-        <p className="text-sm text-gray-500 mt-6">
-          Last updated: March 2026
-        </p>
-
+        <div className="mt-12 border-t pt-6 text-center">
+          <p className="text-sm text-gray-400">
+            Last updated: March 2026
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -129,13 +144,11 @@ export default function RefundPolicy() {
 /* Reusable Section Component */
 function Section({ title, children }) {
   return (
-    <div className="mb-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-2">
+    <div>
+      <h2 className="text-xl font-semibold text-gray-800 mb-4 border-l-4 border-gray-900 pl-3">
         {title}
       </h2>
-      <div className="text-gray-700 leading-relaxed">
-        {children}
-      </div>
+      <div className="space-y-3">{children}</div>
     </div>
   );
 }
