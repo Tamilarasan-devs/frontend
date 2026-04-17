@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { API_URL ,axiosInstance} from "../../utils/axiosInstance";
-import cate1 from '../../assets/images/category/cate1.png'
-import cate2 from '../../assets/images/category/cate2.png'
-import cate3 from '../../assets/images/category/cate3.png'
-import cate4 from '../../assets/images/category/cate4.png'
-import cate5 from '../../assets/images/category/cate5.png'
+
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -68,9 +64,7 @@ const allImages = (banners || []).flatMap(item =>
   }))
 );
 
-const images=[
-  cate1,cate2,cate3,cate4,cate5
-]
+
 
 
   return (

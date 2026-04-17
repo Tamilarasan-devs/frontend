@@ -1,8 +1,7 @@
 // src/api/authApi.js
 import axios from "axios";
-import  {API_URL}  from "./api";
+import  {API_URL}  from "../utils/axiosInstance";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // Login function
 export const loginUser = async (credentials) => {

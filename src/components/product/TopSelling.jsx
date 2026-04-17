@@ -1,8 +1,4 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
-import cate1 from '../../assets/images/prod/pro5.jpeg'
-import cate5 from '../../assets/images/prod/pro1.jpeg'
 import ProductCard from "./ProductCard";
 import { axiosInstance } from "../../utils/axiosInstance";
 // import {products} from '../../services/productData'

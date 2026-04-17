@@ -1,9 +1,4 @@
 import React, { useEffect, useRef ,useState} from "react";
-import bnr1 from '../../assets/images/banners/bnr1.jpg'
-import bnr2 from '../../assets/images/banners/bnr2.jpg'
-import bnr3 from '../../assets/images/banners/bnr3.jpg'
-import bnr4 from '../../assets/images/banners/bnr4.jpg'
-import bnr5 from '../../assets/images/banners/bnr5.jpg'
 
 
 
@@ -44,9 +39,6 @@ export default function Banner() {
     return () => clearInterval(scrollInterval);
   }, []);
 
-  const images = [bnr1,bnr2,bnr3
-  ,bnr4,bnr5
-  ];
   const [banners, setBanners] = useState([])
   console.log('banners :',banners)
   const [loading, setLoading] = useState(true)
