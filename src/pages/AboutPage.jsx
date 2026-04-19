@@ -3,6 +3,7 @@ import pure from '../assets/images/pure.jpeg'
 import health from '../assets/images/health.jpeg'
 import safe from '../assets/images/safe.jpeg'
 import ht from '../assets/images/ht.jpeg'
+
 // ─── Add this to your global CSS / index.css ───────────────────────────────
 // @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
@@ -180,6 +181,7 @@ export default function OurBusiness() {
         }
       `}</style>
 
+
       {/* ─── Section ─────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden py-16 px-6 "
@@ -189,6 +191,8 @@ export default function OurBusiness() {
           // fontFamily: "'DM Sans', sans-serif",
         }}
       >
+
+        
         {/* Ambient glows */}
         <div
           className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full"

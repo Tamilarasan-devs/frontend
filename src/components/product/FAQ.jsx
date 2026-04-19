@@ -111,8 +111,13 @@ function FAQ({ productName }) {
 
       return (
         <div className="max-w-5xl mx-auto mt-16 p-6">
-          <h2 className="text-3xl font-extrabold text-stone-800 mb-8 text-center uppercase tracking-wider">
-            {matchedCategory.question} FAQs
+          <h2 className="text-3xl font-extrabold mb-8 text-center uppercase tracking-wider flex flex-col items-center gap-3">
+            <div>
+              <span className="text-black">{matchedCategory.question.split(' ')[0]}</span>{" "}
+              <span className="text-[#03349a]">{matchedCategory.question.split(' ').slice(1).join(' ')}</span>{" "}
+              <span className="text-[#c9643a]">FAQs</span>
+            </div>
+            <div className="w-24 h-1 rounded-full bg-gradient-to-r from-[#03349a] to-[#c9643a]" />
           </h2>
           <div className="space-y-4">
             {items.map((faq, index) => (
@@ -149,8 +154,13 @@ function FAQ({ productName }) {
   // Fallback to default behavior if no productName or no match
   return (
     <div className="max-w-5xl mx-auto mt-16 p-6">
-      <h1 className="text-4xl font-extrabold text-stone-800 mb-10 text-center uppercase tracking-wider">
-        Frequently Asked Questions
+      <h1 className="text-4xl font-extrabold mb-10 text-center uppercase tracking-wider flex flex-col items-center gap-4">
+        <div>
+          <span className="text-black">Frequently</span>{" "}
+          <span className="text-[#03349a]">Asked</span>{" "}
+          <span className="text-[#c9643a]">Questions</span>
+        </div>
+        <div className="w-32 h-1.5 rounded-full bg-gradient-to-r from-[#03349a] to-[#c9643a]" />
       </h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (

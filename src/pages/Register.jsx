@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation ,QueryClient} from "@tanstack/react-query";
 import { registerUser } from "../config/authApi";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -17,10 +18,10 @@ export default function Register() {
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: () => {
-      alert("Account created successfully! Please login.");
+      toast.success("Account created successfully! Please login.");
     },
     onError: (error) => {
-      alert(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
     },
   });
 
@@ -31,8 +32,8 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (form.password !== form.confirmPassword) return alert("Passwords do not match!");
-    if (!form.agree) return alert("You must agree to the terms!");
+    if (form.password !== form.confirmPassword) return toast.error("Passwords do not match!");
+    if (!form.agree) return toast.warning("You must agree to the terms!");
     mutation.mutate({ name: form.name, email: form.email, password: form.password });
     setForm({ name: "", email: "", password: "", confirmPassword: "", agree: false });
   };
@@ -98,24 +99,19 @@ export default function Register() {
         .feature-item:hover { background: rgba(255,255,255,0.13); }
       `}</style>
 
-      {/* ── Outer Card ── */}
       <div
         className="slide-up w-full max-w-5xl rounded-3xl overflow-hidden"
         style={{ boxShadow: "0 32px 80px rgba(130,12,12,0.18), 0 8px 24px rgba(0,0,0,0.08)" }}
       >
         <div className="flex flex-col lg:flex-row">
-
-          {/* ════ LEFT PANEL ════ */}
           <div
             className="lg:w-[42%] relative flex flex-col justify-between px-10 py-12 overflow-hidden"
             style={{ background: "linear-gradient(155deg, #03349a 0%, #5a0808 55%, #3a0404 100%)" }}
           >
-            {/* Background blobs */}
             <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.04)" }} />
             <div className="absolute -bottom-24 -left-12 w-80 h-80 rounded-full" style={{ background: "rgba(170,184,32,0.06)" }} />
             <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(255,255,255,0.012) 28px,rgba(255,255,255,0.012) 29px)" }} />
 
-            {/* Logo */}
             <div className="relative z-10">
               <div className="flex items-center gap-3">
                 <div
@@ -128,7 +124,6 @@ export default function Register() {
               </div>
             </div>
 
-            {/* Middle hero content */}
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-5">
                 <div className="h-px w-6 bg-[#aab820]" />
@@ -142,7 +137,6 @@ export default function Register() {
                 Create your account and unlock access to everything we have to offer. Fast, secure, and simple.
               </p>
 
-              {/* Feature list */}
               <div className="space-y-3">
                 {features.map((f, i) => (
                   <div
@@ -165,7 +159,6 @@ export default function Register() {
               </div>
             </div>
 
-            {/* Bottom */}
             <div className="relative z-10 pt-8 border-t border-white/10">
               <p className="text-white text-xs mb-1">Already registered?</p>
               <a href="login" className="text-[#aab820] text-sm font-extrabold hover:underline">
@@ -174,10 +167,7 @@ export default function Register() {
             </div>
           </div>
 
-          {/* ════ RIGHT FORM PANEL ════ */}
           <div className="flex-1 bg-[#fefbf6] flex flex-col justify-center px-8 lg:px-12 py-12">
-
-            {/* Mobile logo */}
             <div className="flex lg:hidden items-center gap-2 mb-8">
               <div className="w-8 h-8 rounded-lg bg-[#03349a] flex items-center justify-center">
                 <span className="text-white font-black text-sm">W</span>
@@ -185,7 +175,6 @@ export default function Register() {
               <span className="text-[#03349a] font-bold text-lg">Aayubakwath</span>
             </div>
 
-            {/* Heading */}
             <div className="mb-7">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-[3px] w-5 rounded-full bg-[#03349a]" />
@@ -197,10 +186,7 @@ export default function Register() {
               <p className="text-gray-600 text-md font-semibold">Fill in your details below to get started.</p>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-
-              {/* Full Name */}
               <div>
                 <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Full Name</label>
                 <div className="relative">
@@ -216,7 +202,6 @@ export default function Register() {
                 </div>
               </div>
 
-              {/* Email */}
               <div>
                 <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Email Address</label>
                 <div className="relative">
@@ -232,9 +217,7 @@ export default function Register() {
                 </div>
               </div>
 
-              {/* Password row — two columns */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Password */}
                 <div>
                   <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Password</label>
                   <div className="relative">
@@ -255,7 +238,6 @@ export default function Register() {
                   </div>
                 </div>
 
-                {/* Confirm Password */}
                 <div>
                   <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">Confirm</label>
                   <div className="relative">
@@ -277,14 +259,12 @@ export default function Register() {
                 </div>
               </div>
 
-              {/* Password match indicator */}
               {form.confirmPassword && (
                 <p className={`text-xs font-bold flex items-center gap-1.5 -mt-1 ${form.password === form.confirmPassword ? "text-green-600" : "text-red-500"}`}>
                   {form.password === form.confirmPassword ? "✓ Passwords match" : "✗ Passwords do not match"}
                 </p>
               )}
 
-              {/* Terms */}
               <div className="flex items-start gap-3 pt-1">
                 <div className="relative mt-0.5 shrink-0">
                   <input type="checkbox" name="agree" id="agree" checked={form.agree} onChange={handleChange} className="sr-only" />
@@ -311,7 +291,6 @@ export default function Register() {
                 </label>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={mutation.isLoading}
@@ -331,23 +310,19 @@ export default function Register() {
                   </span>
                 ) : "Create Account →"}
               </button>
-
             </form>
 
-            {/* Divider */}
             <div className="mt-6 flex items-center gap-3">
               <div className="flex-1 h-px bg-gray-100" />
               <span className="text-xs text-gray-300 font-semibold">or</span>
               <div className="flex-1 h-px bg-gray-100" />
             </div>
 
-            {/* Sign-in link */}
             <p className="mt-4 text-center text-sm  font-semibold text-gray-600">
               Already have an account?{" "}
               <a href="login" className="text-[#03349a] font-extrabold hover:underline">Sign In</a>
             </p>
 
-            {/* Security note */}
             <div className="mt-5 flex items-center justify-center gap-1.5 text-gray-300 text-xs">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -355,7 +330,6 @@ export default function Register() {
               <span>256-bit SSL · Secured & Encrypted</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>

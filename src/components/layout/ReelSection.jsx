@@ -155,10 +155,13 @@ export default function VideoCarousel() {
 
       {/* Title */}
       <div className="text-center mb-8">
-        <h2 className="text-xl md:text-3xl font-bold text-[#03349a]">
-          Real People Real Stories
+        <h2 className="text-xl md:text-3xl font-bold">
+          <span className="text-black">Real People</span>{" "}
+          <span className="text-[#03349a]">Real</span>{" "}
+          <span className="text-[#c9643a]">Stories</span>
         </h2>
-        <p className="text-sm md:text-lg mt-2 font-semibold text-gray-700">
+        <div className="w-24 h-1 bg-gradient-to-r from-[#03349a] to-[#c9643a] mx-auto mt-3 rounded-full" />
+        <p className="text-sm md:text-lg mt-3 font-semibold text-gray-700">
           Loved By All Age Groups & Indian Skin Types Worldwide
         </p>
       </div>

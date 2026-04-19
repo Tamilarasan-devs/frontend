@@ -117,20 +117,25 @@ export default function BeforeAfterGrid() {
           transition: "opacity 0.65s ease, transform 0.65s ease",
         }}
       >
-        <h1 className="text-3xl font-bold flex justify-center text-[#03349a] text-center">
-          Over 1 Million People Trust Aayubakawath
+        <h1 className="text-3xl font-bold flex justify-center text-center">
+          <span className="text-black mr-2">Over</span>{" "}
+          <span className="text-[#03349a] mr-2">1 Million People</span>{" "}
+          <span className="text-[#c9643a]">Trust Aayubakawath</span>
         </h1>
 
         <div
-          className="h-1 bg-[#6095ff] mx-auto rounded-full mb-4 mt-4"
+          className="h-1 mx-auto rounded-full mb-4 mt-4"
           style={{
-            width: headingVisible ? 96 : 0,
+            background: "linear-gradient(90deg, #03349a, #c9643a)",
+            width: headingVisible ? 120 : 0,
             transition: "width 0.7s ease 0.3s",
           }}
         ></div>
 
-        <h1 className="text-xl font-semibold flex justify-center text-[#03349a] text-center">
-          Discover Science-Backed Herbal Wellness Solutions
+        <h1 className="text-xl font-semibold flex justify-center text-center">
+          <span className="text-black mr-2">Discover</span>{" "}
+          <span className="text-[#03349a] mr-2">Science-Backed</span>{" "}
+          <span className="text-[#c9643a]">Herbal Wellness Solutions</span>
         </h1>
       </div>
 

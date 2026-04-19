@@ -44,7 +44,10 @@ export default function Home() {
           <ProductGrid/>
         </LazySection>
 
-{/* <GridBanner/> */}
+ <LazySection minHeight={300}>
+          <OurStory/>
+        </LazySection>
+
 
         <LazySection minHeight={300}>
           <VideoPage/>
@@ -66,9 +69,7 @@ export default function Home() {
           <ClientReview/>
         </LazySection>
 
-        <LazySection minHeight={300}>
-          <OurStory/>
-        </LazySection>
+       
 
         <LazySection minHeight={250}>
           <SecondBanner/>

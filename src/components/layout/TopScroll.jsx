@@ -10,7 +10,6 @@ export default function TopScroll() {
 //   { title: "Power of Nature, Strength for Life" }
 // ];
   const [announcements, setAnnouncements] = useState([]);
-  console.log('announcements :',announcements)
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 

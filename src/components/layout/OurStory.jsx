@@ -12,8 +12,12 @@ export default function OurStory() {
         
         {/* Left Content */}
         <div className="space-y-6">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            Our Roots
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight flex flex-col items-start gap-2">
+            <div>
+              <span className="text-black">Our</span>{" "}
+              <span className="text-[#03349a]">Roots</span>
+            </div>
+            <div className="w-20 h-1 rounded-full bg-gradient-to-r from-[#03349a] to-[#c9643a]" />
           </h1>
 
           <p className="text-lg text-stone-600">

@@ -8,178 +8,67 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function CategoryBannerList() {
-  const [visible, setVisible] = useState(false);
   const [banners, setBanners] = useState([]);
-  console.log('bnner :',banners)
-  const sectionRef = useRef(null);
   const navigate = useNavigate();
 
-  // const API_URL = "https://aayubakwath-backend.onrender.com/api/v1/categoryBanner/getCategoryBanner/";
-  // const BASE_URL = "https://aayubakwath-backend.onrender.com/";
-  // const API_URL = "http://localhost:8080/api/v1/categoryBanner/getCategoryBanner/";
-  const BASE_URL = "http://localhost:8080/";
-console.log('vv',API_URL)
-  // 🔹 Animation Observer
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
+    const fetchBanners = async () => {
+      try {
+        const res = await axiosInstance.get("/categoryBanner/getCategoryBanner");
+        if (res.data.success) {
+          setBanners(res.data.data);
         }
-      },
-      { threshold: 0.15 }
-    );
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    fetchBanners();
   }, []);
 
-  // 🔹 Fetch Banners
-useEffect(() => {
-  const fetchBanners = async () => {
-    try {
-      const res = await axiosInstance.get("/categoryBanner/getCategoryBanner");
-      console.log("res:", res?.data);
-
-      if (res.data.success) {
-        setBanners(res.data.data); // ✅ fixed
-      }
-    } catch (error) {
-      console.error("Error fetching banners:", error);
-    }
-  };
-
-  fetchBanners();
-}, []);
-
-  const BRAND = "#820c0c";
-  const ACCENT = "#c9643a";
-
-  // 🔹 Flatten images
-const allImages = (banners || []).flatMap(item =>
-  (item.categoryBanner || []).map(img => ({
-    id: item.id,
-    img
-  }))
-);
-
-
-
+  const images = banners.flatMap(item => item.categoryBanner);
 
   return (
-    <>
-      <style>
-        {`
-          .swiper-button-prev,
-          .swiper-button-next {
-            color: #000000;
-          }
+    <section className="px-4 sm:px-6 lg:px-10 py-6">
 
-          .swiper-button-prev:hover,
-          .swiper-button-next:hover {
-            color: #820c0c;
-          }
-        `}
-      </style>
-    
-    <section ref={sectionRef} className="px-4 sm:px-6 lg:px-10 py-10">
-      
-      {/* Title */}
-      <h2
-        className="text-2xl sm:text-3xl font-bold text-center mb-10"
-        style={{
-          color: '#03349a',
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(-24px)",
-          transition: "opacity 0.6s ease, transform 0.6s ease",
-        }}
-      >
-        Explore Our <span className="text-[#03349a]">Categories</span>
-        
-        <span
-          className="block h-1 mx-auto mt-2 rounded-full"
-          style={{
-            background: '#0048d4',
-            width: visible ? "80px" : "0px",
-            transition: "width 0.8s ease 0.4s",
-          }}
-        ></span>
-      </h2>
-
-      {/* 🔹 First 4 Images */}
-    <div className="mt-6 px-4">
-  <Swiper
-    modules={[Navigation]}
-    navigation={true}
-    spaceBetween={20}
-    slidesPerView={1}
-    breakpoints={{
-      640: { slidesPerView: 2 },
-      768: { slidesPerView: 3 },
-      1024: { slidesPerView: 4 },
-    }}
-  >
-    {banners.map((item, index) =>
-      item.categoryBanner.map((img, i) => (
-        <SwiperSlide key={`${item.id}-${i}`}>
-          <div
-            className="group cursor-pointer rounded-xl overflow-hidden"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible
-                ? "translateY(0) scale(1)"
-                : "translateY(40px) scale(0.95)",
-              transition: `all 0.6s ease ${0.1 * index}s`,
-            }}
-          >
-           
-            <div
-              className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
-              onClick={() => navigate("/productListing")}
-            >
-              <img
-                src={img}
-                alt="banner"
-                className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
-        </SwiperSlide>
-      ))
-    )}
-
-    {/* {images.map((img, i) => (
-  <SwiperSlide key={i}>
-    <div
-      className="group cursor-pointer rounded-xl overflow-hidden"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible
-          ? "translateY(0) scale(1)"
-          : "translateY(40px) scale(0.95)",
-        transition: `all 0.6s ease ${0.1 * i}s`,
-      }}
-    >
-     
+  {/* 🔹 Top Row (3 cards) */}
+  <div className="grid grid-cols-3 gap-4 mb-4">
+    {images.slice(0, 3).map((img, i) => (
       <div
-        className="overflow-hidden rounded-xl group-hover:shadow-2xl transition-all duration-300"
+        key={i}
         onClick={() => navigate("/productListing")}
+        className="group cursor-pointer rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
       >
-        <img
-          src={img}
-          alt="banner"
-          className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
+        <div className="h-28 flex items-center justify-center p-3">
+          <img
+            src={img}
+            alt="category"
+            className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
       </div>
-    </div>
-  </SwiperSlide>
-))} */}
-  </Swiper>
-</div>
+    ))}
+  </div>
 
+  {/* 🔹 Bottom Row (2 bigger cards) */}
+  <div className="grid grid-cols-2 gap-4">
+    {images.slice(3, 5).map((img, i) => (
+      <div
+        key={i}
+        onClick={() => navigate("/productListing")}
+        className="group cursor-pointer rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+      >
+        <div className="h-32 sm:h-36 flex items-center justify-center p-4">
+          <img
+            src={img}
+            alt="category"
+            className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    ))}
+  </div>
 
-    </section>
-    </>
+</section>
   );
 }

@@ -3,25 +3,21 @@ import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
 import ProductCard from './ProductCard'
 // ─── Config ────────────────────────────────────────────────────────────────────
-import cate1 from '../../assets/images/allCate/cate1.jpeg'
-import cate2 from '../../assets/images/allCate/cate2.jpeg'
-import cate3 from '../../assets/images/allCate/cate3.jpeg'
-import cate4 from '../../assets/images/allCate/cate4.jpeg'
+import cate1 from '../../assets/images/allCate/cate1.jpg'
+import cate2 from '../../assets/images/allCate/cate2.jpg'
+import cate3 from '../../assets/images/allCate/cate3.jpg'
+import cate4 from '../../assets/images/allCate/cate4.jpg'
+import cate5 from '../../assets/images/allCate/cate5.jpg'
+import cate6 from '../../assets/images/allCate/cate6.jpg'
+import cate7 from '../../assets/images/allCate/cate7.jpg'
 import Banner from '../layout/Banner'
 import OfferScrollBar from '../layout/OfferScrollBar'
 import FirstBanner from "../layout/banner/FirstBanner";
 // import {products} from '../../services/productData'
 
-// ─── Static Categories (replace with your real categories API) ─────────────────
-const CATEGORIES = [
-  { id: "all",                                      name: "All Products",      emoji: "🌿", count: 8, img: cate1 },
-  { id: "02c6d619-8544-4372-8fd8-0bc1540ad44a",    name: "Heart Health",      emoji: "❤️", count: 3, img: cate2 },
-  { id: "cat-immunity",                             name: "Immunity",          emoji: "🛡️", count: 2, img: cate3 },
-  { id: "cat-digestion",                            name: "Digestion",         emoji: "🌱", count: 2, img: cate4 },
-  { id: "cat-skin",                                 name: "Skin Care",         emoji: "✨", count: 1, img: cate1 },
-];
-// console.log('products :',products)
 // ─── Helpers ───────────────────────────────────────────────────────────────────
+const FALLBACK_EMOJIS = ["🌿", "❤️", "🛡️", "🌱", "✨", "💊", "🔋", "🧘", "🧴", "🥣"];
+const FALLBACK_IMAGES = [cate1, cate2, cate3, cate4, cate5, cate6, cate7];
 const calcDiscount = (price, final) =>
   Math.round(((parseFloat(price) - parseFloat(final)) / parseFloat(price)) * 100);
 
@@ -211,9 +207,10 @@ function MobileDrawer({ categories, selected, onSelect, open, onClose }) {
 // ─── Main Page Component ───────────────────────────────────────────────────────
 export default function ProductListingPage() {
 
-  const [products, setProducts]     = useState([]);
-  const [loading, setLoading]       = useState(true);
-  const [category, setCategory]     = useState("all");
+  const [products, setProducts]           = useState([]);
+  const [loading, setLoading]             = useState(true);
+  const [rawCategories, setRawCategories] = useState([]);
+  const [category, setCategory]           = useState("all");
   const [search, setSearch]         = useState("");
   const [sortBy, setSortBy]         = useState("default");
   const [offerTag, setOfferTag]     = useState("All");
@@ -237,20 +234,82 @@ export default function ProductListingPage() {
     fetchProducts();
   }, []);
 
-  // ── Derive offer tags from products ──
-const offerTags = useMemo(() => {
-  const set = new Set(["All"]);
+  // ── Fetch categories ──
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axiosInstance.get("/category/getCategory");
+        if (response.data.success) {
+          setRawCategories(response.data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
-  products
-    ?.filter(Boolean) // removes undefined/null items
-    .forEach((p) => {
-      p.offerTags?.forEach((t) => t && set.add(t));
+  // ── Compute final categories list ──
+  const computedCategories = useMemo(() => {
+    // 1. Start with "All"
+    const allItem = {
+      id: "all",
+      name: "All Products",
+      emoji: "🌿",
+      img: cate1,
+      count: products.length
+    };
+
+    // 2. Transform raw categories from backend
+    const dynamicItems = (rawCategories || []).map((cat, idx) => {
+      // Calculate count from products state
+      const count = products.filter(p => p.categoryId === cat.id).length;
+      
+      return {
+        id: cat.id,
+        name: cat.category, // Backend field is 'category'
+        emoji: FALLBACK_EMOJIS[idx % FALLBACK_EMOJIS.length],
+        img: FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length],
+        count
+      };
     });
 
-  return [...set];
-}, [products]);
-console.log(products)
+    return [allItem, ...dynamicItems];
+  }, [rawCategories, products]);
 
+  // ── Derive offer tags from products ──
+  const offerTags = useMemo(() => {
+    const set = new Set(["All"]);
+
+    products
+      ?.filter(Boolean) // removes undefined/null items
+      .forEach((p) => {
+        p.offerTags?.forEach((t) => t && set.add(t));
+      });
+
+    return [...set];
+  }, [products]);
+
+  const getTagColor = (tag) => {
+    if (tag === "All") return { bg: "#F3F4F6", border: "#D1D5DB", text: "#374151", activeBg: "#374151" };
+    
+    const palettes = [
+      { bg: "#E0F2FE", border: "#7DD3FC", text: "#0369A1", activeBg: "#0369A1" }, // Blue
+      { bg: "#F0FDF4", border: "#86EFAC", text: "#166534", activeBg: "#166534" }, // Green
+      { bg: "#FFF7ED", border: "#FDBA74", text: "#9A3412", activeBg: "#9A3412" }, // Orange
+      { bg: "#FEF2F2", border: "#FCA5A5", text: "#991B1B", activeBg: "#991B1B" }, // Red
+      { bg: "#FAF5FF", border: "#D8B4FE", text: "#6B21A8", activeBg: "#6B21A8" }, // Purple
+      { bg: "#FFFBEB", border: "#FDE68A", text: "#92400E", activeBg: "#92400E" }, // Amber
+      { bg: "#FDF2F9", border: "#F9A8D4", text: "#9D174D", activeBg: "#9D174D" }, // Pink
+    ];
+    
+    let hash = 0;
+    for (let i = 0; i < tag.length; i++) {
+        hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % palettes.length;
+    return palettes[index];
+  };
   // ── Filter + sort products ──
   const filteredProducts = useMemo(() => {
     let list = products.filter((p) => {
@@ -275,7 +334,7 @@ console.log(products)
     console.log("Added to cart:", product.productName);
   };
 
-  const activeCategoryName = CATEGORIES.find((c) => c.id === category)?.name ?? "All Products";
+  const activeCategoryName = computedCategories.find((c) => c.id === category)?.name ?? "All Products";
 
   return (
     <div className=" bg-gray-50 ">
@@ -288,7 +347,7 @@ console.log(products)
 <FirstBanner/>
       {/* ── Mobile Drawer ── */}
       <MobileDrawer
-        categories={CATEGORIES}
+        categories={computedCategories}
         selected={category}
         onSelect={setCategory}
         open={drawerOpen}
@@ -299,7 +358,7 @@ console.log(products)
         <div className="flex gap-6 lg:gap-8 items-start ">
 
           {/* ── Sidebar (desktop only) ── */}
-          <Sidebar categories={CATEGORIES} selected={category} onSelect={setCategory} />
+          <Sidebar categories={computedCategories} selected={category} onSelect={setCategory} />
 
           {/* ── Main Content ── */}
           <main className="flex-1 min-w-0">
@@ -326,18 +385,24 @@ console.log(products)
                 </button>
 
                 {/* Offer tag pills */}
-                {offerTags.length > 1 && offerTags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => setOfferTag(tag)}
-                    className={`px-3.5 py-1.5 rounded-full text-[15px] font-bold border transition-all
-                      ${offerTag === tag
-                        ? "bg-[#c9643a] text-white border-[#c9643a] shadow-sm shadow-[#c9643a]/50"
-                        : "bg-white text-gray-600 border-gray-200 hover:border-[#c9643a] hover:text-[#c9643a]"}`}
-                  >
-                    {tag}
-                  </button>
-                ))}
+                {offerTags.length > 1 && offerTags.map((tag) => {
+                  const colors = getTagColor(tag);
+                  const active = offerTag === tag;
+                  return (
+                    <button
+                      key={tag}
+                      onClick={() => setOfferTag(tag)}
+                      className="px-4 py-1.5 rounded-full text-[14px] font-bold border transition-all shadow-sm"
+                      style={{
+                        backgroundColor: active ? colors.activeBg : colors.bg,
+                        color: active ? "#ffffff" : colors.text,
+                        borderColor: active ? colors.activeBg : colors.border,
+                      }}
+                    >
+                      {tag}
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Right: count + sort */}

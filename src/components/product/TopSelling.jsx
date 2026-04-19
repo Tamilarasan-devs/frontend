@@ -387,13 +387,11 @@ export default function TopSelling() {
     el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
   };
 const [products, setProducts] = useState([]);
- console.log('data :',products)
   const [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
     try {
       const response = await axiosInstance.get("/product/getAllProduct");
-      console.log('response :',response)
       setProducts(response.data.products || []);
     } catch (error) {
       console.error(error);
@@ -451,29 +449,32 @@ const [products, setProducts] = useState([]);
           }}
         >
           <h2
-            className="font-bold text-[#111827] leading-tight"
+            className="font-bold leading-tight"
             style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
           >
-            Shop by <span className="text-[#03349a]">Category</span>
+            <span className="text-black">Shop</span>{" "}
+            <span className="text-[#03349a]">by</span>{" "}
+            <span className="text-[#c9643a]">Category</span>
           </h2>
         </div>
 
         <div
-          className="mt-3 flex items-center gap-1.5 flex justify-center"
+          className="mt-3 flex items-center gap-1.5 justify-center"
           style={{
             opacity: headerVisible ? 1 : 0,
             transition: "opacity 0.65s ease 0.15s",
           }}
         >
           <div
-            className="h-[2.5px] bg-[#03349a] rounded-full"
+            className="h-[3px] rounded-full"
             style={{
-              width: headerVisible ? 36 : 0,
+              width: headerVisible ? 80 : 0,
+              background: "linear-gradient(90deg, #03349a, #c9643a)",
               transition: "width 0.7s ease 0.3s",
             }}
           />
-          <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
-          <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#c9643a]" />
+          <div className="w-5 h-[2.5px] bg-[#f0ece8] rounded-full" />
         </div>
 
         {/* ── Scroll Track ── */}

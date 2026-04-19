@@ -1,77 +1,63 @@
-import React, { useEffect, useRef ,useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { axiosInstance } from "../../utils/axiosInstance";
 
-
-
-import { axiosInstance,API_URL } from "../../utils/axiosInstance";
 export default function Banner() {
   const containerRef = useRef(null);
+  const [banners, setBanners] = useState([]);
 
+  const allImages = [...banners, ...banners];
+
+  // 🔁 Continuous Smooth Scroll
   useEffect(() => {
     const container = containerRef.current;
-    let scrollAmount = 0;
+    let animationFrameId;
+    let speed = 0.3; // 🔥 reduce speed here (lower = slower)
 
-    const scrollInterval = setInterval(() => {
-      const width = container.offsetWidth;
+    const scroll = () => {
+      if (!container) return;
 
-      // responsive scroll size
-      let scrollStep = width;
-      if (window.innerWidth >= 768) scrollStep = width / 2;
-      if (window.innerWidth >= 1024) scrollStep = width / 3;
+      container.scrollLeft += speed;
 
-      scrollAmount += scrollStep;
-
-      container.scrollTo({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-
-      if (scrollAmount >= container.scrollWidth / 2) {
-        setTimeout(() => {
-          container.scrollTo({
-            left: 0,
-            behavior: "auto",
-          });
-          scrollAmount = 0;
-        }, 500);
+      // Reset when half scrolled (for infinite loop)
+      if (container.scrollLeft >= container.scrollWidth / 2) {
+        container.scrollLeft = 0;
       }
-    }, 2000);
 
-    return () => clearInterval(scrollInterval);
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    scroll();
+
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
-  const [banners, setBanners] = useState([])
-  console.log('banners :',banners)
-  const [loading, setLoading] = useState(true)
-  const allImages = [...banners, ...banners];
-// console.log('ALL :',allImages)
-
-
-  // Fetch banners
+  // 📡 Fetch banners
   const getBanners = async () => {
     try {
-      const res = await axiosInstance.get('/homeBanner/getAllHomeBanner')
-      setBanners(res.data.data || [])
+      const res = await axiosInstance.get("/homeBanner/getAllHomeBanner");
+      setBanners(res.data.data || []);
     } catch (err) {
-      console.log(err)
-    } finally {
-      setLoading(false)
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
-    getBanners()
-  }, [])
+    getBanners();
+  }, []);
+
   return (
-    <div ref={containerRef} className="flex overflow-hidden w-full gap-1 ">
+    <div
+      ref={containerRef}
+      className="flex overflow-hidden w-full gap-2"
+    >
       {allImages.map((img, index) => (
-  <img
-    key={index}
-    // src={img}
-    src={`${img.homeBanner}`}
-    alt={`Banner ${index + 1}`}
-    className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover rounded-lg"
-  />
-))}
+        <img
+          key={index}
+          src={img.homeBanner}
+          alt={`Banner ${index + 1}`}
+          className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 object-cover rounded-lg"
+        />
+      ))}
     </div>
   );
 }

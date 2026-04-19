@@ -199,15 +199,15 @@ export default function Testimonial() {
               <h2
                 className="font-bold leading-tight"
                 style={{
-                  color: "#03349a",
                   fontSize: "clamp(1.7rem, 5vw, 3.5rem)",
                   lineHeight: 1.15,
                 }}
               >
-                Loved by{" "}
-                <span className="italic" style={{ color: "#6095ff" }}>10,000+</span>
+                <span className="text-black">Loved</span>{" "}
+                <span className="text-[#03349a]">by</span>{" "}
+                <span className="italic text-[#c9643a]">10,000+</span>
                 <br />
-                Aayubakwath Champions
+                <span className="text-[#03349a]">Aayubakwath Champions</span>
               </h2>
             </div>
 
@@ -220,8 +220,8 @@ export default function Testimonial() {
 
           {/* Divider */}
           <div
-            className="h-px w-full rounded-full"
-            style={{ background: "linear-gradient(90deg, #6095ff44, #03349a88, #6095ff22, transparent)" }}
+            className="h-1 w-full rounded-full"
+            style={{ background: "linear-gradient(90deg, #03349a, #c9643a, transparent)" }}
           />
         </div>
 

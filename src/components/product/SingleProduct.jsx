@@ -4,10 +4,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToCart } from "../../services/cartService";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { toast } from "react-toastify";
 import RelatedProduct from "../product/ReleatedProduct";
 import ReviewSection from "../clientReview/ReviewSection";
 import FAQ from "./FAQ";
 import { HiOutlineTrendingUp } from "react-icons/hi";
+import ashwagandhaImg from "../../assets/images/ingredients/ashwagandha.png";
+import brahmiImg from "../../assets/images/ingredients/brahmi.png";
+import amlaImg from "../../assets/images/ingredients/amla.png";
 // ─── Static Data ──────────────────────────────────────────────────────────────
 
 const OFFERS = [
@@ -123,19 +127,21 @@ const PRODUCT_INGREDIENTS = {
   },
 };
 
+const INGREDIENT_IMAGES = [ashwagandhaImg, brahmiImg, amlaImg];
+
 
 const INGREDIENT_PILLS = [
-  "Ashwagandha","Shatavari","Brahmi","Shilajit","Safed Musli","Cardamom",
-  "Cinnamon","Ginger","Turmeric","Black Pepper","Saffron","Nutmeg","Clove",
-  "Long Pepper","Mulethi","Vidarikand","Gokhuru","Kaunch Beej",
+  "Ashwagandha", "Shatavari", "Brahmi", "Shilajit", "Safed Musli", "Cardamom",
+  "Cinnamon", "Ginger", "Turmeric", "Black Pepper", "Saffron", "Nutmeg", "Clove",
+  "Long Pepper", "Mulethi", "Vidarikand", "Gokhuru", "Kaunch Beej",
 ];
 
 const TAG_COLORS = {
-  "fatigue support":  "bg-blue-50 text-blue-800 border-blue-200",
+  "fatigue support": "bg-blue-50 text-blue-800 border-blue-200",
   "active lifestyle": "bg-violet-50 text-violet-800 border-violet-200",
-  "stamina booster":  "bg-amber-50 text-amber-800 border-amber-200",
+  "stamina booster": "bg-amber-50 text-amber-800 border-amber-200",
   "immunity support": "bg-emerald-50 text-emerald-800 border-emerald-200",
-  default:            "bg-slate-50 text-slate-800 border-slate-200",
+  default: "bg-slate-50 text-slate-800 border-slate-200",
 };
 
 const buildPacks = (finalPrice, origPrice) => {
@@ -144,23 +150,23 @@ const buildPacks = (finalPrice, origPrice) => {
   return [
     { qty: 30, price: Math.round(fp * 0.75), orig: Math.round(op * 0.75), perUnit: (fp * 0.75) / 30, tag: null, duration: "1 Month" },
     { qty: 60, price: Math.round(fp * 1.35), orig: Math.round(op * 1.35), perUnit: (fp * 1.35) / 60, tag: "Best Value", duration: "2 Months" },
-    { qty: 90, price: Math.round(fp * 1.9),  orig: Math.round(op * 1.9),  perUnit: (fp * 1.9) / 90,  tag: "Most Popular", duration: "3 Months" },
+    { qty: 90, price: Math.round(fp * 1.9), orig: Math.round(op * 1.9), perUnit: (fp * 1.9) / 90, tag: "Most Popular", duration: "3 Months" },
   ];
 };
 
 const TABS = [
   { id: "description", label: "Description", icon: "📋" },
   { id: "ingredients", label: "Ingredients", icon: "🌿" },
-  { id: "warning",     label: "Warnings",    icon: "⚠️" },
-  { id: "howToUse",   label: "How to Use",  icon: "📖" },
-  { id: "reviews",     label: "Reviews (3)", icon: "⭐" },
+  { id: "warning", label: "Warnings", icon: "⚠️" },
+  { id: "howToUse", label: "How to Use", icon: "📖" },
+  { id: "reviews", label: "Reviews (3)", icon: "⭐" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 const StarRow = ({ rating, size = "text-sm" }) => (
   <div className="flex gap-0.5">
-    {[1,2,3,4,5].map((i) => (
+    {[1, 2, 3, 4, 5].map((i) => (
       <span key={i} className={`${size} leading-none ${i <= Math.round(rating) ? "text-amber-400" : "text-stone-200"}`}>★</span>
     ))}
   </div>
@@ -170,37 +176,68 @@ const StarRow = ({ rating, size = "text-sm" }) => (
 
 export default function SingleProduct() {
   const [activeImg, setActiveImg] = useState(0);
-  const [imgFade,   setImgFade]   = useState(false);
-  const [packIdx,   setPackIdx]   = useState(1);
-  const [qty,       setQty]       = useState(1);
+  const [imgFade, setImgFade] = useState(false);
+  const [packIdx, setPackIdx] = useState(1);
+  const [qty, setQty] = useState(1);
   const [wishlisted, setWishlisted] = useState(false);
-  const [product,   setProduct]   = useState(null);
-  console.log('product :',product)
-    const [loading,   setLoading]   = useState(true);
+  const [product, setProduct] = useState(null);
+  console.log('product :', product)
+  const [loading, setLoading] = useState(true);
   const [zoomStyle, setZoomStyle] = useState({});
-  const [openTab,   setOpenTab]   = useState("description");
-  const [pincode,   setPincode]   = useState("");
+  const [openTab, setOpenTab] = useState("description");
+  const [pincode, setPincode] = useState("");
   const [pincodeMsg, setPincodeMsg] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const currentIngredients = product ? PRODUCT_INGREDIENTS[product.productName] : null;
 
   const productId = useParams().id;
-  const navigate  = useNavigate();
-  const qc        = useQueryClient();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
 
   const addMut = useMutation({
     mutationFn: addToCart,
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["cart"] }); alert("Item added to cart!"); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["cart"] });
+      toast.success("Item added to cart!");
+    },
     onError: (err) => {
-      if (err.response?.status === 401) { alert("Please login first."); navigate('/login'); }
-      else alert("Failed to add to cart.");
+      if (err.response?.status === 401) {
+        toast.error("Please login first.");
+        navigate('/login');
+      }
+      else toast.error("Failed to add to cart.");
     }
   });
 
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
-    if (!token) { alert("Please login first."); navigate('/login'); return; }
+    if (!token) {
+      toast.error("Please login first.");
+      navigate('/login');
+      return;
+    }
     addMut.mutate({ productId, quantity: qty });
+  };
+
+  const handleBuyNow = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please login first to buy.");
+      navigate("/login");
+      return;
+    }
+
+    addMut.mutate(
+      { productId, quantity: qty },
+      {
+        onSuccess: () => {
+          qc.invalidateQueries({ queryKey: ["cart"] });
+          // Redirect to checkout after adding to cart
+          navigate("/checkout");
+        },
+      }
+    );
   };
 
   const toggleTab = (id) => setOpenTab(openTab === id ? null : id);
@@ -219,13 +256,13 @@ export default function SingleProduct() {
   }, [productId]);
 
   const IMAGES = product?.productImages || [];
-  const PACKS  = product ? buildPacks(product.finalPrice, product.price) : [];
-  const pack   = PACKS[packIdx] ?? {};
+  const PACKS = product ? buildPacks(product.finalPrice, product.price) : [];
+  const pack = PACKS[packIdx] ?? {};
   const discPct = pack.orig ? Math.round(((pack.orig - pack.price) / pack.orig) * 100) : 0;
-  const saving  = pack.orig ? pack.orig - pack.price : 0;
-  const total   = pack.price ? (pack.price * qty).toLocaleString("en-IN") : "0";
+  const saving = pack.orig ? pack.orig - pack.price : 0;
+  const total = pack.price ? (pack.price * qty).toLocaleString("en-IN") : "0";
   const productTags = product?.productTags ?? [];
-  const offerTags   = product?.offerTags ?? [];
+  const offerTags = product?.offerTags ?? [];
 
   const swapImg = (i) => {
     setImgFade(true);
@@ -347,7 +384,7 @@ export default function SingleProduct() {
 
             {/* Main image container */}
             <div className="relative rounded-3xl overflow-hidden bg-white border border-stone-100 shadow-sm"
-              // style={{ aspectRatio: "4/5" }}
+            // style={{ aspectRatio: "4/5" }}
             >
               {/* Top action row: Wishlist + Share */}
               <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
@@ -366,27 +403,27 @@ export default function SingleProduct() {
                   className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-md text-stone-500 hover:text-blue-600 transition-all duration-200"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                   </svg>
                 </button>
               </div>
-<div className=" flex justify-between">
-{/* Discount badge */}
-              {discPct > 0 && (
-                <div className="absolute top-4 left-4 z-20 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide shadow">
-                  {discPct}% OFF
-                </div>
-              )}
+              <div className=" flex justify-between">
+                {/* Discount badge */}
+                {discPct > 0 && (
+                  <div className="absolute top-4 left-4 z-20 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full tracking-wide shadow">
+                    {discPct}% OFF
+                  </div>
+                )}
 
-              {/* Offer tag */}
-              {offerTags.length > 0 && (
-                <div className="absolute top-14 left-4 z-20 bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
-                  {offerTags[0]}
-                </div>
-              )}
-</div>
-              
+                {/* Offer tag */}
+                {offerTags.length > 0 && (
+                  <div className="absolute top-14 left-4 z-20 bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                    {offerTags[0]}
+                  </div>
+                )}
+              </div>
+
 
               {/* Zoom image */}
               <div
@@ -467,11 +504,44 @@ export default function SingleProduct() {
                 Read all reviews
               </button>
             </div>
- {/* Short description */}
+            {/* Description & Benefits Above Price Card */}
             {product.productDescription && (
-              <p className="text-[18px] text-stone-600 mb-6 leading-relaxed">
-                {product.productDescription.slice(0, 140)}…
-              </p>
+              <div className="mb-6">
+                <div 
+                  className={`text-[17px] text-stone-600 leading-relaxed transition-all duration-300 ${!isExpanded ? "line-clamp-2 overflow-hidden" : ""}`}
+                  style={!isExpanded ? { display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical' } : {}}
+                >
+                  {product.productDescription}
+                </div>
+                
+                {isExpanded && (
+                  <div className="mt-4 space-y-4 animate-fadeIn">
+                    <div className="h-px bg-stone-100" />
+                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-stone-400">Key Benefits</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {BENEFITS_LIST.map((b) => (
+                        <div key={b.key} className="flex gap-3 p-3 rounded-xl bg-stone-50/50 border border-stone-100 items-start">
+                          <span className="text-emerald-600 mt-0.5 font-bold">✓</span>
+                          <div className="text-stone-700 text-[14px] leading-relaxed">
+                            <span className="font-bold text-stone-900">{b.key}: </span>
+                            <span>{b.val}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="mt-3 text-[12px] font-black uppercase tracking-[0.15em] text-[#c9643a] hover:text-[#03349a] transition-all duration-300 flex items-center gap-2 group"
+                >
+                  <span className="border-b-2 border-transparent group-hover:border-[#03349a]">
+                    {isExpanded ? "Show Less" : "Read More"}
+                  </span>
+                  <span className={`text-lg transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>⌄</span>
+                </button>
+              </div>
             )}
             {/* ── IN STOCK + SALES BADGE ── */}
             <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
@@ -482,7 +552,7 @@ export default function SingleProduct() {
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700 bg-orange-50 border border-orange-200 rounded-full px-3 py-1.5">
                 <HiOutlineTrendingUp size={20} /> 300+ sold in 30 days
               </span>
-              
+
             </div>
             <div>
               {productTags.slice(0, 2).map((tag) => (
@@ -494,53 +564,109 @@ export default function SingleProduct() {
 
             <div className="h-px bg-stone-100 mb-5" />
 
-            {/* Price block */}
-            <div className="flex items-baseline flex-wrap gap-3 mb-1.5">
-              <span className="text-[44px] sm:text-[52px] font-bold text-stone-900 leading-none">
-                ₹{pack.price?.toLocaleString("en-IN") ?? parseFloat(product.finalPrice).toLocaleString("en-IN")}
-              </span>
-              <span className="text-lg text-stone-400 line-through font-medium">
-                ₹{pack.orig?.toLocaleString("en-IN") ?? parseFloat(product.price).toLocaleString("en-IN")}
-              </span>
-              {saving > 0 && (
-                <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  You save ₹{saving.toLocaleString("en-IN")}
-                </span>
-              )}
+            {/* Price Card */}
+            <div className="mb-4">
+              <div className="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+
+                {/* Top Row */}
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-sm font-semibold text-stone-500 uppercase tracking-wide">
+                    Price
+                  </p>
+
+                  {saving > 0 && (
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      Save ₹{saving.toLocaleString("en-IN")}
+                    </span>
+                  )}
+                </div>
+
+                {/* Main Price */}
+                <div className="flex items-end gap-3 flex-wrap">
+                  <span className="text-[40px] sm:text-[48px] font-bold text-stone-900 leading-none">
+                    ₹{pack.price?.toLocaleString("en-IN") ?? parseFloat(product.finalPrice).toLocaleString("en-IN")}
+                  </span>
+
+                  <span className="text-base text-stone-400 line-through font-medium">
+                    ₹{pack.orig?.toLocaleString("en-IN") ?? parseFloat(product.price).toLocaleString("en-IN")}
+                  </span>
+                </div>
+
+                {/* Extra Info */}
+                <p className="text-xs text-stone-500 mt-1">
+                  Inclusive of all taxes
+                </p>
+
+              </div>
             </div>
 
-           
+
             {/* Pack Selector */}
             <div className="mb-6">
-              <p className="text-[15px] font-bold uppercase tracking-widest mb-3">Choose Pack Size</p>
-              <div className="grid grid-cols-3 gap-3">
+              <p className="text-[15px] font-bold uppercase tracking-widest mb-3">
+                Choose Pack Size
+              </p>
+
+              <div className="flex flex-col gap-3">
                 {PACKS.map((p, i) => {
                   const pct = Math.round(((p.orig - p.price) / p.orig) * 100);
                   const sel = packIdx === i;
+
                   return (
                     <button
                       key={i}
                       onClick={() => setPackIdx(i)}
-                      className={`pack-card relative pt-7 pb-4 px-2 rounded-2xl border-2 text-center
-                        ${sel
-                          ? "border-emerald-600 bg-emerald-50/50 shadow-[0_0_0_3px_rgba(5,150,105,0.10)]"
-                          : "border-stone-200 bg-white hover:border-stone-300"}`}
+                      className={`flex items-center justify-between w-full p-4 rounded-xl border transition-all
+          ${sel
+                          ? "border-emerald-600 bg-emerald-50 shadow-sm"
+                          : "border-stone-200 bg-white hover:border-stone-300"
+                        }`}
                     >
+                      {/* LEFT SIDE */}
+                      <div className="flex items-center gap-4">
+                        {/* 🔘 Circle Radio */}
+                        <div
+                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center
+              ${sel ? "border-emerald-600" : "border-stone-400"}`}
+                        >
+                          {sel && (
+                            <div className="w-2.5 h-2.5 bg-emerald-600 rounded-full"></div>
+                          )}
+                        </div>
+
+                        {/* TEXT */}
+                        <div className="text-left">
+                          <p className="text-sm font-semibold text-stone-900">
+                            {p.qty} caps ({p.duration})
+                          </p>
+                          <p className="text-xs text-stone-400 line-through">
+                            ₹{p.orig.toLocaleString("en-IN")}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* RIGHT SIDE */}
+                      <div className="text-right">
+                        <p className="text-base font-bold text-stone-900">
+                          ₹{p.price.toLocaleString("en-IN")}
+                        </p>
+                        <span className="text-[11px] font-semibold text-emerald-700">
+                          {pct}% OFF
+                        </span>
+                      </div>
+
+                      {/* TAG */}
                       {p.tag && (
-                        <span className={`absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold px-2.5 py-0.5 rounded-full text-white whitespace-nowrap
-                          ${p.tag === "Most Popular" ? "bg-amber-500" : "bg-emerald-700"}`}>
-                          {p.tag === "Best Value" ? "★ " : ""}{p.tag}
+                        <span
+                          className={`absolute top-[-8px] right-3 text-[10px] px-2 py-0.5 rounded-full text-white
+              ${p.tag === "Most Popular"
+                              ? "bg-amber-500"
+                              : "bg-emerald-700"
+                            }`}
+                        >
+                          {p.tag}
                         </span>
                       )}
-                      <p className="text-xs font-semibold text-stone-400 mb-0.5">{p.duration}</p>
-                      <p className={`text-2xl font-bold leading-none mb-1 ${sel ? "text-emerald-800" : "text-stone-900"}`}>
-                        {p.qty} <span className="text-xs font-medium">caps</span>
-                      </p>
-                      <p className="text-sm font-bold text-stone-900">₹{p.price.toLocaleString("en-IN")}</p>
-                      <p className="text-[11px] text-stone-400 line-through">₹{p.orig.toLocaleString("en-IN")}</p>
-                      <span className="inline-block mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        {pct}% off
-                      </span>
                     </button>
                   );
                 })}
@@ -574,13 +700,12 @@ export default function SingleProduct() {
                       <div className="flex-1">
                         <p className="text-sm font-bold text-emerald-800 mb-0.5">{pincodeMsg.msg}</p>
                         <div className="flex items-center gap-2 mt-1.5">
-                          <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${
-                            pincodeMsg.days === 4 
-                              ? "bg-emerald-600 text-white" 
-                              : pincodeMsg.days === 5 
-                                ? "bg-blue-600 text-white" 
-                                : "bg-amber-500 text-white"
-                          }`}>
+                          <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${pincodeMsg.days === 4
+                            ? "bg-emerald-600 text-white"
+                            : pincodeMsg.days === 5
+                              ? "bg-blue-600 text-white"
+                              : "bg-amber-500 text-white"
+                            }`}>
                             {pincodeMsg.days === 4 ? "⚡ Express" : pincodeMsg.days === 5 ? "📦 Standard" : "📦 Standard"}
                           </span>
                           <span className="text-[11px] text-emerald-600 font-medium">Free delivery on orders ₹499+</span>
@@ -597,59 +722,60 @@ export default function SingleProduct() {
               )}
             </div>
 
-         {/* Qty + CTA */}
-<div className="flex gap-3 mb-6 w-full">
+            {/* Qty + CTA */}
+            <div className="flex gap-3 mb-6 w-full">
 
-  {/* Qty Stepper */}
-  <div className="flex-1 flex items-center border-2 border-stone-200 rounded-xl overflow-hidden bg-white">
-    <button
-      onClick={() => setQty(q => Math.max(1, q - 1))}
-      className="w-11 h-12 flex items-center justify-center text-stone-600 hover:bg-stone-50 transition-colors text-xl font-light"
-    >
-      −
-    </button>
-    <span className="w-11 h-12 flex items-center justify-center text-sm font-bold text-stone-900 border-x-2 border-stone-200">
-      {qty}
-    </span>
-    <button
-      onClick={() => setQty(q => q + 1)}
-      className="w-11 h-12 flex items-center justify-center text-stone-600 hover:bg-stone-50 transition-colors text-xl font-light"
-    >
-      +
-    </button>
-  </div>
+              {/* Qty Stepper */}
+              <div className="flex-1 flex items-center border-2 border-stone-200 rounded-xl overflow-hidden bg-white">
+                <button
+                  onClick={() => setQty(q => Math.max(1, q - 1))}
+                  className="w-11 h-12 flex items-center justify-center text-stone-600 hover:bg-stone-50 transition-colors text-xl font-light"
+                >
+                  −
+                </button>
+                <span className="w-11 h-12 flex items-center justify-center text-sm font-bold text-stone-900 border-x-2 border-stone-200">
+                  {qty}
+                </span>
+                <button
+                  onClick={() => setQty(q => q + 1)}
+                  className="w-11 h-12 flex items-center justify-center text-stone-600 hover:bg-stone-50 transition-colors text-xl font-light"
+                >
+                  +
+                </button>
+              </div>
 
-  {/* Add to Cart */}
-  <button
-    type="button"
-    onClick={handleAddToCart}
-    disabled={addMut.isPending}
-    className="flex-1 flex items-center justify-center gap-2 h-12 rounded-xl text-white text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed shim-btn"
-    style={{ boxShadow: "0 8px 20px rgba(0,0,0,0.15)" }}
-  >
-    {addMut.isPending ? (
-      <span className="flex items-center gap-2">
-        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-        Adding…
-      </span>
-    ) : (
-      <>
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-          <circle cx="9" cy="21" r="1"/>
-          <circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
-        Add to Cart
-      </>
-    )}
-  </button>
+              {/* Add to Cart */}
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={addMut.isPending}
+                className="flex-[1.5] h-12 flex items-stretch rounded-xl overflow-hidden transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 group"
+              >
+                {/* Left side: Icon */}
+                <div className="w-14 flex items-center justify-center bg-[#022a7a] text-white transition-colors duration-300">
+                  <svg className={`w-5 h-5 ${addMut.isPending ? 'animate-bounce' : 'group-hover:scale-110 transition-transform'}`} fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg>
+                </div>
 
-  {/* Buy Now */}
-  <button className="flex-1 h-12 border-2 border-stone-900 rounded-xl text-stone-900 text-sm font-bold tracking-widest uppercase hover:bg-stone-900 hover:text-white transition-all duration-200">
-    Buy Now — ₹{total}
-  </button>
+                {/* Right side: Text */}
+                <div className="flex-1 flex items-center justify-center bg-[#03349a] text-white font-bold uppercase tracking-widest text-xs sm:text-sm transition-colors duration-300">
+                  {addMut.isPending ? "Adding..." : "Add to Cart"}
+                </div>
+              </button>
 
-</div>
+              {/* Buy Now */}
+              <button
+                onClick={handleBuyNow}
+                disabled={addMut.isPending}
+                className="flex-1 h-12 border-2 border-stone-900 rounded-xl text-stone-900 text-sm font-bold tracking-widest uppercase hover:bg-stone-900 hover:text-white transition-all duration-200 disabled:opacity-50"
+              >
+                Buy Now — ₹{total}
+              </button>
+
+            </div>
 
             {/* Trust bar */}
             <div className="grid grid-cols-3 border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-sm mb-2">
@@ -691,59 +817,79 @@ export default function SingleProduct() {
               {openTab === id && (
                 <div className="tab-content px-6 pb-6 pt-2 text-stone-700 text-[18px] leading-relaxed border-t border-stone-100">
 
-                  {id === "description" && (
-                    <>
-                      <p className="text-base font-medium text-stone-700 mb-5">{product.productDescription}</p>
-                      <div className="space-y-3">
-                        {BENEFITS_LIST.map((b) => (
-                          <div key={b.key} className="flex gap-3 p-3 rounded-xl bg-stone-50 border border-stone-100">
-                            
-                            <div>
-                              <span className="text-stone-600 text-sm">{b.key}: </span>
-                              <span className="text-sm text-stone-600">{b.val}</span>
-                            </div>
+                  {/* {id === "description" && (
+                    <div className="py-2 opacity-60">
+                      <p className="text-sm italic">Product details and benefits are listed above the price card for easy viewing.</p>
+                    </div>
+                  )} */}
+
+                  {id === "ingredients" && currentIngredients && (
+                    <div className="space-y-12 py-4">
+                      {/* Top Summary Info */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {currentIngredients.list.map((row) => (
+                          <div
+                            key={row.key}
+                            className="flex flex-col gap-1 p-4 rounded-2xl bg-white border border-stone-100 shadow-sm"
+                          >
+                            <span className="font-extrabold text-[#03349a] text-[11px] uppercase tracking-wider">
+                              {row.key}
+                            </span>
+                            <span className="text-[15px] text-stone-600 font-medium leading-relaxed">{row.val}</span>
                           </div>
                         ))}
                       </div>
-                    </>
+
+                      {/* Ingredient Pills */}
+                      <div className="flex flex-wrap gap-2.5">
+                        {currentIngredients.pills.map((ing) => (
+                          <span
+                            key={ing}
+                            className="px-4 py-2 rounded-full bg-stone-100 text-stone-800 border border-stone-200 text-xs font-bold uppercase tracking-wide hover:bg-[#03349a] hover:text-white transition-colors cursor-default"
+                          >
+                            {ing}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Zig-Zag Ingredient Details */}
+                      <div className="space-y-16">
+                        {currentIngredients.details.map((item, index) => {
+                          const [name, desc] = item.split(": ");
+                          const isEven = index % 2 === 0;
+                          const img = INGREDIENT_IMAGES[index % INGREDIENT_IMAGES.length];
+                          
+                          return (
+                            <div 
+                              key={index} 
+                              className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 lg:gap-16 group`}
+                            >
+                              {/* Image Section */}
+                              <div className="w-full md:w-1/2 overflow-hidden rounded-[2rem] shadow-xl aspect-[4/3]">
+                                <img 
+                                  src={img} 
+                                  alt={name} 
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                                />
+                              </div>
+
+                              {/* Text Section */}
+                              <div className="w-full md:w-1/2 space-y-4">
+                                <div className="space-y-1">
+                                  <p className="text-[#c9643a] font-black text-xs uppercase tracking-[0.2em]">Key Ingredient</p>
+                                  <h3 className="text-3xl font-bold text-stone-900">{name}</h3>
+                                </div>
+                                <div className="w-12 h-1 bg-gradient-to-r from-[#03349a] to-[#c9643a] rounded-full" />
+                                <p className="text-[17px] text-stone-600 leading-relaxed font-medium">
+                                  {desc}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   )}
-
-                  {id === "ingredients" && currentIngredients && (
-  <>
-    <div className="space-y-2.5 mb-5">
-      {currentIngredients.list.map((row) => (
-        <div
-          key={row.key}
-          className="flex gap-2 p-3 rounded-xl bg-stone-50 border border-stone-100"
-        >
-          <span className="font-semibold text-stone-800 text-sm flex-shrink-0">
-            {row.key}:
-          </span>
-          <span className="text-sm text-stone-600">{row.val}</span>
-        </div>
-      ))}
-    </div>
-
-    <div className="flex flex-wrap gap-2 mb-5">
-      {currentIngredients.pills.map((ing) => (
-        <span
-          key={ing}
-          className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold"
-        >
-          {ing}
-        </span>
-      ))}
-    </div>
-
-    <div className="space-y-2">
-      {currentIngredients.details.map((item, index) => (
-        <p key={index} className="text-sm text-stone-600">
-          • {item}
-        </p>
-      ))}
-    </div>
-  </>
-)}
 
                   {id === "warning" && (
                     <>

@@ -416,11 +416,12 @@ const [products, setProducts] = useState([]);
           <div className="rp-header">
             <div>
               <p className="rp-eyebrow">You May Also Like</p>
-              <h2 className="rp-h2">Related <span>Products</span></h2>
+              <h2 className="rp-h2">
+                <span className="text-black">Related</span>{" "}
+                <span className="text-[#03349a]">Products</span>
+              </h2>
               <div className="rp-underline">
-                <div className="rp-ul-bar" />
-                <div className="rp-ul-dot" />
-                <div className="rp-ul-bar2" />
+                <div className="w-20 h-1 rounded-full bg-gradient-to-r from-[#03349a] to-[#c9643a]" />
               </div>
             </div>
            

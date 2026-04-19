@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import img0 from '../assets/images/bo.jpg';
-import img1 from '../assets/images/nat.jpeg';
-import img2 from '../assets/images/resr.jpeg';
+import img0 from '../assets/images/about/53.jpg';
+import img1 from '../assets/images/about/54.jpg';
+import img2 from '../assets/images/about/55.jpg';
 import img3 from '../assets/images/resar.jpeg';
 import img4 from '../assets/images/pure.jpeg';
-
+import bnr from '../assets/images/abtUs.jpg'
 
 const sections = [
   {
@@ -161,6 +161,7 @@ function Section({ section, index }) {
         transition: `opacity 0.65s ease ${index * 80}ms, transform 0.65s ease ${index * 80}ms`,
       }}
     >
+      
       {/* Zig-zag row */}
       <div
         className={`flex flex-col ${
@@ -246,7 +247,18 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen" style={{ background: "#fdf8f4" }}>
-
+   <section className="relative w-full overflow-hidden">
+          {/* Background image */}
+          <div className="relative">
+            <img
+              src={bnr}
+              alt="About Banner"
+              loading="lazy"
+              className="w-full h-full  object-cover"
+        />
+        
+          </div>
+        </section>
       {/* ── Hero ── */}
       <div
         className="relative overflow-hidden text-center px-6 pt-20 pb-0"

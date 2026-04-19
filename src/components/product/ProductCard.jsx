@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { API_URL } from "../../utils/axiosInstance";
@@ -6,8 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToCart } from "../../services/cartService";
 const CARD_W = 402;
 const CARD_GAP = 20;
-export default  function ProductCard({ product, animDelay, sectionVisible }) {
-console.log('shop page :',product)
+export default function ProductCard({ product, animDelay, sectionVisible }) {
 
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
@@ -35,11 +34,11 @@ console.log('shop page :',product)
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-       alert("Please login first to add items to cart.");
-       navigate('/login');
-       return;
+      alert("Please login first to add items to cart.");
+      navigate('/login');
+      return;
     }
-    
+
     addMut.mutate({ productId: product.id, quantity: 1 });
   };
 
@@ -50,14 +49,25 @@ console.log('shop page :',product)
     const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
     return () => clearTimeout(t);
   }, [sectionVisible, animDelay]);
-const badgeColors = {
-  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" },
-  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" },
-  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" },
-  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" },
-  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" },
-  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" },
-};
+  const getTagColor = (tag) => {
+    const palettes = [
+      { bg: "#E0F2FE", border: "#7DD3FC", text: "#0369A1" }, // Blue
+      { bg: "#F0FDF4", border: "#86EFAC", text: "#166534" }, // Green
+      { bg: "#FFF7ED", border: "#FDBA74", text: "#9A3412" }, // Orange
+      { bg: "#FEF2F2", border: "#FCA5A5", text: "#991B1B" }, // Red
+      { bg: "#FAF5FF", border: "#D8B4FE", text: "#6B21A8" }, // Purple
+      { bg: "#FFFBEB", border: "#FDE68A", text: "#92400E" }, // Amber
+      { bg: "#FDF2F9", border: "#F9A8D4", text: "#9D174D" }, // Pink
+    ];
+    
+    // Hash the tag string to get a stable index
+    let hash = 0;
+    for (let i = 0; i < tag.length; i++) {
+      hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % palettes.length;
+    return palettes[index];
+  };
   return (
 
     <div
@@ -66,14 +76,14 @@ const badgeColors = {
       onMouseDown={(e) => e.stopPropagation()}
       className="flex-shrink-0  rounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none w-full sm:w-[48%] md:w-[300px] lg:w-[340px] xl:w-[450px]"
       style={{
-        
+
         border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
         zIndex: hov ? 40 : 10,
         transform: hov
           ? "translateY(-12px) scale(1.015)"
           : cardVisible
-          ? "translateY(0) scale(1)"
-          : "translateY(32px) scale(0.96)",
+            ? "translateY(0) scale(1)"
+            : "translateY(32px) scale(0.96)",
         opacity: cardVisible ? 1 : 0,
         boxShadow: hov
           ? "0 20px 48px rgba(130,12,12,.10), 0 4px 16px rgba(0,0,0,.06)"
@@ -84,23 +94,29 @@ const badgeColors = {
       }}
     >
       {/* ── Image Area ── */}
-      {product.offerTags && (
-        <span
-          className="absolute top-3 left-3 text-xs px-2 py-1 rounded z-10 font-semibold"
-          style={{
-            backgroundColor: badgeColors[product.offerTags]?.bg || "#22C55E",
-            color: badgeColors[product.offerTags]?.text || "#FFFFFF",
-            border: `1px solid ${badgeColors[product.offerTags]?.border || "#888"}`,
-          }}
-        >
-          {product.offerTags}
-        </span>
-      )}
+      {product.offerTags && (Array.isArray(product.offerTags) ? product.offerTags : [product.offerTags]).map((tag, i) => {
+        const colors = getTagColor(tag);
+        return (
+          <span
+            key={i}
+            className="absolute z-10 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm"
+            style={{
+              top: 12 + i * 24,
+              left: 12,
+              backgroundColor: colors.bg,
+              color: colors.text,
+              border: `1px solid ${colors.border}`,
+            }}
+          >
+            {tag}
+          </span>
+        );
+      })}
 
-     <div
-  // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[450px] sm:h-[350px] aspect-[4/3] rounded-xl"
-  // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[350px] sm:h-[450px] aspect-[4/3] rounded-xl"
-  className="
+      <div
+        // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[450px] sm:h-[350px] aspect-[4/3] rounded-xl"
+        // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[350px] sm:h-[450px] aspect-[4/3] rounded-xl"
+        className="
   relative overflow-hidden bg-[#f9f5f2] w-full 
   h-[350px]        // 📱 mobile (default)
   sm:h-[350px]     // 📲 small devices (≥640px)
@@ -109,12 +125,12 @@ const badgeColors = {
   xl:h-[450px]     // 🖥️ large screens (≥1280px)
   aspect-[4/3] rounded-xl
 "
-  onClick={() => navigate(`/product/${product.id}`)}
->
+        onClick={() => navigate(`/product/${product.id}`)}
+      >
         {/* Primary image */}
         <img
           // src={ product.productImages[0]}
-         src={product?.productImages?.[0]?.url} 
+          src={product?.productImages?.[0]?.url}
           alt={product.productName}
           draggable={false}
           className="absolute inset-0 w-full h-full  "
@@ -127,7 +143,7 @@ const badgeColors = {
         {/* Hover image */}
         <img
           // src={ product.productImages[1]}
-         src={product?.productImages?.[1]?.url} 
+          src={product?.productImages?.[1]?.url}
           alt={product.productName}
           draggable={false}
           className="absolute inset-0 w-full h-full "
@@ -176,10 +192,10 @@ const badgeColors = {
             overflow: "hidden",
           }}
         >
-          <span className="text-[#829b1c] font-extrabold">FOR :</span> 
+          <span className="text-[#829b1c] font-extrabold">FOR :</span>
           {product.forWhom}
         </p>
-        
+
         <p
           className="text-sm font-bold text-gray-600 mb-3"
           style={{
@@ -190,7 +206,7 @@ const badgeColors = {
             overflow: "hidden",
           }}
         >
-          <span className="text-[#c9643a] font-extrabold">WITH :</span> 
+          <span className="text-[#c9643a] font-extrabold">WITH :</span>
           {product.withWhom}
         </p>
 
@@ -202,7 +218,7 @@ const badgeColors = {
               <span>{product.rating.toFixed(1)} Ratings</span>
             </span>
             <span className="text-xs font-semibold text-gray-500">
-               Reviews
+              Reviews
             </span>
           </div>
         )}
@@ -233,25 +249,24 @@ const badgeColors = {
         {/* Add to Cart */}
         <button
           onClick={handleAddToCart}
-          onMouseEnter={() => setBtnHov(true)}
-          onMouseLeave={() => setBtnHov(false)}
-          className="w-full py-3 text-sm font-semibold tracking-wide uppercase
-            flex items-center justify-center gap-2 text-white cursor-pointer
-            rounded-tl-[50px] rounded-br-[50px] rounded-tr-none rounded-bl-none
-            transition-all duration-300 ease-in-out"
-          style={{
-            background: btnHov ? "#0147d3" : "#03349a",
-            boxShadow: btnHov ? "0 6px 20px rgba(201,100,58,.35)" : "none",
-          }}
+          disabled={addMut.isPending}
+          className="w-full flex items-stretch h-12 rounded-xl overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 group"
         >
-          {addMut.isPending ? (
-            <span>Adding...</span>
-          ) : (
-            <>
-              <FaShoppingCart size={14} />
-              Add to Cart
-            </>
-          )}
+          {/* Left side: Icon */}
+          <div
+            className="w-14 flex items-center justify-center transition-colors duration-300"
+            style={{ backgroundColor: "#022a7a" }}
+          >
+            <FaShoppingCart className={`w-5 h-5 text-white ${addMut.isPending ? 'animate-bounce' : 'group-hover:scale-110 transition-transform'}`} />
+          </div>
+
+          {/* Right side: Text */}
+          <div
+            className="flex-1 flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
+            style={{ backgroundColor: "#03349a" }}
+          >
+            {addMut.isPending ? "Adding..." : "Add to Cart"}
+          </div>
         </button>
       </div>
     </div>

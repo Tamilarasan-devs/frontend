@@ -18,7 +18,6 @@ export default function ProductGrid() {
   const fetchProducts = async () => {
     try {
       const response = await axiosInstance.get("/product/getAllProduct");
-      console.log('response :', response)
       setProducts(response.data.products || []);
     } catch (error) {
       console.error(error);
@@ -36,13 +35,15 @@ export default function ProductGrid() {
 
       <div className="m-5 opacity-100 translate-y-0 transition-all duration-700 ease-in-out">
 
-        <h2 className="text-[clamp(26px,4vw,36px)] font-bold text-gray-900 m-0 leading-[1.15]">
-          Fuel Your Day,  <span className="text-[#03349a]">Naturally</span>
+        <h2 className="text-[clamp(26px,4vw,36px)] font-bold m-0 leading-[1.15]">
+          <span className="text-black">Fuel</span>{" "}
+          <span className="text-[#03349a]">Your Day,</span>{" "}
+          <span className="text-[#c9643a]">Naturally</span>
         </h2>
         <div className="mt-3 flex items-center gap-1.5">
-          <div className="w-9 h-[2.5px] bg-[#03349a] rounded-full" />
-          <div className="w-2 h-2 rounded-full bg-[#c9643a] opacity-60" />
-          <div className="w-4 h-[2.5px] bg-[#f0ece8] rounded-full" />
+          <div className="w-12 h-[3px] rounded-full" style={{ background: "linear-gradient(90deg, #03349a, #c9643a)" }} />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#c9643a]" />
+          <div className="w-5 h-[2.5px] bg-[#f0ece8] rounded-full" />
         </div>
         <p className="text-[18px] font-semibold fontsemibold mt-4 text-accent mb-2.5 flex items-center gap-2.5">
           Aayubakwath brings together powerful herbs to keep you active, energized, and balanced—every single day.

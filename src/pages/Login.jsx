@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../config/authApi";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "", remember: false });
@@ -11,18 +12,15 @@ export default function Login() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("Login successful:", data);
-      // Backend returns data: { user, token } wrapped in another data object 
-      // or directly if axios extracted it. From auth.controller.js we saw data: result.
       const token = data?.data?.token || data?.token;
       if (token) {
         localStorage.setItem("token", token);
       }
-      alert("Logged in successfully!");
-      // Optionally redirect user here
+      toast.success("Welcome back! Login successful.");
       window.location.href = "/";
     },
     onError: (error) => {
-      alert(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "Login failed");
     },
   });
 
@@ -71,24 +69,19 @@ export default function Login() {
         .submit-btn:active:not(:disabled) { transform: translateY(0); }
       `}</style>
 
-      {/* ── Outer Card ── */}
       <div
         className="slide-up w-full max-w-5xl rounded-3xl overflow-hidden"
         style={{ boxShadow: "0 32px 80px rgba(130,12,12,0.18), 0 8px 24px rgba(0,0,0,0.08)" }}
       >
         <div className="flex flex-col lg:flex-row">
-
-          {/* ════ LEFT PANEL ════ */}
           <div
             className="lg:w-[42%] relative flex flex-col justify-between px-10 py-12 overflow-hidden"
             style={{ background: "linear-gradient(155deg, #03349a 0%, #5a0808 55%, #3a0404 100%)" }}
           >
-            {/* Background blobs */}
             <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full" style={{ background: "rgba(255,255,255,0.04)" }} />
             <div className="absolute -bottom-24 -left-12 w-80 h-80 rounded-full" style={{ background: "rgba(170,184,32,0.06)" }} />
             <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(255,255,255,0.012) 28px,rgba(255,255,255,0.012) 29px)" }} />
 
-            {/* Logo */}
             <div className="relative z-10">
               <div className="flex items-center gap-3">
                 <div
@@ -101,7 +94,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Hero content */}
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-5">
                 <div className="h-px w-6 bg-[#aab820]" />
@@ -115,7 +107,6 @@ export default function Login() {
                 Sign in to your account and pick up right where you left off. Everything's waiting for you.
               </p>
 
-              {/* Stats row */}
               <div className="grid grid-cols-3 gap-3 mb-8">
                 {stats.map((s, i) => (
                   <div
@@ -129,19 +120,15 @@ export default function Login() {
                 ))}
               </div>
 
-              {/* Testimonial card */}
               <div
                 className="rounded-2xl p-5"
                 style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.08)" }}
               >
-                {/* Quote mark */}
                 <div className="text-[#aab820] text-3xl font-black leading-none ">"</div>
                 <p className="text-white text-md leading-relaxed mb-4">{testimonial.text}</p>
-                
               </div>
             </div>
 
-            {/* Bottom link */}
             <div className="relative z-10 pt-8 border-t border-white/10">
               <p className="text-white/35 text-xs mb-1">Don't have an account?</p>
               <a href="register" className="text-[#aab820] text-sm font-extrabold hover:underline">
@@ -150,10 +137,7 @@ export default function Login() {
             </div>
           </div>
 
-          {/* ════ RIGHT FORM PANEL ════ */}
           <div className="flex-1 bg-[#fefbf6] flex flex-col justify-center px-8 lg:px-12 py-12">
-
-            {/* Mobile logo */}
             <div className="flex lg:hidden items-center gap-2 mb-8">
               <div className="w-8 h-8 rounded-lg bg-[#03349a] flex items-center justify-center">
                 <span className="text-white font-black text-sm">W</span>
@@ -161,7 +145,6 @@ export default function Login() {
               <span className="text-[#03349a] font-bold text-lg">Aayubakwath</span>
             </div>
 
-            {/* Heading */}
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-[3px] w-5 rounded-full bg-[#03349a]" />
@@ -173,10 +156,7 @@ export default function Login() {
               <p className="text-gray-600 text-md  font-black">Enter your credentials to access your account.</p>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-
-              {/* Email */}
               <div>
                 <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a] mb-1.5">
                   Email Address
@@ -196,7 +176,6 @@ export default function Login() {
                 </div>
               </div>
 
-              {/* Password */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-[15px] font-extrabold tracking-widest uppercase text-[#03349a]">
@@ -226,7 +205,6 @@ export default function Login() {
                 </div>
               </div>
 
-              {/* Remember me */}
               <div className="flex items-center gap-3">
                 <div className="relative shrink-0">
                   <input type="checkbox" name="remember" id="remember" checked={form.remember} onChange={handleChange} className="sr-only" />
@@ -250,7 +228,6 @@ export default function Login() {
                 </label>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={mutation.isLoading}
@@ -270,23 +247,19 @@ export default function Login() {
                   </span>
                 ) : "Sign In →"}
               </button>
-
             </form>
 
-            {/* Divider */}
             <div className="mt-7 flex items-center gap-3">
               <div className="flex-1 h-px bg-gray-100" />
               <span className="text-xs text-gray-300 font-semibold">or</span>
               <div className="flex-1 h-px bg-gray-100" />
             </div>
 
-            {/* Register link */}
             <p className="mt-5 text-center text-sm font-semibold text-gray-600">
               Don't have an account?{" "}
               <a href="register" className="text-[#03349a] font-extrabold hover:underline">Create Account</a>
             </p>
 
-            {/* Security note */}
             <div className="mt-5 flex items-center justify-center gap-1.5 text-gray-300 text-xs">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -294,7 +267,6 @@ export default function Login() {
               <span>256-bit SSL · Secured & Encrypted</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>
