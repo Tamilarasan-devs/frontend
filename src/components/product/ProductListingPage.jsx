@@ -108,11 +108,11 @@ function Sidebar({ categories, selected, onSelect }) {
         
         <div className="px-4 py-3 border-b border-gray-100 bg-gray-50/60">
           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-            Categories
+            Categories name
           </p>
         </div>
 
-        <nav className="p-2 space-y-2">
+        <nav className="p-3 space-y-4">
           {categories.map((cat) => {
             const active = selected === cat.id;
 
@@ -120,17 +120,22 @@ function Sidebar({ categories, selected, onSelect }) {
               <button
                 key={cat.id}
                 onClick={() => onSelect(cat.id)}
-                className="relative w-full h-26 flex items-center px-4 rounded-xl overflow-hidden"
+                className="group relative w-full flex flex-col items-center transition-all duration-300"
               >
-                {/* Background */}
-                <div className="absolute inset-0">
-                  <img src={cat.img} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-black/40" />
+                {/* Image Container */}
+                <div className={`relative w-full h-24 rounded-2xl overflow-hidden transition-all duration-500 
+                  ${active ? "ring-2 ring-emerald-500 ring-offset-2 scale-102" : "ring-1 ring-gray-100 group-hover:shadow-lg group-hover:-translate-y-1"}`}>
+                  <img src={cat.img} className="w-full h-full object-cover" alt={cat.name} />
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 text-white">
-                  {cat.name}
+                {/* Name - Shows under image on hover with big size */}
+                <div className="overflow-hidden w-full transition-all duration-500 max-h-0 group-hover:max-h-20 mt-0 group-hover:mt-3">
+                  <span className="block text-xl font-bold text-gray-800 text-center scale-75 group-hover:scale-100 transition-transform duration-500 origin-top">
+                    {cat.name}
+                  </span>
+                  {active && (
+                    <div className="mx-auto w-8 h-1 bg-emerald-500 rounded-full mt-1.5 animate-pulse" />
+                  )}
                 </div>
               </button>
             );

@@ -147,7 +147,7 @@ export default function Testimonial() {
       ref={sectionRef}
       className="min-h-screen flex items-center justify-center"
       style={{
-        background: "linear-gradient(160deg, #f0f5ff 0%, #e8eeff 60%, #dce8ff 100%)",
+        // background: "linear-gradient(160deg, #f0f5ff 0%, #e8eeff 60%, #dce8ff 100%)",
         padding: "clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem)",
       }}
     >

@@ -38,7 +38,7 @@ export default function CategoryBannerList() {
       </div>
 
       {/* Image Grid */}
-<div className="grid grid-cols-2 sm:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-12">
+<div className="grid grid-cols-2 sm:grid-cols-6 gap-6 px-4 sm:px-6 lg:px-12">
   {images.map((img, i) => (
     <div
       key={i}

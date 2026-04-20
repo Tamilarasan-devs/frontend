@@ -6,14 +6,6 @@ import {
 } from "react-icons/fa";
 import logo from '../../assets/images/logo.jpg'
 
-const Logo = () => (
-  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 48, height: 38 }}>
-    <path d="M100 155 C60 155 10 120 10 80 C10 60 30 45 55 50 C70 52 85 65 100 85 C115 65 130 52 145 50 C170 45 190 60 190 80 C190 120 140 155 100 155Z" fill="#8B1010"/>
-    <path d="M100 130 C75 130 45 108 45 80 C45 65 58 55 72 58 C83 60 93 72 100 90 C107 72 117 60 128 58 C142 55 155 65 155 80 C155 108 125 130 100 130Z" fill="#D4845A"/>
-    <path d="M100 58 C93 58 86 52 86 44 C86 38 91 34 96 36 C98 37 99 39 100 41 C101 39 102 37 104 36 C109 34 114 38 114 44 C114 52 107 58 100 58Z" fill="#6B8C1A"/>
-  </svg>
-);
-
 const quickLinks = [
   { label: "Home", path: "/" },
   { label: "About", path: "/aboutpage" },
@@ -32,11 +24,11 @@ const helpLinks = [
 ];
 
 const socials = [
-  { icon: <FaFacebookF size={14} />, link: "https://www.facebook.com/", label: "Facebook" },
-  { icon: <FaInstagram size={14} />, link: "https://www.instagram.com/aayubakawath/", label: "Instagram" },
-  { icon: <FaTwitter size={14} />, link: "https://x.com/Aayubakwath", label: "Twitter" },
-  { icon: <FaYoutube size={14} />, link: "https://studio.youtube.com/channel/UCx9SZTz-XdtUMtKz5pZsJcg/editing/profile", label: "YouTube" },
-  { icon: <FaLinkedinIn size={14} />, link: "https://www.linkedin.com/in/sri-bakawathi-life-science-932a143b2/", label: "LinkedIn" },
+  { icon: <FaFacebookF size={16} />, link: "https://www.facebook.com/", label: "Facebook" },
+  { icon: <FaInstagram size={16} />, link: "https://www.instagram.com/aayubakawath/", label: "Instagram" },
+  { icon: <FaTwitter size={16} />, link: "https://x.com/Aayubakwath", label: "Twitter" },
+  { icon: <FaYoutube size={16} />, link: "https://studio.youtube.com/channel/UCx9SZTz-XdtUMtKz5pZsJcg/editing/profile", label: "YouTube" },
+  { icon: <FaLinkedinIn size={16} />, link: "https://www.linkedin.com/in/sri-bakawathi-life-science-932a143b2/", label: "LinkedIn" },
 ];
 
 export default function Footer() {
@@ -73,7 +65,7 @@ export default function Footer() {
         .footer-link {
           position: relative;
           color: #4a3030;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 500;
           letter-spacing: 0.01em;
           transition: all 0.25s ease;
@@ -101,7 +93,7 @@ export default function Footer() {
         .footer-link:hover::after { width: 100%; }
 
         .social-btn {
-          width: 38px; height: 38px;
+          width: 42px; height: 42px;
           border-radius: 50%;
           display: flex; align-items: center; justify-content: center;
           background: white;
@@ -126,7 +118,7 @@ export default function Footer() {
         }
 
         .contact-icon {
-          width: 34px; height: 34px;
+          width: 38px; height: 38px;
           border-radius: 10px;
           background: rgba(201,168,76,0.1);
           border: 1px solid rgba(201,168,76,0.2);
@@ -138,7 +130,7 @@ export default function Footer() {
 
         .section-heading {
           font-family: inherit;
-          font-size: 17px;
+          font-size: 20px;
           font-weight: 700;
           color: var(--blue);
           letter-spacing: 0.05em;
@@ -163,7 +155,7 @@ export default function Footer() {
           border-radius: 10px 0 0 10px;
           color: var(--dark);
           padding: 11px 16px;
-          font-size: 13.5px;
+          font-size: 15px;
           outline: none;
           flex: 1;
           transition: all 0.3s;
@@ -226,17 +218,17 @@ export default function Footer() {
                   <img src={logo} className="w-11 h-11 transition-transform duration-300 hover:rotate-12" alt="Aayubakawath Logo" />
                 </a>
                 <div style={{ borderLeft: "2px solid rgba(201,168,76,0.3)", paddingLeft: 14 }}>
-                  <h2 className="footer-display" style={{ fontSize: 22, fontWeight: 800, color: "var(--blue)", letterSpacing: "0.02em", lineHeight: 1 }}>
+                  <h2 className="footer-display" style={{ fontSize: 26, fontWeight: 800, color: "var(--blue)", letterSpacing: "0.02em", lineHeight: 1 }}>
                     Aayubakawath
                   </h2>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: "var(--gold)", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: "var(--gold)", textTransform: "uppercase", letterSpacing: "0.15em" }}>
                     Ayurvedic Wellness
                   </span>
                 </div>
               </div>
 
               {/* Tagline */}
-              <p style={{ fontSize: 14.5, color: "#4a3030", lineHeight: 1.8, marginBottom: 26, fontWeight: 500 }}>
+              <p style={{ fontSize: 16.5, color: "#4a3030", lineHeight: 1.8, marginBottom: 26, fontWeight: 500 }}>
                 Nature's wisdom, crafted for your well-being. Rooted in tradition, refined for today's lifestyle.
               </p>
 
@@ -244,9 +236,9 @@ export default function Footer() {
               <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 26 }}>
                 <div className="contact-item">
                   <div className="contact-icon">
-                    <FaMapMarkerAlt size={14} />
+                    <FaMapMarkerAlt size={16} />
                   </div>
-                  <p style={{ fontSize: 13.5, color: "#4a3030", lineHeight: 1.6, fontWeight: 500 }}>
+                  <p style={{ fontSize: 15.5, color: "#4a3030", lineHeight: 1.6, fontWeight: 500 }}>
                     Sri Bakawathi Life Science<br />
                     No: 1/770, K. Ayyampalayam, K.S.N Puram<br />
                     Palladam, Tiruppur – 641662, TN
@@ -255,18 +247,18 @@ export default function Footer() {
 
                 <div className="contact-item">
                   <div className="contact-icon">
-                    <FaPhoneAlt size={13} />
+                    <FaPhoneAlt size={15} />
                   </div>
-                  <a href="tel:9443157282" className="footer-link" style={{ fontSize: 15, fontWeight: 600 }}>
+                  <a href="tel:9443157282" className="footer-link" style={{ fontSize: 16, fontWeight: 600 }}>
                     +91 94431 57282
                   </a>
                 </div>
 
                 <div className="contact-item">
                   <div className="contact-icon">
-                    <FaEnvelope size={13} />
+                    <FaEnvelope size={15} />
                   </div>
-                  <a href="mailto:info.sblsmarketing@gmail.com" className="footer-link" style={{ fontSize: 14 }}>
+                  <a href="mailto:info.sblsmarketing@gmail.com" className="footer-link" style={{ fontSize: 16 }}>
                     info.sblsmarketing@gmail.com
                   </a>
                 </div>
@@ -311,7 +303,7 @@ export default function Footer() {
             {/* ── Newsletter ── */}
             <div>
               <h4 className="section-heading">Stay Updated</h4>
-              <p style={{ fontSize: 14, color: "#4a3030", lineHeight: 1.7, marginBottom: 22, fontWeight: 500 }}>
+              <p style={{ fontSize: 16, color: "#4a3030", lineHeight: 1.7, marginBottom: 22, fontWeight: 500 }}>
                 Join our wellness community for Ayurvedic insights and exclusive offers.
               </p>
              
@@ -324,8 +316,8 @@ export default function Footer() {
                   { label: "Traditional Wisdom", icon: "🌿" }
                 ].map((badge, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.4)", padding: "6px 14px", borderRadius: "100px", border: "1px solid rgba(201,168,76,0.15)", width: "fit-content" }}>
-                    <span style={{ fontSize: 13 }}>{badge.icon}</span>
-                    <span style={{ fontSize: 12.5, color: "#4a3030", fontWeight: 600, letterSpacing: "0.01em" }}>{badge.label}</span>
+                    <span style={{ fontSize: 15 }}>{badge.icon}</span>
+                    <span style={{ fontSize: 14.5, color: "#4a3030", fontWeight: 600, letterSpacing: "0.01em" }}>{badge.label}</span>
                   </div>
                 ))}
               </div>
@@ -337,11 +329,11 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div style={{ maxWidth: 1320, margin: "0 auto", padding: "24px 32px", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 20, position: "relative" }}>
-          <p style={{ fontSize: 13.5, color: "#6a5050", margin: 0, fontWeight: 500 }}>
+          <p style={{ fontSize: 15.5, color: "#6a5050", margin: 0, fontWeight: 500 }}>
             © 2026 <span style={{ color: "var(--blue)", fontWeight: 700 }}>Aayubakawath</span>. All Rights Reserved.
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-             <p style={{ fontSize: 12, color: "#8a7070", maxWidth: 640, lineHeight: 1.6, margin: 0, textAlign: "right", fontStyle: "italic" }}>
+             <p style={{ fontSize: 14, color: "#8a7070", maxWidth: 640, lineHeight: 1.6, margin: 0, textAlign: "right", fontStyle: "italic" }}>
               *Ancient wisdom meets modern science. Our products derived from tradition.
             </p>
           </div>

@@ -45,10 +45,11 @@ console.log('sec ; ban',res)
       <div className="relative w-full  group cursor-pointer">
 
         {/* Image */}
+        ;;
         <img
           src={banner}
           alt="Offer Banner"
-          className="w-full  object-cover group-hover:scale-105 transition duration-700"
+          className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
         />
 
 

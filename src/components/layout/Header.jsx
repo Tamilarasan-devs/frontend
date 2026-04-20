@@ -28,11 +28,11 @@ const Dot = ({ n, accent }) => (
 /* ─── Desktop nav link ───────────────────────────────────────────────── */
 const DesktopLink = ({ href, label, active }) => (
   <a href={href}
-    className={`relative font-dm text-[13px] font-bold tracking-[1.8px] uppercase
-                 px-3 py-1.5 rounded transition-colors duration-200
+    className={`relative font-dm text-[15px] font-bold tracking-[1.2px] uppercase
+                 px-4 py-2 rounded transition-all duration-300
                  ${active ? "" : "nav-hover"}`}
     style={{ color: active ? "#0337a4" : "#1a0a0a" }}
-    onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#0337a4"; }}
+    onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#c9643a"; }}
     onMouseLeave={e => { if (!active) e.currentTarget.style.color = "#1a0a0a"; }}>
 
     {label}
@@ -172,24 +172,23 @@ export default function Header() {
         }}>
 
         {/* ── inner row ─────────────────────────────────────────── */}
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8
-                        h-[68px] flex items-center justify-between lg:justify-start gap-4 lg:gap-8">
+        <div className="max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8
+                        h-[80px] flex items-center justify-between lg:justify-start gap-3 lg:gap-6">
 
           {/* LOGO */}
           <img src={logo} className='w-12 h-12' alt='logo' />
           <a href="/" className="relative flex-shrink-0 overflow-hidden px-0.5 py-0.5" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
             <span className="logo-shine absolute inset-y-0 w-10 pointer-events-none"
               style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)" }} />
-            <p className="font-cinzel text-[19px] sm:text-[22px] font-semibold tracking-wide leading-none"
-              style={{ color: "#03349a" }}>
-              Aayubakwath
+            <p className="font-cinzel text-[20px] sm:text-[25px] font-bold tracking-tight leading-none bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+              Aayubakawath
             </p>
             <span className="block h-px mt-1"
               style={{ background: "linear-gradient(90deg,#c9a84c 55%,transparent)" }} />
           </a>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-1 ml-4 lg:ml-8">
+          <nav className="hidden lg:flex items-center gap-1 ml-4 lg:ml-4">
             {navLinks.map((link, i) => (
               <React.Fragment key={link.href}>
                 {i > 0 && (
@@ -202,7 +201,7 @@ export default function Header() {
           </nav>
 
           {/* PERSISTENT SEARCH BAR */}
-          <div className="hidden lg:block flex-1 max-w-[500px]">
+          <div className="hidden lg:block flex-[2] max-w-[1200px] mx-6">
             <SearchBar />
           </div>
 
@@ -215,8 +214,12 @@ export default function Header() {
                           border border-[#c9a84c] transition-all duration-200 bg-[rgba(201,168,76,0.08)]
                           hover:border-[#c9a84c] hover:bg-[rgba(201,168,76,0.08)]
                           hover:-translate-y-0.5"
-              style={{ color: "#03349a" }}>
-              <FaHeart size={14} />
+               style={{
+                  background: "linear-gradient(135deg,#03349a,#0145cc)",
+                  border: "2px solid #c9a84c",
+                  boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
+                }}>
+              <FaHeart size={14} color='white' />
             </a>
 
             {/* Track Order */}
@@ -225,22 +228,27 @@ export default function Header() {
                           border border-[#c9a84c] transition-all duration-200 bg-[rgba(201,168,76,0.08)]
                           hover:border-[#c9a84c] hover:bg-[rgba(201,168,76,0.12)]
                           hover:-translate-y-0.5"
-              style={{ color: "#03349a" }}>
-              <FaTruck size={14} />
+               style={{
+                  background: "linear-gradient(135deg,#03349a,#0145cc)",
+                  border: "2px solid #c9a84c",
+                  boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
+                }}>
+              <FaTruck size={14}  color='white'/>
             </a>
 
             {/* Cart Button */}
             <button
               type="button"
-              className="flex shim-btn items-center justify-center gap-2 px-4 py-3 text-white text-sm font-semibold uppercase tracking-wide rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-              style={{ boxShadow: "0 10px 24px rgba(130,12,12,.35)" }}
+              className="flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[13px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
+              style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
               onClick={() => navigate('/cart')}
+              
             >
               <FaShoppingCart className="w-4 h-4 flex-shrink-0" />
               <span>Cart</span>
               {cartCount > 0 && (
-                <span className="min-w-[17px] h-[17px] flex items-center justify-center
-                                 rounded-full text-[9px] font-bold border border-white/25 bg-blue-800">
+                <span className="min-w-[18px] h-[18px] flex items-center justify-center
+                                 rounded-full text-[10px] font-bold border border-white/40 bg-[#c9643a]">
                   {cartCount}
                 </span>
               )}
@@ -367,24 +375,24 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="grid grid-cols-2 gap-2.5 px-4 sm:px-6 pb-5">
+            <div className="grid grid-cols-2 gap-3 px-4 sm:px-6 pb-8">
               {[
-                { icon: <FaShoppingCart size={12} />, label: "Cart", href: "/cart", badge: cartCount || null, accent: false },
-                { icon: <FaTruck size={12} />, label: "Track", href: "/trackorder", badge: null },
-                { icon: <FaHeart size={12} />, label: "Wishlist", href: "/wishlist", badge: null, accent: true },
-                { icon: <FaUser size={12} />, label: isLoggedIn ? "Profile" : "Account", href: isLoggedIn ? "/profile" : "/login", badge: null },
+                { icon: <FaShoppingCart size={16} />, label: "Cart", href: "/cart", badge: cartCount || null, accent: false },
+                { icon: <FaTruck size={16} />, label: "Track", href: "/trackorder", badge: null },
+                { icon: <FaHeart size={16} />, label: "Wishlist", href: "/wishlist", badge: null, accent: true },
+                { icon: <FaUser size={16} />, label: isLoggedIn ? "Profile" : "Account", href: isLoggedIn ? "/profile" : "/login", badge: null },
               ].map(item => (
                 <a key={item.href} href={item.href}
-                  className="relative flex flex-col items-center justify-center gap-1.5
-                              py-3 rounded-xl text-white font-dm font-semibold
-                              tracking-[1px] uppercase transition-opacity hover:opacity-90
-                              text-[9px] sm:text-[10px]"
+                  className="relative flex flex-col items-center justify-center gap-2
+                              py-4 rounded-2xl text-white font-dm font-bold
+                              tracking-[1.2px] uppercase transition-all duration-200 active:scale-95
+                              text-[11px] sm:text-[12px]"
                   style={{
-                    background: "linear-gradient(135deg,#8b0000,#5a0000)",
-                    boxShadow: "0 3px 10px rgba(139,0,0,0.22)"
+                    background: "linear-gradient(135deg,#03349a,#0145cc)",
+                    boxShadow: "0 6px 16px rgba(3,52,154,0.25)"
                   }}>
                   {item.icon}
-                  <span className="truncate w-full text-center">{item.label}</span>
+                  <span className="truncate w-full text-center px-1">{item.label}</span>
                   {item.badge && <Dot n={item.badge} accent={item.accent} />}
                 </a>
               ))}

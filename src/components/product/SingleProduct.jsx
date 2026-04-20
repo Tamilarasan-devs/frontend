@@ -436,7 +436,7 @@ export default function SingleProduct() {
                     src={IMAGES[activeImg]?.url}
                     alt={product.productName}
                     style={zoomStyle}
-                    className={`w-full h-full object-cover transition-opacity duration-200 ${imgFade ? "opacity-0" : "opacity-100"}`}
+                    className={`w-full h-[580px]  transition-opacity duration-200 ${imgFade ? "opacity-0" : "opacity-100"}`}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-stone-300 text-sm font-medium">

@@ -5,6 +5,7 @@ import img2 from '../assets/images/about/55.jpg';
 import img3 from '../assets/images/resar.jpeg';
 import img4 from '../assets/images/pure.jpeg';
 import bnr from '../assets/images/about/about.jpg'
+import OurBusiness from "./AboutPage";
 
 const sections = [
   {
@@ -187,10 +188,7 @@ function Section({ section, index }) {
             style={{ background: index % 2 === 0 ? "#03349a" : "#c8922a" }}
           />
 
-          <h2
-            className="text-3xl lg:text-4xl font-bold leading-snug mb-6"
-            style={{ color: "#03349a" }}
-          >
+          <h2 className="text-3xl lg:text-4xl font-bold leading-snug mb-6 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
             {title}
           </h2>
 
@@ -247,6 +245,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen" style={{ background: "#fdf8f4" }}>
+      
    <section className="relative w-full overflow-hidden">
           {/* Background image */}
           <div className="relative">
@@ -260,22 +259,23 @@ export default function AboutPage() {
           </div>
         </section>
       {/* ── Hero ── */}
+      <OurBusiness/>
       <div
         className="relative overflow-hidden text-center px-6 pt-20 pb-0"
-        style={{ background: "#03349a" }}
+        // style={{ background: "#03349a" }}
       >
         {/* Decorative blobs */}
         <div
           className="absolute -top-10 -right-10 w-64 h-64 rounded-full opacity-30"
-          style={{ background: "#0a4bc4" }}
+          // style={{ background: "#0a4bc4" }}
         />
         <div
           className="absolute bottom-10 -left-8 w-48 h-48 rounded-full opacity-10"
-          style={{ background: "#c8922a" }}
+          // style={{ background: "#c8922a" }}
         />
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Badge */}
+        {/* <div className="relative max-w-4xl mx-auto">
+          
           <span
             className="inline-block text-sm font-bold tracking-widest uppercase px-5 py-2 rounded-full mb-8"
             style={{
@@ -302,7 +302,7 @@ export default function AboutPage() {
             Supporting healthier lives through carefully formulated, natural health supplements.
           </p>
 
-          {/* Stats bar */}
+   
           <div
             className="flex justify-center mt-14"
             style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
@@ -331,7 +331,7 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Wave transition */}
         <svg
