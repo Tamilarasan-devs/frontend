@@ -20,11 +20,8 @@ export default function Certificate() {
 
   return (
     <div className="overflow-hidden w-full py-10 bg-white">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 tracking-tight">
-        <span style={{ color: "#1a0a0a" }}>Only </span>
-        <span style={{ color: "#03349a" }}>Nature. </span>
-        <span style={{ color: "#1a0a0a" }}>Only </span>
-        <span style={{ color: "#c9643a" }}>Wellness.</span>
+      <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-10 tracking-tight bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+        Only Nature. Only Wellness.
       </h1>
 
       <style>

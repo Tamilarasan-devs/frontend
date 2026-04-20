@@ -16,7 +16,7 @@ export default function Newsletter() {
   return (
     <section className="bg-gray-50 py-16 px-6">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
           Join Our Newsletter
         </h2>
         <p className="text-gray-600 mb-8">

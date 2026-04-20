@@ -28,7 +28,7 @@ export default function OffersSection() {
   return (
     <section className="bg-gray-50 py-16 px-6">
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+        <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
           Special Offers & Discounts
         </h2>
         <div className="w-24 h-1 bg-[#c9643a] mx-auto rounded-full mb-4"></div>
@@ -44,7 +44,7 @@ export default function OffersSection() {
             className={`${offer.bg} rounded-2xl shadow-lg p-8 flex flex-col justify-between transform transition hover:scale-105 duration-300`}
           >
             <div>
-              <h3 className="text-2xl font-semibold mb-3 text-gray-900">{offer.title}</h3>
+              <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">{offer.title}</h3>
               <p className="text-gray-700 text-sm md:text-base opacity-90">{offer.description}</p>
             </div>
             <button

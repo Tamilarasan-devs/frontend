@@ -49,23 +49,30 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
     const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
     return () => clearTimeout(t);
   }, [sectionVisible, animDelay]);
-  const getTagColor = (tag) => {
+  const getTagColor = (tag, indexOffset = 0) => {
     const palettes = [
-      { bg: "#E0F2FE", border: "#7DD3FC", text: "#0369A1" }, // Blue
-      { bg: "#F0FDF4", border: "#86EFAC", text: "#166534" }, // Green
-      { bg: "#FFF7ED", border: "#FDBA74", text: "#9A3412" }, // Orange
-      { bg: "#FEF2F2", border: "#FCA5A5", text: "#991B1B" }, // Red
-      { bg: "#FAF5FF", border: "#D8B4FE", text: "#6B21A8" }, // Purple
-      { bg: "#FFFBEB", border: "#FDE68A", text: "#92400E" }, // Amber
-      { bg: "#FDF2F9", border: "#F9A8D4", text: "#9D174D" }, // Pink
+      { bg: "#03349a", border: "#012a7a", text: "#FFFFFF" }, // Brand Blue
+      { bg: "#c9643a", border: "#a3502e", text: "#FFFFFF" }, // Brand Orange
+      { bg: "#166534", border: "#11522a", text: "#FFFFFF" }, // Deep Green
+      { bg: "#991B1B", border: "#7f1616", text: "#FFFFFF" }, // Deep Red
+      { bg: "#6B21A8", border: "#561b87", text: "#FFFFFF" }, // Deep Purple
+      { bg: "#0F766E", border: "#0d5c56", text: "#FFFFFF" }, // Teal
+      { bg: "#1E3A8A", border: "#172b69", text: "#FFFFFF" }, // Indigo
+      { bg: "#BE123C", border: "#9f0f32", text: "#FFFFFF" }, // Rose
+      { bg: "#0369A1", border: "#025a8a", text: "#FFFFFF" }, // Sky Blue
+      { bg: "#92400E", border: "#78350b", text: "#FFFFFF" }, // Amber
+      { bg: "#9D174D", border: "#831341", text: "#FFFFFF" }, // Pink
+      { bg: "#111827", border: "#000000", text: "#FFFFFF" }, // Near Black
     ];
     
-    // Hash the tag string to get a stable index
+    // Hash the tag string to get a stable base index
     let hash = 0;
     for (let i = 0; i < tag.length; i++) {
       hash = tag.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const index = Math.abs(hash) % palettes.length;
+    
+    // Use the hash + the index offset (i) to ensure different words on the same card stay unique
+    const index = (Math.abs(hash) + indexOffset) % palettes.length;
     return palettes[index];
   };
   return (
@@ -95,7 +102,7 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
     >
       {/* ── Image Area ── */}
       {product.offerTags && (Array.isArray(product.offerTags) ? product.offerTags : [product.offerTags]).map((tag, i) => {
-        const colors = getTagColor(tag);
+        const colors = getTagColor(tag, i);
         return (
           <span
             key={i}
@@ -262,8 +269,6 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
 
           {/* Right side: Text */}
           <div
-            // className="flex-1 flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
-            // style={{ backgroundColor: "#03349a" }}
              className="flex-1 shim-btn flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
               style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
           >

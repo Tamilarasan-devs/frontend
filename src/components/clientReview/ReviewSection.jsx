@@ -17,7 +17,7 @@ export default function ReviewSection() {
       
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-stone-800">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
           Real People Real Stories
         </h2>
       </div>
@@ -80,7 +80,7 @@ export default function ReviewSection() {
 
       {/* Customer Photos */}
       <div className="space-y-3">
-        <h3 className="text-lg font-semibold text-stone-800">
+        <h3 className="text-lg font-bold bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
           Customer photos & videos
         </h3>
 

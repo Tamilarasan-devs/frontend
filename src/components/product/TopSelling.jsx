@@ -16,12 +16,12 @@ const CARD_W = 272;
 const CARD_GAP = 20;
 
 const badgeColors = {
-  "New Launches":   { bg: "#FACC15", border: "#F59E0B", text: "#000000" },
-  "Must Try!":      { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" },
-  "Top Rated":      { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" },
-  "Fast Moving":    { bg: "#84CC16", border: "#65A30D", text: "#000000" },
-  "Hot Seller":     { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" },
-  "Limited Stock":  { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" },
+  "New Launches": { bg: "#FACC15", border: "#F59E0B", text: "#000000" },
+  "Must Try!": { bg: "#0EA5E9", border: "#0284C7", text: "#FFFFFF" },
+  "Top Rated": { bg: "#22C55E", border: "#16A34A", text: "#FFFFFF" },
+  "Fast Moving": { bg: "#84CC16", border: "#65A30D", text: "#000000" },
+  "Hot Seller": { bg: "#EC4899", border: "#DB2777", text: "#FFFFFF" },
+  "Limited Stock": { bg: "#EF4444", border: "#B91C1C", text: "#FFFFFF" },
 };
 
 /* ─── Arrow Button ────────────────────────────────────────── */
@@ -263,19 +263,19 @@ function ArrowBtn({ dir, onClick }) {
 
 /* ─── Main Component ──────────────────────────────────────── */
 export default function TopSelling() {
-  const trackRef  = useRef(null);
-  const barRef    = useRef(null);
+  const trackRef = useRef(null);
+  const barRef = useRef(null);
   const sectionRef = useRef(null);
-  const [prog, setProg]             = useState(0);
-  const [active, setActive]         = useState(0);
-  const [dragging, setDragging]     = useState(false);
-  const [thumbW, setThumbW]         = useState(30);
-  const [thumbL, setThumbL]         = useState(0);
+  const [prog, setProg] = useState(0);
+  const [active, setActive] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const [thumbW, setThumbW] = useState(30);
+  const [thumbL, setThumbL] = useState(0);
   const [sectionVisible, setSectionVisible] = useState(false);
-  const [headerVisible, setHeaderVisible]   = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(false);
   const [controlsVisible, setControlsVisible] = useState(false);
-  const dragX   = useRef(0);
-  const dragSL  = useRef(0);
+  const dragX = useRef(0);
+  const dragSL = useRef(0);
   const isThumb = useRef(false);
 
   // Section IntersectionObserver
@@ -349,7 +349,7 @@ export default function TopSelling() {
     e.preventDefault();
     isThumb.current = thumb;
     setDragging(true);
-    dragX.current  = e.clientX;
+    dragX.current = e.clientX;
     dragSL.current = trackRef.current?.scrollLeft ?? 0;
   };
 
@@ -361,9 +361,9 @@ export default function TopSelling() {
       if (isThumb.current) {
         const bar = barRef.current;
         if (!bar) return;
-        const barPx   = bar.clientWidth;
+        const barPx = bar.clientWidth;
         const thumbPx = (el.clientWidth / el.scrollWidth) * barPx;
-        const scale   = (el.scrollWidth - el.clientWidth) / (barPx - thumbPx);
+        const scale = (el.scrollWidth - el.clientWidth) / (barPx - thumbPx);
         el.scrollLeft = dragSL.current + (e.clientX - dragX.current) * scale;
       } else {
         el.scrollLeft = dragSL.current - (e.clientX - dragX.current);
@@ -371,22 +371,22 @@ export default function TopSelling() {
     };
     const up = () => setDragging(false);
     window.addEventListener("mousemove", mv);
-    window.addEventListener("mouseup",   up);
+    window.addEventListener("mouseup", up);
     return () => {
       window.removeEventListener("mousemove", mv);
-      window.removeEventListener("mouseup",   up);
+      window.removeEventListener("mouseup", up);
     };
   }, [dragging]);
 
   const onBarClick = (e) => {
     const bar = barRef.current;
-    const el  = trackRef.current;
+    const el = trackRef.current;
     if (!bar || !el) return;
-    const rect  = bar.getBoundingClientRect();
+    const rect = bar.getBoundingClientRect();
     const ratio = (e.clientX - rect.left) / rect.width;
     el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth);
   };
-const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
@@ -491,7 +491,7 @@ const [products, setProducts] = useState([]);
               <ProductCard
                 key={product.id}
                 product={product}
-                
+
 
                 //  product={product}   // ✅ PASS DATA
                 animDelay={idx * 0.08}
@@ -533,11 +533,11 @@ const [products, setProducts] = useState([]);
               onMouseDown={(e) => { e.stopPropagation(); startDrag(e, true); }}
               className="absolute top-0 h-full rounded-full"
               style={{
-                width:      `${thumbW}%`,
-                left:       `${thumbL}%`,
+                width: `${thumbW}%`,
+                left: `${thumbL}%`,
                 background: "linear-gradient(to right, #c9643a, #03349a)",
-                boxShadow:  "0 0 8px rgba(201,100,58,.5)",
-                cursor:     dragging && isThumb.current ? "grabbing" : "grab",
+                boxShadow: "0 0 8px rgba(201,100,58,.5)",
+                cursor: dragging && isThumb.current ? "grabbing" : "grab",
                 transition: dragging ? "none" : "left .08s linear, width .15s ease",
               }}
             />

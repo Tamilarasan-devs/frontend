@@ -117,10 +117,8 @@ export default function BeforeAfterGrid() {
           transition: "opacity 0.65s ease, transform 0.65s ease",
         }}
       >
-        <h1 className="text-3xl font-bold flex justify-center text-center">
-          <span className="text-black mr-2">Over</span>{" "}
-          <span className="text-[#03349a] mr-2">1 Million People</span>{" "}
-          <span className="text-[#c9643a]">Trust Aayubakawath</span>
+        <h1 className="text-3xl font-bold flex justify-center text-center bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+          Over 1 Million People Trust Aayubakawath
         </h1>
 
         <div
@@ -132,10 +130,8 @@ export default function BeforeAfterGrid() {
           }}
         ></div>
 
-        <h1 className="text-xl font-semibold flex justify-center text-center">
-          <span className="text-black mr-2">Discover</span>{" "}
-          <span className="text-[#03349a] mr-2">Science-Backed</span>{" "}
-          <span className="text-[#c9643a]">Herbal Wellness Solutions</span>
+        <h1 className="text-xl font-semibold flex justify-center text-center bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+          Discover Science-Backed Herbal Wellness Solutions
         </h1>
       </div>
 
@@ -160,14 +156,14 @@ export default function BeforeAfterGrid() {
             onTouchMove={handleTouchMove1}
             onTouchEnd={stopDrag1}
           >
-              <img src={afterImg1} className="w-full h-full object-cover" />
+            <img src={afterImg1} className="w-full h-full object-cover" />
 
 
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position1}%` }}
             >
-            <img src={beforeImg1} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={beforeImg1} className="absolute inset-0 w-full h-full object-cover" />
 
             </div>
 
@@ -213,14 +209,14 @@ export default function BeforeAfterGrid() {
             onTouchMove={handleTouchMove2}
             onTouchEnd={stopDrag2}
           >
-              <img src={afterImg2} className="w-full h-full object-cover" />
+            <img src={afterImg2} className="w-full h-full object-cover" />
 
 
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position2}%` }}
             >
-            <img src={beforeImg2} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={beforeImg2} className="absolute inset-0 w-full h-full object-cover" />
 
             </div>
 
@@ -266,14 +262,14 @@ export default function BeforeAfterGrid() {
             onTouchMove={handleTouchMove3}
             onTouchEnd={stopDrag3}
           >
-              <img src={afterImg3} className="w-full h-full object-cover" />
+            <img src={afterImg3} className="w-full h-full object-cover" />
 
 
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${position3}%` }}
             >
-            <img src={beforeImg3} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={beforeImg3} className="absolute inset-0 w-full h-full object-cover" />
 
             </div>
 

@@ -430,7 +430,7 @@ export default function ProductListingPage() {
 
             {/* ── Section Heading ── */}
             <div className="flex items-center justify-between mb-4">
-              <h1 className="text-base sm:text-lg font-bold text-yellow-700  tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent tracking-tight">
                 {activeCategoryName}
               </h1>
               <span className="text-xs text-gray-400 sm:hidden">{filteredProducts.length} items</span>

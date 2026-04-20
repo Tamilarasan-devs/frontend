@@ -203,11 +203,9 @@ export default function Testimonial() {
                   lineHeight: 1.15,
                 }}
               >
-                <span className="text-black">Loved</span>{" "}
-                <span className="text-[#03349a]">by</span>{" "}
-                <span className="italic text-[#c9643a]">10,000+</span>
-                <br />
-                <span className="text-[#03349a]">Aayubakwath Champions</span>
+                <span className="bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+                  Loved by 10,000+ Aayubakwath Champions
+                </span>
               </h2>
             </div>
 

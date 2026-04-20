@@ -15,7 +15,7 @@ const cards = [
     image: pure,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
-           strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         <path d="M9 12l2 2 4-4" />
       </svg>
@@ -27,7 +27,7 @@ const cards = [
     image: health,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
-           strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <rect x="2" y="7" width="20" height="14" rx="2" />
         <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
         <line x1="12" y1="12" x2="12" y2="16" />
@@ -41,7 +41,7 @@ const cards = [
     image: safe,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
-           strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -55,7 +55,7 @@ const cards = [
     image: ht,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="#c9643a" strokeWidth="1.8"
-           strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <circle cx="12" cy="12" r="10" />
         <line x1="2" y1="12" x2="22" y2="12" />
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
@@ -192,7 +192,7 @@ export default function OurBusiness() {
         }}
       >
 
-        
+
         {/* Ambient glows */}
         <div
           className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full"
@@ -216,11 +216,11 @@ export default function OurBusiness() {
           <span style={{ color: "#c9643a" }}>Do</span>
         </h2>
         <p className="text-center text-[black] text-xl mb-3 font-semibold">
-          Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support. 
+          Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support.
         </p>
         <p className="text-center text-[black] text-xl mb-3 font-semibold">
           Maintain strict quality standards in production
-Provide safe and effective wellness solutions
+          Provide safe and effective wellness solutions
         </p>
 
         {/* ── Divider ── */}
@@ -250,9 +250,9 @@ Provide safe and effective wellness solutions
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-             
 
-              
+
+
 
               {/* ── Circle image area ── */}
               <div className="circle-group relative w-56 h-56 mx-auto z-[3]">
@@ -297,7 +297,7 @@ Provide safe and effective wellness solutions
               <div
                 className="group relative z-[2] overflow-hidden text-center w-56"
                 style={{
-                  background:"#03349a",
+                  background: "#03349a",
                   borderRadius: "0 0 100px 100px",
                   marginTop: "-72px",
                   paddingTop: "88px",
@@ -341,6 +341,7 @@ Provide safe and effective wellness solutions
                     background: "rgba(255,255,255,.1)",
                     backdropFilter: "blur(4px)",
                   }}
+
                   aria-label={`Learn more about ${card.title}`}
                 >
                   →
