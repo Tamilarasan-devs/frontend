@@ -8,6 +8,7 @@ import RelatedProduct from "../product/ReleatedProduct";
 import ReviewSection from "../clientReview/ReviewSection";
 import FAQ from "./FAQ";
 import { HiOutlineTrendingUp } from "react-icons/hi";
+import { FaTruck } from "react-icons/fa";
 import ashwagandhaImg from "../../assets/images/ingredients/ashwagandha.png";
 import brahmiImg from "../../assets/images/ingredients/brahmi.png";
 import amlaImg from "../../assets/images/ingredients/amla.png";
@@ -257,10 +258,10 @@ export default function SingleProduct() {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-[#0D1F17] flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 rounded-full border-2 border-[#C9A84C] border-t-transparent animate-spin" />
-        <p className="text-sm font-medium text-[#C9A84C] tracking-[0.3em] uppercase">Preparing your experience…</p>
+        <div className="w-12 h-12 rounded-full border-2 border-[#0337a4] border-t-transparent animate-spin" />
+        <p className="text-sm font-medium text-[#0337a4] tracking-[0.3em] uppercase">Preparing your experience…</p>
       </div>
     </div>
   );
@@ -417,7 +418,7 @@ export default function SingleProduct() {
             {/* Offers strip */}
             <div className="bg-white rounded-2xl border border-stone-100 p-5 shadow-sm">
               <div className="flex items-center gap-3 mb-4 divider-ornament">
-                <span className="text-[14px] font-bold text-[#C9A84C] uppercase tracking-[0.25em] whitespace-nowrap px-2">Available Offers</span>
+                <span className="text-[20px] font-bold text-[#03349a] uppercase tracking-[0.22em] whitespace-nowrap px-2">Available Offers</span>
               </div>
               <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
                 {OFFERS.map(({ icon, title, body }) => (
@@ -503,9 +504,10 @@ export default function SingleProduct() {
                 </button>
               </div>
             )}
+            <div className="h-px bg-black mb-2" />
 
             {/* Status bar */}
-            <div className="flex items-center gap-3 mb-6 flex-wrap">
+            <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
               <span className="inline-flex items-center gap-2 text-sm font-bold text-[#1A3D2B] bg-emerald-50 border border-emerald-200 rounded-full px-4 py-2 tracking-wide uppercase">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 pulse-dot" />
                 In Stock
@@ -515,12 +517,12 @@ export default function SingleProduct() {
               </span>
             </div>
 
-            <div className="h-px bg-gradient-to-r from-transparent via-[#C9A84C]/30 to-transparent mb-6" />
+            <div className="h-px bg-black mb-2" />
 
             {/* ── Price Card ── */}
             <div className="bg-[#0D1F17] rounded-2xl p-5 sm:p-6 mb-5 shadow-[0_8px_30px_rgba(13,31,23,0.2)]">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]/70">Price</span>
+                <span className="text-[16px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]/70">Price</span>
                 {saving > 0 && (
                   <span className="text-[14px] font-bold px-3 py-1 rounded-full bg-[#C9A84C]/15 text-[#C9A84C] border border-[#C9A84C]/30">
                     You save ₹{saving.toLocaleString("en-IN")}
@@ -528,19 +530,19 @@ export default function SingleProduct() {
                 )}
               </div>
               <div className="flex items-end gap-4 flex-wrap">
-                <span className=" text-[62px] sm:text-[70px] font-bold text-white leading-none">
+                <span className=" text-[20px] sm:text-[55px] font-bold text-white leading-none">
                   ₹{pack.price?.toLocaleString("en-IN") ?? parseFloat(product.finalPrice).toLocaleString("en-IN")}
                 </span>
                 <span className="text-2xl text-white/30 line-through font-medium mb-2">
                   ₹{pack.orig?.toLocaleString("en-IN") ?? parseFloat(product.price).toLocaleString("en-IN")}
                 </span>
               </div>
-              <p className="text-[14px] text-white/40 mt-1 tracking-wide">Inclusive of all taxes · Free delivery on ₹499+</p>
+              <p className="text-[16px] text-white/40 mt-1 tracking-wide">Inclusive of all taxes · Free delivery on ₹499+</p>
             </div>
 
             {/* ── Pack Selector ── */}
             <div className="mb-6">
-              <p className="text-[15px] font-black uppercase tracking-[0.22em] text-stone-500 mb-4">Choose Your Pack</p>
+              <p className="text-[15px] font-bold uppercase text-[#03349a] tracking-[0.22em] mb-4">Choose Your Pack</p>
               <div className="flex flex-col gap-2.5">
                 {PACKS.map((p, i) => {
                   const pct = Math.round(((p.orig - p.price) / p.orig) * 100);
@@ -570,12 +572,12 @@ export default function SingleProduct() {
                           <p className={`text-[17px] font-bold tracking-tight ${sel ? "text-[#0D1F17]" : "text-stone-700"}`}>
                             {p.qty} Capsules · {p.duration}
                           </p>
-                          <p className="text-sm text-stone-400 line-through mt-0.5">₹{p.orig.toLocaleString("en-IN")}</p>
+                          <p className="text-[20px] text-stone-400 line-through mt-0.5">₹{p.orig.toLocaleString("en-IN")}</p>
                         </div>
                       </div>
 
                       <div className="text-right">
-                        <p className={`text-xl font-bold ${sel ? "text-[#0D1F17]" : "text-stone-800"}`}>
+                        <p className={`text-[32px] font-bold ${sel ? "text-[#0D1F17]" : "text-stone-800"}`}>
                           ₹{p.price.toLocaleString("en-IN")}
                         </p>
                         <span className={`text-[14px] font-bold ${sel ? "text-[#1A3D2B]" : "text-stone-400"}`}>
@@ -590,7 +592,15 @@ export default function SingleProduct() {
 
             {/* ── Pincode ── */}
             <div className="bg-white border border-stone-200 rounded-2xl p-5 mb-6 shadow-sm">
-              <p className="text-[15px] font-black uppercase tracking-[0.22em] text-stone-500 mb-4">Check Delivery</p>
+              <div className="flex justify-between items-center mb-5">
+                <p className="text-[14px] font-black uppercase tracking-[0.22em] text-[#03349a]">Check Delivery</p>
+                <div className="flex items-center gap-2 text-[#03349a] bg-[#03349a]/5 px-3 py-1.5 rounded-lg border border-[#03349a]/10"
+                onClick={() => navigate("/shipping-policy")}
+                >
+                  <FaTruck className="text-sm" />
+                  <span className="text-[12px] font-bold uppercase tracking-wider">Shipping & Returns</span>
+                </div>
+              </div>
               <div className="flex gap-3">
                 <input
                   type="text"
@@ -607,6 +617,7 @@ export default function SingleProduct() {
                   Check
                 </button>
               </div>
+
               {pincodeMsg && (
                 <div className={`mt-3 rounded-xl p-4 ${pincodeMsg.type === "success" ? "bg-emerald-50 border border-emerald-200" : "bg-red-50 border border-red-200"}`}>
                   {pincodeMsg.type === "success" ? (
@@ -634,137 +645,143 @@ export default function SingleProduct() {
             </div>
 
             {/* ── Qty + CTA ── */}
-           <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
+            <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
 
-  {/* Qty Stepper */}
-  <div className="flex items-center border-2 border-stone-200 rounded-xl overflow-hidden bg-white shadow-sm w-full sm:w-auto">
-    <button
-      onClick={() => setQty(q => Math.max(1, q - 1))}
-      className="w-14 h-14 flex items-center justify-center text-stone-500 hover:bg-stone-50 transition-colors text-2xl font-light px-3 py-3"
-    >
-      −
-    </button>
+              {/* Qty Stepper */}
+              <div className="flex items-center border-2 border-stone-200 rounded-xl overflow-hidden bg-white shadow-sm w-full sm:w-auto">
+                <button
+                  onClick={() => setQty(q => Math.max(1, q - 1))}
+                  className="w-14 h-14 flex items-center justify-center text-stone-500 hover:bg-stone-50 transition-colors text-2xl font-light px-3 py-3"
+                >
+                  −
+                </button>
 
-    <span className="w-12 flex items-center justify-center text-sm font-bold text-stone-900 border-x-2 border-stone-200 py-3">
-      {qty}
-    </span>
+                <span className="w-12 flex items-center justify-center text-sm font-bold text-stone-900 border-x-2 border-stone-200 py-3">
+                  {qty}
+                </span>
 
-    <button
-      onClick={() => setQty(q => q + 1)}
-      className="w-12 h-13 flex items-center justify-center text-stone-500 hover:bg-stone-50 transition-colors text-xl font-light px-3 py-3"
-    >
-      +
-    </button>
-  </div>
+                <button
+                  onClick={() => setQty(q => q + 1)}
+                  className="w-12 h-13 flex items-center justify-center text-stone-500 hover:bg-stone-50 transition-colors text-xl font-light px-3 py-3"
+                >
+                  +
+                </button>
+              </div>
 
-  {/* Add to Cart */}
-  <button
-    type="button"
-    onClick={handleAddToCart}
-    disabled={addMut.isPending}
-    className="w-full sm:w-auto flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[18px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
-    style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
-  >
-    <svg
-      className={`w-4.5 h-4.5 ${addMut.isPending ? 'animate-bounce' : ''}`}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      viewBox="0 0 24 24"
-    >
-      <circle cx="9" cy="21" r="1" />
-      <circle cx="20" cy="21" r="1" />
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-    </svg>
-    {addMut.isPending ? "Adding…" : "Add to Cart"}
-  </button>
+              {/* Add to Cart */}
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={addMut.isPending}
+                className="w-full sm:w-auto flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[18px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
+                style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
+              >
+                <svg
+                  className={`w-4.5 h-4.5 ${addMut.isPending ? 'animate-bounce' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                {addMut.isPending ? "Adding…" : "Add to Cart"}
+              </button>
 
-  {/* Buy Now */}
-  <button
-    onClick={handleBuyNow}
-    disabled={addMut.isPending}
-    className="w-full sm:flex-1 gold-btn h-13 rounded-xl text-[#0D1F17] text-[18px] font-black tracking-[0.1em] uppercase transition-all duration-200 disabled:opacity-50 py-3"
-  >
-    Buy — ₹{total}
-  </button>
+              {/* Buy Now */}
+              <button
+                onClick={handleBuyNow}
+                disabled={addMut.isPending}
+                className="w-full sm:flex-1 gold-btn h-13 rounded-xl text-[#0D1F17] text-[18px] font-black tracking-[0.1em] uppercase transition-all duration-200 disabled:opacity-50 py-3"
+              >
+                Buy — ₹{total}
+              </button>
 
-</div>
-{/* ── Offers For You — Horizontal ── */}
-<div className="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm mb-6">
+            </div>
+           <div className="rounded-2xl overflow-hidden shadow-lg border border-stone-200 mb-6 bg-white">
 
   {/* Header */}
-  <div className="flex items-center justify-between px-5 py-3 bg-stone-50 border-b border-stone-100">
+  <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-[#03349a] to-[#c9643a] text-white">
     <div className="flex items-center gap-2">
-      <span className="w-2 h-2 rounded-full bg-[#C9A84C]" />
-      <span className="text-[17px] font-bold tracking-wide text-stone-800">Offers For You</span>
+      <span className="w-2.5 h-2.5 rounded-full bg-yellow-300 animate-pulse" />
+      <span className="text-[18px] font-bold tracking-wide">Offers For You</span>
     </div>
-    <span className="text-[14px] font-semibold text-stone-500 bg-white border border-stone-200 px-3 py-1 rounded-full">
-      2 available offers
+
+    <span className="text-[13px] font-semibold bg-white/20 px-3 py-1 rounded-full backdrop-blur">
+      2 offers available
     </span>
   </div>
 
-  {/* Two cards side by side */}
-  <div className="grid grid-cols-2 divide-x divide-stone-100">
+  {/* Cards */}
+  <div className="grid grid-cols-2">
 
-    {/* Offer 1 — Online */}
-    <div className="flex flex-col gap-3 p-5">
-      <div className="flex flex-wrap gap-1.5">
-        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 tracking-wide">
-          Extra ₹146 OFF
+    {/* Offer 1 */}
+    <div className="p-5 flex flex-col gap-3 bg-gradient-to-br from-blue-50 via-white to-orange-50 hover:shadow-xl transition-all duration-300">
+
+      <div className="flex flex-wrap gap-2">
+        <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#03349a] text-white shadow">
+          ₹146 OFF
         </span>
-        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
+        <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#c9643a] text-white shadow">
           BEST PRICE
         </span>
       </div>
 
       <div>
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-[32px] font-bold text-stone-900 leading-none">₹884</span>
-          <span className="text-sm font-bold text-emerald-700">21% off</span>
+        <div className="flex items-end gap-2">
+          <span className="text-[34px] font-extrabold text-stone-900">₹884</span>
+          <span className="text-sm font-bold text-[#03349a]">21% OFF</span>
         </div>
-        <p className="text-[15px] text-stone-500 leading-snug">Pay Online, Enjoy 15% + Extra 5% Off!</p>
+        <p className="text-md text-stone-500 mt-1">
+          Pay online & unlock instant savings
+        </p>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-[14px] text-stone-400">Code</span>
-        <code className="text-[14px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
+        <span className="text-md text-stone-400">CODE</span>
+        <code className="text-sm font-bold bg-[#03349a] text-white px-3 py-1 rounded-md tracking-widest">
           AAYU15
         </code>
       </div>
 
-      <button className="mt-auto w-full py-2.5 bg-[#1A3D2B] text-white text-[15px] font-bold rounded-xl hover:bg-[#0D1F17] transition-all duration-200 tracking-wide">
-        Use Now
+      <button className="mt-auto py-2.5 rounded-xl font-bold text-white bg-gradient-to-r from-[#03349a] to-[#c9643a] hover:opacity-90 hover:scale-[1.02] transition">
+        Use Offer
       </button>
     </div>
 
-    {/* Offer 2 — COD */}
-    <div className="flex flex-col gap-3 p-5">
-      <div className="flex flex-wrap gap-1.5">
-        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 tracking-wide">
-          Extra ₹100 OFF
+    {/* Offer 2 */}
+    <div className="p-5 flex flex-col gap-3 bg-gradient-to-br from-orange-50 via-white to-blue-50 hover:shadow-xl transition-all duration-300 border-l">
+
+      <div className="flex flex-wrap gap-2">
+        <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#c9643a] text-white shadow">
+          ₹100 OFF
         </span>
-        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
+        <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#03349a] text-white shadow">
           BEST PRICE
         </span>
       </div>
 
       <div>
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-[32px] font-bold text-stone-900 leading-none">₹930</span>
-          <span className="text-sm font-bold text-emerald-700">17% off</span>
+        <div className="flex items-end gap-2">
+          <span className="text-[34px] font-extrabold text-stone-900">₹930</span>
+          <span className="text-sm font-bold text-[#c9643a]">17% OFF</span>
         </div>
-        <p className="text-[15px] text-stone-500 leading-snug">On COD, Enjoy 15% Off!</p>
+        <p className="text-sm text-stone-500 mt-1">
+          COD offer with instant discount
+        </p>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-[14px] text-stone-400">Code</span>
-        <code className="text-[14px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
+        <span className="text-md text-stone-400">CODE</span>
+        <code className="text-sm font-bold bg-[#c9643a] text-white px-3 py-1 rounded-md tracking-widest">
           AAYU15
         </code>
       </div>
 
-      <button className="mt-auto w-full py-2.5 bg-white border-2 border-stone-200 text-stone-700 text-[15px] font-bold rounded-xl hover:border-stone-400 hover:text-stone-900 transition-all duration-200 tracking-wide">
-        Use Now
+      <button className="mt-auto py-2.5 rounded-xl font-bold border-2 border-[#c9643a] text-[#c9643a] hover:bg-[#c9643a] hover:text-white transition">
+        Use Offer
       </button>
     </div>
 
@@ -792,7 +809,7 @@ export default function SingleProduct() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-12 font-body">
         {/* Section header */}
         <div className="flex items-center gap-4 mb-8 divider-ornament">
-          <span className="text-[15px] font-black uppercase tracking-[0.25em] text-[#C9A84C] whitespace-nowrap px-3">Product Details</span>
+          <span className="text-[18px] font-black uppercase tracking-[0.25em] text-[#0337a4] whitespace-nowrap px-3">Product Details</span>
         </div>
 
         <div className="space-y-3">
@@ -858,10 +875,9 @@ export default function SingleProduct() {
                       <div className="space-y-14">
                         {currentIngredients.details.map((item, index) => {
                           const [name, desc] = item.split(": ");
-                          const isEven = index % 2 === 0;
                           const img = INGREDIENT_IMAGES[index % INGREDIENT_IMAGES.length];
                           return (
-                            <div key={index} className={`ingredient-card flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-10 lg:gap-16`}>
+                            <div key={index} className="ingredient-card flex flex-col md:flex-row items-center gap-10 lg:gap-16">
                               <div className="w-full md:w-1/2 overflow-hidden rounded-[2rem] shadow-xl aspect-[4/3]">
                                 <img src={img} alt={name} className="w-full h-full object-cover" />
                               </div>
