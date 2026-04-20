@@ -264,7 +264,7 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
           <div
             // className="flex-1 flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
             // style={{ backgroundColor: "#03349a" }}
-             className="flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[13px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
+             className="flex-1 shim-btn flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
               style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
           >
             {addMut.isPending ? "Adding..." : "Add to Cart"}
