@@ -74,10 +74,9 @@ export default function SecondBanner() {
             transition: "opacity 0.65s ease, transform 0.65s ease",
           }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold">
-            <span style={{ color: "#03349a" }}>Pure, Clean & </span>
-            <span style={{ color: "#c9643a" }}>Conscious Choices</span>
-          </h2>
+          <h2 className="inline-block text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+  Pure, Clean & Conscious Choices
+</h2>
         </div>
 
         {/* Grid */}

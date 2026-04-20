@@ -117,9 +117,12 @@ export default function BeforeAfterGrid() {
           transition: "opacity 0.65s ease, transform 0.65s ease",
         }}
       >
-        <h1 className="text-3xl font-bold flex justify-center text-center bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
-          Over 1 Million People Trust Aayubakawath
-        </h1>
+        <div className="text-center">
+
+        <h1 className="inline-block text-3xl font-bold text-center mb-2 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+  Over 1 Million People Trust Aayubakawath
+</h1>
+        </div>
 
         <div
           className="h-1 mx-auto rounded-full mb-4 mt-4"

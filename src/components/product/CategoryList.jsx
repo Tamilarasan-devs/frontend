@@ -25,14 +25,18 @@ export default function CategoryBannerList() {
 
   return (
     <section className="px-4 sm:px-6 lg:px-12 py-10">
+          <style>{`
+        :root { --red:#03349a; --amber:#c9643a; --cream:#fdf8f4; }
+        @keyframes shim{0%{background-position:200% center}100%{background-position:-200% center}}
+        .shim-btn{background:linear-gradient(90deg,var(--red),var(--amber),#c2410c,var(--red));background-size:200% auto;animation:shim 3s linear infinite;}
+        .nav-hover:hover { color: #0337a4 !important; }
+      `}</style>
       {/* Title */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
-          Explore Our Categories
-        </h2>
-        <p className="text-gray-500 text-sm mt-2">
-          Discover products tailored for you
-        </p>
+          <h2 className="inline-block text-3xl font-bold tracking-tight bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+  Explore Our Categories
+</h2>
+      
       </div>
 
       {/* Image Grid */}

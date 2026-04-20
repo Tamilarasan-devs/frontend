@@ -2,322 +2,292 @@ import React from "react";
 import {
   FaFacebookF, FaInstagram, FaTwitter, FaYoutube,
   FaLinkedinIn, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt,
-  FaLeaf, FaArrowRight
 } from "react-icons/fa";
-import logo from '../../assets/images/logo.jpg'
+import logo from '../../assets/images/logo.jpg';
 
 const quickLinks = [
   { label: "Home", path: "/" },
   { label: "About", path: "/aboutpage" },
   { label: "Shop", path: "/productListing" },
   { label: "Dealership", path: "/dealership" },
-  // { label: "Download", path: "/download" },
   { label: "Blog", path: "/blog" },
-  { label: "Contact", path: "/contact" }
+  { label: "Contact", path: "/contact" },
 ];
+
 const helpLinks = [
   { label: "FAQ'S", path: "/faq" },
   { label: "Shipping Policy", path: "/shipping-policy" },
   { label: "Return & Cancellation", path: "/returns" },
   { label: "Terms of Use", path: "/terms" },
-  { label: "Privacy Policy", path: "/privacy" }
+  { label: "Privacy Policy", path: "/privacy" },
 ];
 
 const socials = [
-  { icon: <FaFacebookF size={16} />, link: "https://www.facebook.com/", label: "Facebook" },
-  { icon: <FaInstagram size={16} />, link: "https://www.instagram.com/aayubakawath/", label: "Instagram" },
-  { icon: <FaTwitter size={16} />, link: "https://x.com/Aayubakwath", label: "Twitter" },
-  { icon: <FaYoutube size={16} />, link: "https://studio.youtube.com/channel/UCx9SZTz-XdtUMtKz5pZsJcg/editing/profile", label: "YouTube" },
-  { icon: <FaLinkedinIn size={16} />, link: "https://www.linkedin.com/in/sri-bakawathi-life-science-932a143b2/", label: "LinkedIn" },
+  { icon: <FaFacebookF size={13} />, link: "https://www.facebook.com/", label: "Facebook" },
+  { icon: <FaInstagram size={13} />, link: "https://www.instagram.com/aayubakawath/", label: "Instagram" },
+  { icon: <FaTwitter size={13} />, link: "https://x.com/Aayubakwath", label: "Twitter" },
+  { icon: <FaYoutube size={13} />, link: "https://studio.youtube.com/channel/UCx9SZTz-XdtUMtKz5pZsJcg/editing/profile", label: "YouTube" },
+  { icon: <FaLinkedinIn size={13} />, link: "https://www.linkedin.com/in/sri-bakawathi-life-science-932a143b2/", label: "LinkedIn" },
+];
+
+const badges = [
+  { label: "100% Pure & Natural", icon: "✨" },
+  { label: "ISO Certified Excellence", icon: "🛡️" },
+  { label: "Traditional Wisdom", icon: "🌿" },
 ];
 
 export default function Footer() {
   return (
     <>
       <style>{`
-        :root { --blue: #03349a; --gold: #c9a84c; --cream: #fdf8f0; --dark: #1a0a0a; }
+        :root {
+          --blue: #03349a;
+          --gold: #c9a84c;
+          --cream: #fdf8f0;
+        }
 
         .footer-root {
           background: var(--cream);
+          border-top: 1px solid rgba(201,168,76,0.2);
           position: relative;
           overflow: hidden;
-          border-top: 1px solid rgba(201,168,76,0.2);
+
         }
 
-        /* Subtle texture overlay - updated colors for light theme */
         .footer-root::before {
           content: '';
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
-                            radial-gradient(circle at 80% 80%, rgba(3,52,154,0.04) 0%, transparent 45%),
-                            radial-gradient(circle at 60% 10%, rgba(201,168,76,0.1) 0%, transparent 40%);
+          background-image:
+            radial-gradient(circle at 15% 15%, rgba(201,168,76,0.07) 0%, transparent 45%),
+            radial-gradient(circle at 85% 85%, rgba(3,52,154,0.04) 0%, transparent 45%);
           pointer-events: none;
         }
 
-        /* Decorative top border - matches header dividers */
-        .footer-top-border {
-          height: 3px;
-          background: linear-gradient(to right, transparent, var(--gold) 15%, #ffe08a 40%, var(--blue) 60%, var(--gold) 80%, transparent);
-          opacity: 0.6;
+        .footer-top-bar {
+          height: 2px;
+          background: linear-gradient(to right, transparent, var(--gold) 20%, #ffe08a 45%, var(--blue) 60%, var(--gold) 80%, transparent);
+          opacity: 0.55;
         }
 
-        .footer-link {
-          position: relative;
-          color: #4a3030;
-          font-size: 16px;
+        .nav-link {
+          color: #3d2c2c;
+          font-size: 15px;
           font-weight: 500;
-          letter-spacing: 0.01em;
-          transition: all 0.25s ease;
+          transition: color 0.2s, transform 0.2s;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 5px;
+          position: relative;
         }
-
-        .footer-link:hover {
-          color: var(--blue);
-          transform: translateX(4px);
-        }
-
-        .footer-link::after {
+        .nav-link::after {
           content: '';
           position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 1.5px;
+          bottom: -1px; left: 0;
+          width: 0; height: 1px;
           background: var(--gold);
-          transition: width 0.3s ease;
+          transition: width 0.25s ease;
         }
+        .nav-link:hover { color: var(--blue); transform: translateX(3px); }
+        .nav-link:hover::after { width: 100%; }
 
-        .footer-link:hover::after { width: 100%; }
-
-        .social-btn {
-          width: 42px; height: 42px;
+        .social-pill {
+          width: 34px; height: 34px;
           border-radius: 50%;
           display: flex; align-items: center; justify-content: center;
           background: white;
           border: 1px solid rgba(201,168,76,0.3);
           color: var(--blue);
-          transition: all 0.3s ease;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          transition: all 0.25s;
+          box-shadow: 0 1px 5px rgba(0,0,0,0.05);
         }
-
-        .social-btn:hover {
+        .social-pill:hover {
           background: var(--blue);
-          border-color: var(--blue);
           color: white;
-          transform: translateY(-3px);
-          box-shadow: 0 8px 16px rgba(3,52,154,0.25);
+          border-color: var(--blue);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 14px rgba(3,52,154,0.22);
         }
 
-        .contact-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
+        .col-heading {
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--blue);
+          padding-bottom: 10px;
+          margin-bottom: 14px;
+          border-bottom: 1.5px solid rgba(201,168,76,0.3);
+          position: relative;
+        }
+        .col-heading::after {
+          content: '';
+          position: absolute;
+          bottom: -1.5px; left: 0;
+          width: 24px; height: 1.5px;
+          background: var(--gold);
         }
 
-        .contact-icon {
-          width: 38px; height: 38px;
-          border-radius: 10px;
+        .contact-icon-box {
+          width: 30px; height: 30px;
+          border-radius: 8px;
           background: rgba(201,168,76,0.1);
           border: 1px solid rgba(201,168,76,0.2);
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
           color: var(--blue);
-          transition: all 0.3s ease;
         }
 
-        .section-heading {
-          font-family: inherit;
-          font-size: 20px;
-          font-weight: 700;
-          color: var(--blue);
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          margin-bottom: 22px;
-          padding-bottom: 12px;
-          position: relative;
+        .badge-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(255,255,255,0.6);
+          border: 1px solid rgba(201,168,76,0.18);
+          border-radius: 100px;
+          padding: 4px 12px;
+          backdrop-filter: blur(4px);
         }
 
-        .section-heading::after {
-          content: '';
-          position: absolute;
-          bottom: 0; left: 0;
-          width: 32px; height: 2px;
-          background: var(--gold);
-          border-radius: 2px;
-        }
-
-        .newsletter-input {
-          background: white;
-          border: 1.5px solid rgba(201,168,76,0.25);
-          border-radius: 10px 0 0 10px;
-          color: var(--dark);
-          padding: 11px 16px;
-          font-size: 15px;
-          outline: none;
-          flex: 1;
-          transition: all 0.3s;
-        }
-
-        .newsletter-input::placeholder { color: #bba070; }
-        .newsletter-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(3,52,154,0.05); }
-
-        .newsletter-btn {
-          background: var(--blue);
-          border: none;
-          border-radius: 0 10px 10px 0;
-          color: white;
-          padding: 11px 18px;
-          cursor: pointer;
-          transition: all 0.3s;
-        }
-
-        .newsletter-btn:hover { background: #0145cc; }
-
-        .divider-line {
+        .divider {
           border: none;
           height: 1px;
           background: linear-gradient(to right, transparent, rgba(201,168,76,0.2) 20%, rgba(201,168,76,0.2) 80%, transparent);
-          margin: 0;
-        }
-
-        .badge-dot {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: var(--gold);
-          display: inline-block;
-          margin-right: 10px;
-          flex-shrink: 0;
-        }
-
-        @keyframes shim{0%{background-position:200% center}100%{background-position:-200% center}}
-        .shim-btn-footer {
-          background: linear-gradient(90deg, var(--blue), var(--gold), #ffe08a, var(--blue));
-          background-size: 200% auto;
-          animation: shim 3s linear infinite;
-        }
-
-        .footer-display {
-          font-family: inherit;
         }
       `}</style>
 
       <footer className="footer-root">
-        <div className="footer-top-border" />
+        <div className="footer-top-bar" />
 
-        {/* Main Grid */}
-        <div style={{ maxWidth: 1320, margin: "0 auto", padding: "70px 32px 50px", position: "relative" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "50px 40px" }}>
+        {/* ── Main Grid ── */}
+        <div className="max-w-7xl mx-auto px-6 pt-12 pb-8 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-            {/* ── Brand Column ── */}
-            <div style={{ gridColumn: "span 1" }}>
-              {/* Logo + Name */}
-              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 22 }}>
+            {/* Brand Column */}
+            <div className="lg:col-span-1">
+              {/* Logo */}
+              <div className="flex items-center gap-3 mb-4">
                 <a href="/">
-                  <img src={logo} className="w-11 h-11 transition-transform duration-300 hover:rotate-12" alt="Aayubakawath Logo" />
+                  <img
+                    src={logo}
+                    alt="Aayubakawath Logo"
+                    className="w-9 h-9 rounded-lg object-cover transition-transform hover:rotate-6 duration-300"
+                  />
                 </a>
-                <div style={{ borderLeft: "2px solid rgba(201,168,76,0.3)", paddingLeft: 14 }}>
-                  <h2 className="footer-display" style={{ fontSize: 26, fontWeight: 800, color: "var(--blue)", letterSpacing: "0.02em", lineHeight: 1 }}>
+                <div style={{ borderLeft: "1.5px solid rgba(201,168,76,0.35)", paddingLeft: 12 }}>
+                  <p className="font-extrabold leading-tight" style={{ fontSize: 20, color: "var(--blue)", letterSpacing: "0.02em" }}>
                     Aayubakawath
-                  </h2>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: "var(--gold)", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+                  </p>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: "var(--gold)", textTransform: "uppercase", letterSpacing: "0.14em" }}>
                     Ayurvedic Wellness
                   </span>
                 </div>
               </div>
 
               {/* Tagline */}
-              <p style={{ fontSize: 16.5, color: "#4a3030", lineHeight: 1.8, marginBottom: 26, fontWeight: 500 }}>
-                Nature's wisdom, crafted for your well-being. Rooted in tradition, refined for today's lifestyle.
+              <p className="mb-4 leading-relaxed" style={{ fontSize: 15, color: "#4a3030", fontWeight: 500 }}>
+                Nature's wisdom, crafted for your well-being. Rooted in tradition, refined for today.
               </p>
 
-              {/* Contact items */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 26 }}>
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <FaMapMarkerAlt size={16} />
+              {/* Contact */}
+              <div className="flex flex-col gap-3 mb-4">
+                <div className="flex items-start gap-2.5">
+                  <div className="contact-icon-box mt-0.5">
+                    <FaMapMarkerAlt size={12} />
                   </div>
-                  <p style={{ fontSize: 15.5, color: "#4a3030", lineHeight: 1.6, fontWeight: 500 }}>
+                  <p style={{ fontSize: 14.5, color: "#4a3030", lineHeight: 1.65, fontWeight: 500 }}>
                     Sri Bakawathi Life Science<br />
                     No: 1/770, K. Ayyampalayam, K.S.N Puram<br />
                     Palladam, Tiruppur – 641662, TN
                   </p>
                 </div>
 
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <FaPhoneAlt size={15} />
+                <div className="flex items-center gap-2.5">
+                  <div className="contact-icon-box">
+                    <FaPhoneAlt size={11} />
                   </div>
-                  <a href="tel:9443157282" className="footer-link" style={{ fontSize: 16, fontWeight: 600 }}>
+                  <a href="tel:9443157282" className="nav-link" style={{ fontSize: 15, fontWeight: 600 }}>
                     +91 94431 57282
                   </a>
                 </div>
 
-                <div className="contact-item">
-                  <div className="contact-icon">
-                    <FaEnvelope size={15} />
+                <div className="flex items-center gap-2.5">
+                  <div className="contact-icon-box">
+                    <FaEnvelope size={11} />
                   </div>
-                  <a href="mailto:info.sblsmarketing@gmail.com" className="footer-link" style={{ fontSize: 16 }}>
+                  <a href="mailto:info.sblsmarketing@gmail.com" className="nav-link" style={{ fontSize: 14.5 }}>
                     info.sblsmarketing@gmail.com
                   </a>
                 </div>
               </div>
 
               {/* Socials */}
-              <div style={{ display: "flex", gap: 12 }}>
+              <div className="flex gap-2">
                 {socials.map((s, i) => (
-                  <a key={i} href={s.link} target="_blank" rel="noopener noreferrer" className="social-btn" aria-label={s.label}>
+                  <a key={i} href={s.link} target="_blank" rel="noopener noreferrer" className="social-pill" aria-label={s.label}>
                     {s.icon}
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* ── Quick Links ── */}
+            {/* Quick Links */}
             <div>
-              <h4 className="section-heading">Explore</h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+              <h4 className="col-heading">Explore</h4>
+              <ul className="flex flex-col gap-2.5 p-0 m-0 list-none">
                 {quickLinks.map((link, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "center" }}>
-                    <span className="badge-dot" />
-                    <a href={link.path} className="footer-link">{link.label}</a>
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />
+                    <a href={link.path} className="nav-link">{link.label}</a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* ── Help ── */}
+            {/* Help Links */}
             <div>
-              <h4 className="section-heading">Support</h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+              <h4 className="col-heading">Support</h4>
+              <ul className="flex flex-col gap-2.5 p-0 m-0 list-none">
                 {helpLinks.map((link, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "center" }}>
-                    <span className="badge-dot" />
-                    <a href={link.path} className="footer-link">{link.label}</a>
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: "var(--gold)" }} />
+                    <a href={link.path} className="nav-link">{link.label}</a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* ── Newsletter ── */}
+            {/* Newsletter + Badges */}
             <div>
-              <h4 className="section-heading">Stay Updated</h4>
-              <p style={{ fontSize: 16, color: "#4a3030", lineHeight: 1.7, marginBottom: 22, fontWeight: 500 }}>
+              <h4 className="col-heading">Stay Updated</h4>
+              <p className="mb-4 leading-relaxed" style={{ fontSize: 15, color: "#4a3030", fontWeight: 500 }}>
                 Join our wellness community for Ayurvedic insights and exclusive offers.
               </p>
-             
 
-              {/* Trust badges */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {[
-                  { label: "100% Pure & Natural", icon: "✨" },
-                  { label: "ISO Certified Excellence", icon: "🛡️" },
-                  { label: "Traditional Wisdom", icon: "🌿" }
-                ].map((badge, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(255,255,255,0.4)", padding: "6px 14px", borderRadius: "100px", border: "1px solid rgba(201,168,76,0.15)", width: "fit-content" }}>
-                    <span style={{ fontSize: 15 }}>{badge.icon}</span>
-                    <span style={{ fontSize: 14.5, color: "#4a3030", fontWeight: 600, letterSpacing: "0.01em" }}>{badge.label}</span>
+              {/* Newsletter Input */}
+              <div className="flex mb-5 rounded-xl overflow-hidden" style={{ border: "1.5px solid rgba(201,168,76,0.28)", background: "white" }}>
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-1 px-3 py-2 outline-none text-xs bg-transparent"
+                  style={{ color: "#1a0a0a", fontSize: 15 }}
+                />
+                <button
+                  className="px-4 py-2 text-white font-semibold text-xs transition-all"
+                  style={{ background: "var(--blue)", fontSize: 14, letterSpacing: "0.03em" }}
+                  onMouseEnter={e => e.target.style.background = "#0145cc"}
+                  onMouseLeave={e => e.target.style.background = "var(--blue)"}
+                >
+                  Subscribe
+                </button>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="flex flex-col gap-2">
+                {badges.map((b, i) => (
+                  <div key={i} className="badge-chip">
+                    <span style={{ fontSize: 15 }}>{b.icon}</span>
+                    <span style={{ fontSize: 14, color: "#3d2c2c", fontWeight: 600 }}>{b.label}</span>
                   </div>
                 ))}
               </div>
@@ -325,18 +295,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <hr className="divider-line" />
+        <hr className="divider mx-6" />
 
         {/* Bottom Bar */}
-        <div style={{ maxWidth: 1320, margin: "0 auto", padding: "24px 32px", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 20, position: "relative" }}>
-          <p style={{ fontSize: 15.5, color: "#6a5050", margin: 0, fontWeight: 500 }}>
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-3">
+          <p className="m-0" style={{ fontSize: 15, color: "#6a5050", fontWeight: 500 }}>
             © 2026 <span style={{ color: "var(--blue)", fontWeight: 700 }}>Aayubakawath</span>. All Rights Reserved.
           </p>
-          <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-             <p style={{ fontSize: 14, color: "#8a7070", maxWidth: 640, lineHeight: 1.6, margin: 0, textAlign: "right", fontStyle: "italic" }}>
-              *Ancient wisdom meets modern science. Our products derived from tradition.
-            </p>
-          </div>
+          <p className="m-0 text-right" style={{ fontSize: 14, color: "#8a7070", maxWidth: 480, lineHeight: 1.5 }}>
+            *Ancient wisdom meets modern science. Our products derived from tradition.
+          </p>
         </div>
       </footer>
     </>

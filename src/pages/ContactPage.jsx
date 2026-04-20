@@ -230,7 +230,7 @@ const CSS = `
   }
   .ct-panel-tag {
     display:inline-flex; align-items:center; gap:7px;
-    font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    font-size:15px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
     color:#03349a; padding:6px 13px; border:1.5px solid rgba(130,12,12,0.15);
     border-radius:100px; width:fit-content; background:rgba(130,12,12,0.04);
   }
@@ -277,7 +277,7 @@ const CSS = `
   /* Button */
   .ct-btn {
     width:100%; padding:16px; border:none; border-radius:14px; cursor:pointer;
-    font-family:'Syne',sans-serif; font-size:11px; font-weight:700;
+    font-size:14px; font-weight:700;
     letter-spacing:.2em; text-transform:uppercase; color:#fff;
     background:linear-gradient(135deg,#03349a 0%,#a01310 40%,#c9643a 100%);
     box-shadow:0 8px 28px rgba(130,12,12,0.28);

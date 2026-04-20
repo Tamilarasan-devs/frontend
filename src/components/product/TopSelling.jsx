@@ -448,14 +448,12 @@ export default function TopSelling() {
             transition: "opacity 0.65s ease, transform 0.65s ease",
           }}
         >
-          <h2
-            className="font-bold leading-tight"
-            style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
-          >
-            <span className="text-black">Shop</span>{" "}
-            <span className="text-[#03349a]">by</span>{" "}
-            <span className="text-[#c9643a]">Category</span>
-          </h2>
+         <h2
+  className="inline-block font-bold leading-tight bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]"
+  style={{ fontSize: "clamp(26px, 4vw, 36px)" }}
+>
+  Shop by Category
+</h2>
         </div>
 
         <div
