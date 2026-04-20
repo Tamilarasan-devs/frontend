@@ -394,7 +394,11 @@ Wellness – Support healthier lifestyles through effective nutritional support.
             <Reveal className="text-center mb-16">
               {/* <Label text="What We Offer" /> */}
               <h2 className=" text-2xl sm:text-3xl font-bold text-center gradient-text mb-2">What We Offer</h2>
-              <h2 className=" text-2xl sm:text-3xl font-semibold text-center  text-black">Our Product Range</h2>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-center mt-2">
+                <span style={{ color: "#1a0a0a" }}>Our </span>
+                <span style={{ color: "#03349a" }}>Product </span>
+                <span style={{ color: "#c9643a" }}>Range</span>
+              </h2>
               <Divider />
               <p className="text-gray-800 text-lg mt-2 font-semibold">Specialized formulations supporting key health areas</p>
             </Reveal>

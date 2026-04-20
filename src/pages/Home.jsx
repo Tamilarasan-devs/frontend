@@ -22,6 +22,9 @@ import ReelSection from '../components/layout/ReelSection'
 import VideoPage from './VideoPage'
 import { Helmet } from "react-helmet-async";
 import LazySection from '../components/common/LazySection'
+import About from './About'
+import AboutPage from './NewAbout'
+import OurBusiness from './AboutPage'
 
 export default function Home() {
   return (
@@ -44,6 +47,9 @@ export default function Home() {
           <ProductGrid/>
         </LazySection>
 
+ <LazySection minHeight={300}>
+         <OurBusiness/>
+        </LazySection>
  <LazySection minHeight={300}>
           <OurStory/>
         </LazySection>
@@ -79,14 +85,15 @@ export default function Home() {
           <Certificate/>
         </LazySection>
 
-        <LazySection minHeight={400}>
+        {/* <LazySection minHeight={400}>
           <ReelSection/>
-        </LazySection>
+        </LazySection> */}
 
         <LazySection minHeight={500}>
           <Testimonial/>
         </LazySection>
 
+        
     </div>
   )
 }

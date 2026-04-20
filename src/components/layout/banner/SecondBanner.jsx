@@ -74,8 +74,9 @@ export default function SecondBanner() {
             transition: "opacity 0.65s ease, transform 0.65s ease",
           }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Pure, Clean & Conscious Choices
+          <h2 className="text-3xl md:text-4xl font-bold">
+            <span style={{ color: "#03349a" }}>Pure, Clean & </span>
+            <span style={{ color: "#c9643a" }}>Conscious Choices</span>
           </h2>
         </div>
 

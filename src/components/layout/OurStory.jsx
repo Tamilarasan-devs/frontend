@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import img from '../../assets/images/q3.jpg'
 export default function OurStory() {
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ export default function OurStory() {
         {/* Right Image */}
         <div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71"
+            src={img}
             alt="natural wellness"
             className="w-full h-[400px] object-cover rounded-2xl shadow-sm"
           />

@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import { API_URL ,axiosInstance} from "../../utils/axiosInstance";
-
-import "swiper/css";
-import "swiper/css/navigation";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 export default function CategoryBannerList() {
   const [banners, setBanners] = useState([]);
@@ -29,46 +24,35 @@ export default function CategoryBannerList() {
   const images = banners.flatMap(item => item.categoryBanner);
 
   return (
-    <section className="px-4 sm:px-6 lg:px-10 py-6">
-
-  {/* 🔹 Top Row (3 cards) */}
-  <div className="grid grid-cols-3 gap-4 mb-4">
-    {images.slice(0, 3).map((img, i) => (
-      <div
-        key={i}
-        onClick={() => navigate("/productListing")}
-        className="group cursor-pointer rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
-      >
-        <div className="h-28 flex items-center justify-center p-3">
-          <img
-            src={img}
-            alt="category"
-            className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
+    <section className="px-4 sm:px-6 lg:px-12 py-10">
+      {/* Title */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-semibold tracking-tight">
+          <span style={{ color: "#1a0a0a" }}>Explore </span>
+          <span style={{ color: "#03349a" }}>Our </span>
+          <span style={{ color: "#c9643a" }}>Categories</span>
+        </h2>
+        <p className="text-gray-500 text-sm mt-2">
+          Discover products tailored for you
+        </p>
       </div>
-    ))}
-  </div>
 
-  {/* 🔹 Bottom Row (2 bigger cards) */}
-  <div className="grid grid-cols-2 gap-4">
-    {images.slice(3, 5).map((img, i) => (
-      <div
-        key={i}
-        onClick={() => navigate("/productListing")}
-        className="group cursor-pointer rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
-      >
-        <div className="h-32 sm:h-36 flex items-center justify-center p-4">
-          <img
-            src={img}
-            alt="category"
-            className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-      </div>
-    ))}
-  </div>
-
-</section>
+      {/* Image Grid */}
+<div className="grid grid-cols-2 sm:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-12">
+  {images.map((img, i) => (
+    <div
+      key={i}
+      onClick={() => navigate("/productListing")}
+      className="cursor-pointer overflow-hidden rounded-xl"
+    >
+      <img
+        src={img}
+        alt="category"
+        className="h-30 w-50 transition-transform duration-500 hover:scale-110"
+      />
+    </div>
+  ))}
+</div>
+    </section>
   );
 }

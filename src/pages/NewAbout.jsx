@@ -4,7 +4,7 @@ import img1 from '../assets/images/about/54.jpg';
 import img2 from '../assets/images/about/55.jpg';
 import img3 from '../assets/images/resar.jpeg';
 import img4 from '../assets/images/pure.jpeg';
-import bnr from '../assets/images/abtUs.jpg'
+import bnr from '../assets/images/about/about.jpg'
 
 const sections = [
   {

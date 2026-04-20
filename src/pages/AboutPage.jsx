@@ -210,11 +210,10 @@ export default function OurBusiness() {
         />
 
         {/* ── Heading ── */}
-        <h2
-          className="text-2xl sm:text-3xl font-bold text-center text-[#03349a] mb-2"
-        
-        >
-          What We Do
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2">
+          <span style={{ color: "#1a0a0a" }}>What </span>
+          <span style={{ color: "#03349a" }}>We </span>
+          <span style={{ color: "#c9643a" }}>Do</span>
         </h2>
         <p className="text-center text-[black] text-xl mb-3 font-semibold">
           Use scientifically backed and traditional ingredients. Develop herbal supplements for daily health support. 
