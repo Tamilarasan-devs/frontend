@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
-import { API_URL } from "../../utils/axiosInstance";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { addToCart } from "../../services/cartService";
+import { addToWishlist, removeProductFromWishlist, checkWishlistStatus } from "../../services/wishlistService";
+import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { toast } from "react-toastify";
 const CARD_W = 402;
 const CARD_GAP = 20;
 export default function ProductCard({ product, animDelay, sectionVisible }) {
@@ -19,7 +20,7 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
     mutationFn: addToCart,
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["cart"] });
-      alert("Item added to cart!");
+      toast.success("Item added to cart!");
     },
     onError: (err) => {
       if (err.response?.status === 401) {
@@ -30,16 +31,57 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
       }
     }
   });
-
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Please login first to add items to cart.");
+      toast.error("Please login first.");
       navigate('/login');
       return;
     }
-
     addMut.mutate({ productId: product.id, quantity: 1 });
+  };
+
+  // Wishlist Logic
+  const { data: wishlistData } = useQuery({
+    queryKey: ["wishlist-status", product.id],
+    queryFn: () => checkWishlistStatus(product.id),
+    enabled: !!localStorage.getItem("token") && !!product.id,
+  });
+
+  const wishlisted = wishlistData?.isWishlisted || false;
+
+  const wishlistMut = useMutation({
+    mutationFn: async () => {
+      if (wishlisted) {
+        return await removeProductFromWishlist(product.id);
+      } else {
+        return await addToWishlist({ productId: product.id });
+      }
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["wishlist"] });
+      qc.invalidateQueries({ queryKey: ["wishlist-status", product.id] });
+      toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist");
+    },
+    onError: (err) => {
+      if (err.response?.status === 401) {
+        toast.error("Please login first.");
+        navigate('/login');
+      } else {
+        toast.error("Failed to update wishlist.");
+      }
+    }
+  });
+
+  const handleToggleWishlist = (e) => {
+    e.stopPropagation();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please login first.");
+      navigate('/login');
+      return;
+    }
+    wishlistMut.mutate();
   };
 
   // Trigger card entrance after section becomes visible + stagger delay
@@ -176,6 +218,17 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
           <div className="text-[17px] font-black">{disc}%</div>
           <div className="text-[10px] font-bold -mt-0.5">OFF</div>
         </div>
+
+        {/* Wishlist Button */}
+        <button
+          onClick={handleToggleWishlist}
+          disabled={wishlistMut.isPending}
+          className={`absolute top-12 right-2.5 z-20 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all duration-300
+            ${wishlisted ? "bg-rose-500 text-white scale-110" : "bg-white/90 text-stone-400 hover:text-rose-500 hover:scale-110"}`}
+          style={{ opacity: hov || wishlisted ? 1 : 0 }}
+        >
+          <FaHeart size={14} className={wishlistMut.isPending ? 'animate-pulse' : ''} />
+        </button>
       </div>
 
       {/* ── Card Body ── */}

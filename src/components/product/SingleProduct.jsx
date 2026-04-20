@@ -274,10 +274,7 @@ export default function SingleProduct() {
   return (
     <div className="min-h-screen text-stone-900" style={{ background: "#FAFAF7" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-        .font-display { font-family: 'Cormorant Garamond', serif; }
-        .font-body { font-family: 'DM Sans', sans-serif; }
+        
 
         @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
         @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
@@ -692,7 +689,87 @@ export default function SingleProduct() {
   </button>
 
 </div>
+{/* ── Offers For You — Horizontal ── */}
+<div className="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm mb-6">
 
+  {/* Header */}
+  <div className="flex items-center justify-between px-5 py-3 bg-stone-50 border-b border-stone-100">
+    <div className="flex items-center gap-2">
+      <span className="w-2 h-2 rounded-full bg-[#C9A84C]" />
+      <span className="text-[13px] font-bold tracking-wide text-stone-800">Offers For You</span>
+    </div>
+    <span className="text-[11px] font-semibold text-stone-500 bg-white border border-stone-200 px-3 py-1 rounded-full">
+      2 available offers
+    </span>
+  </div>
+
+  {/* Two cards side by side */}
+  <div className="grid grid-cols-2 divide-x divide-stone-100">
+
+    {/* Offer 1 — Online */}
+    <div className="flex flex-col gap-3 p-5">
+      <div className="flex flex-wrap gap-1.5">
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 tracking-wide">
+          Extra ₹146 OFF
+        </span>
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
+          BEST PRICE
+        </span>
+      </div>
+
+      <div>
+        <div className="flex items-baseline gap-2 mb-1">
+          <span className="text-[26px] font-bold text-stone-900 leading-none">₹884</span>
+          <span className="text-xs font-bold text-emerald-700">21% off</span>
+        </div>
+        <p className="text-[12px] text-stone-500 leading-snug">Pay Online, Enjoy 15% + Extra 5% Off!</p>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <span className="text-[11px] text-stone-400">Code</span>
+        <code className="text-[11px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
+          AAYU15
+        </code>
+      </div>
+
+      <button className="mt-auto w-full py-2.5 bg-[#1A3D2B] text-white text-[12px] font-bold rounded-xl hover:bg-[#0D1F17] transition-all duration-200 tracking-wide">
+        Use Now
+      </button>
+    </div>
+
+    {/* Offer 2 — COD */}
+    <div className="flex flex-col gap-3 p-5">
+      <div className="flex flex-wrap gap-1.5">
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 tracking-wide">
+          Extra ₹100 OFF
+        </span>
+        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
+          BEST PRICE
+        </span>
+      </div>
+
+      <div>
+        <div className="flex items-baseline gap-2 mb-1">
+          <span className="text-[26px] font-bold text-stone-900 leading-none">₹930</span>
+          <span className="text-xs font-bold text-emerald-700">17% off</span>
+        </div>
+        <p className="text-[12px] text-stone-500 leading-snug">On COD, Enjoy 15% Off!</p>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <span className="text-[11px] text-stone-400">Code</span>
+        <code className="text-[11px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
+          AAYU15
+        </code>
+      </div>
+
+      <button className="mt-auto w-full py-2.5 bg-white border-2 border-stone-200 text-stone-700 text-[12px] font-bold rounded-xl hover:border-stone-400 hover:text-stone-900 transition-all duration-200 tracking-wide">
+        Use Now
+      </button>
+    </div>
+
+  </div>
+</div>
             {/* Trust bar */}
             <div className="grid grid-cols-3 border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-sm">
               {[

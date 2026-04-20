@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaUser, FaSearch, FaTimes, FaBars, FaTruck } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { getCart } from "../../services/cartService";
+import { getWishlist } from "../../services/wishlistService";
 import SearchBar from '../../pages/SearchBar';
 import { toast } from "react-toastify";
 
@@ -143,6 +144,15 @@ export default function Header() {
   });
   const cartCount = cartData?.data?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
+  // Fetch wishlist count from backend
+  const { data: wishlistData } = useQuery({
+    queryKey: ["wishlist"],
+    queryFn: getWishlist,
+    retry: false,
+    enabled: !!localStorage.getItem("token"),
+  });
+  const wishlistCount = wishlistData?.data?.length || 0;
+
   const isLoggedIn = !!localStorage.getItem("token");
 
   const handleLogout = () => {
@@ -220,6 +230,7 @@ export default function Header() {
                   boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
                 }}>
               <FaHeart size={14} color='white' />
+              {wishlistCount > 0 && <Dot n={wishlistCount} accent={true} />}
             </a>
 
             {/* Track Order */}
@@ -379,7 +390,7 @@ export default function Header() {
               {[
                 { icon: <FaShoppingCart size={16} />, label: "Cart", href: "/cart", badge: cartCount || null, accent: false },
                 { icon: <FaTruck size={16} />, label: "Track", href: "/trackorder", badge: null },
-                { icon: <FaHeart size={16} />, label: "Wishlist", href: "/wishlist", badge: null, accent: true },
+                { icon: <FaHeart size={16} />, label: "Wishlist", href: "/wishlist", badge: wishlistCount || null, accent: true },
                 { icon: <FaUser size={16} />, label: isLoggedIn ? "Profile" : "Account", href: isLoggedIn ? "/profile" : "/login", badge: null },
               ].map(item => (
                 <a key={item.href} href={item.href}
