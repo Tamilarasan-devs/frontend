@@ -3,7 +3,7 @@ import img0 from '../assets/images/about/53.jpg';
 import img1 from '../assets/images/about/54.jpg';
 import img2 from '../assets/images/about/55.jpg';
 import img3 from '../assets/images/resar.jpeg';
-import img4 from '../assets/images/pure.jpeg';
+import img4 from '../assets/images/about/img.jpg';
 import bnr from '../assets/images/about/about.jpg'
 import OurBusiness from "./AboutPage";
 import { useNavigate } from "react-router-dom";
@@ -247,7 +247,7 @@ export default function AboutPage() {
   const navigate= useNavigate()
 
   return (
-    <div className="min-h-screen" style={{ background: "#fdf8f4" }}>
+    <div style={{ background: "#fdf8f4" }}>
       
    <section className="relative w-full overflow-hidden">
           {/* Background image */}
@@ -265,31 +265,19 @@ export default function AboutPage() {
       <OurBusiness/>
       <div
         className="relative overflow-hidden text-center px-6 pt-20 pb-0"
-        // style={{ background: "#03349a" }}
+        style={{ background: "#03349a" }}
       >
         {/* Decorative blobs */}
         <div
           className="absolute -top-10 -right-10 w-64 h-64 rounded-full opacity-30"
-          // style={{ background: "#0a4bc4" }}
+          style={{ background: "#0a4bc4" }}
         />
         <div
           className="absolute bottom-10 -left-8 w-48 h-48 rounded-full opacity-10"
-          // style={{ background: "#c8922a" }}
+          style={{ background: "#c8922a" }}
         />
 
-        {/* <div className="relative max-w-4xl mx-auto">
-          
-          <span
-            className="inline-block text-sm font-bold tracking-widest uppercase px-5 py-2 rounded-full mb-8"
-            style={{
-              background: "rgba(200,146,42,0.18)",
-              color: "#f0c26a",
-              border: "1px solid rgba(200,146,42,0.35)",
-              letterSpacing: "0.2em",
-            }}
-          >
-            About Us
-          </span>
+        <div className="relative max-w-4xl mx-auto">
 
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6"
@@ -307,34 +295,45 @@ export default function AboutPage() {
 
    
           <div
-            className="flex justify-center mt-14"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
-          >
-            {[
-              { v: "100%", l: "Natural Ingredients" },
-              { v: "GMP", l: "Certified Process" },
-              { v: "5+", l: "Health Categories" },
-            ].map((s, i) => (
-              <div
-                key={i}
-                className="flex-1 max-w-[180px] py-6 px-4"
-                style={{
-                  borderRight: i < 2 ? "1px solid rgba(255,255,255,0.1)" : "none",
-                }}
-              >
-                <div
-                  className="text-3xl font-bold"
-                  style={{ color: "#f0c26a" }}
-                >
-                  {s.v}
-                </div>
-                <div className="text-sm mt-1" style={{ color: "#a8c0ef" }}>
-                  {s.l}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
+  className="overflow-hidden mt-14"
+  style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
+>
+  <style>{`
+    @keyframes scrollX {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .scroll-track {
+      display: flex;
+      width: max-content;
+      animation: scrollX 15s linear infinite;
+    }
+  `}</style>
+
+  <div className="scroll-track">
+    {[...Array(2)].flatMap(() => [
+      { v: "100%", l: "Natural Ingredients" },
+      { v: "GMP", l: "Certified Process" },
+      { v: "5+", l: "Health Categories" },
+    ]).map((s, i) => (
+      <div
+        key={i}
+        className="flex-shrink-0 w-[180px] py-6 px-4 text-center"
+        style={{
+          borderRight: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        <div className="text-3xl font-bold text-[#f0c26a]">
+          {s.v}
+        </div>
+        <div className="text-sm mt-1 text-[#a8c0ef]">
+          {s.l}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+        </div>
 
         {/* Wave transition */}
         <svg
@@ -350,9 +349,10 @@ export default function AboutPage() {
         </svg>
       </div>
     
+    
 
       {/* ── Zig-Zag Sections ── */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-12 pb-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-24">
         {sections.map((section, index) => (
           <Section key={index} section={section} index={index} />
         ))}

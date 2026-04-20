@@ -23,7 +23,6 @@ export default function BlogPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(16px); }
@@ -92,10 +91,6 @@ export default function BlogPage() {
         }
         .load-btn:hover { transform: translateY(-2px); }
         .load-btn:hover::after { transform: translateX(100%); }
-
-        .blog-serif {
-          font-family: 'Playfair Display', serif;
-        }
       `}</style>
 
       <div className="blog-root min-h-screen" style={{ backgroundColor:'white' }}>

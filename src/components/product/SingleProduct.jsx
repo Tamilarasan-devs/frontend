@@ -324,11 +324,11 @@ export default function SingleProduct() {
 
       {/* ── Breadcrumb ── */}
       <nav className="bg-white border-b border-stone-100 px-4 sm:px-8 lg:px-16 py-4 font-body">
-        <div className="max-w-[1440px] mx-auto flex items-center gap-2 text-sm">
+        <div className="max-w-[1440px] mx-auto flex items-center gap-2 text-lg">
           {["Home", product.forWhom ?? "Products"].map((c) => (
             <span key={c} className="flex items-center gap-2">
               <a href="#" className="text-stone-400 hover:text-[#1A3D2B] transition-colors font-medium tracking-wide">{c}</a>
-              <span className="text-[#C9A84C] text-xs">›</span>
+              <span className="text-[#C9A84C] text-sm">›</span>
             </span>
           ))}
           <span className="font-semibold text-[#1A3D2B] truncate max-w-[220px] tracking-wide">{product.productName}</span>
@@ -365,12 +365,12 @@ export default function SingleProduct() {
 
               {/* Badges */}
               {discPct > 0 && (
-                <div className="absolute top-5 left-5 z-20 bg-[#1A3D2B] text-[#C9A84C] text-xs font-bold px-4 py-2 rounded-full tracking-[0.1em] shadow-lg">
+                <div className="absolute top-5 left-5 z-20 bg-[#1A3D2B] text-[#C9A84C] text-[15px] font-bold px-4 py-2 rounded-full tracking-[0.1em] shadow-lg">
                   {discPct}% OFF
                 </div>
               )}
               {offerTags.length > 0 && (
-                <div className="absolute top-16 left-5 z-20 bg-[#C9A84C] text-white text-[11px] font-bold px-3 py-1.5 rounded-full shadow tracking-wide">
+                <div className="absolute top-16 left-5 z-20 bg-[#C9A84C] text-white text-[14px] font-bold px-3 py-1.5 rounded-full shadow tracking-wide">
                   {offerTags[0]}
                 </div>
               )}
@@ -392,7 +392,7 @@ export default function SingleProduct() {
               {/* Stock badge */}
               <div className="absolute bottom-5 left-5 z-20 flex items-center gap-2.5 bg-white/95 backdrop-blur-md border border-amber-100 rounded-full px-5 py-2.5 shadow-md">
                 <span className="w-2 h-2 rounded-full bg-amber-400 pulse-dot flex-shrink-0" />
-                <span className="text-xs font-semibold text-stone-700 tracking-wide">Only 14 left in stock</span>
+                <span className="text-sm font-semibold text-stone-700 tracking-wide">Only 14 left in stock</span>
               </div>
             </div>
 
@@ -417,14 +417,14 @@ export default function SingleProduct() {
             {/* Offers strip */}
             <div className="bg-white rounded-2xl border border-stone-100 p-5 shadow-sm">
               <div className="flex items-center gap-3 mb-4 divider-ornament">
-                <span className="text-[11px] font-bold text-[#C9A84C] uppercase tracking-[0.25em] whitespace-nowrap px-2">Available Offers</span>
+                <span className="text-[14px] font-bold text-[#C9A84C] uppercase tracking-[0.25em] whitespace-nowrap px-2">Available Offers</span>
               </div>
               <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
                 {OFFERS.map(({ icon, title, body }) => (
                   <div key={title} className="min-w-[140px] flex-shrink-0 border border-stone-100 rounded-xl p-3.5 hover:border-[#C9A84C]/30 hover:bg-amber-50/30 transition-all duration-200 group">
-                    <div className="w-9 h-9 bg-gradient-to-br from-[#1A3D2B] to-[#2A5C40] rounded-xl flex items-center justify-center text-base mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-200">{icon}</div>
-                    <p className="text-sm font-bold text-stone-900 mb-1 tracking-tight">{title}</p>
-                    <p className="text-[12px] text-stone-500 leading-snug">{body}</p>
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#1A3D2B] to-[#2A5C40] rounded-xl flex items-center justify-center text-lg mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-200">{icon}</div>
+                    <p className="text-[16px] font-bold text-stone-900 mb-1 tracking-tight">{title}</p>
+                    <p className="text-[14px] text-stone-500 leading-snug">{body}</p>
                   </div>
                 ))}
               </div>
@@ -436,25 +436,25 @@ export default function SingleProduct() {
 
             {/* Category tag */}
             {product.forWhom && (
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A84C] mb-3">
-                <span className="w-6 h-px bg-[#C9A84C]" />
+              <span className="inline-flex items-center gap-1.5 text-[16px] font-bold uppercase tracking-[0.2em] text-[#03349a] mb-3">
+                <span className="w-6 h-px bg-[#03349a]" />
                 {product.forWhom}
               </span>
             )}
 
             {/* Product Name */}
-            <h1 className="font-display text-[36px] sm:text-[44px] lg:text-[52px] font-bold leading-[1.1] mb-4 text-[#0D1F17]">
+            <h1 className="font-display text-[42px] sm:text-[50px] lg:text-[60px] font-bold leading-[1.1] mb-4 text-[#0D1F17]">
               {product.productName}
             </h1>
 
             {/* Ratings */}
             <div className="flex items-center flex-wrap gap-4 mb-5">
               <div className="flex items-center gap-2.5 bg-amber-50 border border-amber-200 rounded-full px-4 py-2">
-                <StarRow rating={4.7} size="text-sm" />
-                <span className="text-sm font-bold text-amber-800">4.7</span>
-                <span className="text-xs text-amber-500 font-medium">(1,248 reviews)</span>
+                <StarRow rating={4.7} size="text-lg" />
+                <span className="text-[18px] font-bold text-amber-800">4.7</span>
+                <span className="text-sm text-amber-500 font-medium">(1,248 reviews)</span>
               </div>
-              <button className="text-xs font-semibold text-[#1A3D2B] border-b border-[#1A3D2B]/30 hover:border-[#1A3D2B] pb-0.5 transition-all">
+              <button className="text-sm font-semibold text-[#1A3D2B] border-b border-[#1A3D2B]/30 hover:border-[#1A3D2B] pb-0.5 transition-all">
                 Read all reviews →
               </button>
             </div>
@@ -463,7 +463,7 @@ export default function SingleProduct() {
             {productTags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-5">
                 {productTags.slice(0, 3).map((tag) => (
-                  <span key={tag} className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-full border border-[#1A3D2B]/20 bg-[#1A3D2B]/5 text-[#1A3D2B] uppercase tracking-wide">
+                  <span key={tag} className="inline-flex items-center gap-1.5 text-[14px] font-semibold px-3 py-1.5 rounded-full border border-[#1A3D2B]/20 bg-[#1A3D2B]/5 text-[#1A3D2B] uppercase tracking-wide">
                     <span className="text-[#C9A84C]">✦</span> {tag}
                   </span>
                 ))}
@@ -474,18 +474,18 @@ export default function SingleProduct() {
             {product.productDescription && (
               <div className="mb-6 border-l-2 border-[#C9A84C]/40 pl-5">
                 <div
-                  className={`text-[16px] text-stone-600 leading-relaxed font-body transition-all duration-300 ${!isExpanded ? "line-clamp-2" : ""}`}
+                  className={`text-[20px] text-stone-600 leading-relaxed font-body transition-all duration-300 ${!isExpanded ? "line-clamp-2" : ""}`}
                 >
                   {product.productDescription}
                 </div>
 
                 {isExpanded && (
                   <div className="mt-5 space-y-3 animate-fadeUp">
-                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#C9A84C] mt-4 mb-3">Key Benefits</p>
+                    <p className="text-[14px] font-black uppercase tracking-[0.2em] text-[#C9A84C] mt-4 mb-3">Key Benefits</p>
                     {BENEFITS_LIST.map((b) => (
                       <div key={b.key} className="flex gap-3 p-4 rounded-xl bg-[#1A3D2B]/[0.03] border border-[#1A3D2B]/10 items-start hover:bg-[#1A3D2B]/[0.06] transition-colors">
                         <span className="text-lg flex-shrink-0 mt-0.5">{b.icon}</span>
-                        <div className="text-[14px] leading-relaxed text-stone-600">
+                        <div className="text-[18px] leading-relaxed text-stone-600">
                           <span className="font-bold text-[#0D1F17]">{b.key}: </span>
                           <span>{b.val}</span>
                         </div>
@@ -496,7 +496,7 @@ export default function SingleProduct() {
 
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="mt-3 text-[11px] font-black uppercase tracking-[0.18em] text-[#1A3D2B] hover:text-[#C9A84C] transition-colors flex items-center gap-2"
+                  className="mt-3 text-[14px] font-black uppercase tracking-[0.18em] text-[#1A3D2B] hover:text-[#C9A84C] transition-colors flex items-center gap-2"
                 >
                   {isExpanded ? "Show Less" : "Read More"}
                   <span className={`transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>↓</span>
@@ -506,12 +506,12 @@ export default function SingleProduct() {
 
             {/* Status bar */}
             <div className="flex items-center gap-3 mb-6 flex-wrap">
-              <span className="inline-flex items-center gap-2 text-xs font-bold text-[#1A3D2B] bg-emerald-50 border border-emerald-200 rounded-full px-4 py-2 tracking-wide uppercase">
+              <span className="inline-flex items-center gap-2 text-sm font-bold text-[#1A3D2B] bg-emerald-50 border border-emerald-200 rounded-full px-4 py-2 tracking-wide uppercase">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 pulse-dot" />
                 In Stock
               </span>
-              <span className="inline-flex items-center gap-2 text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 rounded-full px-4 py-2 tracking-wide">
-                <HiOutlineTrendingUp size={14} /> 300+ sold this month
+              <span className="inline-flex items-center gap-2 text-sm font-bold text-amber-800 bg-amber-50 border border-amber-200 rounded-full px-4 py-2 tracking-wide">
+                <HiOutlineTrendingUp size={16} /> 300+ sold this month
               </span>
             </div>
 
@@ -520,27 +520,27 @@ export default function SingleProduct() {
             {/* ── Price Card ── */}
             <div className="bg-[#0D1F17] rounded-2xl p-5 sm:p-6 mb-5 shadow-[0_8px_30px_rgba(13,31,23,0.2)]">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]/70">Price</span>
+                <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]/70">Price</span>
                 {saving > 0 && (
-                  <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#C9A84C]/15 text-[#C9A84C] border border-[#C9A84C]/30">
+                  <span className="text-[14px] font-bold px-3 py-1 rounded-full bg-[#C9A84C]/15 text-[#C9A84C] border border-[#C9A84C]/30">
                     You save ₹{saving.toLocaleString("en-IN")}
                   </span>
                 )}
               </div>
               <div className="flex items-end gap-4 flex-wrap">
-                <span className=" text-[52px] sm:text-[60px] font-bold text-white leading-none">
+                <span className=" text-[62px] sm:text-[70px] font-bold text-white leading-none">
                   ₹{pack.price?.toLocaleString("en-IN") ?? parseFloat(product.finalPrice).toLocaleString("en-IN")}
                 </span>
-                <span className="text-lg text-white/30 line-through font-medium mb-2">
+                <span className="text-2xl text-white/30 line-through font-medium mb-2">
                   ₹{pack.orig?.toLocaleString("en-IN") ?? parseFloat(product.price).toLocaleString("en-IN")}
                 </span>
               </div>
-              <p className="text-[11px] text-white/40 mt-1 tracking-wide">Inclusive of all taxes · Free delivery on ₹499+</p>
+              <p className="text-[14px] text-white/40 mt-1 tracking-wide">Inclusive of all taxes · Free delivery on ₹499+</p>
             </div>
 
             {/* ── Pack Selector ── */}
             <div className="mb-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-stone-500 mb-4">Choose Your Pack</p>
+              <p className="text-[15px] font-black uppercase tracking-[0.22em] text-stone-500 mb-4">Choose Your Pack</p>
               <div className="flex flex-col gap-2.5">
                 {PACKS.map((p, i) => {
                   const pct = Math.round(((p.orig - p.price) / p.orig) * 100);
@@ -555,7 +555,7 @@ export default function SingleProduct() {
                           : "border-stone-200 bg-white hover:border-stone-300"}`}
                     >
                       {p.tag && (
-                        <span className={`absolute -top-2.5 right-4 text-[10px] font-bold px-3 py-0.5 rounded-full text-white uppercase tracking-wide
+                        <span className={`absolute -top-2.5 right-4 text-[13px] font-bold px-3 py-0.5 rounded-full text-white uppercase tracking-wide
                           ${p.tag === "Most Popular" ? "bg-amber-500" : "bg-[#1A3D2B]"}`}>
                           {p.tag}
                         </span>
@@ -567,18 +567,18 @@ export default function SingleProduct() {
                           {sel && <div className="w-2.5 h-2.5 bg-[#C9A84C] rounded-full" />}
                         </div>
                         <div>
-                          <p className={`text-sm font-bold tracking-tight ${sel ? "text-[#0D1F17]" : "text-stone-700"}`}>
+                          <p className={`text-[17px] font-bold tracking-tight ${sel ? "text-[#0D1F17]" : "text-stone-700"}`}>
                             {p.qty} Capsules · {p.duration}
                           </p>
-                          <p className="text-xs text-stone-400 line-through mt-0.5">₹{p.orig.toLocaleString("en-IN")}</p>
+                          <p className="text-sm text-stone-400 line-through mt-0.5">₹{p.orig.toLocaleString("en-IN")}</p>
                         </div>
                       </div>
 
                       <div className="text-right">
-                        <p className={`text-base font-bold ${sel ? "text-[#0D1F17]" : "text-stone-800"}`}>
+                        <p className={`text-xl font-bold ${sel ? "text-[#0D1F17]" : "text-stone-800"}`}>
                           ₹{p.price.toLocaleString("en-IN")}
                         </p>
-                        <span className={`text-[11px] font-bold ${sel ? "text-[#1A3D2B]" : "text-stone-400"}`}>
+                        <span className={`text-[14px] font-bold ${sel ? "text-[#1A3D2B]" : "text-stone-400"}`}>
                           {pct}% off
                         </span>
                       </div>
@@ -590,7 +590,7 @@ export default function SingleProduct() {
 
             {/* ── Pincode ── */}
             <div className="bg-white border border-stone-200 rounded-2xl p-5 mb-6 shadow-sm">
-              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-stone-500 mb-4">Check Delivery</p>
+              <p className="text-[15px] font-black uppercase tracking-[0.22em] text-stone-500 mb-4">Check Delivery</p>
               <div className="flex gap-3">
                 <input
                   type="text"
@@ -598,11 +598,11 @@ export default function SingleProduct() {
                   placeholder="Enter pincode"
                   value={pincode}
                   onChange={(e) => { setPincode(e.target.value.replace(/\D/g, "")); setPincodeMsg(null); }}
-                  className="luxury-input flex-1 border-2 border-stone-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none transition-all duration-200 bg-stone-50/50"
+                  className="luxury-input flex-1 border-2 border-stone-200 rounded-xl px-4 py-3 text-[17px] font-medium focus:outline-none transition-all duration-200 bg-stone-50/50"
                 />
                 <button
                   onClick={checkPincode}
-                  className="px-6 py-3 bg-[#1A3D2B] text-white text-sm font-bold rounded-xl hover:bg-[#0D1F17] transition-all duration-200 tracking-wide shadow-sm"
+                  className="px-6 py-3 bg-[#1A3D2B] text-white text-[17px] font-bold rounded-xl hover:bg-[#0D1F17] transition-all duration-200 tracking-wide shadow-sm"
                 >
                   Check
                 </button>
@@ -613,20 +613,20 @@ export default function SingleProduct() {
                     <div className="flex items-start gap-3">
                       <span className="text-xl">🚚</span>
                       <div>
-                        <p className="text-sm font-bold text-emerald-800">{pincodeMsg.msg}</p>
+                        <p className="text-[17px] font-bold text-emerald-800">{pincodeMsg.msg}</p>
                         <div className="flex items-center gap-2 mt-2">
-                          <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full text-white
+                          <span className={`text-[13px] font-bold px-2.5 py-1 rounded-full text-white
                             ${pincodeMsg.days === 4 ? "bg-emerald-600" : pincodeMsg.days === 5 ? "bg-blue-600" : "bg-amber-500"}`}>
                             {pincodeMsg.days === 4 ? "⚡ Express" : "📦 Standard"}
                           </span>
-                          <span className="text-[11px] text-emerald-600 font-medium">Free on orders ₹499+</span>
+                          <span className="text-[16px] text-emerald-600 font-medium">Free on orders ₹499+</span>
                         </div>
                       </div>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
                       <span>⚠️</span>
-                      <p className="text-sm font-semibold text-red-700">{pincodeMsg.msg}</p>
+                      <p className="text-[18px] font-semibold text-red-700">{pincodeMsg.msg}</p>
                     </div>
                   )}
                 </div>
@@ -640,7 +640,7 @@ export default function SingleProduct() {
   <div className="flex items-center border-2 border-stone-200 rounded-xl overflow-hidden bg-white shadow-sm w-full sm:w-auto">
     <button
       onClick={() => setQty(q => Math.max(1, q - 1))}
-      className="w-12 h-13 flex items-center justify-center text-stone-500 hover:bg-stone-50 transition-colors text-xl font-light px-3 py-3"
+      className="w-14 h-14 flex items-center justify-center text-stone-500 hover:bg-stone-50 transition-colors text-2xl font-light px-3 py-3"
     >
       −
     </button>
@@ -662,7 +662,7 @@ export default function SingleProduct() {
     type="button"
     onClick={handleAddToCart}
     disabled={addMut.isPending}
-    className="w-full sm:w-auto flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[13px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
+    className="w-full sm:w-auto flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[18px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
     style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
   >
     <svg
@@ -683,7 +683,7 @@ export default function SingleProduct() {
   <button
     onClick={handleBuyNow}
     disabled={addMut.isPending}
-    className="w-full sm:flex-1 gold-btn h-13 rounded-xl text-[#0D1F17] text-sm font-black tracking-[0.1em] uppercase transition-all duration-200 disabled:opacity-50 py-3"
+    className="w-full sm:flex-1 gold-btn h-13 rounded-xl text-[#0D1F17] text-[18px] font-black tracking-[0.1em] uppercase transition-all duration-200 disabled:opacity-50 py-3"
   >
     Buy — ₹{total}
   </button>
@@ -696,9 +696,9 @@ export default function SingleProduct() {
   <div className="flex items-center justify-between px-5 py-3 bg-stone-50 border-b border-stone-100">
     <div className="flex items-center gap-2">
       <span className="w-2 h-2 rounded-full bg-[#C9A84C]" />
-      <span className="text-[13px] font-bold tracking-wide text-stone-800">Offers For You</span>
+      <span className="text-[17px] font-bold tracking-wide text-stone-800">Offers For You</span>
     </div>
-    <span className="text-[11px] font-semibold text-stone-500 bg-white border border-stone-200 px-3 py-1 rounded-full">
+    <span className="text-[14px] font-semibold text-stone-500 bg-white border border-stone-200 px-3 py-1 rounded-full">
       2 available offers
     </span>
   </div>
@@ -709,30 +709,30 @@ export default function SingleProduct() {
     {/* Offer 1 — Online */}
     <div className="flex flex-col gap-3 p-5">
       <div className="flex flex-wrap gap-1.5">
-        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 tracking-wide">
+        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 tracking-wide">
           Extra ₹146 OFF
         </span>
-        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
+        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
           BEST PRICE
         </span>
       </div>
 
       <div>
         <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-[26px] font-bold text-stone-900 leading-none">₹884</span>
-          <span className="text-xs font-bold text-emerald-700">21% off</span>
+          <span className="text-[32px] font-bold text-stone-900 leading-none">₹884</span>
+          <span className="text-sm font-bold text-emerald-700">21% off</span>
         </div>
-        <p className="text-[12px] text-stone-500 leading-snug">Pay Online, Enjoy 15% + Extra 5% Off!</p>
+        <p className="text-[15px] text-stone-500 leading-snug">Pay Online, Enjoy 15% + Extra 5% Off!</p>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-[11px] text-stone-400">Code</span>
-        <code className="text-[11px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
+        <span className="text-[14px] text-stone-400">Code</span>
+        <code className="text-[14px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
           AAYU15
         </code>
       </div>
 
-      <button className="mt-auto w-full py-2.5 bg-[#1A3D2B] text-white text-[12px] font-bold rounded-xl hover:bg-[#0D1F17] transition-all duration-200 tracking-wide">
+      <button className="mt-auto w-full py-2.5 bg-[#1A3D2B] text-white text-[15px] font-bold rounded-xl hover:bg-[#0D1F17] transition-all duration-200 tracking-wide">
         Use Now
       </button>
     </div>
@@ -740,30 +740,30 @@ export default function SingleProduct() {
     {/* Offer 2 — COD */}
     <div className="flex flex-col gap-3 p-5">
       <div className="flex flex-wrap gap-1.5">
-        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 tracking-wide">
+        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 tracking-wide">
           Extra ₹100 OFF
         </span>
-        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
+        <span className="text-[13px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 tracking-wide">
           BEST PRICE
         </span>
       </div>
 
       <div>
         <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-[26px] font-bold text-stone-900 leading-none">₹930</span>
-          <span className="text-xs font-bold text-emerald-700">17% off</span>
+          <span className="text-[32px] font-bold text-stone-900 leading-none">₹930</span>
+          <span className="text-sm font-bold text-emerald-700">17% off</span>
         </div>
-        <p className="text-[12px] text-stone-500 leading-snug">On COD, Enjoy 15% Off!</p>
+        <p className="text-[15px] text-stone-500 leading-snug">On COD, Enjoy 15% Off!</p>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-[11px] text-stone-400">Code</span>
-        <code className="text-[11px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
+        <span className="text-[14px] text-stone-400">Code</span>
+        <code className="text-[14px] font-bold bg-stone-100 text-stone-700 px-2.5 py-1 rounded border border-dashed border-stone-300 tracking-widest">
           AAYU15
         </code>
       </div>
 
-      <button className="mt-auto w-full py-2.5 bg-white border-2 border-stone-200 text-stone-700 text-[12px] font-bold rounded-xl hover:border-stone-400 hover:text-stone-900 transition-all duration-200 tracking-wide">
+      <button className="mt-auto w-full py-2.5 bg-white border-2 border-stone-200 text-stone-700 text-[15px] font-bold rounded-xl hover:border-stone-400 hover:text-stone-900 transition-all duration-200 tracking-wide">
         Use Now
       </button>
     </div>
@@ -779,8 +779,8 @@ export default function SingleProduct() {
               ].map(({ icon, label, sub }, i) => (
                 <div key={label} className={`flex flex-col items-center gap-1.5 py-5 px-2 text-center ${i < 2 ? "border-r border-stone-200" : ""} hover:bg-stone-50 transition-colors`}>
                   <span className="text-2xl">{icon}</span>
-                  <span className="text-xs font-bold text-stone-900 leading-tight tracking-tight">{label}</span>
-                  <span className="text-[11px] text-stone-400 font-medium">{sub}</span>
+                  <span className="text-[16px] font-bold text-stone-900 leading-tight tracking-tight">{label}</span>
+                  <span className="text-[14px] text-stone-400 font-medium">{sub}</span>
                 </div>
               ))}
             </div>
@@ -792,7 +792,7 @@ export default function SingleProduct() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-12 font-body">
         {/* Section header */}
         <div className="flex items-center gap-4 mb-8 divider-ornament">
-          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#C9A84C] whitespace-nowrap px-3">Product Details</span>
+          <span className="text-[15px] font-black uppercase tracking-[0.25em] text-[#C9A84C] whitespace-nowrap px-3">Product Details</span>
         </div>
 
         <div className="space-y-3">
@@ -804,7 +804,7 @@ export default function SingleProduct() {
               >
                 <span className="flex items-center gap-3.5">
                   <span className="text-xl">{icon}</span>
-                  <span className="text-[15px] font-bold text-[#0D1F17] tracking-tight group-hover:text-[#1A3D2B] transition-colors">{label}</span>
+                  <span className="text-[20px] font-bold text-[#0D1F17] tracking-tight group-hover:text-[#1A3D2B] transition-colors">{label}</span>
                 </span>
                 <span className={`w-7 h-7 rounded-full border-2 border-stone-200 flex items-center justify-center text-stone-400 transition-all duration-300 group-hover:border-[#C9A84C] group-hover:text-[#C9A84C] ${openTab === id ? "rotate-180 border-[#C9A84C] text-[#C9A84C] bg-amber-50" : ""}`}>
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
@@ -818,12 +818,12 @@ export default function SingleProduct() {
 
                   {id === "description" && (
                     <div className="py-3 space-y-4">
-                      <p className="text-[16px] text-stone-600 leading-relaxed">{product.productDescription}</p>
+                      <p className="text-[20px] text-stone-600 leading-relaxed">{product.productDescription}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                         {BENEFITS_LIST.map((b) => (
                           <div key={b.key} className="flex gap-3 p-4 rounded-xl bg-[#1A3D2B]/[0.04] border border-[#1A3D2B]/10 items-start">
                             <span className="text-lg flex-shrink-0">{b.icon}</span>
-                            <div className="text-[14px] leading-relaxed text-stone-600">
+                            <div className="text-[18px] leading-relaxed text-stone-600">
                               <span className="font-bold text-[#0D1F17]">{b.key}: </span>
                               {b.val}
                             </div>
@@ -839,8 +839,8 @@ export default function SingleProduct() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {currentIngredients.list.map((row) => (
                           <div key={row.key} className="p-5 rounded-2xl bg-[#0D1F17] border border-[#1A3D2B]">
-                            <span className="font-black text-[#C9A84C] text-[10px] uppercase tracking-[0.2em] block mb-2">{row.key}</span>
-                            <span className="text-[14px] text-white/70 font-medium leading-relaxed">{row.val}</span>
+                            <span className="font-black text-[#C9A84C] text-[14px] uppercase tracking-[0.2em] block mb-2">{row.key}</span>
+                            <span className="text-[18px] text-white/70 font-medium leading-relaxed">{row.val}</span>
                           </div>
                         ))}
                       </div>
@@ -848,7 +848,7 @@ export default function SingleProduct() {
                       {/* Pills */}
                       <div className="flex flex-wrap gap-2.5">
                         {currentIngredients.pills.map((ing) => (
-                          <span key={ing} className="px-4 py-2 rounded-full bg-stone-100 text-stone-700 border border-stone-200 text-[11px] font-bold uppercase tracking-wide hover:bg-[#1A3D2B] hover:text-white hover:border-[#1A3D2B] transition-all duration-200 cursor-default">
+                          <span key={ing} className="px-4 py-2 rounded-full bg-stone-100 text-stone-700 border border-stone-200 text-[14px] font-bold uppercase tracking-wide hover:bg-[#1A3D2B] hover:text-white hover:border-[#1A3D2B] transition-all duration-200 cursor-default">
                             {ing}
                           </span>
                         ))}
@@ -866,10 +866,10 @@ export default function SingleProduct() {
                                 <img src={img} alt={name} className="w-full h-full object-cover" />
                               </div>
                               <div className="w-full md:w-1/2 space-y-4">
-                                <p className="text-[#C9A84C] font-black text-[10px] uppercase tracking-[0.25em]">Key Ingredient</p>
-                                <h3 className="font-display text-4xl font-bold text-[#0D1F17]">{name}</h3>
+                                <p className="text-[#C9A84C] font-black text-[14px] uppercase tracking-[0.25em]">Key Ingredient</p>
+                                <h3 className="font-display text-5xl font-bold text-[#0D1F17]">{name}</h3>
                                 <div className="w-16 h-0.5 bg-gradient-to-r from-[#C9A84C] to-[#1A3D2B] rounded-full" />
-                                <p className="text-[16px] text-stone-600 leading-relaxed">{desc}</p>
+                                <p className="text-[20px] text-stone-600 leading-relaxed">{desc}</p>
                               </div>
                             </div>
                           );
@@ -882,14 +882,14 @@ export default function SingleProduct() {
                     <div className="space-y-3 py-3">
                       {WARNING_LIST.map((row) => (
                         <div key={row.key} className="flex gap-3 p-4 rounded-xl bg-amber-50/60 border border-amber-100">
-                          <span className="text-amber-500 flex-shrink-0 text-sm mt-0.5">⚠</span>
-                          <div className="text-sm">
+                          <span className="text-amber-500 flex-shrink-0 text-lg mt-0.5">⚠</span>
+                          <div className="text-lg">
                             <span className="font-bold text-stone-800">{row.key}: </span>
                             <span className="text-stone-600">{row.val}</span>
                           </div>
                         </div>
                       ))}
-                      <p className="text-sm font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-4 mt-4">
+                      <p className="text-lg font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-4 mt-4">
                         ⚠ Always consult a qualified healthcare provider before use. Not intended to diagnose or treat any disease.
                       </p>
                     </div>
@@ -906,11 +906,11 @@ export default function SingleProduct() {
                         <div key={item.step} className="flex gap-5 p-5 rounded-xl bg-stone-50 border border-stone-100 hover:border-[#C9A84C]/30 transition-colors group">
                           <div className="flex flex-col items-center gap-1">
                             <span className="text-2xl">{item.icon}</span>
-                            <span className="font-display text-[11px] font-bold text-[#C9A84C] tracking-widest">{item.step}</span>
+                            <span className="font-display text-[15px] font-bold text-[#C9A84C] tracking-widest">{item.step}</span>
                           </div>
                           <div>
-                            <p className="font-bold text-[#0D1F17] text-sm mb-1 tracking-tight">{item.title}</p>
-                            <p className="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+                            <p className="font-bold text-[#0D1F17] text-lg mb-1 tracking-tight">{item.title}</p>
+                            <p className="text-lg text-stone-500 leading-relaxed">{item.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -922,23 +922,23 @@ export default function SingleProduct() {
                       {REVIEWS.map((r, i) => (
                         <div key={i} className="p-5 rounded-xl bg-stone-50 border border-stone-100 hover:border-[#C9A84C]/20 transition-colors">
                           <div className="flex items-start gap-4 mb-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#1A3D2B] to-[#2A5C40] text-white text-sm font-bold flex items-center justify-center flex-shrink-0 shadow-sm font-display">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1A3D2B] to-[#2A5C40] text-lg font-bold flex items-center justify-center flex-shrink-0 shadow-sm font-display">
                               {r.initial}
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center gap-3 flex-wrap">
-                                <p className="font-bold text-stone-900 text-sm tracking-tight">{r.name}</p>
+                                <p className="font-bold text-stone-900 text-[18px] tracking-tight">{r.name}</p>
                                 {r.verified && (
-                                  <span className="text-[10px] font-bold text-[#1A3D2B] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">✓ Verified Purchase</span>
+                                  <span className="text-[14px] font-bold text-[#1A3D2B] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">✓ Verified Purchase</span>
                                 )}
                               </div>
                               <div className="flex items-center gap-2 mt-1">
-                                <StarRow rating={r.rating} size="text-xs" />
-                                <span className="text-[11px] text-stone-400 font-medium">{r.date}</span>
+                                <StarRow rating={r.rating} size="text-sm" />
+                                <span className="text-[14px] text-stone-400 font-medium">{r.date}</span>
                               </div>
                             </div>
                           </div>
-                          <p className="text-sm text-stone-600 leading-relaxed">{r.text}</p>
+                          <p className="text-[18px] text-stone-600 leading-relaxed">{r.text}</p>
                         </div>
                       ))}
                     </div>

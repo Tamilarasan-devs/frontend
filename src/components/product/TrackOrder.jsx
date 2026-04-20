@@ -150,14 +150,13 @@ export default function TrackOrder() {
     <div style={{
       minHeight: "100vh",
       background: "#fdf6f0",
-      fontFamily: "'DM Sans', 'Nunito', sans-serif",
+
       position: "relative",
       overflowX: "hidden",
     }}>
 
       {/* ── STYLES ── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
         .to-input::placeholder { color: #c4a99a; }
         .to-input:focus { outline: none; }
@@ -206,7 +205,7 @@ export default function TrackOrder() {
             <span style={{ color:ACCENT, fontSize:11, fontWeight:700, letterSpacing:".14em", textTransform:"uppercase" }}>Live Order Tracking</span>
           </div>
 
-          <h1 style={{ fontFamily:"'Playfair Display',serif", color:BRAND, fontSize:"clamp(36px,6vw,68px)", fontWeight:900, margin:"0 0 16px", lineHeight:1.08, letterSpacing:"-.02em" }}>
+          <h1 style={{ color:BRAND, fontSize:"clamp(36px,6vw,68px)", fontWeight:900, margin:"0 0 16px", lineHeight:1.08, letterSpacing:"-.02em" }}>
             Where's My<br />
             <span style={{ background:`linear-gradient(100deg, ${BRAND} 0%, ${ACCENT} 60%, #e8904a 100%)`, backgroundSize:"200% 100%", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", animation:"to-shimmer 4s linear infinite" }}>
               Package?
@@ -320,7 +319,7 @@ export default function TrackOrder() {
                   <div>
                     <p style={{ color:"rgba(255,255,255,.4)", fontSize:10, fontWeight:700, letterSpacing:".18em", textTransform:"uppercase", margin:"0 0 7px" }}>Order ID</p>
                     <div style={{ display:"flex", alignItems:"center", gap:12 }}>
-                      <span style={{ color:"#fff", fontFamily:"'Playfair Display',serif", fontSize:28, fontWeight:700 }}>{order.id}</span>
+                      <span style={{ color:"#fff", fontSize:28, fontWeight:700 }}>{order.id}</span>
                       <button
                         className="to-cpill"
                         onClick={handleCopy}
@@ -384,7 +383,7 @@ export default function TrackOrder() {
               }}
             >
               <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:12, marginBottom:26 }}>
-                <h3 style={{ fontFamily:"'Playfair Display',serif", color:BRAND, fontSize:19, fontWeight:700, margin:0, display:"flex", alignItems:"center", gap:10 }}>
+                <h3 style={{ color:BRAND, fontSize:19, fontWeight:700, margin:0, display:"flex", alignItems:"center", gap:10 }}>
                   <FaTruck size={15} color={ACCENT} /> Shipment Timeline
                 </h3>
                 <div style={{ display:"flex", alignItems:"center", gap:8, background:"#f9f4f0", borderRadius:10, padding:"6px 14px", border:"1px solid rgba(201,100,58,.12)" }}>
@@ -509,7 +508,7 @@ export default function TrackOrder() {
         {searched && !order && !loading && (
           <div style={{ textAlign:"center", padding:"80px 24px", animation:"to-fadeup .6s ease both" }}>
             <div style={{ fontSize:60, marginBottom:18 }}>📦</div>
-            <h3 style={{ fontFamily:"'Playfair Display',serif", color:BRAND, fontSize:24, fontWeight:700, margin:"0 0 10px" }}>Order Not Found</h3>
+            <h3 style={{ color:BRAND, fontSize:24, fontWeight:700, margin:"0 0 10px" }}>Order Not Found</h3>
             <p style={{ color:"#a07060", fontSize:14, maxWidth:320, margin:"0 auto", lineHeight:1.8 }}>
               Double-check your Order ID or contact our support team.<br />
               <strong style={{ color:BRAND }}>Try: AYU-2025-001 or AYU-2025-002</strong>

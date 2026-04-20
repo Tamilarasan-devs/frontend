@@ -252,7 +252,7 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
             overflow: "hidden",
           }}
         >
-          <span className="text-[#829b1c] font-extrabold">FOR :</span>
+          <span className="text-[#829b1c] font-extrabold">FOR : </span>
           {product.forWhom}
         </p>
 
@@ -266,7 +266,7 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
             overflow: "hidden",
           }}
         >
-          <span className="text-[#c9643a] font-extrabold">WITH :</span>
+          <span className="text-[#c9643a] font-extrabold">WITH : </span>
           {product.withWhom}
         </p>
 

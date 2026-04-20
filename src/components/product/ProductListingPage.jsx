@@ -3,13 +3,13 @@ import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
 import ProductCard from './ProductCard'
 // ─── Config ────────────────────────────────────────────────────────────────────
-import cate1 from '../../assets/images/allCate/cate1.jpg'
-import cate2 from '../../assets/images/allCate/cate2.jpg'
-import cate3 from '../../assets/images/allCate/cate3.jpg'
-import cate4 from '../../assets/images/allCate/cate4.jpg'
-import cate5 from '../../assets/images/allCate/cate5.jpg'
-import cate6 from '../../assets/images/allCate/cate6.jpg'
-import cate7 from '../../assets/images/allCate/cate7.jpg'
+import cate1 from '../../assets/images/allCate/cate1.png'
+import cate2 from '../../assets/images/allCate/cate2.png'
+import cate3 from '../../assets/images/allCate/cate3.png'
+import cate4 from '../../assets/images/allCate/cate4.png'
+import cate5 from '../../assets/images/allCate/cate5.png'
+import cate6 from '../../assets/images/allCate/cate6.png'
+// import cate7 from '../../assets/images/allCate/cate3.png'
 import Banner from '../layout/Banner'
 import OfferScrollBar from '../layout/OfferScrollBar'
 import FirstBanner from "../layout/banner/FirstBanner";
@@ -17,7 +17,7 @@ import FirstBanner from "../layout/banner/FirstBanner";
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 const FALLBACK_EMOJIS = ["🌿", "❤️", "🛡️", "🌱", "✨", "💊", "🔋", "🧘", "🧴", "🥣"];
-const FALLBACK_IMAGES = [cate1, cate2, cate3, cate4, cate5, cate6, cate7];
+const FALLBACK_IMAGES = [cate1, cate2, cate3, cate4, cate5, cate6];
 const calcDiscount = (price, final) =>
   Math.round(((parseFloat(price) - parseFloat(final)) / parseFloat(price)) * 100);
 
