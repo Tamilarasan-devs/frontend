@@ -6,6 +6,7 @@ import img3 from '../assets/images/resar.jpeg';
 import img4 from '../assets/images/pure.jpeg';
 import bnr from '../assets/images/about/about.jpg'
 import OurBusiness from "./AboutPage";
+import { useNavigate } from "react-router-dom";
 
 const sections = [
   {
@@ -243,6 +244,8 @@ function Section({ section, index }) {
 
 export default function AboutPage() {
 
+  const navigate= useNavigate()
+
   return (
     <div className="min-h-screen" style={{ background: "#fdf8f4" }}>
       
@@ -395,6 +398,7 @@ export default function AboutPage() {
               letterSpacing: "0.08em",
               boxShadow: "0 6px 24px rgba(200,146,42,0.4)",
             }}
+            onClick={()=>{navigate("/productListing")}}
           >
             Explore Products
           </button>
