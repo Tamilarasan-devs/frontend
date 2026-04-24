@@ -106,13 +106,13 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
       { bg: "#9D174D", border: "#831341", text: "#FFFFFF" }, // Pink
       { bg: "#111827", border: "#000000", text: "#FFFFFF" }, // Near Black
     ];
-    
+
     // Hash the tag string to get a stable base index
     let hash = 0;
     for (let i = 0; i < tag.length; i++) {
       hash = tag.charCodeAt(i) + ((hash << 5) - hash);
     }
-    
+
     // Use the hash + the index offset (i) to ensure different words on the same card stay unique
     const index = (Math.abs(hash) + indexOffset) % palettes.length;
     return palettes[index];
@@ -163,8 +163,6 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
       })}
 
       <div
-        // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[450px] sm:h-[350px] aspect-[4/3] rounded-xl"
-        // className="relative overflow-hidden bg-[#f9f5f2] w-full h-[350px] sm:h-[450px] aspect-[4/3] rounded-xl"
         className="
   relative overflow-hidden bg-[#f9f5f2] w-full 
   h-[350px]        // 📱 mobile (default)
@@ -204,6 +202,8 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
         />
 
         {/* Discount ribbon — top-right corner */}
+
+
         <div
           className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
           style={{
@@ -322,8 +322,8 @@ export default function ProductCard({ product, animDelay, sectionVisible }) {
 
           {/* Right side: Text */}
           <div
-             className="flex-1 shim-btn flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
-              style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
+            className="flex-1 shim-btn flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
+            style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
           >
             {addMut.isPending ? "Adding..." : "Add to Cart"}
           </div>

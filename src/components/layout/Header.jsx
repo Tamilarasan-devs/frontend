@@ -191,7 +191,7 @@ export default function Header() {
             <span className="logo-shine absolute inset-y-0 w-10 pointer-events-none"
               style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)" }} />
             <p className="font-cinzel text-[20px] sm:text-[25px] font-bold tracking-tight leading-none bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
-              Aayubakawath
+              Aayubakwath
             </p>
             <span className="block h-px mt-1"
               style={{ background: "linear-gradient(90deg,#c9a84c 55%,transparent)" }} />
@@ -224,11 +224,11 @@ export default function Header() {
                           border border-[#c9a84c] transition-all duration-200 bg-[rgba(201,168,76,0.08)]
                           hover:border-[#c9a84c] hover:bg-[rgba(201,168,76,0.08)]
                           hover:-translate-y-0.5"
-               style={{
-                  background: "linear-gradient(135deg,#03349a,#0145cc)",
-                  border: "2px solid #c9a84c",
-                  boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
-                }}>
+              style={{
+                background: "linear-gradient(135deg,#03349a,#0145cc)",
+                border: "2px solid #c9a84c",
+                boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
+              }}>
               <FaHeart size={14} color='white' />
               {wishlistCount > 0 && <Dot n={wishlistCount} accent={true} />}
             </a>
@@ -239,12 +239,12 @@ export default function Header() {
                           border border-[#c9a84c] transition-all duration-200 bg-[rgba(201,168,76,0.08)]
                           hover:border-[#c9a84c] hover:bg-[rgba(201,168,76,0.12)]
                           hover:-translate-y-0.5"
-               style={{
-                  background: "linear-gradient(135deg,#03349a,#0145cc)",
-                  border: "2px solid #c9a84c",
-                  boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
-                }}>
-              <FaTruck size={14}  color='white'/>
+              style={{
+                background: "linear-gradient(135deg,#03349a,#0145cc)",
+                border: "2px solid #c9a84c",
+                boxShadow: "0 3px 12px rgba(139,0,0,0.28)"
+              }}>
+              <FaTruck size={14} color='white' />
             </a>
 
             {/* Cart Button */}
@@ -253,7 +253,7 @@ export default function Header() {
               className="flex shim-btn items-center justify-center gap-2 px-6 py-3.5 text-white text-[13px] font-bold uppercase tracking-wider rounded-2xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0"
               style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
               onClick={() => navigate('/cart')}
-              
+
             >
               <FaShoppingCart className="w-4 h-4 flex-shrink-0" />
               <span>Cart</span>

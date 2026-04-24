@@ -34,7 +34,7 @@ const LogoSVG = ({ animated }) => (
   </svg>
 );
 
-const LETTERS = "AAYUBAKAWATH".split("");
+const LETTERS = "Aayubakwath".split("");
 
 export default function SplashScreen({ onFinish } = {}) {
   const [logoAnim, setLogoAnim] = useState(false);
@@ -55,7 +55,7 @@ export default function SplashScreen({ onFinish } = {}) {
     const t4 = setTimeout(() => setTaglineVisible(true), 3000);
     const t5 = setTimeout(() => setFadeOut(true), 4600);
     const t6 = setTimeout(() => setDone(true), 5400);
-    return () => [t1,t2,t3,t4,t5,t6].forEach(clearTimeout);
+    return () => [t1, t2, t3, t4, t5, t6].forEach(clearTimeout);
   }, []);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function SplashScreen({ onFinish } = {}) {
         fontFamily: "Cormorant Garamond, Georgia, serif",
         fontSize: 22, color: "#8B5E3C", letterSpacing: "0.2em"
       }}>
-        ✦ Welcome to Aayubakawath ✦
+        ✦ Welcome to Aayubakwath ✦
       </div>
     );
   }
@@ -139,10 +139,10 @@ export default function SplashScreen({ onFinish } = {}) {
           opacity: logoAnim ? 0.06 : 0,
           transition: "opacity 1.5s ease 0.8s",
         }} viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
-          <circle cx="400" cy="300" r="220" stroke="#8B1010" strokeWidth="1.5" fill="none"/>
-          <circle cx="400" cy="300" r="175" stroke="#D4845A" strokeWidth="1" fill="none"/>
-          <circle cx="400" cy="300" r="290" stroke="#6B8C1A" strokeWidth="0.8" fill="none"/>
-          <circle cx="400" cy="300" r="340" stroke="#8B1010" strokeWidth="0.5" fill="none"/>
+          <circle cx="400" cy="300" r="220" stroke="#8B1010" strokeWidth="1.5" fill="none" />
+          <circle cx="400" cy="300" r="175" stroke="#D4845A" strokeWidth="1" fill="none" />
+          <circle cx="400" cy="300" r="290" stroke="#6B8C1A" strokeWidth="0.8" fill="none" />
+          <circle cx="400" cy="300" r="340" stroke="#8B1010" strokeWidth="0.5" fill="none" />
         </svg>
 
         {/* Orbiting ring */}
@@ -159,12 +159,12 @@ export default function SplashScreen({ onFinish } = {}) {
             position: "absolute", top: -4, left: "50%", marginLeft: -4,
             width: 8, height: 8, borderRadius: "50%",
             background: "#D4845A", opacity: 0.7,
-          }}/>
+          }} />
           <div style={{
             position: "absolute", bottom: -4, left: "50%", marginLeft: -4,
             width: 6, height: 6, borderRadius: "50%",
             background: "#6B8C1A", opacity: 0.7,
-          }}/>
+          }} />
         </div>
 
         {/* Floating particles */}
@@ -178,11 +178,11 @@ export default function SplashScreen({ onFinish } = {}) {
             opacity: particlesVisible ? p.opacity : 0,
             transition: `opacity 1.2s ease ${p.delay}`,
             animation: particlesVisible ? `floatDot ${p.duration} ease-in-out ${p.delay} infinite alternate` : "none",
-          }}/>
+          }} />
         ))}
 
         {/* Corner decorations */}
-        {["top-left","top-right","bottom-left","bottom-right"].map((pos, i) => (
+        {["top-left", "top-right", "bottom-left", "bottom-right"].map((pos, i) => (
           <div key={pos} style={{
             position: "absolute",
             top: pos.includes("top") ? 28 : "auto",
@@ -195,10 +195,10 @@ export default function SplashScreen({ onFinish } = {}) {
           }}>
             <svg viewBox="0 0 40 40" fill="none">
               <path d={pos.includes("top-left") ? "M0 20 L0 0 L20 0" :
-                       pos.includes("top-right") ? "M40 20 L40 0 L20 0" :
-                       pos.includes("bottom-left") ? "M0 20 L0 40 L20 40" :
-                       "M40 20 L40 40 L20 40"
-              } stroke="#8B1010" strokeWidth="1.5" fill="none"/>
+                pos.includes("top-right") ? "M40 20 L40 0 L20 0" :
+                  pos.includes("bottom-left") ? "M0 20 L0 40 L20 40" :
+                    "M40 20 L40 40 L20 40"
+              } stroke="#8B1010" strokeWidth="1.5" fill="none" />
             </svg>
           </div>
         ))}
@@ -216,7 +216,7 @@ export default function SplashScreen({ onFinish } = {}) {
             transition: "opacity 0.8s ease, transform 1s cubic-bezier(0.34,1.56,0.64,1)",
             animation: logoAnim ? "breathe 4s ease-in-out 2s infinite" : "none",
           }}>
-            <img src={logo} alt="log" animated={logoAnim}  className="rounded-full"/>
+            <img src={logo} alt="log" animated={logoAnim} className="rounded-full" />
             {/* <LogoSVG animated={logoAnim} /> */}
           </div>
 
@@ -248,13 +248,13 @@ export default function SplashScreen({ onFinish } = {}) {
             transform: taglineVisible ? "scaleX(1)" : "scaleX(0)",
             transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1)",
           }}>
-            <div style={{ width: 56, height: 1, background: "linear-gradient(to right, transparent, #8B1010, rgba(139,16,16,0.4))" }}/>
+            <div style={{ width: 56, height: 1, background: "linear-gradient(to right, transparent, #8B1010, rgba(139,16,16,0.4))" }} />
             <svg width="18" height="18" viewBox="0 0 18 18">
-              <circle cx="9" cy="9" r="3" fill="#6B8C1A"/>
-              <circle cx="9" cy="9" r="6.5" stroke="#D4845A" strokeWidth="0.8" fill="none"/>
-              <circle cx="9" cy="9" r="8.5" stroke="#8B1010" strokeWidth="0.4" fill="none" strokeDasharray="2,3"/>
+              <circle cx="9" cy="9" r="3" fill="#6B8C1A" />
+              <circle cx="9" cy="9" r="6.5" stroke="#D4845A" strokeWidth="0.8" fill="none" />
+              <circle cx="9" cy="9" r="8.5" stroke="#8B1010" strokeWidth="0.4" fill="none" strokeDasharray="2,3" />
             </svg>
-            <div style={{ width: 56, height: 1, background: "linear-gradient(to left, transparent, #8B1010, rgba(139,16,16,0.4))" }}/>
+            <div style={{ width: 56, height: 1, background: "linear-gradient(to left, transparent, #8B1010, rgba(139,16,16,0.4))" }} />
           </div>
 
           {/* Tagline */}
@@ -290,7 +290,7 @@ export default function SplashScreen({ onFinish } = {}) {
             background: "linear-gradient(to right, #8B1010, #D4845A, #6B8C1A)",
             borderRadius: 2,
             animation: taglineVisible ? "loadFill 1.8s ease forwards" : "none",
-          }}/>
+          }} />
         </div>
 
         {/* Byline */}

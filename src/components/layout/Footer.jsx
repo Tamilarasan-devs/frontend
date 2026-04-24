@@ -24,7 +24,7 @@ const helpLinks = [
 
 const socials = [
   { icon: <FaFacebookF size={13} />, link: "https://www.facebook.com/", label: "Facebook" },
-  { icon: <FaInstagram size={13} />, link: "https://www.instagram.com/aayubakawath/", label: "Instagram" },
+  { icon: <FaInstagram size={13} />, link: "https://www.instagram.com/Aayubakwath/", label: "Instagram" },
   { icon: <FaTwitter size={13} />, link: "https://x.com/Aayubakwath", label: "Twitter" },
   { icon: <FaYoutube size={13} />, link: "https://studio.youtube.com/channel/UCx9SZTz-XdtUMtKz5pZsJcg/editing/profile", label: "YouTube" },
   { icon: <FaLinkedinIn size={13} />, link: "https://www.linkedin.com/in/sri-bakawathi-life-science-932a143b2/", label: "LinkedIn" },
@@ -170,13 +170,13 @@ export default function Footer() {
                 <a href="/">
                   <img
                     src={logo}
-                    alt="Aayubakawath Logo"
+                    alt="Aayubakwath Logo"
                     className="w-9 h-9 rounded-lg object-cover transition-transform hover:rotate-6 duration-300"
                   />
                 </a>
                 <div style={{ borderLeft: "1.5px solid rgba(201,168,76,0.35)", paddingLeft: 12 }}>
                   <p className="font-extrabold leading-tight" style={{ fontSize: 20, color: "var(--blue)", letterSpacing: "0.02em" }}>
-                    Aayubakawath
+                    Aayubakwath
                   </p>
                   <span style={{ fontSize: 12, fontWeight: 700, color: "var(--gold)", textTransform: "uppercase", letterSpacing: "0.14em" }}>
                     Ayurvedic Wellness
@@ -300,7 +300,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-3">
           <p className="m-0" style={{ fontSize: 15, color: "#6a5050", fontWeight: 500 }}>
-            © 2026 <span style={{ color: "var(--blue)", fontWeight: 700 }}>Aayubakawath</span>. All Rights Reserved.
+            © 2026 <span style={{ color: "var(--blue)", fontWeight: 700 }}>Aayubakwath</span>. All Rights Reserved.
           </p>
           <p className="m-0 text-right" style={{ fontSize: 14, color: "#8a7070", maxWidth: 480, lineHeight: 1.5 }}>
             *Ancient wisdom meets modern science. Our products derived from tradition.

@@ -190,20 +190,20 @@ Details: ${form.details}`
                 <ul className="space-y-2.5 m-0 p-0 list-none">
                   {["Flat discounts on every order","Dedicated account manager","Branded / custom packaging","Priority shipping pan-India","Flexible payment terms"].map(t=>(
                     <li key={t} className="flex items-start gap-2.5 text-sm text-white/85">
-                      <span className="text-yellow-400 mt-0.5 font-bold">✓</span> {t}
+                      <span className="text-yellow-400 mt-0.5 text-[17px] font-bold">✓</span> {t}
                     </li>
                   ))}
                 </ul>
               </div>
 
               <div className="rounded-3xl p-6" style={{background:"#fff",border:"1.5px solid #f0ece8",boxShadow:"0 8px 24px rgba(0,0,0,.05)"}}>
-                <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{color:"var(--amber)"}}>Quick Contact</p>
+                <p className="text-[15px] font-bold uppercase tracking-widest mb-3" style={{color:"var(--amber)"}}>Quick Contact</p>
                 <div className="space-y-3">
-                  <a href="mailto:info.sblsmarketing@gmail.com" className="flex items-center gap-3 text-sm font-semibold text-gray-900 no-underline hover:text-red-800 transition-colors">
+                  <a href="mailto:info.sblsmarketing@gmail.com" className="flex items-center gap-3 text-[16px] font-semibold text-gray-900 no-underline hover:text-red-800 transition-colors">
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0" style={{background:"#fdf4f4"}}>✉️</span>
                     info.sblsmarketing@gmail.com
                   </a>
-                  <a href="tel:+919344398462" className="flex items-center gap-3 text-sm font-semibold text-gray-900 no-underline hover:text-red-800 transition-colors">
+                  <a href="tel:+919344398462" className="flex items-center gap-3 text-[16px] font-semibold text-gray-900 no-underline hover:text-red-800 transition-colors">
                     <span className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0" style={{background:"#fdf4f4"}}>📞</span>
                     +91 94431 57282
                   </a>
@@ -227,7 +227,7 @@ Details: ${form.details}`
                     {inputFields.map(field=>(
                       <div key={field.name} className={field.col==="full"?"sm:col-span-2":""}>
                         <label htmlFor={field.name}
-                               className="block text-[11px] font-bold uppercase tracking-widest mb-1.5"
+                               className="block text-[13px] font-bold uppercase tracking-widest mb-1.5"
                                style={{color:"var(--red)"}}>
                           {field.label}
                         </label>
@@ -241,7 +241,7 @@ Details: ${form.details}`
                     ))}
                     <div className="sm:col-span-2">
                       <label htmlFor="details"
-                             className="block text-[11px] font-bold uppercase tracking-widest mb-1.5"
+                             className="block text-[13px] font-bold uppercase tracking-widest mb-1.5"
                              style={{color:"var(--red)"}}>
                         Additional Details
                       </label>
@@ -256,7 +256,7 @@ Details: ${form.details}`
                   </div>
                   <div className="h-px my-6" style={{background:"#f0ece8"}} />
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <p className="text-xs font-semibold text-gray-900 leading-relaxed max-w-xs m-0">
+                    <p className="text-md font-semibold text-gray-900 leading-relaxed max-w-xs m-0">
                       Our team will reach out within{" "}
                       <span className="font-semibold" style={{color:"var(--red)"}}>24–48 hours</span>.
                     </p>
@@ -275,7 +275,7 @@ Details: ${form.details}`
         {/* ══ FEATURE ICONS ══ */}
         <div className="max-w-5xl mx-auto px-4 pb-20">
           <div className="reveal text-center mb-8">
-            <p className="text-xs font-bold uppercase tracking-widest" style={{color:"var(--amber)"}}>Why Choose Us</p>
+            <p className="text-[18px] font-bold uppercase tracking-widest" style={{color:"var(--amber)"}}>Why Choose Us</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {features.map((f,i)=>(
@@ -292,7 +292,7 @@ Details: ${form.details}`
     {f.img}
   </div>
 
-  <h4 className="f-syne font-bold text-sm text-gray-900 mb-1.5 leading-snug break-words">
+  <h4 className="f-syne font-bold text-md text-gray-900 mb-1.5 leading-snug break-words">
     {f.title}
   </h4>
 

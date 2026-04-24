@@ -119,9 +119,9 @@ export default function BeforeAfterGrid() {
       >
         <div className="text-center">
 
-        <h1 className="inline-block text-3xl font-bold text-center mb-2 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
-  Over 1 Million People Trust Aayubakawath
-</h1>
+          <h1 className="inline-block text-3xl font-bold text-center mb-2 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+            Over 1 Million People Trust Aayubakwath
+          </h1>
         </div>
 
         <div

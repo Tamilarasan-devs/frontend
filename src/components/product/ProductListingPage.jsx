@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
 import ProductCard from './ProductCard'
 // ─── Config ────────────────────────────────────────────────────────────────────
@@ -15,7 +14,7 @@ import OfferScrollBar from '../layout/OfferScrollBar'
 import FirstBanner from "../layout/banner/FirstBanner";
 // import {products} from '../../services/productData'
 
-// ─── Helpers ───────────────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 const FALLBACK_EMOJIS = ["🌿", "❤️", "🛡️", "🌱", "✨", "💊", "🔋", "🧘", "🧴", "🥣"];
 const FALLBACK_IMAGES = [cate1, cate2, cate3, cate4, cate5, cate6];
 const calcDiscount = (price, final) =>
@@ -66,12 +65,12 @@ const Icons = {
 };
 
 // ─── Header Component ──────────────────────────────────────────────────────────
-function Header({  search, setSearch }) {
+function Header({ search, setSearch }) {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-center gap-3 sm:gap-6">
 
-        
+
 
         {/* Search */}
         <div className="flex-1 max-w-md">
@@ -105,7 +104,7 @@ function Sidebar({ categories, selected, onSelect }) {
   return (
     <aside className="w-64 hidden md:block sticky top-20 h-fit">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        
+
         <div className="px-4 py-3 border-b border-gray-100 bg-gray-50/60">
           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
             Categories name
@@ -212,14 +211,14 @@ function MobileDrawer({ categories, selected, onSelect, open, onClose }) {
 // ─── Main Page Component ───────────────────────────────────────────────────────
 export default function ProductListingPage() {
 
-  const [products, setProducts]           = useState([]);
-  const [loading, setLoading]             = useState(true);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [rawCategories, setRawCategories] = useState([]);
-  const [category, setCategory]           = useState("all");
-  const [search, setSearch]         = useState("");
-  const [sortBy, setSortBy]         = useState("default");
-  const [offerTag, setOfferTag]     = useState("All");
-  const [cartCount, setCartCount]   = useState(0);
+  const [category, setCategory] = useState("all");
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("default");
+  const [offerTag, setOfferTag] = useState("All");
+  const [cartCount, setCartCount] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // ── Fetch products ──
@@ -269,7 +268,7 @@ export default function ProductListingPage() {
     const dynamicItems = (rawCategories || []).map((cat, idx) => {
       // Calculate count from products state
       const count = products.filter(p => p.categoryId === cat.id).length;
-      
+
       return {
         id: cat.id,
         name: cat.category, // Backend field is 'category'
@@ -297,7 +296,7 @@ export default function ProductListingPage() {
 
   const getTagColor = (tag) => {
     if (tag === "All") return { bg: "#F3F4F6", border: "#D1D5DB", text: "#374151", activeBg: "#374151" };
-    
+
     const palettes = [
       { bg: "#E0F2FE", border: "#7DD3FC", text: "#0369A1", activeBg: "#0369A1" }, // Blue
       { bg: "#F0FDF4", border: "#86EFAC", text: "#166534", activeBg: "#166534" }, // Green
@@ -307,10 +306,10 @@ export default function ProductListingPage() {
       { bg: "#FFFBEB", border: "#FDE68A", text: "#92400E", activeBg: "#92400E" }, // Amber
       { bg: "#FDF2F9", border: "#F9A8D4", text: "#9D174D", activeBg: "#9D174D" }, // Pink
     ];
-    
+
     let hash = 0;
     for (let i = 0; i < tag.length; i++) {
-        hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+      hash = tag.charCodeAt(i) + ((hash << 5) - hash);
     }
     const index = Math.abs(hash) % palettes.length;
     return palettes[index];
@@ -318,17 +317,17 @@ export default function ProductListingPage() {
   // ── Filter + sort products ──
   const filteredProducts = useMemo(() => {
     let list = products.filter((p) => {
-      const matchCat  = category === "all" || p.categoryId === category;
-      const matchQ    = !search
+      const matchCat = category === "all" || p.categoryId === category;
+      const matchQ = !search
         || p.productName.toLowerCase().includes(search.toLowerCase())
         || p.productTags?.some((t) => t.toLowerCase().includes(search.toLowerCase()));
-      const matchTag  = offerTag === "All" || p.offerTags?.includes(offerTag);
+      const matchTag = offerTag === "All" || p.offerTags?.includes(offerTag);
       return matchCat && matchQ && matchTag;
     });
 
-    if (sortBy === "price-asc")  list = [...list].sort((a, b) => parseFloat(a.finalPrice) - parseFloat(b.finalPrice));
+    if (sortBy === "price-asc") list = [...list].sort((a, b) => parseFloat(a.finalPrice) - parseFloat(b.finalPrice));
     if (sortBy === "price-desc") list = [...list].sort((a, b) => parseFloat(b.finalPrice) - parseFloat(a.finalPrice));
-    if (sortBy === "discount")   list = [...list].sort((a, b) =>
+    if (sortBy === "discount") list = [...list].sort((a, b) =>
       calcDiscount(b.price, b.finalPrice) - calcDiscount(a.price, a.finalPrice));
 
     return list;
@@ -345,11 +344,11 @@ export default function ProductListingPage() {
     <div className=" bg-gray-50 ">
 
       {/* ── Header ── */}
-      <Banner/>
+      <Banner />
       {/* <TopScroll/> */}
-      <OfferScrollBar/>
+      <OfferScrollBar />
       <Header cartCount={cartCount} search={search} setSearch={setSearch} />
-<FirstBanner/>
+      <FirstBanner />
       {/* ── Mobile Drawer ── */}
       <MobileDrawer
         categories={computedCategories}
@@ -450,21 +449,21 @@ export default function ProductListingPage() {
                       />
                     ))}
             </div> */}
-   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
-  {filteredProducts
-    ?.filter(Boolean) // removes undefined/null
-    .map((product, idx) => (
-      <div key={product.id || idx} className="flex">
-        <ProductCard
-          product={product}
-          animDelay={idx * 0.08}
-          sectionVisible={true}
-          onClick={(item) => console.log("Go to product", item)}
-          onAddToCart={(item) => console.log("Add to cart", item)}
-        />
-      </div>
-    ))}
-</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
+              {filteredProducts
+                ?.filter(Boolean) // removes undefined/null
+                .map((product, idx) => (
+                  <div key={product.id || idx} className="flex">
+                    <ProductCard
+                      product={product}
+                      animDelay={idx * 0.08}
+                      sectionVisible={true}
+                      onClick={(item) => console.log("Go to product", item)}
+                      onAddToCart={(item) => console.log("Add to cart", item)}
+                    />
+                  </div>
+                ))}
+            </div>
           </main>
         </div>
       </div>

@@ -95,7 +95,7 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf9f7]" style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif" }}>
+    <div className="min-h-screen bg-[#faf9f7]">
 
       {/* ── Header ── */}
       <div className="bg-white border-b border-stone-100 sticky top-0 z-20 shadow-sm">

@@ -184,7 +184,7 @@ export default function CartPage() {
                   style={{ background: BRAND }}>{totalItems} item{totalItems !== 1 ? "s" : ""}</span>
               )}
             </div>
-            <p className="text-sm text-gray-400">Review your items before checkout</p>
+            <p className="text-md text-gray-700">Review your items before checkout</p>
           </div>
 
           {/* ── Empty State ── */}
@@ -347,34 +347,34 @@ export default function CartPage() {
                   {/* Summary Header */}
                   <div className="px-5 sm:px-6 py-4 border-b border-gray-100"
                     style={{ background: `linear-gradient(130deg, #3d0404, ${BRAND})` }}>
-                    <h2 className="text-base font-bold text-white" style={{ fontFamily: "'Libre Baskerville',serif" }}>
+                    <h2 className="text-lg font-bold text-white" style={{ fontFamily: "'Libre Baskerville',serif" }}>
                       Order Summary
                     </h2>
-                    <p className="text-xs text-red-200 mt-0.5">
+                    <p className="text-sm text-red-200 mt-0.5">
                       {totalItems} item{totalItems !== 1 ? "s" : ""} in your cart
                     </p>
                   </div>
 
                   <div className="p-4 sm:p-5 space-y-3">
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between text-[16px]">
                       <span className="text-gray-500">MRP Total</span>
                       <span className="font-semibold text-gray-700">₹{mrpTotal.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between text-[16px]">
                       <span className="text-gray-500">Product Discount</span>
                       <span className="font-bold text-emerald-600">− ₹{savings.toLocaleString()}</span>
                     </div>
                     {appliedCoupon && (
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-[16px]">
                         <span className="text-gray-500 flex items-center gap-1 flex-wrap">
                           Coupon ({appliedCoupon})
                           <button onClick={() => { setAppliedCoupon(null); setCouponSuccess(""); setCoupon(""); }}
-                            className="text-red-400 hover:text-red-600 cursor-pointer border-none bg-transparent text-xs ml-1">✕</button>
+                            className="text-red-400 hover:text-red-600 cursor-pointer border-none bg-transparent text-sm ml-1">✕</button>
                         </span>
                         <span className="font-bold text-emerald-600">− ₹{discount.toLocaleString()}</span>
                       </div>
                     )}
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between text-[16px]">
                       <span className="text-gray-500">Delivery</span>
                       <span className={`font-bold ${delivery === 0 ? "text-emerald-600" : "text-gray-700"}`}>
                         {delivery === 0 ? "FREE" : `₹${delivery}`}
@@ -383,13 +383,13 @@ export default function CartPage() {
 
                     <div className="border-t border-dashed border-gray-200 pt-3">
                       <div className="flex justify-between items-center">
-                        <span className="font-extrabold text-gray-900">Total</span>
-                        <span className="text-xl font-extrabold"
+                        <span className="font-extrabold text-gray-900 text-lg">Total</span>
+                        <span className="text-2xl font-extrabold"
                           style={{ color: BRAND, fontFamily: "'Libre Baskerville',serif" }}>
                           ₹{total.toLocaleString()}
                         </span>
                       </div>
-                      <p className="text-[11px] text-emerald-600 font-bold mt-1 text-right">
+                      <p className="text-sm text-emerald-600 font-bold mt-1 text-right">
                         You save ₹{(savings + discount).toLocaleString()} on this order 🎉
                       </p>
                     </div>
@@ -397,7 +397,7 @@ export default function CartPage() {
                     {/* Checkout */}
                     <button 
                       onClick={() => navigate('/checkout')}
-                      className="w-full py-3.5 rounded-2xl text-white font-bold text-sm border-none cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 mt-1"
+                      className="w-full py-3.5 rounded-2xl text-white font-bold text-base border-none cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 mt-1"
                       style={{ background: `linear-gradient(135deg, #3d0404, ${BRAND} 50%, ${ACCENT})` }}>
                       Proceed to Checkout →
                     </button>
@@ -411,7 +411,7 @@ export default function CartPage() {
                       ].map((b) => (
                         <div key={b.label} className="flex flex-col items-center text-center bg-gray-50 rounded-xl py-2.5 px-1">
                           <span className="text-base mb-1">{b.icon}</span>
-                          <span className="text-[9px] font-bold text-gray-500 leading-tight">{b.label}</span>
+                          <span className="text-[11px] font-bold text-gray-500 leading-tight">{b.label}</span>
                         </div>
                       ))}
                     </div>
@@ -419,7 +419,7 @@ export default function CartPage() {
                     {/* Payment chips */}
                     <div className="flex items-center justify-center gap-2 pt-1 flex-wrap">
                       {["VISA", "MC", "UPI", "EMI"].map((p) => (
-                        <div key={p} className="px-2 py-1 rounded-md bg-gray-100 text-[9px] font-extrabold text-gray-500 tracking-wider">
+                        <div key={p} className="px-2 py-1 rounded-md bg-gray-100 text-[11px] font-extrabold text-gray-500 tracking-wider">
                           {p}
                         </div>
                       ))}
@@ -436,8 +436,8 @@ export default function CartPage() {
                     </svg>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-bold text-gray-800">Need help?</p>
-                    <p className="text-[11px] text-gray-400">
+                    <p className="text-sm font-bold text-gray-800">Need help?</p>
+                    <p className="text-[13px] text-gray-400">
                       Chat with us or call{" "}
                       <span className="font-bold" style={{ color: BRAND }}>1800-000-1234</span>
                     </p>
