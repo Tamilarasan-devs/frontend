@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import bnr from '../assets/images/bulk.jpg'
+import bnr from '../assets/images/about/4.jpg'
 import { Helmet } from "react-helmet-async";
 
 /* ─── DATA ─────────────────────────────────────── */

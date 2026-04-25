@@ -4,7 +4,7 @@ import img1 from '../assets/images/about/54.jpg';
 import img2 from '../assets/images/about/55.jpg';
 import img3 from '../assets/images/resar.jpeg';
 import img4 from '../assets/images/about/img.jpg';
-import bnr from '../assets/images/about/about.jpg'
+import bnr from '../assets/images/about/2.jpg'
 import OurBusiness from "./AboutPage";
 import { useNavigate } from "react-router-dom";
 

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import bnr from '../assets/images/bann2.jpg';
+import bnr from '../assets/images/blog/5.jpg';
 import blogPosts, { categories } from "../data/blogData";
-
 const BRAND = "#03349a";
 const ACCENT = "#c9643a";
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import bnr from '../assets/images/cont.jpg'
+import bnr from '../assets/images/about/3.jpg'
 import card from '../assets/images/contact-pln.jpg'
 
 const CSS = `
