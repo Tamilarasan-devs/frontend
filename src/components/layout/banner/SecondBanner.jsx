@@ -61,8 +61,10 @@ export default function SecondBanner() {
   }, []);
 
   return (
+    <>
+     <ShopPageBanner />
     <section ref={sectionRef} className="py-16 px-6 bg-cover bg-center">
-      <ShopPageBanner />
+     
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
@@ -125,5 +127,6 @@ export default function SecondBanner() {
 
       </div>
     </section>
+    </>
   );
 }

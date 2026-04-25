@@ -559,7 +559,7 @@ export default function SingleProduct() {
             {product.forWhom && (
               <div className="flex items-center gap-2 mb-3">
                 <span className="h-px w-6 bg-[#c9643a]" />
-                <span className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#c9643a]">{product.forWhom}</span>
+                <span className="text-[15px] font-extrabold uppercase tracking-[0.25em] text-[#c9643a]">{product.forWhom}</span>
               </div>
             )}
 
@@ -588,7 +588,7 @@ export default function SingleProduct() {
             {productTags.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {productTags.slice(0, 4).map((tag) => (
-                  <span key={tag} className="text-[11px] font-bold px-3 py-1.5 rounded-full border border-[#0337a4]/20 bg-[#0337a4]/5 text-[#0337a4] uppercase tracking-wide">
+                  <span key={tag} className="text-[15px] font-bold px-3 py-1.5 rounded-full border border-[#0337a4]/20 bg-[#0337a4]/5 text-[#0337a4] uppercase tracking-wide">
                     {tag}
                   </span>
                 ))}
@@ -598,7 +598,7 @@ export default function SingleProduct() {
             {/* Description */}
             {product.productDescription && (
               <div className="mb-5 pl-4 border-l-2 border-[#c9643a]/30">
-                <div className={`text-[16px] text-stone-600 leading-relaxed ${!isExpanded ? "line-clamp-2" : ""}`}>
+                <div className={`text-[20px] text-stone-600 leading-relaxed ${!isExpanded ? "line-clamp-2" : ""}`}>
                   {product.productDescription}
                 </div>
                 {isExpanded && (
@@ -632,7 +632,7 @@ export default function SingleProduct() {
             </div>
 
             {/* Stock + Social Proof */}
-            <div className="flex items-center gap-2.5 flex-wrap my-3">
+            <div className="flex items-center justify-between gap-2.5 flex-wrap my-3">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3.5 py-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot" /> In Stock
               </div>
@@ -656,20 +656,20 @@ export default function SingleProduct() {
                   ₹{pack.price?.toLocaleString("en-IN") ?? parseFloat(product.finalPrice).toLocaleString("en-IN")}
                 </span>
                 <div className="mb-2">
-                  <span className="text-[15px] text-white line-through font-medium block">
+                  <span className="text-[20px] text-white line-through font-medium block">
                     ₹{pack.orig?.toLocaleString("en-IN") ?? parseFloat(product.price).toLocaleString("en-IN")}
                   </span>
                   {discPct > 0 && (
-                    <span className="text-[15px] font-bold text-[#c9643a] uppercase tracking-wide">{discPct}% off</span>
+                    <span className="text-[20px] font-bold text-[#c9643a] uppercase tracking-wide">{discPct}% off</span>
                   )}
                 </div>
               </div>
-              <p className="text-[15px] text-white font-medium">Inclusive of all taxes · Free delivery on ₹999+</p>
+              <p className="text-[20px] text-white font-medium">Inclusive of all taxes · Free delivery on ₹999+</p>
             </div>
 
             {/* ── Pack Selector ── */}
             <div className="mb-5">
-              <p className="text-[15px] font-extrabold uppercase tracking-[0.25em] text-[#0337a4] mb-3">Choose Your Pack</p>
+              <p className="text-[20px] font-extrabold uppercase  text-[#0337a4] mb-3">Choose Your Pack</p>
               <div className="flex flex-col gap-2">
                 {PACKS.map((p, i) => {
                   const pct = Math.round(((p.orig - p.price) / p.orig) * 100);
@@ -695,10 +695,10 @@ export default function SingleProduct() {
                           {sel && <div className="w-2 h-2 bg-[#0337a4] rounded-full" />}
                         </div>
                         <div>
-                          <p className={`text-[14px] font-extrabold tracking-tight ${sel ? "text-[#0337a4]" : "text-stone-800"}`}>
-                            {p.qty} Capsules · {p.duration}
+                          <p className={`text-[20px] font-extrabold tracking-tight ${sel ? "text-[#0337a4]" : "text-stone-800"}`}>
+                            {p.qty} Capsules 
                           </p>
-                          <p className="text-[11px] text-stone-400 font-semibold mt-0.5">{p.desc}</p>
+                          <p className="text-[15px] text-stone-400 font-semibold mt-0.5">{p.desc}</p>
                         </div>
                       </div>
                       <div className="text-right">
@@ -719,7 +719,7 @@ export default function SingleProduct() {
             {/* ── Pincode Checker ── */}
             <div className="bg-white border border-stone-200 rounded-2xl p-4 mb-5 shadow-sm">
               <div className="flex items-center justify-between mb-3.5">
-                <p className="text-[15px] font-extrabold uppercase tracking-[0.25em] text-[#0337a4] flex items-center gap-2">
+                <p className="text-[20px] font-extrabold uppercase  text-[#0337a4] flex items-center gap-2">
                   <FaTruck className="text-[#0337a4]" /> Check Delivery
                 </p>
                 <button
@@ -824,9 +824,9 @@ export default function SingleProduct() {
                       <p className="text-[28px] font-black text-stone-900 leading-none">
                         ₹{Number(product.grabPrice).toLocaleString("en-IN")}
                       </p>
-                      <span className="text-sm text-stone-400 line-through">₹{Number(product.finalPrice).toLocaleString("en-IN")}</span>
+                      <span className="text-[20px] text-stone-700 line-through">₹{Number(product.finalPrice).toLocaleString("en-IN")}</span>
                     </div>
-                    <p className="text-[13px] text-stone-500 mt-2 font-medium">
+                    <p className="text-[15px] text-stone-700 mt-2 font-medium">
                       Get additional discount using the code below
                     </p>
                   </div>

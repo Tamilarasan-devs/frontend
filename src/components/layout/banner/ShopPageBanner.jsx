@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import banner from '../../../assets/images/bnrnm.jpg'
+import banner from '../../../assets/images/ban-img.jpg'
 
 export default function ShopPageBanner() {
    const [visible, setVisible] = useState(false);
@@ -23,7 +23,7 @@ export default function ShopPageBanner() {
     <div className="px-6 py-10">
       <div
         ref={ref}
-        className="relative rounded-3xl overflow-hidden shadow-lg"
+        className="relative overflow-hidden shadow-lg"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible

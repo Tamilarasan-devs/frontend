@@ -239,19 +239,19 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
       <div className="flex flex-col flex-1 px-4 pt-4 pb-4 gap-2.5">
 
         {/* Product Name */}
-        <h3 className="text-[20px] font-extrabold text-[#1a1a1a] leading-snug line-clamp-1">
+        <h3 className="text-[25px] font-extrabold text-[#1a1a1a] leading-snug line-clamp-1">
           {product.productName}
         </h3>
 
         {/* For / With */}
         <div className="flex flex-col gap-1">
-          <p className="text-[15px] text-gray-800 line-clamp-1">
-            <span className="font-extrabold text-[#829b1c] uppercase text-[15px] mr-1 tracking-wide">
+          <p className="text-[18px] text-gray-800 line-clamp-1">
+            <span className="font-extrabold text-[#829b1c] uppercase text-[18px] mr-1 tracking-wide">
               FOR
             </span>
             {product.forWhom}
           </p>
-          <p className="text-[15px] text-gray-800 line-clamp-1">
+          <p className="text-[18px] text-gray-800 line-clamp-1">
             <span className="font-extrabold text-[#c9643a] uppercase text-[15px] mr-1 tracking-wide">
               WITH
             </span>
@@ -279,10 +279,10 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
 
         {/* Price row */}
         <div className="flex items-center gap-2 mt-auto">
-          <span className="text-[20px] font-extrabold text-black">
+          <span className="text-[25px] font-extrabold text-black">
             ₹{Number(product.finalPrice).toLocaleString("en-IN")}
           </span>
-          <span className="text-[14px] text-[#03349a] line-through">
+          <span className="text-[20px] text-[#03349a] line-through">
             ₹{Number(product.price).toLocaleString("en-IN")}
           </span>
           <span className="ml-auto text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">

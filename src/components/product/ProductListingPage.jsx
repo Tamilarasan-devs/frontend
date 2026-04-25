@@ -1,19 +1,19 @@
 import { useState, useEffect, useMemo } from "react";
 import { axiosInstance } from "../../utils/axiosInstance";
 import ProductCard from "./ProductCard";
-import cate1 from "../../assets/images/allCate/cate1.png";
-import cate2 from "../../assets/images/allCate/cate2.png";
-import cate3 from "../../assets/images/allCate/cate3.png";
-import cate4 from "../../assets/images/allCate/cate4.png";
-import cate5 from "../../assets/images/allCate/cate5.png";
-import cate6 from "../../assets/images/allCate/cate6.png";
+import cate1 from "../../assets/images/allCate/cate1.jpg";
+import cate2 from "../../assets/images/allCate/cate2.jpg";
+import cate3 from "../../assets/images/allCate/cate3.jpg";
+import cate4 from "../../assets/images/allCate/cate4.jpg";
+import cate5 from "../../assets/images/allCate/cate5.jpg";
+import cate6 from "../../assets/images/allCate/cate6.jpg";
 import Banner from "../layout/Banner";
 import OfferScrollBar from "../layout/OfferScrollBar";
 import FirstBanner from "../layout/banner/FirstBanner";
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 const FALLBACK_EMOJIS = ["🌿", "❤️", "🛡️", "🌱", "✨", "💊", "🔋", "🧘", "🧴", "🥣"];
-const FALLBACK_IMAGES = [cate1, cate2, cate3, cate4, cate5, cate6];
+const FALLBACK_IMAGES = [cate1, cate3, cate2, cate4, cate5, cate6];
 const calcDiscount = (p, f) => Math.round(((parseFloat(p) - parseFloat(f)) / parseFloat(p)) * 100);
 
 const TAG_FILTER_PALETTES = [
@@ -240,7 +240,7 @@ export default function ProductListingPage() {
   }, []);
 
   const computedCategories = useMemo(() => {
-    const allItem = { id: "all", name: "All Products", emoji: "🌿", img: cate1, count: products.length };
+    const allItem = { id: "all", name: "All Products", emoji: "🌿", img: cate6, count: products.length };
     const dynamic = (rawCategories || []).map((cat, idx) => ({
       id: cat.id,
       name: cat.category,

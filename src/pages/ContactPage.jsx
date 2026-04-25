@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import bnr from '../assets/images/cont.jpg'
-import card from '../assets/images/btl.jpeg'
+import card from '../assets/images/contact-pln.jpg'
 
 const CSS = `
   
@@ -146,7 +146,7 @@ const CSS = `
   }
   .ct-stat-l {
     font-size:15px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-    color:#0f296a; display:block; margin-top:4px;
+    color:#0f296a]; display:block; margin-top:4px;
   }
   .ct-stat-sep { width:1px; height:36px; background:rgba(130,12,12,0.1); }
 
