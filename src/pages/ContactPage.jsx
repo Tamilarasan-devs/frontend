@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import bnr from '../assets/images/cont.jpg'
-// const FONT = `@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');`;
+import card from '../assets/images/btl.jpeg'
 
 const CSS = `
   
@@ -74,11 +74,9 @@ const CSS = `
     background:#ede7df; position:relative; overflow:hidden;
     display:flex; align-items:center; justify-content:center;
   }
+    
   .ct-hero-right::before {
     content:''; position:absolute; inset:0;
-    background-image:
-      repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(130,12,12,0.05) 39px,rgba(130,12,12,0.05) 40px),
-      repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(130,12,12,0.05) 39px,rgba(130,12,12,0.05) 40px);
   }
 
   .ct-ring {
@@ -125,6 +123,7 @@ const CSS = `
   .ct-eye-dot { width:6px; height:6px; border-radius:50%; background:#03349a; }
 
   /* Headline */
+  
   .ct-h1 {
      font-weight:800;
     font-size:clamp(50px,6.5vw,92px); line-height:.9;
@@ -313,7 +312,7 @@ const CSS = `
     padding:20px 28px; flex-wrap:wrap; gap:10px;
     border-bottom:1px solid rgba(130,12,12,0.07);
   }
-  .ct-map-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:#1a1008; }
+  .ct-map-title {  font-size:15px; font-weight:800; color:#1a1008; }
   .ct-map-addr { font-size:12px; color:black; font-weight:300; margin-top:2px; }
   .ct-live { display:flex; align-items:center; gap:6px; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#5a7010; }
   .ct-live-dot { width:7px; height:7px; border-radius:50%; background:#829b1c; animation:ct-pulse 2s ease-in-out infinite; }
@@ -423,27 +422,7 @@ Message: ${form.message}`;
         </div>
 
         <div className="ct-hero-right">
-          <div className="ct-ring ct-ring-1" />
-          <div className="ct-ring ct-ring-2" />
-          <div className="ct-ring ct-ring-3" />
-          <div className="ct-ring-dot" />
-          {[
-            {style:{top:"18%",left:"12%"},text:"Palladam, TN",delay:".1s"},
-            {style:{top:"28%",right:"8%"},text:"Est. 2010",delay:".3s"},
-            {style:{bottom:"28%",left:"10%"},text:"Life Science",delay:".5s"},
-            {style:{bottom:"18%",right:"12%"},text:"Tamil Nadu",delay:".7s"},
-          ].map(({style,text,delay},i)=>(
-            <div key={i} className="ct-chip" style={{...style,animation:`ct-fade .8s ${delay} ease both`}}>{text}</div>
-          ))}
-          {[{top:24,left:24},{top:24,right:24},{bottom:24,left:24},{bottom:24,right:24}].map((pos,i)=>(
-            <div key={i} style={{
-              position:"absolute",...pos,width:20,height:20,
-              borderTop:pos.bottom?undefined:"1.5px solid rgba(130,12,12,0.2)",
-              borderBottom:pos.top?undefined:"1.5px solid rgba(130,12,12,0.2)",
-              borderLeft:pos.right?undefined:"1.5px solid rgba(130,12,12,0.2)",
-              borderRight:pos.left?undefined:"1.5px solid rgba(130,12,12,0.2)",
-            }}/>
-          ))}
+         <img src={card} alt=""  className="rounded-md"/>
         </div>
       </section>
 

@@ -63,19 +63,22 @@ export default function ProductGrid() {
       ) : (
 
         /* 🔥 Product Grid */
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 ">
-          {products.map((product, idx) => (
-            <div key={product.id} className="flex justify-center">
-              <ProductCard
-                product={product}
-                animDelay={idx * 0.08}
-                sectionVisible={true}
-                onClick={(item) => console.log("Go to product", item)}
-                onAddToCart={(item) => console.log("Add to cart", item)}
-              />
-            </div>
-          ))}
-        </div>
+        // <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 ">
+        //   {products.map((product, idx) => (
+        //     <div key={product.id} className="flex justify-center">
+        //       <ProductCard
+        //         product={product}
+        //         animDelay={idx * 0.08}
+        //         sectionVisible={true}
+        //         onClick={(item) => console.log("Go to product", item)}
+        //         onAddToCart={(item) => console.log("Add to cart", item)}
+        //       />
+        //     </div>
+        //   ))}
+        // </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+  {products.map((p, i) => <ProductCard key={p.id} product={p} animDelay={i * 0.08} sectionVisible={true} />)}
+</div>
 
       )}
     </div>

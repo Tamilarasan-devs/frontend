@@ -806,68 +806,108 @@ export default function SingleProduct() {
               </button>
             </div>
 
-            <div className="rounded-xl border border-stone-200 bg-white p-4 mb-5">
-  <div className="flex items-center justify-between mb-3 bg-black rounded-md p-4">
-    <p className="text-[15px] font-semibold text-stone-900 text-white">
-      Offers For You
-    </p>
-    <span className="text-[13px] text-stone-500 text-white">2 available</span>
-  </div>
+            {product.grabCode && product.grabPrice && (
+              <div className="rounded-xl border-2 border-[#c9643a] bg-orange-50/20 p-4 mb-5 shadow-sm">
+                <div className="flex items-center justify-between mb-3 bg-[#c9643a] rounded-lg p-3">
+                  <p className="text-[14px] font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
+                    <span className="text-lg">🔥</span> Limited Time Grab Deal
+                  </p>
+                  <span className="text-[11px] font-bold text-white bg-white/20 px-2 py-0.5 rounded uppercase">Special Price</span>
+                </div>
 
-  <div className="grid grid-cols-2 gap-3">
-    
-    {/* Offer 1 */}
-    <div className="border border-stone-200 rounded-lg p-3 bg-green-50/40">
-      <p className="text-[12px] font-semibold text-green-700 mb-1">
-        Extra ₹30 OFF
-      </p>
+                <div className="flex items-center gap-4">
+                  <div className="flex-1">
+                    <p className="text-[12px] font-bold text-[#c9643a] mb-1 uppercase tracking-tight">
+                      Special Grab Price
+                    </p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-[28px] font-black text-stone-900 leading-none">
+                        ₹{Number(product.grabPrice).toLocaleString("en-IN")}
+                      </p>
+                      <span className="text-sm text-stone-400 line-through">₹{Number(product.finalPrice).toLocaleString("en-IN")}</span>
+                    </div>
+                    <p className="text-[13px] text-stone-500 mt-2 font-medium">
+                      Get additional discount using the code below
+                    </p>
+                  </div>
 
-      <p className="text-[18px] font-bold text-stone-900">
-        ₹280
-      </p>
+                  <div className="flex flex-col items-center gap-2 border-l border-stone-200 pl-4">
+                    <div className="bg-white border-2 border-dashed border-[#c9643a] px-4 py-2 rounded-xl text-center">
+                      <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-0.5">Code</p>
+                      <p className="text-[18px] font-black text-[#c9643a] tracking-tighter">{product.grabCode}</p>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText(product.grabCode);
+                        toast.success("Code copied!");
+                      }}
+                      className="text-[11px] font-bold text-[#0337a4] hover:underline uppercase tracking-wider"
+                    >
+                      Copy Code
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
-      <p className="text-[15px] text-stone-500 mb-2">
-        Pay online, enjoy 5% + extra 5% off
-      </p>
+            <div className="rounded-xl border border-stone-200 bg-white p-4 mb-5 shadow-sm">
+              <div className="flex items-center justify-between mb-4 bg-[#0d1219] rounded-lg p-3.5">
+                <p className="text-[14px] font-extrabold text-white uppercase tracking-wider">
+                  Available Offers
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[11px] font-bold text-white/60 tracking-widest uppercase">2 Active</span>
+                </div>
+              </div>
 
-      <div className="flex items-center justify-between">
-        <span className="text-[15px] text-stone-600 border px-2 py-0.5 rounded">
-          Code: AAYU15
-        </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Offer 1 */}
+                <div className="border border-stone-100 rounded-xl p-4 bg-emerald-50/30 hover:border-emerald-200 transition-colors">
+                  <p className="text-[11px] font-extrabold text-emerald-700 mb-1 uppercase tracking-widest">
+                    Prepaid Offer
+                  </p>
+                  <p className="text-[20px] font-black text-stone-900 mb-1">
+                    Extra 5% OFF
+                  </p>
+                  <p className="text-[13px] text-stone-600 mb-3 leading-relaxed">
+                    Pay online & enjoy extra savings on your order
+                  </p>
+                  <div className="flex items-center justify-between border-t border-emerald-100 pt-3">
+                    <span className="text-[12px] font-bold text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-100">
+                      Auto Applied
+                    </span>
+                  </div>
+                </div>
 
-        <button className="text-[14px] font-semibold text-green-700 hover:underline">
-          Use Now
-        </button>
-      </div>
-    </div>
-
-    {/* Offer 2 */}
-    <div className="border border-stone-200 rounded-lg p-3 bg-orange-50/40">
-      <p className="text-[12px] font-semibold text-orange-600 mb-1">
-        Extra ₹15 OFF
-      </p>
-
-      <p className="text-[18px] font-bold text-stone-900">
-        ₹295
-      </p>
-
-      <p className="text-[15px] text-stone-500 mb-2">
-        On COD, enjoy 5% off
-      </p>
-
-      <div className="flex items-center justify-between">
-        <span className="text-[15px] text-stone-600 border px-2 py-0.5 rounded">
-          Code: AAYU15
-        </span>
-
-        <button className="text-[14px] font-semibold text-orange-600 hover:underline">
-          Use Now
-        </button>
-      </div>
-    </div>
-
-  </div>
-</div>
+                {/* Offer 2 */}
+                <div className="border border-stone-100 rounded-xl p-4 bg-blue-50/30 hover:border-blue-200 transition-colors">
+                  <p className="text-[11px] font-extrabold text-[#0337a4] mb-1 uppercase tracking-widest">
+                    First Order
+                  </p>
+                  <p className="text-[20px] font-black text-stone-900 mb-1">
+                    ₹50 Discount
+                  </p>
+                  <p className="text-[13px] text-stone-600 mb-3 leading-relaxed">
+                    On orders above ₹999 for new customers
+                  </p>
+                  <div className="flex items-center justify-between border-t border-blue-100 pt-3">
+                    <span className="text-[12px] font-bold text-[#0337a4] bg-white px-2.5 py-1 rounded-lg border border-blue-100">
+                      Code: NEW50
+                    </span>
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText("NEW50");
+                        toast.success("Code copied!");
+                      }}
+                      className="text-[11px] font-bold text-[#0337a4] hover:underline"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* ── Trust Bar ── */}
             <div className="grid grid-cols-3 bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">

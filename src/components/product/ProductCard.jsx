@@ -2,330 +2,318 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { addToCart } from "../../services/cartService";
-import { addToWishlist, removeProductFromWishlist, checkWishlistStatus } from "../../services/wishlistService";
+import {
+  addToWishlist,
+  removeProductFromWishlist,
+  checkWishlistStatus,
+} from "../../services/wishlistService";
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
-const CARD_W = 402;
-const CARD_GAP = 20;
-export default function ProductCard({ product, animDelay, sectionVisible }) {
 
+const TAG_PALETTES = [
+  { bg: "#03349a", text: "#fff" },
+  { bg: "#c9643a", text: "#fff" },
+  { bg: "#166534", text: "#fff" },
+  { bg: "#991B1B", text: "#fff" },
+  { bg: "#6B21A8", text: "#fff" },
+  { bg: "#0F766E", text: "#fff" },
+  { bg: "#1E3A8A", text: "#fff" },
+  { bg: "#BE123C", text: "#fff" },
+  { bg: "#0369A1", text: "#fff" },
+  { bg: "#92400E", text: "#fff" },
+  { bg: "#9D174D", text: "#fff" },
+  { bg: "#064E3B", text: "#fff" },
+];
+
+function tagColor(tag, i) {
+  let hash = 0;
+  for (let c of tag) hash = c.charCodeAt(0) + ((hash << 5) - hash);
+  return TAG_PALETTES[(Math.abs(hash) + i) % TAG_PALETTES.length];
+}
+
+export default function ProductCard({ product, animDelay = 0, sectionVisible = true }) {
   const [hov, setHov] = useState(false);
-  const [btnHov, setBtnHov] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
-  const disc = Math.round(((product.price - product.finalPrice) / product.price) * 100);
   const navigate = useNavigate();
   const qc = useQueryClient();
-
-  const addMut = useMutation({
-    mutationFn: addToCart,
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["cart"] });
-      toast.success("Item added to cart!");
-    },
-    onError: (err) => {
-      if (err.response?.status === 401) {
-        alert("Please login first to add items to cart.");
-        navigate('/login');
-      } else {
-        alert("Failed to add to cart.");
-      }
-    }
-  });
-  const handleAddToCart = () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      toast.error("Please login first.");
-      navigate('/login');
-      return;
-    }
-    addMut.mutate({ productId: product.id, quantity: 1 });
-  };
-
-  // Wishlist Logic
-  const { data: wishlistData } = useQuery({
-    queryKey: ["wishlist-status", product.id],
-    queryFn: () => checkWishlistStatus(product.id),
-    enabled: !!localStorage.getItem("token") && !!product.id,
-  });
-
-  const wishlisted = wishlistData?.isWishlisted || false;
-
-  const wishlistMut = useMutation({
-    mutationFn: async () => {
-      if (wishlisted) {
-        return await removeProductFromWishlist(product.id);
-      } else {
-        return await addToWishlist({ productId: product.id });
-      }
-    },
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["wishlist"] });
-      qc.invalidateQueries({ queryKey: ["wishlist-status", product.id] });
-      toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist");
-    },
-    onError: (err) => {
-      if (err.response?.status === 401) {
-        toast.error("Please login first.");
-        navigate('/login');
-      } else {
-        toast.error("Failed to update wishlist.");
-      }
-    }
-  });
-
-  const handleToggleWishlist = (e) => {
-    e.stopPropagation();
-    const token = localStorage.getItem("token");
-    if (!token) {
-      toast.error("Please login first.");
-      navigate('/login');
-      return;
-    }
-    wishlistMut.mutate();
-  };
-
-  // Trigger card entrance after section becomes visible + stagger delay
+  const [adding, setAdding] = useState(false);
+  const disc = Math.round(
+    ((product.price - product.finalPrice) / product.price) * 100
+  );
+  const savings = (Number(product.price) - Number(product.finalPrice)).toFixed(0);
 
   useEffect(() => {
     if (!sectionVisible) return;
     const t = setTimeout(() => setCardVisible(true), animDelay * 1000);
     return () => clearTimeout(t);
   }, [sectionVisible, animDelay]);
-  const getTagColor = (tag, indexOffset = 0) => {
-    const palettes = [
-      { bg: "#03349a", border: "#012a7a", text: "#FFFFFF" }, // Brand Blue
-      { bg: "#c9643a", border: "#a3502e", text: "#FFFFFF" }, // Brand Orange
-      { bg: "#166534", border: "#11522a", text: "#FFFFFF" }, // Deep Green
-      { bg: "#991B1B", border: "#7f1616", text: "#FFFFFF" }, // Deep Red
-      { bg: "#6B21A8", border: "#561b87", text: "#FFFFFF" }, // Deep Purple
-      { bg: "#0F766E", border: "#0d5c56", text: "#FFFFFF" }, // Teal
-      { bg: "#1E3A8A", border: "#172b69", text: "#FFFFFF" }, // Indigo
-      { bg: "#BE123C", border: "#9f0f32", text: "#FFFFFF" }, // Rose
-      { bg: "#0369A1", border: "#025a8a", text: "#FFFFFF" }, // Sky Blue
-      { bg: "#92400E", border: "#78350b", text: "#FFFFFF" }, // Amber
-      { bg: "#9D174D", border: "#831341", text: "#FFFFFF" }, // Pink
-      { bg: "#111827", border: "#000000", text: "#FFFFFF" }, // Near Black
-    ];
 
-    // Hash the tag string to get a stable base index
-    let hash = 0;
-    for (let i = 0; i < tag.length; i++) {
-      hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  /* ── Cart (optimistic) ── */
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    if (!localStorage.getItem("token")) { toast.error("Please login first."); navigate("/login"); return; }
+    if (adding) return;
+
+    setAdding(true);
+
+    // ── Optimistic update: bump cart count in cache immediately ──
+    qc.setQueryData(["cart"], (old) => {
+      if (!old) return old;
+      // Support both array and {items:[]} shapes
+      const items = Array.isArray(old) ? old : old.items ?? [];
+      const existing = items.find((i) => i.productId === product.id);
+      const updatedItems = existing
+        ? items.map((i) => i.productId === product.id ? { ...i, quantity: i.quantity + 1 } : i)
+        : [...items, { productId: product.id, quantity: 1, product }];
+      return Array.isArray(old) ? updatedItems : { ...old, items: updatedItems };
+    });
+
+    toast.success("Item added to cart!");
+
+    try {
+      await addToCart({ productId: product.id, quantity: 1 });
+      // Sync real data from server in background
+      qc.invalidateQueries({ queryKey: ["cart"] });
+    } catch (err) {
+      // Rollback optimistic update on error
+      qc.invalidateQueries({ queryKey: ["cart"] });
+      if (err.response?.status === 401) { toast.error("Please login first."); navigate("/login"); }
+      else toast.error("Failed to add to cart.");
+    } finally {
+      setAdding(false);
     }
-
-    // Use the hash + the index offset (i) to ensure different words on the same card stay unique
-    const index = (Math.abs(hash) + indexOffset) % palettes.length;
-    return palettes[index];
   };
-  return (
 
+  /* ── Wishlist ── */
+  const { data: wishlistData } = useQuery({
+    queryKey: ["wishlist-status", product.id],
+    queryFn: () => checkWishlistStatus(product.id),
+    enabled: !!localStorage.getItem("token") && !!product.id,
+  });
+  const wishlisted = wishlistData?.isWishlisted || false;
+
+  const wishlistMut = useMutation({
+    mutationFn: () =>
+      wishlisted ? removeProductFromWishlist(product.id) : addToWishlist({ productId: product.id }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["wishlist"] });
+      qc.invalidateQueries({ queryKey: ["wishlist-status", product.id] });
+      toast.success(wishlisted ? "Removed from wishlist" : "Added to wishlist");
+    },
+    onError: (err) => {
+      if (err.response?.status === 401) { toast.error("Please login first."); navigate("/login"); }
+      else toast.error("Failed to update wishlist.");
+    },
+  });
+
+  const handleToggleWishlist = (e) => {
+    e.stopPropagation();
+    if (!localStorage.getItem("token")) { toast.error("Please login first."); navigate("/login"); return; }
+    wishlistMut.mutate();
+  };
+
+  return (
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      onMouseDown={(e) => e.stopPropagation()}
-      className="flex-shrink-0  rounded-lg overflow-hidden relative rounded-2xl cursor-pointer select-none w-full sm:w-[48%] md:w-[300px] lg:w-[340px] xl:w-[450px]"
+      onClick={() => navigate(`/product/${product.id}`)}
+      className="relative flex flex-col cursor-pointer select-none rounded-2xl overflow-hidden bg-white"
       style={{
-
-        border: `1.5px solid ${hov ? "rgba(201,100,58,.33)" : "#f0ece8"}`,
-        zIndex: hov ? 40 : 10,
-        transform: hov
-          ? "translateY(-12px) scale(1.015)"
-          : cardVisible
-            ? "translateY(0) scale(1)"
-            : "translateY(32px) scale(0.96)",
-        opacity: cardVisible ? 1 : 0,
+        border: `1.5px solid ${hov ? "rgba(201,100,58,0.4)" : "#ede9e4"}`,
         boxShadow: hov
-          ? "0 20px 48px rgba(130,12,12,.10), 0 4px 16px rgba(0,0,0,.06)"
-          : "0 1px 4px rgba(0,0,0,.04)",
+          ? "0 20px 48px rgba(3,52,154,0.12), 0 4px 16px rgba(0,0,0,0.07)"
+          : "0 2px 8px rgba(0,0,0,0.05)",
+        transform: cardVisible
+          ? hov ? "translateY(-7px)" : "translateY(0) scale(1)"
+          : "translateY(28px) scale(0.97)",
+        opacity: cardVisible ? 1 : 0,
         transition: cardVisible
-          ? "opacity 0.5s ease, transform 0.5s cubic-bezier(.22,.68,0,1.15), box-shadow .35s ease, border-color .3s ease"
+          ? "opacity 0.5s ease, transform 0.45s cubic-bezier(.22,.68,0,1.15), box-shadow 0.3s ease, border-color 0.3s ease"
           : "none",
       }}
     >
+      <style>{`
+        :root { --red:#03349a; --amber:#c9643a; --cream:#fdf8f4; }
+        @keyframes shim{0%{background-position:200% center}100%{background-position:-200% center}}
+        .shim-btn{background:linear-gradient(90deg,#0337a4,#c9643a,#8b4513,#0337a4);background-size:200% auto;animation:shim 4s linear infinite;}
+        .nav-hover:hover { color: #0337a4 !important; }
+      `}</style>
       {/* ── Image Area ── */}
-      {product.offerTags && (Array.isArray(product.offerTags) ? product.offerTags : [product.offerTags]).map((tag, i) => {
-        const colors = getTagColor(tag, i);
-        return (
-          <span
-            key={i}
-            className="absolute z-10 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm"
-            style={{
-              top: 12 + i * 24,
-              left: 12,
-              backgroundColor: colors.bg,
-              color: colors.text,
-              border: `1px solid ${colors.border}`,
-            }}
-          >
-            {tag}
-          </span>
-        );
-      })}
-
       <div
-        className="
-  relative overflow-hidden bg-[#f9f5f2] w-full 
-  h-[350px]        // 📱 mobile (default)
-  sm:h-[350px]     // 📲 small devices (≥640px)
-  md:h-[400px]     // 💻 tablets (≥768px)
-  lg:h-[450px]     // 🖥️ desktops (≥1024px)
-  xl:h-[450px]     // 🖥️ large screens (≥1280px)
-  aspect-[4/3] rounded-xl
-"
-        onClick={() => navigate(`/product/${product.id}`)}
+        className="relative w-full overflow-hidden flex-shrink-0 bg-[#f7f3ef]"
+        style={{ height: 320 }}
       >
         {/* Primary image */}
         <img
-          // src={ product.productImages[0]}
           src={product?.productImages?.[0]?.url}
           alt={product.productName}
           draggable={false}
-          className="absolute inset-0 w-full h-full  "
+          className="absolute inset-0 w-full h-full object-contain p-3"
           style={{
             opacity: hov ? 0 : 1,
             transform: hov ? "scale(1.06)" : "scale(1)",
-            transition: "opacity .4s ease, transform .6s ease",
+            transition: "opacity 0.4s ease, transform 0.6s ease",
           }}
         />
         {/* Hover image */}
         <img
-          // src={ product.productImages[1]}
           src={product?.productImages?.[1]?.url}
           alt={product.productName}
           draggable={false}
-          className="absolute inset-0 w-full h-full "
+          className="absolute inset-0 w-full h-full object-contain p-3"
           style={{
             opacity: hov ? 1 : 0,
             transform: hov ? "scale(1)" : "scale(1.06)",
-            transition: "opacity .4s ease, transform .6s ease",
+            transition: "opacity 0.4s ease, transform 0.6s ease",
           }}
         />
 
-        {/* Discount ribbon — top-right corner */}
+        {/* ── Zigzag Discount Ribbon — top right ── */}
+        {disc > 0 && (
+          <div
+            className="absolute top-0 right-0 z-10 flex flex-col items-center justify-center text-white"
+            style={{
+              width: 56,
+              paddingTop: 12,
+              paddingBottom: 20,
+              background: "linear-gradient(180deg,#FFB800,#e69f00)",
+              lineHeight: 1.15,
+              clipPath:
+                "polygon(0 0,100% 0,100% 80%,93% 100%,85% 84%,77% 100%,69% 84%,61% 100%,53% 84%,45% 100%,37% 84%,29% 100%,21% 84%,13% 100%,5% 84%,0 100%)",
+              boxShadow: "0 4px 14px rgba(0,0,0,0.20)",
+            }}
+          >
+            <span className="text-[20px] font-black leading-none">{disc}%</span>
+            <span className="text-[9px] font-bold tracking-widest uppercase mt-0.5">OFF</span>
+          </div>
+        )}
 
+        {/* Offer tags — top left */}
 
-        <div
-          className="absolute top-0 right-0 z-10 text-white font-extrabold text-center"
-          style={{
-            background: "#FFB800",
-            padding: "14px 10px 18px",
-            lineHeight: 1.1,
-            clipPath: "polygon(100% 0,0 0,0 75%,15% 100%,30% 75%,45% 100%,60% 75%,75% 100%,90% 75%,100% 100%)",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-            minWidth: 44,
-          }}
-        >
-          <div className="text-[17px] font-black">{disc}%</div>
-          <div className="text-[10px] font-bold -mt-0.5">OFF</div>
-        </div>
+        {(product.offerTags?.length > 0 || product.grabCode) && (
+          <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
+            {product.grabCode && (
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md bg-[#c9643a] text-white border border-white/20 animate-pulse">
+                🔥 Grab Deal
+              </span>
+            )}
+            {product.offerTags?.length > 0 &&
+              (Array.isArray(product.offerTags) ? product.offerTags : [product.offerTags]).map(
+                (tag, i) => (
+                  <span
+                    key={i}
+                    className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md"
+                    style={{
+                      backgroundColor: TAG_PALETTES[i % TAG_PALETTES.length].bg,
+                      color: "#fff",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                )
+              )
+            }
+          </div>
+        )}
 
-        {/* Wishlist Button */}
+        {/* Wishlist button */}
         <button
           onClick={handleToggleWishlist}
           disabled={wishlistMut.isPending}
-          className={`absolute top-12 right-2.5 z-20 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all duration-300
+          className={`absolute bottom-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all duration-300
             ${wishlisted ? "bg-rose-500 text-white scale-110" : "bg-white/90 text-stone-400 hover:text-rose-500 hover:scale-110"}`}
           style={{ opacity: hov || wishlisted ? 1 : 0 }}
         >
-          <FaHeart size={14} className={wishlistMut.isPending ? 'animate-pulse' : ''} />
+          <FaHeart size={13} className={wishlistMut.isPending ? "animate-pulse" : ""} />
         </button>
       </div>
 
       {/* ── Card Body ── */}
-      <div className="px-[18px] pt-4 pb-5">
+      <div className="flex flex-col flex-1 px-4 pt-4 pb-4 gap-2.5">
+
         {/* Product Name */}
-        <div className="inline-block group mb-1 max-w-full">
-          <h3 className="text-[15.5px] font-bold text-[#1a1a1a] whitespace-nowrap overflow-hidden text-ellipsis max-w-[236px]">
-            {product.productName}
-          </h3>
-          <div className="h-0.5 w-0 group-hover:w-full transition-all duration-300 bg-[#03349a]" />
+        <h3 className="text-[17px] font-extrabold text-[#1a1a1a] leading-snug line-clamp-1">
+          {product.productName}
+        </h3>
+
+        {/* For / With */}
+        <div className="flex flex-col gap-1">
+          <p className="text-[13px] text-gray-600 line-clamp-1">
+            <span className="font-extrabold text-[#829b1c] uppercase text-[11px] mr-1 tracking-wide">
+              FOR
+            </span>
+            {product.forWhom}
+          </p>
+          <p className="text-[13px] text-gray-600 line-clamp-1">
+            <span className="font-extrabold text-[#c9643a] uppercase text-[11px] mr-1 tracking-wide">
+              WITH
+            </span>
+            {product.withWhom}
+          </p>
         </div>
 
-        {/* Description */}
-        <p
-          className="text-sm font-bold text-gray-600 mb-3"
-          style={{
-            lineHeight: 1.65,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          <span className="text-[#829b1c] font-extrabold">FOR : </span>
-          {product.forWhom}
-        </p>
-
-        <p
-          className="text-sm font-bold text-gray-600 mb-3"
-          style={{
-            lineHeight: 1.65,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          <span className="text-[#c9643a] font-extrabold">WITH : </span>
-          {product.withWhom}
-        </p>
-
-        {/* Rating & Reviews */}
-        {product.rating && (
-          <div className="flex items-center gap-3 mb-1 justify-between">
-            <span className="text-xs font-semibold text-amber-400 flex items-center gap-1 ">
-              <span>⭐</span>
-              <span>{product.rating.toFixed(1)} Ratings</span>
-            </span>
-            <span className="text-xs font-semibold text-gray-500">
-              Reviews
-            </span>
+        {/* Product tags — multi dark color */}
+        {product.productTags?.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {product.productTags.slice(0, 4).map((tag, i) => {
+              const c = tagColor(tag, i);
+              return (
+                <span
+                  key={i}
+                  className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
+                  style={{ backgroundColor: c.bg, color: c.text }}
+                >
+                  {tag}
+                </span>
+              );
+            })}
           </div>
         )}
 
-        {/* Price */}
-        <div className="flex items-baseline gap-1.5 mt-2.5 mb-1.5">
-          <span className="font-['Libre_Baskerville'] text-xl font-bold text-[#03349a]">
-            ₹{product.finalPrice}
+        {/* Price row */}
+        <div className="flex items-center gap-2 mt-auto">
+          <span className="text-[20px] font-extrabold text-[#03349a]">
+            ₹{Number(product.finalPrice).toLocaleString("en-IN")}
           </span>
-          <span className="text-[13px] text-gray-400 line-through">
-            ₹{product.price}
+          <span className="text-[14px] text-gray-400 line-through">
+            ₹{Number(product.price).toLocaleString("en-IN")}
           </span>
-          <span className="ml-auto text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">
-            Save ₹{(product.price - product.finalPrice).toFixed(0)}
+          <span className="ml-auto text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+            Save ₹{savings}
           </span>
         </div>
 
-        {/* Promo code */}
-        <div
-          className="text-[10px] sm:text-xs font-bold text-center py-1 px-2 rounded-lg mb-2.5 border border-dashed mt-2 bg-[#c0d5ff]"
-          style={{ borderColor: "#558af3" }}
-        >
-          Use code <strong>GRAB</strong> → Get @ ₹{product.price - 20}
-        </div>
+        {/* Grab Deal Promo */}
+        {product.grabCode && (
+          <div
+            className="text-[10px] sm:text-[11px] font-bold text-center py-2 px-3 rounded-md text-[#0337a4] bg-[#ceddfd] transition-all duration-300"
+            style={{
+              boxShadow: hov ? "0 4px 12px rgba(3,55,164,0.1)" : "none",
+              letterSpacing: "0.02em"
+            }}
+          >
+            Use code <span className="font-black uppercase">{product.grabCode}</span> 
+            {product.grabPrice && (
+              <> → Get @ <span className="font-black">₹{Number(product.grabPrice).toLocaleString("en-IN")}</span></>
+            )}
+          </div>
+        )}
 
-        <div className="h-px bg-gray-100 my-3" />
-
-        {/* Add to Cart */}
+        {/* Add to Cart button */}
         <button
           onClick={handleAddToCart}
-          disabled={addMut.isPending}
-          className="w-full flex items-stretch h-12 rounded-xl overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 group"
+          disabled={adding}
+          className="w-full h-12 flex items-center overflow-hidden rounded-xl transition-all duration-300 disabled:opacity-60 active:scale-[.98] group"
+          style={{ boxShadow: "0 8px 22px rgba(3,52,154,0.22)" }}
         >
-          {/* Left side: Icon */}
-          <div
-            className="w-14 flex items-center justify-center transition-colors duration-300"
-            style={{ backgroundColor: "#022a7a" }}
-          >
-            <FaShoppingCart className={`w-5 h-5 text-white ${addMut.isPending ? 'animate-bounce' : 'group-hover:scale-110 transition-transform'}`} />
+          <div className="w-12 h-full flex items-center justify-center bg-[#022a7a] flex-shrink-0">
+            <FaShoppingCart
+              size={16}
+              className={`text-white ${adding ? "animate-bounce" : "group-hover:scale-110 transition-transform"}`}
+            />
           </div>
-
-          {/* Right side: Text */}
-          <div
-            className="flex-1 shim-btn flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-300"
-            style={{ boxShadow: "0 12px 28px rgba(3,52,154,0.3)" }}
-          >
-            {addMut.isPending ? "Adding..." : "Add to Cart"}
+          <div className="shim-btn flex-1 h-full flex items-center justify-center text-white text-[13px] font-bold uppercase tracking-widest transition-colors duration-300">
+            {adding ? "Adding…" : "Add to Cart"}
           </div>
         </button>
       </div>

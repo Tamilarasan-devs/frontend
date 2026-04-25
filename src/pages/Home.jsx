@@ -55,9 +55,9 @@ export default function Home() {
         </LazySection>
 
 
-        <LazySection minHeight={300}>
+        {/* <LazySection minHeight={300}>
           <VideoPage/>
-        </LazySection>
+        </LazySection> */}
 
         <LazySection minHeight={400}>
           <TopSelling/>
