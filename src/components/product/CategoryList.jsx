@@ -33,7 +33,7 @@ export default function CategoryBannerList() {
       `}</style>
       {/* Title */}
       <div className="text-center mb-10">
-          <h2 className="inline-block text-3xl font-bold tracking-tight bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+          <h2 className="inline-block text-3xl font-bold tracking-tight text-[#0f296a]">
   Explore Our Categories
 </h2>
       

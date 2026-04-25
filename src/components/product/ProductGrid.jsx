@@ -38,7 +38,7 @@ export default function ProductGrid() {
         {/* <h2 className="text-[clamp(26px,4vw,36px)] font-bold m-0 leading-[1.15] bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
           Fuel Your Day, Naturally
         </h2> */}
-        <h2 className="inline-block text-[clamp(26px,4vw,36px)] font-bold m-0 leading-[1.15] bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+        <h2 className="inline-block text-[clamp(26px,4vw,36px)] font-bold m-0 leading-[1.15] text-[#0f296a]">
   Fuel Your Day, Naturally
 </h2>
         <div className="mt-3 flex items-center gap-1.5">

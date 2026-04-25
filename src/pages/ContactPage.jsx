@@ -131,10 +131,7 @@ const CSS = `
   }
   .ct-h1 em {
     font-style:italic; font-weight:400;
-    background:linear-gradient(120deg,#03349a 0%,#c9643a 50%,#e8845a 100%);
-    background-size:200%;
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    animation:ct-shim 4s ease-in-out infinite;
+    color:#0f296a
   }
   .ct-sub {
     font-size:20px; line-height:1.75; font-weight:400;
@@ -149,7 +146,7 @@ const CSS = `
   }
   .ct-stat-l {
     font-size:15px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-    color:black; display:block; margin-top:4px;
+    color:#0f296a; display:block; margin-top:4px;
   }
   .ct-stat-sep { width:1px; height:36px; background:rgba(130,12,12,0.1); }
 

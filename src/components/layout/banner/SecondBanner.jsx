@@ -74,7 +74,7 @@ export default function SecondBanner() {
             transition: "opacity 0.65s ease, transform 0.65s ease",
           }}
         >
-          <h2 className="inline-block text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+          <h2 className="inline-block text-3xl md:text-4xl font-bold text-center mb-2 text-[#0f296a]">
   Pure, Clean & Conscious Choices
 </h2>
         </div>

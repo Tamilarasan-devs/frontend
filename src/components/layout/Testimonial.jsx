@@ -147,7 +147,6 @@ export default function Testimonial() {
       ref={sectionRef}
       className="min-h-screen flex items-center justify-center"
       style={{
-        // background: "linear-gradient(160deg, #f0f5ff 0%, #e8eeff 60%, #dce8ff 100%)",
         padding: "clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem)",
       }}
     >
@@ -203,14 +202,14 @@ export default function Testimonial() {
                   lineHeight: 1.15,
                 }}
               >
-                <span className="bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+                <span className="text-[#0f296a]">
                   Loved by 10,000+ Aayubakwath Champions
                 </span>
               </h2>
             </div>
 
-            <div className="md:text-right" style={{ maxWidth: 280 }}>
-              <p className="text-sm leading-relaxed" style={{ color: "#4a6fa5" }}>
+            <div className="md:text-right" style={{ maxWidth: 300 }}>
+              <p className="text-md  text-black" >
                 Every review is 100% genuine — no edits, no incentives. Real results from real people.
               </p>
             </div>

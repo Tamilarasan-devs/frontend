@@ -213,7 +213,7 @@ export default function OurBusiness() {
         
         <div className="text-center">
 
-        <h2 className="inline-block text-2xl sm:text-3xl font-bold text-center mb-2 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+        <h2 className="inline-block text-2xl sm:text-3xl font-bold text-center mb-2 text-[#0f296a]">
   What We Do
 </h2>
         </div>

@@ -119,7 +119,7 @@ export default function BeforeAfterGrid() {
       >
         <div className="text-center">
 
-          <h1 className="inline-block text-3xl font-bold text-center mb-2 bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+          <h1 className="inline-block text-3xl font-bold text-center mb-2 text-[#0f296a]">
             Over 1 Million People Trust Aayubakwath
           </h1>
         </div>
@@ -133,7 +133,7 @@ export default function BeforeAfterGrid() {
           }}
         ></div>
 
-        <h1 className="text-xl font-semibold flex justify-center text-center bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">
+        <h1 className="text-xl font-semibold flex justify-center text-center text-black">
           Discover Science-Backed Herbal Wellness Solutions
         </h1>
       </div>

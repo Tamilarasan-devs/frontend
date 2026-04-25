@@ -139,57 +139,64 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
         .nav-hover:hover { color: #0337a4 !important; }
       `}</style>
       {/* ── Image Area ── */}
-      <div
-        className="relative w-full overflow-hidden flex-shrink-0 bg-[#f7f3ef]"
-        style={{ height: 320 }}
-      >
-        {/* Primary image */}
-        <img
-          src={product?.productImages?.[0]?.url}
-          alt={product.productName}
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-contain p-3"
-          style={{
-            opacity: hov ? 0 : 1,
-            transform: hov ? "scale(1.06)" : "scale(1)",
-            transition: "opacity 0.4s ease, transform 0.6s ease",
-          }}
-        />
-        {/* Hover image */}
-        <img
-          src={product?.productImages?.[1]?.url}
-          alt={product.productName}
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-contain p-3"
-          style={{
-            opacity: hov ? 1 : 0,
-            transform: hov ? "scale(1)" : "scale(1.06)",
-            transition: "opacity 0.4s ease, transform 0.6s ease",
-          }}
-        />
+   {/* ── Image Area ── */}
+      <div className="relative w-full bg-[#f7f3ef] overflow-hidden flex-shrink-0" style={{ paddingBottom: "100%" /* 1:1 square ratio */ }}>
+
+        {/* Inner absolute container */}
+        <div className="absolute inset-0 flex items-center justify-center ">
+
+          {/* Primary image */}
+          <img
+            src={product?.productImages?.[0]?.url}
+            alt={product.productName}
+            draggable={false}
+            className="w-full h-full object-contain"
+            style={{
+              opacity: hov ? 0 : 1,
+              transform: hov ? "scale(1.07)" : "scale(1)",
+              transition: "opacity 0.4s ease, transform 0.6s ease",
+              position: "absolute",
+              inset: 0,
+            }}
+          />
+
+          {/* Hover image */}
+          <img
+            src={product?.productImages?.[1]?.url || product?.productImages?.[0]?.url}
+            alt={product.productName}
+            draggable={false}
+            className="w-full h-full object-contain"
+            style={{
+              opacity: hov ? 1 : 0,
+              transform: hov ? "scale(1)" : "scale(1.07)",
+              transition: "opacity 0.4s ease, transform 0.6s ease",
+              position: "absolute",
+              inset: 0,
+            }}
+          />
+        </div>
 
         {/* ── Zigzag Discount Ribbon — top right ── */}
         {disc > 0 && (
           <div
-            className="absolute top-0 right-0 z-10 flex flex-col items-center justify-center text-white"
+            className="absolute top-0 right-0 z-10 flex flex-col items-center justify-center text-white font-black"
             style={{
-              width: 56,
-              paddingTop: 12,
-              paddingBottom: 20,
-              background: "linear-gradient(180deg,#FFB800,#e69f00)",
-              lineHeight: 1.15,
+              width: 54,
+              paddingTop: 10,
+              paddingBottom: 22,
+              background: "#FFB800",
+              lineHeight: 1.1,
               clipPath:
-                "polygon(0 0,100% 0,100% 80%,93% 100%,85% 84%,77% 100%,69% 84%,61% 100%,53% 84%,45% 100%,37% 84%,29% 100%,21% 84%,13% 100%,5% 84%,0 100%)",
-              boxShadow: "0 4px 14px rgba(0,0,0,0.20)",
+                "polygon(0 0,100% 0,100% 78%,91% 100%,82% 83%,73% 100%,64% 83%,55% 100%,46% 83%,37% 100%,28% 83%,19% 100%,10% 83%,0 100%)",
+              boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
             }}
           >
-            <span className="text-[20px] font-black leading-none">{disc}%</span>
-            <span className="text-[9px] font-bold tracking-widest uppercase mt-0.5">OFF</span>
+            <span className="text-[18px] leading-none">{disc}%</span>
+            <span className="text-[9px] tracking-widest font-bold uppercase mt-0.5">OFF</span>
           </div>
         )}
 
         {/* Offer tags — top left */}
-
         {(product.offerTags?.length > 0 || product.grabCode) && (
           <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
             {product.grabCode && (
@@ -197,22 +204,20 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
                 🔥 Grab Deal
               </span>
             )}
-            {product.offerTags?.length > 0 &&
-              (Array.isArray(product.offerTags) ? product.offerTags : [product.offerTags]).map(
-                (tag, i) => (
-                  <span
-                    key={i}
-                    className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md"
-                    style={{
-                      backgroundColor: TAG_PALETTES[i % TAG_PALETTES.length].bg,
-                      color: "#fff",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                )
+            {(Array.isArray(product.offerTags) ? product.offerTags : product.offerTags ? [product.offerTags] : []).map(
+              (tag, i) => (
+                <span
+                  key={i}
+                  className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md"
+                  style={{
+                    backgroundColor: TAG_PALETTES[i % TAG_PALETTES.length].bg,
+                    color: "#fff",
+                  }}
+                >
+                  {tag}
+                </span>
               )
-            }
+            )}
           </div>
         )}
 
@@ -221,31 +226,33 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
           onClick={handleToggleWishlist}
           disabled={wishlistMut.isPending}
           className={`absolute bottom-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all duration-300
-            ${wishlisted ? "bg-rose-500 text-white scale-110" : "bg-white/90 text-stone-400 hover:text-rose-500 hover:scale-110"}`}
+            ${wishlisted
+              ? "bg-rose-500 text-white scale-110"
+              : "bg-white/90 text-stone-400 hover:text-rose-500 hover:scale-110"
+            }`}
           style={{ opacity: hov || wishlisted ? 1 : 0 }}
         >
           <FaHeart size={13} className={wishlistMut.isPending ? "animate-pulse" : ""} />
         </button>
       </div>
-
       {/* ── Card Body ── */}
       <div className="flex flex-col flex-1 px-4 pt-4 pb-4 gap-2.5">
 
         {/* Product Name */}
-        <h3 className="text-[17px] font-extrabold text-[#1a1a1a] leading-snug line-clamp-1">
+        <h3 className="text-[20px] font-extrabold text-[#1a1a1a] leading-snug line-clamp-1">
           {product.productName}
         </h3>
 
         {/* For / With */}
         <div className="flex flex-col gap-1">
-          <p className="text-[13px] text-gray-600 line-clamp-1">
-            <span className="font-extrabold text-[#829b1c] uppercase text-[11px] mr-1 tracking-wide">
+          <p className="text-[15px] text-gray-800 line-clamp-1">
+            <span className="font-extrabold text-[#829b1c] uppercase text-[15px] mr-1 tracking-wide">
               FOR
             </span>
             {product.forWhom}
           </p>
-          <p className="text-[13px] text-gray-600 line-clamp-1">
-            <span className="font-extrabold text-[#c9643a] uppercase text-[11px] mr-1 tracking-wide">
+          <p className="text-[15px] text-gray-800 line-clamp-1">
+            <span className="font-extrabold text-[#c9643a] uppercase text-[15px] mr-1 tracking-wide">
               WITH
             </span>
             {product.withWhom}
@@ -260,8 +267,8 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
               return (
                 <span
                   key={i}
-                  className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
-                  style={{ backgroundColor: c.bg, color: c.text }}
+                  className="text-[15px]  px-2.5 py-0.5 rounded-full"
+                  style={{ backgroundColor: 'black', color: c.text }}
                 >
                   {tag}
                 </span>
@@ -272,10 +279,10 @@ export default function ProductCard({ product, animDelay = 0, sectionVisible = t
 
         {/* Price row */}
         <div className="flex items-center gap-2 mt-auto">
-          <span className="text-[20px] font-extrabold text-[#03349a]">
+          <span className="text-[20px] font-extrabold text-black">
             ₹{Number(product.finalPrice).toLocaleString("en-IN")}
           </span>
-          <span className="text-[14px] text-gray-400 line-through">
+          <span className="text-[14px] text-[#03349a] line-through">
             ₹{Number(product.price).toLocaleString("en-IN")}
           </span>
           <span className="ml-auto text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full whitespace-nowrap">

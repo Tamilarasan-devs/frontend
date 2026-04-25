@@ -200,12 +200,12 @@ export default function TopSelling() {
             }}
           >
             <h2
-              className="font-extrabold leading-tight bg-gradient-to-r from-[#111827] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]"
+              className="font-extrabold leading-tight text-[#0f296a]"
               style={{ fontSize: "clamp(24px, 4vw, 34px)" }}
             >
               Best Sellers
             </h2>
-            <p className="text-gray-400 text-sm mt-1">
+            <p className="text-black text-lg mt-1">
               Our most loved products — trusted by thousands
             </p>
           </div>

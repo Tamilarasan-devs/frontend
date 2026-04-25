@@ -22,7 +22,7 @@ export default function Certificate() {
     <div className="overflow-hidden w-full py-10 bg-white">
       <div className="text-center">
 
-      <h1 className="inline-block text-3xl md:text-4xl font-extrabold text-center mb-10 tracking-tight bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+      <h1 className="inline-block text-3xl md:text-4xl font-extrabold text-center mb-10 tracking-tight text-[#0f296a]">
   Only Nature. Only Wellness.
 </h1>
       </div>

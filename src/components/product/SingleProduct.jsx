@@ -644,9 +644,9 @@ export default function SingleProduct() {
             {/* ── Price Card ── */}
             <div className="bg-[#0d1219] rounded-2xl p-5 mb-5 shadow-[0_8px_32px_rgba(3,55,164,0.25)]">
               <div className="flex items-start justify-between mb-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-white/40">Your Price</span>
+                <span className="text-[15px] font-extrabold uppercase  text-white">Your Price</span>
                 {saving > 0 && (
-                  <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#c9643a]/20 text-[#c9643a] border border-[#c9643a]/30">
+                  <span className="text-[15px] font-bold px-3 py-1 rounded-full bg-[#c9643a]/20 text-[#c9643a] border border-[#c9643a]/30">
                     Save ₹{saving.toLocaleString("en-IN")} 🎉
                   </span>
                 )}
@@ -656,15 +656,15 @@ export default function SingleProduct() {
                   ₹{pack.price?.toLocaleString("en-IN") ?? parseFloat(product.finalPrice).toLocaleString("en-IN")}
                 </span>
                 <div className="mb-2">
-                  <span className="text-xl text-white/25 line-through font-medium block">
+                  <span className="text-[15px] text-white line-through font-medium block">
                     ₹{pack.orig?.toLocaleString("en-IN") ?? parseFloat(product.price).toLocaleString("en-IN")}
                   </span>
                   {discPct > 0 && (
-                    <span className="text-[11px] font-bold text-[#c9643a] uppercase tracking-wide">{discPct}% off</span>
+                    <span className="text-[15px] font-bold text-[#c9643a] uppercase tracking-wide">{discPct}% off</span>
                   )}
                 </div>
               </div>
-              <p className="text-[11px] text-white/30 font-medium">Inclusive of all taxes · Free delivery on ₹499+</p>
+              <p className="text-[15px] text-white font-medium">Inclusive of all taxes · Free delivery on ₹999+</p>
             </div>
 
             {/* ── Pack Selector ── */}

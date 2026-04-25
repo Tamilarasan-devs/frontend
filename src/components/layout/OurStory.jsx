@@ -70,7 +70,7 @@ export default function OurStory() {
         <div className="space-y-6">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight flex flex-col items-start gap-2">
             <div>
-              <span className="bg-gradient-to-r from-[#1a0a0a] via-[#03349a] to-[#c9643a] bg-clip-text text-transparent">Our Roots</span>
+              <span className="text-[#0f296a]">Our Roots</span>
             </div>
             <div className="w-20 h-1 rounded-full bg-gradient-to-r from-[#03349a] to-[#c9643a]" />
           </h1>
